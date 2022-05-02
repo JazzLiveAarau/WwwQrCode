@@ -1,0 +1,60 @@
+/* 
+File: QrCodeScan.css Date: 2022-04-30 Author: Gunnar Lidén
+
+General information
+===================
+
+This file defines the styles for the scanning of QR codes
+
+
+Remarks and references
+======================
+*/
+
+body 
+{
+    font-family: Arial;
+    font-size: 3.8mm;
+}
+
+.cl_div_qr_reader
+{
+    width: 400px;
+}
+
+.cl_div_qr_reader_logo
+{
+    height: 8mm;
+    width: 400px;
+    margin-top: 5mm;
+    font-size: 5.6mm;
+    font-weight: bold;
+    color: rgb(255,0,10);
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_qr_reader_result
+{
+    font-size: 5.6mm;
+    font-weight: bold;
+    width: 400px;
+    padding: 10px;
+    clear: both;
+}
+
+.cl_div_next_qr_scan
+{
+    font-size: 4.6mm;
+    font-weight: bold;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+    background-color: gray;
+    cursor: pointer;
+    clear: both;
+}

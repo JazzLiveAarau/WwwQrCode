@@ -1,0 +1,267 @@
+/* 
+File: QrCodeGenerate.css Date: 2022-05-02 Author: Gunnar Lidén
+
+General information
+===================
+
+This file defines the styles for the creation of QR codes HTML elements 
+
+
+Remarks and references
+======================
+*/
+
+body 
+{
+    font-family: Arial;
+    font-size: 4.8mm;
+}
+
+.cl_div_qr_generate_logo
+{
+    height: 12mm;
+    width: 330px;
+    margin-top: 5mm;
+    font-size: 8.6mm;
+    font-weight: bold;
+    color: rgb(255,0,10);
+    background-color: black;
+    text-align: center;
+    clear: both;
+}
+
+input 
+{
+    padding:5px;
+    background-color:transparent;
+    border:none;
+    border-bottom:solid 4px black;
+    width:150px;
+    margin-bottom: 5mm;
+    margin-left: 50px;
+    font-size:16px;
+}
+
+.cl_qr_code_controls
+{
+    margin-left: 80mm;
+}
+
+.cl_canvas_qr_code
+{
+    clear: both;
+}
+
+.cl_button_qr_generate 
+{
+    background-color:#323036;
+    padding:8px;
+    margin: 30px;
+    margin-left: 70px;
+    color:white;
+    cursor:pointer;
+}
+
+/* Size and background color (white) of the A4 pages that shall be printed.  */
+/* Format A4 is 210 mm X 297 mm                                              */
+PagePrint 
+{
+    background: white;
+    display: block;
+    margin: 0mm;
+    width: 210mm;
+    height: 297mm;  
+
+    /* position: relative; */
+}
+
+.cl_print_page_container
+{
+    width: 210mm;
+
+    height: auto; 
+
+    border: 1px solid blue;
+
+    overflow: hidden;
+}
+
+.cl_all_print_pages
+{
+    min-height: 297mm;
+
+    height: auto;
+    width: 210mm;
+    /* border: 1px dotted black; */
+    overflow: hidden;
+    clear: both;
+}
+
+.cl_all_print_rows
+{
+    margin-top: 18mm;
+}
+ 
+
+.cl_print_page_row_one
+{
+    margin-top: 18mm;
+    width: 210mm;
+    height: 52mm;    
+    /* border: 1px solid red; */
+}
+
+.cl_print_page_row
+{
+    width: 210mm;
+    height: 52mm;    
+    /* border: 1px solid red; */
+}
+
+.cl_card_box_left
+{
+    width: 81mm;
+    height: 51mm;
+    margin-left: 24mm;
+    margin-right: 0mm;
+    margin-bottom: 1mm;
+    margin-top: 0mm;
+    float: left;
+    border: 1px dashed gray;    
+}
+
+.cl_card_box_right
+{
+    width: 81mm;
+    height: 51mm;
+    margin-left: 1mm;
+    margin-right: 0mm;
+    margin-bottom: 1mm;
+    margin-top: 0mm;
+    float: left;
+    border: 1px dashed gray;    
+}
+
+.cl_card_box_reverse_left
+{
+    width: 81mm;
+    height: 51mm;
+    margin-left: 24mm;
+    margin-right: 0mm;
+    margin-bottom: 1mm;
+    margin-top: 0mm;
+    float: left;
+    border: 1px dashed gray;       
+    font-size: 3.0mm; 
+}
+
+.cl_card_box_reverse_right
+{
+    width: 81mm;
+    height: 51mm;
+    margin-left: 1mm;
+    margin-right: 0mm;
+    margin-bottom: 1mm;
+    margin-top: 0mm;
+    float: left;
+    border: 1px dashed gray;    
+    font-size: 3.0mm; 
+}
+
+.cl_text_logo
+{
+    height: 8mm;
+    width: 100%;
+    margin-top: 3mm;
+    font-size: 5.6mm;
+    font-weight: bold;
+    color: rgb(255,0,10);
+    text-align: center;
+    clear: both;
+}
+
+.cl_supporter_name
+{
+    height: 10mm;
+    width: 76mm;
+    margin-left: 3mm;
+    margin-top: 0mm;
+    font-size: 5.6mm;
+    font-weight: bold;
+    padding-top: 3mm;
+    background-color: rgb(225, 213, 230);
+    text-align: center;
+    clear: both;
+}
+
+.cl_season_text
+{
+    height: 17mm;
+    width: 35mm;
+    margin-left: 3mm;
+    margin-top: 0mm;
+    font-size: 5.6mm;
+    font-weight: bold;
+    padding-top: 3mm;
+    text-align: center;
+    float: left;    
+    /* border: 1px solid blue; */
+}
+
+.cl_qr_canvas
+{
+    margin-left: 0mm;
+}
+
+.cl_div_qr_canvas
+{
+    margin-left: 7mm;
+    margin-top: 1mm;
+    height: 23mm;
+    width: 25mm;
+    float: left;
+    /* border: 1px solid green; */     
+}
+
+.cl_p_reverse_one
+{
+    margin-top: 1mm;
+    text-align: center;
+}
+
+.cl_p_reverse_two
+{
+    margin-top: 0mm;
+    text-align: center;
+}
+
+.cl_p_reverse_three
+{
+    margin-top: 0mm;
+    text-align: center;
+}
+
+.cl_p_reverse_four
+{
+    margin-top: 0mm;
+    text-align: center;
+}
+
+@media print 
+{
+    body, PagePrint 
+    {
+      margin: 0;
+      box-shadow: 0;
+    }
+}
+  
+@media print 
+{
+    #Header, #Footer { display: none !important; }
+}
+
+@media print 
+{
+.page-break { display: block; page-break-before: always; }
+}
