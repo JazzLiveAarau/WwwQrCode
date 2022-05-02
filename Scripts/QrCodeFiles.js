@@ -16,6 +16,9 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Path and start part file name of the QR file
+var g_qr_start_part_file_name = 'QrFiles/Season_2021_2022/QrCode_';
+        
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
@@ -62,9 +65,129 @@ function createQrFilesForAllSupporters()
 
     generateQrCodeAllSupporters(qr_case, canvas_size, qr_code_season_str);
 
+    saveAllQrFilesOnServer();
+
 } // createQrFilesForAllSupporters
 
+function saveAllQrFilesOnServer()
+{
+    var n_end = g_supporter_data_url.length;
+
+    for (var index_supporter=0; index_supporter < n_end; index_supporter++)
+    {
+        saveOneQrFileOnServer(index_supporter);
+    }
+
+} // saveAllQrFilesOnServer
+
+// Saves one QR file on the server.
+function saveOneQrFileOnServer(i_index_supporter)
+{
+    var b_execute_server = execApplicationOnServer();
+
+    if (!b_execute_server)
+    {
+        return;
+    }
+
+    var supporter_str = 'index_' + i_index_supporter.toString();
+
+    var xml_content_str = g_supporter_data_url[i_index_supporter];
+
+    var file_name_path = getServerQrFileName(supporter_str);
+
+    if (!saveFileWithJQueryPostFunction(file_name_path, xml_content_str))
+    {
+        alert("saveOneQrFileOnServer Saving QR file failed");
+    }
+
+} // saveOneQrFileOnServer
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create File Functions ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Basic Save File Function  /////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Function copied from FlyerSave.js
+
+// Save a file with the JQuery function "post"
+// Please refer to SaveFileOnServer.php for a detailed description of "post"
+// Input parameter i_file_name is the server file name
+// Input parameter i_content_string is the content of the file
+// The function returns false for failure
+function saveFileWithJQueryPostFunction(i_file_name, i_content_string)
+{
+  var file_name = '../' + i_file_name;
+
+    $.post
+      ('Php/SaveFileOnServer.php',
+        {
+          file_content: i_content_string,
+          file_name: file_name
+        },
+        function(data_save,status_save)
+		{
+            if (status_save == "success")
+            {
+                // alert(data_save);
+            }
+            else
+            {
+				alert("Execution of SaveFileOnServer.php failed");
+				return false;
+            }          
+        } // function
+      ); // post
+	  
+    return true;	  
+	
+} // saveFileWithJQueryPostFunction
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Basic Save File Function  ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Utility Functions /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Returns the name and path for the QR file
+function getServerQrFileName(i_supporter_str)
+{
+    var start_path = g_qr_start_part_file_name;
+
+    var full_name = g_qr_start_part_file_name + i_supporter_str + '.txt';
+
+    return full_name;
+
+} // getServerQrFileName
+
+// Returns true if the application runs on the server
+function execApplicationOnServer()
+{
+    var current_base = window.location.href;
+
+    var server_url = 'jazzliveaarau.ch';
+
+    var index_url = current_base.indexOf(server_url);
+
+    if (index_url >= 0) 
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+} // execApplicationOnServer
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Utility Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
