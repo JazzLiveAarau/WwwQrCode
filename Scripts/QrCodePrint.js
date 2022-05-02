@@ -5,29 +5,13 @@
 // File content
 // =============
 //
-// QR Code generation functions
-
-// References
-// https://www.studytonight.com/post/javascript-qr-code-generator
-// https://cdnjs.com/libraries/qrious
-
-// Problem not filling canvas
-// https://github.com/neocotic/qrious/issues/105
-// https://stackoverflow.com/questions/52825735/generate-and-download-qr-code-from-string-with-qrious-additional-white-spaces
+// QR Code printing functions
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Instance of the class QRious defined in file /QrCodeLib/qrious.js
-var g_object_generate_qr_code = null;
-
-// Array with all supporter names and the season
-var g_supporter_names = [];
-
-// Image data for all QR codes
-var g_supporter_image_data = [];
-
+// Background color for the supporter names
 var g_supporter_name_background_color = 'rgb(225, 213, 230)';
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -38,10 +22,23 @@ var g_supporter_name_background_color = 'rgb(225, 213, 230)';
 ///////////////////////// Start Event Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// On load function for the QR code generator
+function onloadQrCodePrint()
+{
+    var el_input_color = getElementInputBackgroundColor();
+
+    el_input_color.value = g_supporter_name_background_color;
+
+    hideQrCodeImage();
+
+    setTestArrayWithSupporterName();
+
+} // onloadQrCodePrint
+
 // User clicked the button generate QR codes for supporters
 function clickGenerateSupporterQrCodes()
 {
-    generateQrCodeAllSupporters();
+    generateQrCodeAllSupportersCreatePrintPages();
 
 } // clickGenerateSupporterQrCodes
 
@@ -56,29 +53,13 @@ function clickGenerateSupporterQrReverseSide()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Generate Qr Code Supporter ////////////////////////////////
+///////////////////////// Start Create Print Pages Functions //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Generate QR codes for all supporters
-function generateQrCodeAllSupporters()
+// Generate QR codes for all supporters and create print pages
+function generateQrCodeAllSupportersCreatePrintPages()
 {
-    g_supporter_image_data = [];
-
-    var season_str = '2021-2022';
-
-    var canvas_context = getCanvasContextQrCode();
-
-    for (var index_name=0; index_name < g_supporter_names.length; index_name++)
-    {
-        var name_str = g_supporter_names[index_name];
-
-        var image_data = generateQrCodeOneSupporter(name_str, season_str);
-
-        g_supporter_image_data[index_name] = image_data;
-    }
-
-    // Test
-    canvas_context.putImageData(g_supporter_image_data[4], 0, 0);
+    generateQrCodeAllSupporters();
 
     var el_all_pages = getElementDivAllPrintPages();
 
@@ -92,7 +73,7 @@ function generateQrCodeAllSupporters()
 
     setBackgroundColorForNames();
 
-} // generateQrCodeAllSupporters
+} // generateQrCodeAllSupportersCreatePrintPages
 
 // Generate the reverse page
 function generateReversePage()
@@ -134,100 +115,12 @@ function setBackgroundColorForNames()
 
 } // setBackgroundColorForNames
 
-// Generate QR code for one supporter and set canvas
-function generateQrCodeOneSupporter(i_name_str, i_season_str)
-{
-    var qr_text = i_name_str + ' ' + i_season_str;
-
-    g_object_generate_qr_code.set
-    (
-        {
-            foreground: 'black',
-            size: 84,
-            value: qr_text
-        }
-
-    );
-
-    var canvas_context = getCanvasContextQrCode();
-
-    var image_data = canvas_context.getImageData(0, 0, 84, 84);
-
-    return image_data;
-
-} // generateQrCodeOneSupporter
-
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Generate Qr Code Supporter //////////////////////////////////
+///////////////////////// End Create Print Pages Functions ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Init QR Code Generator ////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-// Create the instance of class QRious and set global parameter g_object_generate_qr_code
-function initQrCodeGenerator()
-{
-    g_object_generate_qr_code = new QRious
-    (
-        {
-            element: getElementCanvasQrCode(),
-            size: 84,
-            value: 'https://studytonight.com'
-        }
-    );
-} // initQrCodeGenerator
-
-// On load function for the QR code generator
-function onloadQrCodeGenerator()
-{
-    var el_input_color = getElementInputBackgroundColor();
-
-    el_input_color.value = g_supporter_name_background_color;
-
-    hideQrCodeImage();
-
-    g_supporter_names[0] = 'Franz Amrein';
-    g_supporter_names[1] = 'Duk Won Barthelmess-Lee';
-    g_supporter_names[2] = 'Madlen Bärtschi';
-    g_supporter_names[3] = 'Elisabeth Bösch';
-    g_supporter_names[4] = 'Andres Brändli';
-    g_supporter_names[5] = 'Matthias Bruppacher';
-    g_supporter_names[6] = 'Sonja Buchser';
-    g_supporter_names[7] = 'Hans Byland';
-    g_supporter_names[8] = 'Michel Emmenegger';
-    g_supporter_names[9] = 'Annette Farnhammer';
-    g_supporter_names[10] = 'Erich Fischer';
-    g_supporter_names[11] = 'Noldi Gnädig';
-    g_supporter_names[12] = 'Christoph Grathwohl';
-    g_supporter_names[13] = 'Ruth Grathwohl';
-    g_supporter_names[14] = 'Peter Günthart';
-    g_supporter_names[15] = 'Esther Günthart';
-    g_supporter_names[16] = 'Beat Hächler';
-    g_supporter_names[17] = 'Anne Halter';
-    g_supporter_names[18] = 'Lilli Hannak';
-    g_supporter_names[19] = 'Johannes Hänggli';
-    g_supporter_names[20] = 'Gina Hänggli';
-    g_supporter_names[21] = 'Peter Häuptli';
-    g_supporter_names[22] = 'Jörg Hauser';
-
-} // onloadQrCodeGenerator
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Init QR Code Generator //////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-// Hide the QR code image used for the generation of the codes
-function hideQrCodeImage()
-{
-    var el_qr_code = getElementCanvasQrCode();
-
-    el_qr_code.style.display = 'none';
-
-} // hideQrCodeImage
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Create Print Pages Functions //////////////////////////////
+///////////////////////// Start Get Html Print Page Strings ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Get the string that defines all print pages
@@ -737,7 +630,7 @@ function getElementDivQrCodeCanvasString(i_index_supporter, i_tab)
 } // getElementDivQrCodeCanvasString
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Create Print Pages Functions ////////////////////////////////
+///////////////////////// End Get Html Print Page Strings /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
