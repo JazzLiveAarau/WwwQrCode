@@ -14,6 +14,16 @@
 // Background color for the supporter names
 var g_supporter_name_background_color = 'rgb(225, 213, 230)';
 
+// The season string that will be printed on the supporter card
+var g_print_qr_code_season_str = 'Supporter<br> Saison <br>2021-2022';
+
+// Returns the season string that will be printed on the supporter card
+function getPrintQrCodeSeasonString()
+{
+    return g_print_qr_code_season_str;
+
+} // getPrintQrCodeSeasonString
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -59,11 +69,17 @@ function clickGenerateSupporterQrReverseSide()
 // Generate QR codes for all supporters and create print pages
 function generateQrCodeAllSupportersCreatePrintPages()
 {
-    generateQrCodeAllSupporters();
+    var qr_case = 'ImageData'; 
+
+    var canvas_size = 84;
+
+    qr_code_season_str = '2021-2022';
+
+    generateQrCodeAllSupporters(qr_case, canvas_size, qr_code_season_str);
 
     var el_all_pages = getElementDivAllPrintPages();
 
-    var season_str = 'Supporter Saison <br>2021-2022';
+    var season_str = getPrintQrCodeSeasonString();
 
     var content_all_pages = getContentDivAllPagesString(season_str);
 

@@ -1,4 +1,4 @@
-// File: QrCodePrint.js
+// File: QrCodeSupporter.js
 // Date: 2022-05-02
 // Author: Gunnar Lidén
 
@@ -6,6 +6,23 @@
 // =============
 //
 // QR Code generation functions
+
+// <canvas>
+//----------
+//
+// The HTML <canvas> tag is used to draw graphics, on the fly, via scripting (usually JavaScript).
+//
+// getContext() 
+// The getContext() function returns the drawing context - which is an object that has all the 
+// drawing properties and functions you use to draw on the canvas. The getContext() function is 
+// the function that you use to get access to the canvas tags 2D drawing functions.
+//
+// getImageData()	
+// Returns an ImageData object that copies the pixel data for the specified rectangle on a canvas
+//
+// toDataURL(type, quality)
+// toDataURL() ist eine Methode des Canvas und wandelt das Bild im Canvas in eine Bitmap 
+// (64 bit encoded PNG URL) um, um das Bild zu speichern oder in einem img-Tag anzuzeigen. 
 
 
 // References
@@ -16,6 +33,15 @@
 // https://github.com/neocotic/qrious/issues/105
 // https://stackoverflow.com/questions/52825735/generate-and-download-qr-code-from-string-with-qrious-additional-white-spaces
 
+// HTML Canvas Reference
+// https://www.w3schools.com/tags/ref_canvas.asp
+// HTML canvas getImageData() Method
+// https://www.w3schools.com/tags/canvas_getimagedata.asp
+// toDataURL(type, quality)
+// https://www.mediaevent.de/javascript/canvas-to-data-url.html
+// Store and get image from local store. Use toDataURL(type, quality)
+// https://hacks.mozilla.org/2012/02/saving-images-and-files-in-localstorage/
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
@@ -23,6 +49,46 @@
 
 // Instance of the class QRious defined in file /QrCodeLib/qrious.js
 var g_object_generate_qr_code = null;
+
+// The size of the canvas
+var g_supporter_canvas_size = 84;
+
+// Set the size of the canvas
+function setSupporterCanvasSize(i_size)
+{
+    g_supporter_canvas_size = i_size;
+
+} // setSupporterCanvasSize
+
+// Get the size of the canvas
+function getSupporterCanvasSize()
+{
+    return g_supporter_canvas_size;
+
+} // getSupporterCanvasSize
+
+// Season string for the QR code
+var g_qr_code_season_str = '2021-2022';
+
+// Set season string for the QR code
+function setQrCodeSeasonString(i_qr_code_season_str)
+{
+    g_qr_code_season_str = i_qr_code_season_str;
+
+} // setQrCodeSeasonString
+
+// Get season string for the QR code
+function getQrCodeSeasonString()
+{
+    return g_qr_code_season_str;
+
+} // getQrCodeSeasonString
+
+// Image data for all QR codes
+var g_supporter_image_data = [];
+
+// Image data url (Bitmap) for all QR codes
+var g_supporter_data_url = [];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
@@ -33,11 +99,16 @@ var g_object_generate_qr_code = null;
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Generate QR codes for all supporters and set the array g_supporter_image_data
-function generateQrCodeAllSupporters()
+// i_qr_case = 'ImageData' or 'DataUrl'
+function generateQrCodeAllSupporters(i_qr_case, i_canvas_size, i_qr_code_season_str)
 {
     g_supporter_image_data = [];
 
-    var season_str = '2021-2022';
+    setSupporterCanvasSize(i_canvas_size);
+
+    setQrCodeSeasonString(i_qr_code_season_str);
+
+    var season_str = getQrCodeSeasonString();
 
     var canvas_context = getCanvasContextQrCode();
 
@@ -45,18 +116,29 @@ function generateQrCodeAllSupporters()
     {
         var name_str = g_supporter_names[index_name];
 
-        var image_data = generateQrCodeOneSupporter(name_str, season_str);
+        if (i_qr_case == 'ImageData')
+        {
+            var image_data = generateQrCodeOneSupporterImageData(name_str, season_str);
 
-        g_supporter_image_data[index_name] = image_data;
+            g_supporter_image_data[index_name] = image_data;
+        }
+        else if (i_qr_case == 'DataUrl')
+        {
+            var data_url = generateQrCodeOneSupporterDataUrl(name_str, season_str);
+
+            g_supporter_data_url[index_name] = data_url;            
+        }
+        else
+        {
+            alert("generateQrCodeAllSupporters Not an implmented case= " + i_qr_case);
+            return;
+        }
     }
-
-    // Test
-    canvas_context.putImageData(g_supporter_image_data[4], 0, 0);
 
 } // generateQrCodeAllSupporters
 
-// Generate QR code for one supporter and set canvas
-function generateQrCodeOneSupporter(i_name_str, i_season_str)
+// Generate QR code for one supporter, set canvas and return image data
+function generateQrCodeOneSupporterImageData(i_name_str, i_season_str)
 {
     var qr_text = i_name_str + ' ' + i_season_str;
 
@@ -64,7 +146,7 @@ function generateQrCodeOneSupporter(i_name_str, i_season_str)
     (
         {
             foreground: 'black',
-            size: 84,
+            size: getSupporterCanvasSize(),
             value: qr_text
         }
 
@@ -72,11 +154,35 @@ function generateQrCodeOneSupporter(i_name_str, i_season_str)
 
     var canvas_context = getCanvasContextQrCode();
 
-    var image_data = canvas_context.getImageData(0, 0, 84, 84);
+    var image_data = canvas_context.getImageData(0, 0, getSupporterCanvasSize(), getSupporterCanvasSize());
 
     return image_data;
 
-} // generateQrCodeOneSupporter
+} // generateQrCodeOneSupporterImageData
+
+// Generate QR code for one supporter, set canvas and return data URL (Bitmap)
+function generateQrCodeOneSupporterDataUrl(i_name_str, i_season_str)
+{
+    var qr_text = i_name_str + ' ' + i_season_str;
+
+    g_object_generate_qr_code.set
+    (
+        {
+            foreground: 'black',
+            size: getSupporterCanvasSize(),
+            value: qr_text
+        }
+
+    );
+
+    var el_canvas =  getElementCanvasQrCode();
+
+    var image_data_url = el_canvas.toDataURL("image/png");
+
+    return image_data_url;
+
+} // generateQrCodeOneSupporterDataUrl
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Generate Qr Code Supporter //////////////////////////////////
@@ -93,7 +199,7 @@ function initQrCodeGenerator()
     (
         {
             element: getElementCanvasQrCode(),
-            size: 84,
+            size: getSupporterCanvasSize(),
             value: 'https://studytonight.com'
         }
     );

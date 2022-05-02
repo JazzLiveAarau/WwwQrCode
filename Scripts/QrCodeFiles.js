@@ -7,6 +7,11 @@
 //
 // Creation of QR Code files
 
+
+// References
+// Store and get image from local store. Use toDataURL(type, quality)
+// https://hacks.mozilla.org/2012/02/saving-images-and-files-in-localstorage/
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +37,7 @@ function onloadQrCodeFiles()
 // User clicked button create QR files
 function clickCreateQrFiles()
 {
+    createQrFilesForAllSupporters();
 
 } // clickCreateQrFiles
 
@@ -48,7 +54,13 @@ function clickCreateQrFiles()
 //    Call of generateQrCodeAllSupporters
 function createQrFilesForAllSupporters()
 {
-    generateQrCodeAllSupporters();
+    var qr_case = 'DataUrl'; 
+
+    var canvas_size = 210;
+
+    qr_code_season_str = '2021-2022';
+
+    generateQrCodeAllSupporters(qr_case, canvas_size, qr_code_season_str);
 
 } // createQrFilesForAllSupporters
 
