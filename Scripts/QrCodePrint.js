@@ -22,7 +22,7 @@ var g_supporter_name_background_color = 'rgb(225, 213, 230)';
 ///////////////////////// Start Event Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// On load function for the QR code generator
+// On load function for the QR code print
 function onloadQrCodePrint()
 {
     var el_input_color = getElementInputBackgroundColor();

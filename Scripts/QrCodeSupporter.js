@@ -32,7 +32,7 @@ var g_object_generate_qr_code = null;
 ///////////////////////// Start Generate Qr Code Supporter ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Generate QR codes for all supporters and set array g_supporter_image_data
+// Generate QR codes for all supporters and set the array g_supporter_image_data
 function generateQrCodeAllSupporters()
 {
     g_supporter_image_data = [];
