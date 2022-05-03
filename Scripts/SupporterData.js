@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-02
+// Date: 2022-05-03
 // Author: Gunnar Lidén
 
 // File content
@@ -11,7 +11,7 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Array with all supporter names and the season
+// Array with all supporter names
 var g_supporter_names = [];
 
 
@@ -20,9 +20,58 @@ var g_supporter_names = [];
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Event Functions ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Callback function after load of XML file Supporter.xml
+function afterLoadOfSupporterXmlFile(i_xml)
+{
+    var n_supporters = i_xml.getNumberOfSupporters();
+
+    setTestArrayFromXmlObject(i_xml);
+
+    var n_test_array = g_supporter_names.length;
+
+    // alert("Number persons that paid over 60 CHF is " + n_test_array.toString() + ' Less than sixty is ' + (n_supporters - n_test_array).toString());
+
+} // afterLoadOfSupporterXmlFile
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Event Functions /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Test Temporary Functions //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Set the array with data from the XML file Supporter.xml
+function setTestArrayFromXmlObject(i_xml)
+{
+    g_supporter_names = [];
+
+    var n_supporters = i_xml.getNumberOfSupporters();
+
+    var out_index = 0;
+
+    for (var supporter_number = 1; supporter_number <= n_supporters; supporter_number++)
+    {
+        var first_name = i_xml.getFirstName(supporter_number);
+
+        var family_name = i_xml.getFamilyName(supporter_number);
+    
+        var contribution_int = i_xml.getContributionInt(supporter_number);
+
+        if (contribution_int - 60 >= 0)
+        {
+            g_supporter_names[out_index] = first_name + ' ' + family_name;
+
+            out_index = out_index + 1;
+        }
+    }
+    
+} // setTestArrayFromXmlObject
+
+/*QQQQQ
 // Set the array g_supporter_names
 function setTestArrayWithSupporterName()
 {
@@ -51,6 +100,8 @@ function setTestArrayWithSupporterName()
     g_supporter_names[22] = 'Jörg Hauser';
 
 } // setTestArrayWithSupporterName
+
+QQQ*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Test Temporary Functions ////////////////////////////////////

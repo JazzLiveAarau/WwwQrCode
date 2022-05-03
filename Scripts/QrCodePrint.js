@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-05-02
+// Date: 2022-05-03
 // Author: Gunnar Lidén
 
 // File content
@@ -41,7 +41,11 @@ function onloadQrCodePrint()
 
     hideQrCodeImage();
 
-    setTestArrayWithSupporterName();
+    var season_start_year = 2021; // TODO
+
+    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
+
+    //QQQ setTestArrayWithSupporterName();
 
 } // onloadQrCodePrint
 

@@ -16,6 +16,9 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Instance of the class SupporterXml
+var g_supporter_xml_object = null;
+
 // Path and start part file name of the QR file
 var g_qr_start_part_file_name = 'QrFiles/Season_2021_2022/QrCode_';
         
@@ -33,7 +36,9 @@ function onloadQrCodeFiles()
 {
     // Temporary QQQQQ hideQrCodeImage();
 
-    setTestArrayWithSupporterName();
+    var season_start_year = 2021; // TODO
+
+    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
 
 } // onloadQrCodeFiles
 
