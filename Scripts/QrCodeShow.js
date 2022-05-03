@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-02
+// Date: 2022-05-03
 // Author: Gunnar Lidén
 
 // File content
@@ -85,9 +85,9 @@ function getServerFileNameFromInputElement()
 
     var code_for_qr_file_int = parseInt(code_for_qr_file_str);
 
-    if (code_for_qr_file_int < 0 || code_for_qr_file_int > 22)
+    if (code_for_qr_file_int < 0 || code_for_qr_file_int > 70)
     {
-        alert("Code für QR Code ist weniger als 0 oder grösser als 22");
+        alert("Code für QR Code ist weniger als 0 oder grösser als 70");
 
         return '';        
     }

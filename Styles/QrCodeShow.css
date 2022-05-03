@@ -17,11 +17,12 @@ body
     font-size: 4.8mm;
 }
 
-.cl_div_qr_generate_logo
+.cl_div_qr_show_logo
 {
-    height: 12mm;
+    height: 22mm;
     width: 330px;
-    margin-top: 5mm;
+    margin-top: 3mm;
+    padding-top: 2mm;
     font-size: 8.6mm;
     font-weight: bold;
     color: rgb(255,0,10);
@@ -33,7 +34,7 @@ body
 
 .cl_qr_code_controls
 {
-    margin-left: 10mm;
+    margin-left: 5mm;
 }
 
 .cl_canvas_qr_code
@@ -41,11 +42,12 @@ body
     clear: both;
 }
 
-.cl_button_create_qr_files 
+.cl_button_show_qr_file 
 {
     background-color:#323036;
     padding:8px;
-    margin: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 70px;
     color:white;
     cursor:pointer;
@@ -58,12 +60,13 @@ input
     border:none;
     border-bottom:solid 4px black;
     width:150px;
-    margin-bottom: 5mm;
+    margin-bottom: 0mm;
     margin-left: 50px;
+    text-align: center;
     font-size:16px;
 }
 
 .cl_div_qr_code_image
 {
-    margin: 50px;
+    margin-left: 50px;
 }
