@@ -1,15 +1,15 @@
-// File: SupporterXml.js
+// File: QrQrFilesXml.js
 // Date: 2022-05-04
 // Author: Gunnar Lidén
 
 // File content
 // =============
 //
-// Load and read functions for the supporter XML file
+// Load and read functions for the files XML file
 //
 
 // Class corresponding to the XML element <Supporter> in the file Supporter.xml
-class SupporterXml
+class QrFilesXml
 {
     // Creates the instance of the class
     // i_callback_function_name: Function that shall be called after loading
@@ -28,7 +28,7 @@ class SupporterXml
         this.m_season_start_year = i_season_start_year;
 
         // Supporter XML file name
-        this.m_xml_file_name = 'Supporter.xml';
+        this.m_xml_file_name = 'Files.xml';
 
         // Call back function name
         this.m_callback_function_name = i_callback_function_name;
@@ -37,7 +37,7 @@ class SupporterXml
         this.m_file_xml = null;
 
         // Object holding the tags
-        this.m_tags = new SupporterTags(i_season_start_year);
+        this.m_tags = new QrFilesTags();
 
         // Flag that a node value not have been set
         this.m_not_yet_set_node_value = "NotYetSetNodeValue";
@@ -138,7 +138,7 @@ class SupporterXml
         
         if (i_supporter_number < 1 || i_supporter_number > n_supporters)
         {
-            alert("SupporterXml.getNodeValue Supporter number is not between 1 and " + n_tasks.toString());
+            alert("QrFilesXml.getNodeValue Supporter number is not between 1 and " + n_tasks.toString());
             
             return ret_data;		
         }
@@ -307,7 +307,7 @@ class SupporterXml
     {
         if (null == this.m_file_xml)
         {
-            alert("SupporterXml.checkXmlObject Supporter XML object m_file_xml is null");
+            alert("QrFilesXml.checkXmlObject Supporter XML object m_file_xml is null");
             
             return false;
         }	
@@ -322,19 +322,16 @@ class SupporterXml
     /////// End Check Functions ///////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-} // SupporterXml
+} // QrFilesXml
 
-// Class defining the tags of the XML file Supporter.xml
-class SupporterTags 
+// Class defining the tags of the XML file Files.xml
+class QrFilesTags 
 {
     // Creates the instance of the class
-    constructor(i_start_season_year) 
+    constructor() 
     {
         // Member variables
         // ================
-
-        // Start season year
-        this.m_start_season_year = i_start_season_year;
 
         this.m_tag_supporter = "Supporter";
         this.m_tag_first_name = "Vorname";
@@ -357,4 +354,4 @@ class SupporterTags
 
     } // getContribution
 
-} // SupporterTags
+} // QrFilesTags

@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-02
+// Date: 2022-05-04
 // Author: Gunnar Lidén
 
 // File content
@@ -193,6 +193,29 @@ function execApplicationOnServer()
 
 } // execApplicationOnServer
 
+// Returns a random download code
+function getRandomDownloadCode()
+{
+    // https://stackoverflow.com/questions/9719570/generate-random-password-string-with-requirements-in-javascript
+    
+    var allowed_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    var string_length = 8;
+
+    var ret_string = '';
+
+    for (var char_number = 1; char_number <= string_length; char_number++) 
+    {
+        var random_index = Math.floor(Math.random() * allowed_chars.length);
+
+        ret_string = ret_string + allowed_chars.substring(random_index, random_index + 1);
+    }
+
+    return ret_string;
+
+} // getRandomDownloadCode
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Utility Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
