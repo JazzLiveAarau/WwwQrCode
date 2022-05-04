@@ -8,7 +8,7 @@
 // Load and read functions for the files XML file
 //
 
-// Class corresponding to the XML element <Supporter> in the file Supporter.xml
+// Class corresponding to the XML element <Supporter> in the file QrFiles.xml
 class QrFilesXml
 {
     // Creates the instance of the class
@@ -18,39 +18,42 @@ class QrFilesXml
         // Member variables
         // ================
 
-        // Path and name of XML file on the server /www/QrCode/QrFiles
-        this.m_xml_dir_name_server = 'QrFiles/';
+        // Strings
+        this.m_strings = new QrStrings();
 
-        // Start part of name for subdirectory season
-        this.m_xml_dir_start_season = 'Season_';
+        // Path to the subdirectory for files and XML files (/www/QrCode/QrFiles)
+        this.m_xml_dir_name_server = QrStrings.getPathSubdirectoryQrFiles();
+
+        // Start part of name for subdirectory season. Years will be added 2021-2022
+        this.m_xml_dir_start_season = QrStrings.getStartPartSubdirectorySeason();
 
         // Season start year
         this.m_season_start_year = i_season_start_year;
 
-        // Supporter XML file name
-        this.m_xml_file_name = 'Files.xml';
+        // QR files XML file name (QrFiles.xml)
+        this.m_xml_file_name = QrStrings.getQrFilesXmlFileName();
 
         // Call back function name
         this.m_callback_function_name = i_callback_function_name;
 
-        // The jazz tasks xml object
+        // The QR files xml object
         this.m_file_xml = null;
 
         // Object holding the tags
         this.m_tags = new QrFilesTags();
 
-        // Flag that a node value not have been set
-        this.m_not_yet_set_node_value = "NotYetSetNodeValue";
+        // Flag value that a node value not have been set (NotYetSetNodeValue)
+        this.m_not_yet_set_node_value = QrStrings.getXmlNodeValueNotYetSet();
 
         // Loads the XML object and calls the function m_callback_function_name
-        this.loadXmlFile(this, this.getFileNameSupportXml(), this.m_callback_function_name);
+        this.loadXmlFile(this, this.getUrlForQrFilesXml(), this.m_callback_function_name);
 
     } // constructor
 
     // Sets the XML object
-    setXmlObject(i_jazz_tasks_xml)
+    setXmlObject(i_qr_files_xml)
     {
-        this.m_file_xml = i_jazz_tasks_xml;
+        this.m_file_xml = i_qr_files_xml;
 
     } // setXmlObject
 
@@ -62,64 +65,48 @@ class QrFilesXml
     } // getXmlObject
 
     ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////// Start Get Supporter Data ////////////////////////
+    ///////////////////////// Start Get Qr File Data //////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns the first name for a given supporter number
-    getFirstName(i_supporter_number)
+    // Returns the first name for a given QR File number
+    getFirstName(i_qr_file_number)
     {
-        return this.getNodeValue(this.m_tags.getFirstName(), i_supporter_number);
+        return this.getNodeValue(this.m_tags.getFirstName(), i_qr_file_number);
         
     } // getFirstName
 
-    // Returns the family name for a given supporter number
-    getFamilyName(i_supporter_number)
+    // Returns the family name for a given  QR File number
+    getFamilyName(i_qr_file_number)
     {
-        return this.getNodeValue(this.m_tags.getFamilyName(), i_supporter_number);
+        return this.getNodeValue(this.m_tags.getFamilyName(), i_qr_file_number);
         
     } // getFamilyName
 
-    // Returns the contribution (as string) for a given supporter number
-    getContribution(i_supporter_number)
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Get Qr File Data ////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Number Qr Files  //////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Returns the number of QR files
+    getNumberOfQrFiles()
     {
-        return this.getNodeValue(this.m_tags.getContribution(), i_supporter_number);
-        
-    } // getContribution
+        var ret_n_qr_files = -12345;
 
-    // Returns the contribution (as integer) for a given supporter number
-    getContributionInt(i_supporter_number)
-    {
-        var contribution_str = this.getContribution(i_supporter_number);
+        if (!this.checkXmlObject()){ return ret_n_qr_files; }
 
-        return parseInt(contribution_str);
+        var qr_file_nodes = this.m_file_xml.getElementsByTagName(this.m_tags.getQrFile());
 
-    } // getContributionInt
+        ret_n_qr_files = qr_file_nodes.length;
 
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////// End Get Supporter Data //////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
+        return ret_n_qr_files;
+
+    } // getNumberOfQrFiles 
 
     ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////// Start Number Supporters  ////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-
-    // Returns the number of supporters
-    getNumberOfSupporters()
-    {
-        var ret_n_supporters = -12345;
-
-        if (!this.checkXmlObject()){ return ret_n_supporters; }
-
-        var supporter_nodes = this.m_file_xml.getElementsByTagName(this.m_tags.getSupporter());
-
-        ret_n_supporters = supporter_nodes.length;
-
-        return ret_n_supporters;
-
-    } // getNumberOfSupporters 
-
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////// End Number Supporters  //////////////////////////
+    ///////////////////////// End Number Qr Files  ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
         
@@ -127,27 +114,27 @@ class QrFilesXml
     /////// Start Node Functions //////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns the node value for a given jazz task number and a tag name
-    getNodeValue(i_supporter_tag, i_supporter_number)
+    // Returns the node value for a given QR file number and a tag name
+    getNodeValue(i_supporter_tag, i_qr_file_number)
     {
         var ret_data = '';
         
         if (!this.checkXmlObject()){ return ret_data; }
 
-        var n_supporters = this.getNumberOfSupporters();
+        var n_qr_files = this.getNumberOfQrFiles();
         
-        if (i_supporter_number < 1 || i_supporter_number > n_supporters)
+        if (i_qr_file_number < 1 || i_qr_file_number > n_qr_files)
         {
-            alert("QrFilesXml.getNodeValue Supporter number is not between 1 and " + n_tasks.toString());
+            alert("QrFilesXml.getNodeValue QR file number is not between 1 and " + n_qr_files.toString());
             
             return ret_data;		
         }
             
-        var supporter_nodes = this.m_file_xml.getElementsByTagName(this.m_tags.getSupporter());
+        var qr_file_nodes = this.m_file_xml.getElementsByTagName(this.m_tags.getQrFile());
         
-        var supporter_node = supporter_nodes[i_supporter_number-1];
+        var qr_file_node = qr_file_nodes[i_qr_file_number-1];
         
-        var xml_node_value = this.getNodeValueTagName(supporter_node, i_supporter_tag);
+        var xml_node_value = this.getNodeValueTagName(qr_file_node, i_supporter_tag);
         
         ret_data = this.removeFlagNodeValueNotSet(xml_node_value);
         
@@ -163,92 +150,90 @@ class QrFilesXml
     /////// Start Utility Functions ///////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns the name and path for jazz tasks XML file
-    getFileNameSupportXml()
+    // Returns the name and path for QR files XML file (QrFiles.xml)
+    getUrlForQrFilesXml()
     {
         var ret_file_name = '';
 
         ret_file_name = ret_file_name + this.m_xml_dir_name_server;
 
-        var subdir_season = this.m_xml_dir_start_season + this.m_season_start_year.toString() + '_' +
-        (this.m_season_start_year + 1).toString() + '/';
+        var subdir_season = QrStrings.getSubdirectorySeasonName(this.m_season_start_year);
 
         ret_file_name = ret_file_name + subdir_season +  this.m_xml_file_name;
 
         return ret_file_name;
 
-    } // getFileNameSupportXml
+    } // getUrlForQrFilesXml
 
-        // Returns the node value. Input is an XML node and the tag name
-        getNodeValueTagName(i_node, i_xml_tag)
+    // Returns the node value. Input is an XML node and the tag name
+    getNodeValueTagName(i_node, i_xml_tag)
+    {
+        return i_node.getElementsByTagName(i_xml_tag)[0].childNodes[0].nodeValue;
+        
+    } // getNodeValueTagName
+
+    // Sets a node value. Input is an XML node, the tag name and the node value
+    // Copied from FlyerXml.js
+    setNodeValue(i_node, i_xml_tag, i_node_value)
+    {	
+        i_node.getElementsByTagName(i_xml_tag)[0].childNodes[0].nodeValue = i_node_value;
+        
+    } // setNodeValue
+
+    // Returns empty string if i_node_value is equal to m_not_yet_set_node_value
+    removeFlagNodeValueNotSet(i_node_value)
+    {
+        if (!this.nodeValueIsSet(i_node_value))
         {
-            return i_node.getElementsByTagName(i_xml_tag)[0].childNodes[0].nodeValue;
-            
-        } // getNodeValueTagName
+            return "";
+        }
+        
+        return i_node_value; 
+        
+    } // removeFlagNodeValueNotSet
     
-        // Sets a node value. Input is an XML node, the tag name and the node value
-        // Copied from FlyerXml.js
-        setNodeValue(i_node, i_xml_tag, i_node_value)
-        {	
-            i_node.getElementsByTagName(i_xml_tag)[0].childNodes[0].nodeValue = i_node_value;
-            
-        } // setNodeValue
-    
-        // Returns empty string if i_node_value is equal to m_not_yet_set_node_value
-        removeFlagNodeValueNotSet(i_node_value)
+    // Returns true if the node value is set
+    nodeValueIsSet(i_node_value)
+    {
+        if (i_node_value == this.m_not_yet_set_node_value)
         {
-            if (!this.nodeValueIsSet(i_node_value))
-            {
-                return "";
-            }
-            
-            return i_node_value; 
-            
-        } // removeFlagNodeValueNotSet
-    
-        // Returns true if the node value is set
-        nodeValueIsSet(i_node_value)
+            return false;
+        }
+        else
         {
-            if (i_node_value == this.m_not_yet_set_node_value)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-            
-        } // nodeValueIsSet
-    
-        // Return flag (string) this.m_not_yet_set_node_value if input string is empty
-        // Copied from FlyerXml.js
-        setFlagNodeValueIsNotSetForEmptyString(i_node_value)
+            return true;
+        }
+        
+    } // nodeValueIsSet
+
+    // Return flag (string) this.m_not_yet_set_node_value if input string is empty
+    // Copied from FlyerXml.js
+    setFlagNodeValueIsNotSetForEmptyString(i_node_value)
+    {
+        var trimmed_node_value = i_node_value.trim();
+        
+        if (trimmed_node_value.length == 0)
         {
-            var trimmed_node_value = i_node_value.trim();
-            
-            if (trimmed_node_value.length == 0)
-            {
-                return this.m_not_yet_set_node_value;
-            }
-            
-            return i_node_value;
-    
-        } // setFlagNodeValueIsNotSetForEmptyString    
-    
-        // Same as function above. Just a shorter name
-        modNodeValue(i_node_value)
+            return this.m_not_yet_set_node_value;
+        }
+        
+        return i_node_value;
+
+    } // setFlagNodeValueIsNotSetForEmptyString    
+
+    // Same as function above. Just a shorter name
+    modNodeValue(i_node_value)
+    {
+        var trimmed_node_value = i_node_value.trim();
+        
+        if (trimmed_node_value.length == 0)
         {
-            var trimmed_node_value = i_node_value.trim();
-            
-            if (trimmed_node_value.length == 0)
-            {
-                return this.m_not_yet_set_node_value;
-            }
-            
-            return i_node_value;
-    
-        } // modNodeValue
-    
+            return this.m_not_yet_set_node_value;
+        }
+        
+        return i_node_value;
+
+    } // modNodeValue
     
     ///////////////////////////////////////////////////////////////////////////
     /////// End Utility Functions /////////////////////////////////////////////
@@ -324,7 +309,7 @@ class QrFilesXml
 
 } // QrFilesXml
 
-// Class defining the tags of the XML file Files.xml
+// Class defining the tags of the XML file QrFiles.xml
 class QrFilesTags 
 {
     // Creates the instance of the class
@@ -333,25 +318,18 @@ class QrFilesTags
         // Member variables
         // ================
 
-        this.m_tag_supporter = "Supporter";
+        this.m_tag_qr_file = "QrFile";
         this.m_tag_first_name = "Vorname";
         this.m_tag_family_name = "FamilienName";
-        this.m_tag_contribution = "Beitrag-";
+  
     }
 
     // Get member variable functions
     // =============================
 
-    getSupporter(){return this.m_tag_supporter;} 
+    getQrFile(){return this.m_tag_qr_file;} 
     getFirstName(){return this.m_tag_first_name;} 
     getFamilyName(){return this.m_tag_family_name;} 
-    getContribution()
-    {
-        var ret_tag = this.m_tag_contribution + this.m_start_season_year.toString() + '-' +
-                        (this.m_start_season_year + 1).toString();
 
-        return ret_tag;
-
-    } // getContribution
 
 } // QrFilesTags

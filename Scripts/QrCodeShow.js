@@ -111,17 +111,19 @@ function getServerFileNameFromInputElement()
         return '';        
     }
 
-    var supporter_str = 'index_' + code_for_qr_file_int.toString();
+    var download_code_str = 'index_' + code_for_qr_file_int.toString();
 
-    var file_name_path = 'https://jazzliveaarau.ch/QrCode/' + getServerQrFileName(supporter_str);
+    var file_name_path = '';
+
+    var season_start_year = 2021; // TODO QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
     if (execApplicationOnServer())
     {
-        file_name_path = 'https://jazzliveaarau.ch/QrCode/' + getServerQrFileName(supporter_str);
+        file_name_path = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_str);
     }
     else
     {
-        file_name_path = getServerQrFileName(supporter_str);
+        file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_str);
     }
 
     return file_name_path;

@@ -18,39 +18,42 @@ class SupporterXml
         // Member variables
         // ================
 
-        // Path and name of XML file on the server /www/QrCode/QrFiles
-        this.m_xml_dir_name_server = 'QrFiles/';
+        // Strings
+        this.m_strings = new  QrStrings();
+
+        // Path to the subdirectory for files and XML files (/www/QrCode/QrFiles)
+        this.m_xml_dir_name_server = QrStrings.getPathSubdirectoryQrFiles();
 
         // Start part of name for subdirectory season
-        this.m_xml_dir_start_season = 'Season_';
+        this.m_xml_dir_start_season = QrStrings.getStartPartSubdirectorySeason();
 
         // Season start year
         this.m_season_start_year = i_season_start_year;
 
-        // Supporter XML file name
-        this.m_xml_file_name = 'Supporter.xml';
+        // Supporter XML file name (Supporter.xml)
+        this.m_xml_file_name = QrStrings.getSupporterXmlFileName();
 
         // Call back function name
         this.m_callback_function_name = i_callback_function_name;
 
-        // The jazz tasks xml object
+        // The supporter xml object
         this.m_file_xml = null;
 
         // Object holding the tags
         this.m_tags = new SupporterTags(i_season_start_year);
 
-        // Flag that a node value not have been set
-        this.m_not_yet_set_node_value = "NotYetSetNodeValue";
+        // Flag that a node value not have been set (NotYetSetNodeValue)
+        this.m_not_yet_set_node_value = QrStrings.getXmlNodeValueNotYetSet();
 
         // Loads the XML object and calls the function m_callback_function_name
-        this.loadXmlFile(this, this.getFileNameSupportXml(), this.m_callback_function_name);
+        this.loadXmlFile(this, this.getUrlForSupporterXml(), this.m_callback_function_name);
 
     } // constructor
 
     // Sets the XML object
-    setXmlObject(i_jazz_tasks_xml)
+    setXmlObject(i_supporter_xml)
     {
-        this.m_file_xml = i_jazz_tasks_xml;
+        this.m_file_xml = i_supporter_xml;
 
     } // setXmlObject
 
@@ -127,7 +130,7 @@ class SupporterXml
     /////// Start Node Functions //////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns the node value for a given jazz task number and a tag name
+    // Returns the node value for a given supporter number and a tag name
     getNodeValue(i_supporter_tag, i_supporter_number)
     {
         var ret_data = '';
@@ -138,7 +141,7 @@ class SupporterXml
         
         if (i_supporter_number < 1 || i_supporter_number > n_supporters)
         {
-            alert("SupporterXml.getNodeValue Supporter number is not between 1 and " + n_tasks.toString());
+            alert("SupporterXml.getNodeValue Supporter number is not between 1 and " + n_supporters.toString());
             
             return ret_data;		
         }
@@ -163,21 +166,23 @@ class SupporterXml
     /////// Start Utility Functions ///////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns the name and path for jazz tasks XML file
-    getFileNameSupportXml()
+    // Returns the name and path for supporter XML file (Supporter.xml)
+    getUrlForSupporterXml()
     {
         var ret_file_name = '';
 
         ret_file_name = ret_file_name + this.m_xml_dir_name_server;
 
-        var subdir_season = this.m_xml_dir_start_season + this.m_season_start_year.toString() + '_' +
-        (this.m_season_start_year + 1).toString() + '/';
+        var subdir_season = QrStrings.getSubdirectorySeasonName(this.m_season_start_year);
+        
+        //QQthis.m_xml_dir_start_season + this.m_season_start_year.toString() + '_' +
+        // (this.m_season_start_year + 1).toString() + '/';
 
         ret_file_name = ret_file_name + subdir_season +  this.m_xml_file_name;
 
         return ret_file_name;
 
-    } // getFileNameSupportXml
+    } // getUrlForSupporterXml
 
         // Returns the node value. Input is an XML node and the tag name
         getNodeValueTagName(i_node, i_xml_tag)

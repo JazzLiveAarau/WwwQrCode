@@ -20,7 +20,10 @@
 var g_supporter_xml_object = null;
 
 // Path and start part file name of the QR file
-var g_qr_start_part_file_name = 'QrFiles/Season_2021_2022/QrCode_';
+//QQQ var g_qr_start_part_file_name = 'QrFiles/Season_2021_2022/QrCode_';
+
+// Instance of the class QrStrings
+var g_qr_strings = null;
         
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +42,8 @@ function onloadQrCodeFiles()
     var season_start_year = 2021; // TODO
 
     g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
+
+    g_gr_strings = new QrStrings();
 
 } // onloadQrCodeFiles
 
@@ -95,11 +100,13 @@ function saveOneQrFileOnServer(i_index_supporter)
         return;
     }
 
-    var supporter_str = 'index_' + i_index_supporter.toString();
+    var download_code_str = 'index_' + i_index_supporter.toString();
 
     var xml_content_str = g_supporter_data_url[i_index_supporter];
 
-    var file_name_path = getServerQrFileName(supporter_str);
+    //QQ var file_name_path = getServerQrFileName(download_code_str);
+    var season_start_year = 2021; // TODO QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    var file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_str);
 
     if (!saveFileWithJQueryPostFunction(file_name_path, xml_content_str))
     {
@@ -114,12 +121,11 @@ function saveOneQrFileOnServer(i_index_supporter)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Basic Save File Function  /////////////////////////////////
+///////////////////////// Start Basic Save File Functions  ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Function copied from FlyerSave.js
-
+// This function copied from FlyerSave.js
 // Save a file with the JQuery function "post"
 // Please refer to SaveFileOnServer.php for a detailed description of "post"
 // Input parameter i_file_name is the server file name
@@ -153,25 +159,59 @@ function saveFileWithJQueryPostFunction(i_file_name, i_content_string)
 	
 } // saveFileWithJQueryPostFunction
 
+// Create a file if not existing with the JQuery function "post"
+// Please refer to CreateFileOnServerIfNotExisting.php for a detailed description of "post"
+// Input parameter i_file_name is the server file name
+// Input parameter i_content_string is the content of the file
+// The function returns false for failure
+function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_string)
+{
+  var file_name = '../' + i_file_name;
+
+    $.post
+      ('Php/CreateFileOnServerIfNotExisting.php',
+        {
+          file_content: i_content_string,
+          file_name: file_name
+        },
+        function(data_save,status_save)
+		{
+            if (status_save == "success")
+            {
+                // alert(data_save);
+            }
+            else
+            {
+				alert("Execution of CreateFileOnServerIfNotExisting.php failed");
+				return false;
+            }          
+        } // function
+      ); // post
+	  
+    return true;	  
+	
+} // createFileIfNotExistingWithJQueryPostFunction
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Basic Save File Function  ///////////////////////////////////
+///////////////////////// End Basic Save File Functions  //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Utility Functions /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+/*QQQQQ
 // Returns the name and path for the QR file
-function getServerQrFileName(i_supporter_str)
+function getServerQrFileName(i_download_code_str)
 {
     var start_path = g_qr_start_part_file_name;
 
-    var full_name = g_qr_start_part_file_name + i_supporter_str + '.txt';
+    var full_name = g_qr_start_part_file_name + i_download_code_str + '.txt';
 
     return full_name;
 
 } // getServerQrFileName
+QQQ*/
 
 // Returns true if the application runs on the server
 function execApplicationOnServer()
