@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-03
+// Date: 2022-05-04
 // Author: Gunnar Lidén
 
 // File content
@@ -20,8 +20,11 @@
 // On load function for show a QR code file
 function onloadQrCodeShow()
 {
-
     hideShowQrCodeImage();
+
+    hideDivQrCodeShowText();
+
+    hideDivButtonShowNewQrFile();
  
 } // onloadQrCodeShow
 
@@ -35,14 +38,30 @@ function clickShowQrFile()
         return;
     }
 
-    if (!execApplicationOnServer())
-    {
-        return;
-    }
-
     readTextFileOnServer(file_name_server);
 
+    displayShowQrCodeImage();
+
+    hideDivInputDownloadCode();
+
+    hideDivButtonShowQrFile();
+
+    displayDivButtonShowNewQrFile();
+
 } // clickShowQrFile
+
+// User clicked download a new QR code
+function clickNewQrFile()
+{
+    hideShowQrCodeImage();
+    
+    displayDivInputDownloadCode();
+
+    displayDivButtonShowQrFile();
+
+    hideDivButtonShowNewQrFile();
+
+} // clickNewQrFile
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
@@ -94,7 +113,16 @@ function getServerFileNameFromInputElement()
 
     var supporter_str = 'index_' + code_for_qr_file_int.toString();
 
-    var file_name_path = 'https://jazzliveaarau.ch/SupporterQrCodes/' + getServerQrFileName(supporter_str);
+    var file_name_path = 'https://jazzliveaarau.ch/QrCode/' + getServerQrFileName(supporter_str);
+
+    if (execApplicationOnServer())
+    {
+        file_name_path = 'https://jazzliveaarau.ch/QrCode/' + getServerQrFileName(supporter_str);
+    }
+    else
+    {
+        file_name_path = getServerQrFileName(supporter_str);
+    }
 
     return file_name_path;
 
@@ -127,6 +155,78 @@ function displayShowQrCodeImage()
     el_image.style.display = 'block';
 
 } // displayShowQrCodeImage
+
+// Hide the div QR code text
+function hideDivQrCodeShowText()
+{
+    var el_image = getElementDivQrCodeShowText();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrCodeShowText
+
+// Display the div QR code text
+function displayDivQrCodeShowText()
+{
+    var el_image = getElementDivQrCodeShowText();
+
+    el_image.style.display = 'block';
+
+} // displayDivQrCodeShowText
+
+// Hide the div input download code
+function hideDivInputDownloadCode()
+{
+    var el_image = getElementDivInputDownloadCode();
+
+    el_image.style.display = 'none';
+
+} // hideDivInputDownloadCode
+
+// Display the div input download code
+function displayDivInputDownloadCode()
+{
+    var el_image = getElementDivInputDownloadCode();
+
+    el_image.style.display = 'block';
+
+} // displayDivInputDownloadCode
+
+// Hide the div button show QR code
+function hideDivButtonShowQrFile()
+{
+    var el_button = getElementDivButtonShowQrFile();
+
+    el_button.style.display = 'none';
+
+} // hideDivButtonShowQrFile
+
+// Display the div button show QR code
+function displayDivButtonShowQrFile()
+{
+    var el_button = getElementDivButtonShowQrFile();
+
+    el_button.style.display = 'block';
+
+} // displayDivButtonShowQrFile
+
+// Hide the div button show new QR code
+function hideDivButtonShowNewQrFile()
+{
+    var el_button = getElementDivButtonShowNewQrFile();
+
+    el_button.style.display = 'none';
+
+} // hideDivButtonShowNewQrFile
+
+// Display the div button show new QR code
+function displayDivButtonShowNewQrFile()
+{
+    var el_button = getElementDivButtonShowNewQrFile();
+
+    el_button.style.display = 'block';
+
+} // displayDivButtonShowNewQrFile
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Hide And Display Functions //////////////////////////////////
@@ -214,9 +314,65 @@ function getElementInputCodeForQrCodeFile()
 // Returns the identity of the for the code for the QR file
 function getIdInputCodeForQrCodeFile()
 {
-    return 'id_input_code';
+    return 'id_input_download_code';
 
 } // getIdInputCodeForQrCodeFile
+
+// Get the input element for the div button show QR code
+function getElementDivButtonShowQrFile()
+{
+    return document.getElementById(getIdDivButtonShowQrFile());
+
+} // getElementDivButtonShowQrFile
+
+// Returns the identity of the the div button show QR code
+function getIdDivButtonShowQrFile()
+{
+    return 'id_div_button_show_qr_file';
+
+} // getIdDivButtonShowQrFile
+
+// Get the input element for the div QR code text
+function getElementDivQrCodeShowText()
+{
+    return document.getElementById(getIdDivQrCodeShowText());
+
+} // getElementDivQrCodeShowText
+
+// Returns the identity of the the div QR code text
+function getIdDivQrCodeShowText()
+{
+    return 'id_div_qr_code_show_text';
+
+} // getIdDivQrCodeShowText
+
+// Get the input element for the div input download code
+function getElementDivInputDownloadCode()
+{
+    return document.getElementById(getIdDivInputDownloadCode());
+
+} // getElementDivInputDownloadCode
+
+// Returns the identity of the the div input download code
+function getIdDivInputDownloadCode()
+{
+    return 'id_div_input_download_code';
+
+} // getIdDivInputDownloadCode
+
+// Get the input element for the div button show new QR code
+function getElementDivButtonShowNewQrFile()
+{
+    return document.getElementById(getIdDivButtonShowNewQrFile());
+
+} // getElementDivButtonShowNewQrFile
+
+// Returns the identity of the the div button show new QR code
+function getIdDivButtonShowNewQrFile()
+{
+    return 'id_div_button_show_new_qr_file';
+
+} // getIdDivButtonShowNewQrFile
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

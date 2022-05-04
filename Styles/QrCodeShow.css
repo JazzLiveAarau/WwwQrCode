@@ -1,5 +1,5 @@
 /* 
-File: QrCodeShow.css Date: 2022-05-02 Author: Gunnar Lidén
+File: QrCodeShow.css Date: 2022-05-04 Author: Gunnar Lidén
 
 General information
 ===================
@@ -32,9 +32,10 @@ body
     clear: both;
 }
 
-.cl_qr_code_controls
+.cl_qr_code_show_container
 {
-    margin-left: 5mm;
+    width: 330px;
+    margin-left: 2mm;
 }
 
 .cl_canvas_qr_code
@@ -42,15 +43,24 @@ body
     clear: both;
 }
 
+.cl_div_button_show_qr_file
+{
+    text-align: center;
+}    
+
 .cl_button_show_qr_file 
 {
     background-color:#323036;
     padding:8px;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 70px;
     color:white;
     cursor:pointer;
+}
+
+.cl_div_input_code
+{
+    text-align: center;
 }
 
 input 
@@ -61,12 +71,17 @@ input
     border-bottom:solid 4px black;
     width:150px;
     margin-bottom: 0mm;
-    margin-left: 50px;
+    margin-left: 0px;
     text-align: center;
     font-size:16px;
 }
 
 .cl_div_qr_code_image
 {
-    margin-left: 50px;
+    padding-left: 50px;
+}
+
+.cl_div_qr_code_show_text
+{
+    text-align: center;
 }

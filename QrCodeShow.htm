@@ -30,23 +30,31 @@
   </head>
   <body onload= "onloadQrCodeShow()" >
 
-    <div class="cl_qr_code_controls" >
+    <div class="cl_qr_code_show_container" >
 
-      <div id="id_div_qr_generate_logo" class="cl_div_qr_show_logo">JAZZ <i>live</i> AARAU<br>Supporter</div>
+      <div id="id_div_qr_generate_logo" class="cl_div_qr_show_logo">JAZZ <i>live</i> AARAU<br>QR Code</div>
 
-      <div>Code für das Herunterladen <br><input id="id_input_code" placeholder="Nummer 0-70" type="text" /></div>
+      <div id="id_div_input_download_code"  class="cl_div_input_code"  >Code zum Herunterladen <br><input id="id_input_download_code" placeholder="Nummer 0-70" type="text" /></div>
 
-      <div>
-        <button class="cl_button_show_qr_file" onclick="clickShowQrFile()">QR Code zeigen</button>
+      <div id="id_div_button_show_qr_file"  class="cl_div_button_show_qr_file">
+        <button class="cl_button_show_qr_file" onclick="clickShowQrFile()">QR Code speichern</button>
       </div>
 
-    </div>
+      <div id="id_div_button_show_new_qr_file"  class="cl_div_button_show_qr_file">
+        <button class="cl_button_show_qr_file" onclick="clickNewQrFile()">Neuer QR Code</button>
+      </div>
 
-    <div id="id_div_qr_code_image" class="cl_div_qr_code_image" >
+      <div id="id_div_qr_code_image" class="cl_div_qr_code_image" >
 
-      <img id="id_qr_code_image" src="favicon.ico">
+        <img id="id_qr_code_image" src="favicon.ico">
 
-    </div>
+      </div>
+
+      <div id="id_div_qr_code_show_text" class="cl_div_qr_code_show_text" >
+        Supporter<br> Nnnnnn Mmmmmmm<br> 2021-2022
+      </div>
+
+    </div> <!-- cl_qr_code_show_container -->
 
   </body>
 </html>
