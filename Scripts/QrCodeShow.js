@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-04
+// Date: 2022-05-05
 // Author: Gunnar Lidén
 
 // File content
@@ -14,6 +14,17 @@
 // https://www.mediaevent.de/javascript/canvas-to-data-url.html
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Global Parameters /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Season start year
+var g_season_start_year_show = -12345;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Global Parameters ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Event Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,8 +36,17 @@ function onloadQrCodeShow()
     hideDivQrCodeShowText();
 
     hideDivButtonShowNewQrFile();
+
+    getSeasonStartYear(callbackSeasonStartYearShow);
  
 } // onloadQrCodeShow
+
+// Callback function retrieving the season start year
+function callbackSeasonStartYearShow(i_season_start_year)
+{
+    g_season_start_year_show = i_season_start_year;
+
+} // callbackSeasonStartYearShow
 
 // User clicked button show a QR file
 function clickShowQrFile()
@@ -115,15 +135,13 @@ function getServerFileNameFromInputElement()
 
     var file_name_path = '';
 
-    var season_start_year = 2021; // TODO QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-
     if (execApplicationOnServer())
     {
-        file_name_path = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_str);
+        file_name_path = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, download_code_str);
     }
     else
     {
-        file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_str);
+        file_name_path = QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, download_code_str);
     }
 
     return file_name_path;

@@ -22,6 +22,7 @@ var g_supporter_xml_object = null;
 // Instance of the class QrFilesXml handling the XML file QrFiles,xml
 var g_qr_files_xml_object = null;
 
+// Season start year
 var g_season_start_year = -12345;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -71,8 +72,6 @@ function afterLoadOfQrFilesXml()
 function afterLoadOfSupporterXmlFile(i_supporter_xml)
 {
     QrProgress.Append('Enter afterLoadOfSupporterXmlFile');
-
-    //QQQQ setTestArrayFromXmlObject(i_supporter_xml);
 
     setSupporterDataArrayFromXmlObject(i_supporter_xml);
 
@@ -199,175 +198,7 @@ function createQrFileXmlIfNotAlreadyExisting(i_season_start_year)
 ///////////////////////// Start Create Qr Files Xml File //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Basic PHP Functions  //////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
 
-
-// This function copied from FlyerSave.js
-// Save a file with the JQuery function "post"
-// Please refer to SaveFileOnServer.php for a detailed description of "post"
-// Input parameter i_file_name is the server file name
-// Input parameter i_content_string is the content of the file
-// The function returns false for failure
-function saveFileWithJQueryPostFunction(i_file_name, i_content_string)
-{
-  var file_name = '../' + i_file_name;
-
-    $.post
-      ('Php/SaveFileOnServer.php',
-        {
-          file_content: i_content_string,
-          file_name: file_name
-        },
-        function(data_save,status_save)
-		{
-            if (status_save == "success")
-            {
-                // alert(data_save);
-            }
-            else
-            {
-				alert("Execution of SaveFileOnServer.php failed");
-				return false;
-            }          
-        } // function
-      ); // post
-	  
-    return true;	  
-	
-} // saveFileWithJQueryPostFunction
-
-// Create a file if not existing with the JQuery function "post"
-// Please refer to CreateFileOnServerIfNotExisting.php for a detailed description of "post"
-// Input parameter i_file_name is the server file name
-// Input parameter i_content_string is the content of the file
-// The function returns false for failure
-function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_string)
-{
-  var file_name = '../' + i_file_name;
-
-    $.post
-      ('Php/CreateFileOnServerIfNotExisting.php',
-        {
-          file_content: i_content_string,
-          file_name: file_name
-        },
-        function(data_save,status_save)
-		{
-            if (status_save == "success")
-            {
-                // alert(data_save);
-            }
-            else
-            {
-				alert("Execution of CreateFileOnServerIfNotExisting.php failed");
-				return false;
-            }          
-        } // function
-      ); // post
-	  
-    return true;	  
-	
-} // createFileIfNotExistingWithJQueryPostFunction
-
-// Determine if a file exists using the JQuery function "post"
-// Please refer to ExistsFileOrDirectory.php for a detailed description of "post"
-// Input parameter i_file_name is a server file name
-// The function returns true if the directory or the file exists
-function existsFileJQueryPost(i_file_name, i_callback_function_name)
-{
-  var file_name = '../' + i_file_name;
-
-    $.post
-      ('Php/ExistsFile.php',
-        {
-          file_name: file_name
-        },
-        function(data_exists,status_save)
-		{
-            if (status_save == "success")
-            {
-                //alert(data_exists);
-
-                QrProgress.Append('data_exists = ' + data_exists.trim());
-                
-				if (data_exists.trim() == "TRUE")
-				{
-					//return true;
-                    i_callback_function_name(true);
-				}
-				else
-				{
-					//return false;
-                    i_callback_function_name(false);
-				}
-            }
-            else
-            {
-				alert("Execution of ExistsFileOrDirectory.php failed");
-				
-				return false;
-            }          
-        } // function
-      ); // post
-	  
-	
-} // existsFileJQueryPost
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Basic PHP Functions  ////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Utility Functions /////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-// Returns true if the application runs on the server
-function execApplicationOnServer()
-{
-    var current_base = window.location.href;
-
-    var server_url = 'jazzliveaarau.ch';
-
-    var index_url = current_base.indexOf(server_url);
-
-    if (index_url >= 0) 
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-
-} // execApplicationOnServer
-
-// Returns a random download code
-function getRandomDownloadCode()
-{
-    // https://stackoverflow.com/questions/9719570/generate-random-password-string-with-requirements-in-javascript
-    
-    var allowed_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    var string_length = 8;
-
-    var ret_string = '';
-
-    for (var char_number = 1; char_number <= string_length; char_number++) 
-    {
-        var random_index = Math.floor(Math.random() * allowed_chars.length);
-
-        ret_string = ret_string + allowed_chars.substring(random_index, random_index + 1);
-    }
-
-    return ret_string;
-
-} // getRandomDownloadCode
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Utility Functions ///////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Hide And Display Functions ////////////////////////////////

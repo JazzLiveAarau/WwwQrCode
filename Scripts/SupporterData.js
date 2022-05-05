@@ -14,10 +14,6 @@
 // Array with SupporterData objects
 var g_supporter_data_array = [];
 
-// Array with all supporter names
-//QQQ var g_supporter_names = [];
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -158,47 +154,6 @@ class SupporterData
 ///////////////////////// End Class SupporterData /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Test Temporary Functions //////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
 
-/*QQQQ
-// Set the array with data from the XML file Supporter.xml
-function setTestArrayFromXmlObject(i_xml)
-{
-    QrProgress.Append('Enter setTestArrayFromXmlObject');
-
-    g_supporter_names = [];
-
-    var n_supporters = i_xml.getNumberOfSupporters();
-
-    var out_index = 0;
-
-    for (var supporter_number = 1; supporter_number <= n_supporters; supporter_number++)
-    {
-        var first_name = i_xml.getFirstName(supporter_number);
-
-        var family_name = i_xml.getFamilyName(supporter_number);
-    
-        var contribution_int = i_xml.getContributionInt(supporter_number);
-
-        if (contribution_int - 60 >= 0)
-        {
-            g_supporter_names[out_index] = first_name + ' ' + family_name;
-
-            out_index = out_index + 1;
-        }
-    }
-
-    QrProgress.Append('g_supporter_names is set (' + g_supporter_names.length.toString() + ')');
-    
-    QrProgress.Append('Exit setTestArrayFromXmlObject');
-    
-} // setTestArrayFromXmlObject
-
-QQQQ*/
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Test Temporary Functions ////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
 
 

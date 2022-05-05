@@ -216,9 +216,6 @@ class SupporterXml
         ret_file_name = ret_file_name + this.m_xml_dir_name_server;
 
         var subdir_season = QrStrings.getSubdirectorySeasonName(this.m_season_start_year);
-        
-        //QQthis.m_xml_dir_start_season + this.m_season_start_year.toString() + '_' +
-        // (this.m_season_start_year + 1).toString() + '/';
 
         ret_file_name = ret_file_name + subdir_season +  this.m_xml_file_name;
 

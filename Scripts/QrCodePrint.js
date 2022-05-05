@@ -63,8 +63,6 @@ function afterLoadOfSupporterXmlPrint(i_supporter_xml)
 {
     QrProgress.Append('Enter afterLoadOfSupporterXmlPrint');
 
-    //QQQ setTestArrayFromXmlObject(i_supporter_xml);
-
     setSupporterDataArrayFromXmlObject(i_supporter_xml);
 
 } // afterLoadOfSupporterXmlPrint
