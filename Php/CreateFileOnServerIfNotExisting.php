@@ -42,7 +42,7 @@ $file_content = $_POST['file_content'];
 $file_name = $_POST['file_name'];
 
 // Check if it is a regular file, i.e. here if it is existing
-if (!$file_name)
+if (!is_file($file_name))
 {
     file_put_contents($file_name, $file_content);
     echo "There was no existing file. Creation of file ";
@@ -53,7 +53,7 @@ else
 {
     echo "No creation of a file. The file ";
     echo $file_name;
-    echo "existed";
+    echo " existed";
 }
 
 

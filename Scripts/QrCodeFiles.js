@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-04
+// Date: 2022-05-05
 // Author: Gunnar Lidén
 
 // File content
@@ -16,11 +16,11 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Instance of the class SupporterXml
+// Instance of the class SupporterXml handling the XML file Supporter,xml
 var g_supporter_xml_object = null;
 
-// Path and start part file name of the QR file
-//QQQ var g_qr_start_part_file_name = 'QrFiles/Season_2021_2022/QrCode_';
+// Instance of the class QrFilesXml handling the XML file QrFiles,xml
+var g_qr_files_xml_object = null;
 
 // Instance of the class QrStrings
 var g_qr_strings = null;
@@ -37,15 +37,27 @@ var g_qr_strings = null;
 // On load function for QR code files
 function onloadQrCodeFiles()
 {
+    g_gr_strings = new QrStrings();
+
     // Temporary QQQQQ hideQrCodeImage();
 
     var season_start_year = 2021; // TODO
 
-    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
+    createQrFileXmlIfNotAlreadyExisting(season_start_year);
 
-    g_gr_strings = new QrStrings();
+    g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, season_start_year);
+
 
 } // onloadQrCodeFiles
+
+// Afier loading QrFiles.xml
+function afterLoadOfQrFilesXml()
+{
+    var season_start_year = 2021; // TODO
+
+    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
+
+} // afterLoadOfQrFilesXml
 
 // User clicked button create QR files
 function clickCreateQrFiles()
@@ -59,7 +71,7 @@ function clickCreateQrFiles()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Create File Functions /////////////////////////////////////
+///////////////////////// Start Create Qr Image And Text Files ////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Create QR files for all supporters
@@ -116,9 +128,39 @@ function saveOneQrFileOnServer(i_index_supporter)
 } // saveOneQrFileOnServer
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Create File Functions ///////////////////////////////////////
+///////////////////////// End Create Qr Image And Text Files //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Create Qr Files Xml File //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Create the QR files XML file (QrFiles.xml) if not already existing
+// TODO Check first that the directory exist. The directory is created by the Windows
+//      application Adressen
+function createQrFileXmlIfNotAlreadyExisting(i_season_start_year)
+{
+    var b_execute_server = execApplicationOnServer();
+
+    if (!b_execute_server)
+    {
+        return;
+    }
+
+    var rel_path_xml_file = QrStrings.getRelativeUrlQrFilesXmlFile(i_season_start_year);
+
+    var xml_content = '<AllQrFiles></AllQrFiles>';
+
+    if (!createFileIfNotExistingWithJQueryPostFunction(rel_path_xml_file, xml_content))
+    {
+        alert("createQrFileXmlIfNotAlreadyExisting Failure");
+    }
+
+} // createQrFileXmlIfNotAlreadyExisting
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Create Qr Files Xml File //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Basic Save File Functions  ////////////////////////////////

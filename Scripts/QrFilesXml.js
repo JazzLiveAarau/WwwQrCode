@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-04
+// Date: 2022-05-05
 // Author: Gunnar Lidén
 
 // File content
