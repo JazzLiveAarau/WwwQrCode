@@ -41,14 +41,14 @@ function onloadQrCodeFiles()
 
     hideQrCodeImage();
 
-    getSeasonStartYear(callbackSeasonStartYear);
+    getSeasonStartYear(callbackSeasonStartYearFiles);
 
 } // onloadQrCodeFiles
 
 // Callback after determining season start year with a PHP function
-function callbackSeasonStartYear(i_season_start_year)
+function callbackSeasonStartYearFiles(i_season_start_year)
 {
-    QrProgress.Append('callbackSeasonStartYear ' + i_season_start_year.toString());
+    QrProgress.Append('callbackSeasonStartYearFiles ' + i_season_start_year.toString());
 
     g_season_start_year = i_season_start_year;
 
@@ -56,7 +56,7 @@ function callbackSeasonStartYear(i_season_start_year)
 
     g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, g_season_start_year);
 
-} // callbackSeasonStartYear
+} // callbackSeasonStartYearFiles
 
 // Afier loading QrFiles.xml
 function afterLoadOfQrFilesXml()
@@ -72,7 +72,9 @@ function afterLoadOfSupporterXmlFile(i_supporter_xml)
 {
     QrProgress.Append('Enter afterLoadOfSupporterXmlFile');
 
-    setTestArrayFromXmlObject(i_supporter_xml);
+    //QQQQ setTestArrayFromXmlObject(i_supporter_xml);
+
+    setSupporterDataArrayFromXmlObject(i_supporter_xml);
 
 } // afterLoadOfSupporterXmlFile
 
@@ -85,82 +87,6 @@ function clickCreateQrFiles()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Season Start Year /////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-// Reurns the season start year
-function getSeasonStartYear(i_callbackSeasonStartYear)
-{
-    QrProgress.Append('Enter getSeasonStartYear');
-
-    var ret_start_year = -12345;
-
-    var date_object = new Date();
-
-    var current_year = date_object.getFullYear();
-
-    var qr_file_xml_this_year = QrStrings. getRelativeUrlSupporterXmlFile(current_year);
-
-    var qr_file_xml_prev_year = QrStrings. getRelativeUrlSupporterXmlFile(current_year - 1);
-
-    QrProgress.Append(qr_file_xml_prev_year);
-
-    seasonStartYearJQueryPost(current_year.toString(), qr_file_xml_this_year, qr_file_xml_prev_year, i_callbackSeasonStartYear);
-
-} // getSeasonStartYear
-
-// Get the season start year using JQuery function "post"
-// Please refer to SeasonStartYear.php for a detailed description of "post"
-// Input parameter i_file_name is a server file name
-// The function returns true if the directory or the file exists
-function seasonStartYearJQueryPost(i_current_year, i_file_name_this, i_file_name_prev, i_callback_function_name)
-{
-    QrProgress.Append('Enter seasonStartYearJQueryPost');
-
-    var current_year = i_current_year;
-    var file_name_this = '../' + i_file_name_this;
-    var file_name_prev = '../' + i_file_name_prev;
-
-    $.post
-      ('Php/SeasonStartYear.php',
-        {
-		  current_year: current_year,
-          file_name_this: file_name_this,
-		  file_name_prev: file_name_prev
-        },
-        function(data_year_str,status_save)
-		{
-            if (status_save == "success")
-            {
-                //alert(data_year_str);
-
-                QrProgress.Append('data_year_str = ' + data_year_str.trim());
-				
-				var season_start_year = parseInt(data_year_str.trim());
-				
-				i_callback_function_name(season_start_year);
-
-                return true;
-              
-            }
-            else
-            {
-				alert("Execution of SeasonStartYear.php failed");
-				
-				return false;
-            }          
-        } // function
-      ); // post
-	  
-	
-} // seasonStartYearJQueryPost
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Season Start Year ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -439,34 +365,6 @@ function getRandomDownloadCode()
 
 } // getRandomDownloadCode
 
-// Class showing progress messages
-// Please note that it is not nessary to create an instance of this class
-// The constructor makes nothing and the member functions are static
-class QrProgress
-{
-    constructor()
-    {
-        this.m_el_div_show_progress = getElementDivQrShowProgress();
-    }
-
-    static Msg(i_message_str)
-    {
-        var el_qr_progress = getElementDivQrShowProgress();
-
-        el_qr_progress.innerHTML = i_message_str;
-    }
-
-    static Append(i_append_str)
-    {   
-        var el_qr_progress = getElementDivQrShowProgress();
-
-        var existing_message_str =  el_qr_progress.innerHTML;
-
-        el_qr_progress.innerHTML = existing_message_str + '<br>' +  i_append_str;
-    }
-
-} // QrProgress
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Utility Functions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -495,27 +393,5 @@ function displayDivQrShowProgress()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Hide And Display Functions //////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Get Html Elements, Identities And Classes /////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-// Get the input element for the div qr show progress
-function getElementDivQrShowProgress()
-{
-    return document.getElementById(getIdDivQrShowProgress());
-
-} // getElementDivQrShowProgress
-
-// Returns the identity of the div qr show progress
-function getIdDivQrShowProgress()
-{
-    return 'id_div_qr_show_progress';
-
-} // getIdDivQrShowProgress
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Get Html Elements, Identities And Classes ///////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 

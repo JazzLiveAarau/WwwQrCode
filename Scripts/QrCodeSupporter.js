@@ -1,5 +1,5 @@
 // File: QrCodeSupporter.js
-// Date: 2022-05-02
+// Date: 2022-05-05
 // Author: Gunnar Lidén
 
 // File content
@@ -102,6 +102,9 @@ var g_supporter_data_url = [];
 // i_qr_case = 'ImageData' or 'DataUrl'
 function generateQrCodeAllSupporters(i_qr_case, i_canvas_size, i_qr_code_season_str)
 {
+    QrProgress.Append('Enter generateQrCodeAllSupporters');
+    QrProgress.Append('Case= ' + i_qr_case + ' i_qr_code_season_str= ' + i_qr_code_season_str);
+
     g_supporter_image_data = [];
 
     setSupporterCanvasSize(i_canvas_size);
@@ -112,9 +115,11 @@ function generateQrCodeAllSupporters(i_qr_case, i_canvas_size, i_qr_code_season_
 
     var canvas_context = getCanvasContextQrCode();
 
-    for (var index_name=0; index_name < g_supporter_names.length; index_name++)
+    for (var index_name=0; index_name < g_supporter_data_array.length; index_name++)
     {
-        var name_str = g_supporter_names[index_name];
+        var supporter_data = g_supporter_data_array[index_name];
+
+        var name_str = supporter_data.getFirstAndFamilyName();
 
         if (i_qr_case == 'ImageData')
         {
@@ -130,10 +135,22 @@ function generateQrCodeAllSupporters(i_qr_case, i_canvas_size, i_qr_code_season_
         }
         else
         {
-            alert("generateQrCodeAllSupporters Not an implmented case= " + i_qr_case);
+            alert("generateQrCodeAllSupporters Not an implemented case= " + i_qr_case);
+
             return;
         }
     }
+
+    if (i_qr_case == 'ImageData')
+    {
+        QrProgress.Append('g_supporter_image_data Length= ' + g_supporter_image_data.length);
+    }
+    else if (i_qr_case == 'DataUrl')
+    {
+        QrProgress.Append('g_supporter_data_url Length= ' + g_supporter_data_url.length);
+    }
+
+    QrProgress.Append('Exit generateQrCodeAllSupporters');
 
 } // generateQrCodeAllSupporters
 

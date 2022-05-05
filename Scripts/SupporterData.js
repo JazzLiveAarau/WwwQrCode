@@ -11,8 +11,11 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Array with SupporterData objects
+var g_supporter_data_array = [];
+
 // Array with all supporter names
-var g_supporter_names = [];
+//QQQ var g_supporter_names = [];
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +34,39 @@ var g_supporter_names = [];
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Set SupporterData Array ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Set the array with data from the XML file Supporter.xml
+function setSupporterDataArrayFromXmlObject(i_xml)
+{
+    QrProgress.Append('Enter setSupporterDataArrayFromXmlObject');
+
+    g_supporter_data_array = [];
+
+    var n_supporters = i_xml.getNumberOfSupporters();
+
+    var out_index = 0;
+
+    for (var supporter_number = 1; supporter_number <= n_supporters; supporter_number++)
+    {
+        var contribution_int = i_xml.getContributionInt(supporter_number);
+
+        if (contribution_int - 60 >= 0)
+        {
+            var supporter_data = new SupporterData(i_xml, g_season_start_year, supporter_number);
+
+            g_supporter_data_array[out_index] = supporter_data;
+
+            out_index = out_index + 1;
+        }
+    }
+
+    QrProgress.Append('g_supporter_data_array is set (' + g_supporter_data_array.length.toString() + ')');
+    
+    QrProgress.Append('Exit setSupporterDataArrayFromXmlObject');
+    
+} // setSupporterDataArrayFromXmlObject
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -68,6 +104,8 @@ class SupporterData
         this.m_comment = '';
 
         this.m_contribution = 0;
+
+        this.setData(i_supporter_number);
 
     } // constructor
 
@@ -107,7 +145,13 @@ class SupporterData
 
     getContribution() { return this.m_contribution } 
 
-} // QrSupporterData
+    getFirstAndFamilyName()
+    {
+        return this.m_first_name + ' ' + this.m_family_name;
+
+    } // getFirstAndFamilyName
+
+} // SupporterData
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -118,6 +162,7 @@ class SupporterData
 ///////////////////////// Start Test Temporary Functions //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+/*QQQQ
 // Set the array with data from the XML file Supporter.xml
 function setTestArrayFromXmlObject(i_xml)
 {
@@ -151,7 +196,7 @@ function setTestArrayFromXmlObject(i_xml)
     
 } // setTestArrayFromXmlObject
 
-
+QQQQ*/
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Test Temporary Functions ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////

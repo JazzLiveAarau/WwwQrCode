@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-05-03
+// Date: 2022-05-05
 // Author: Gunnar Lidén
 
 // File content
@@ -35,19 +35,39 @@ function getPrintQrCodeSeasonString()
 // On load function for the QR code print
 function onloadQrCodePrint()
 {
+    QrProgress.Msg("Enter onloadQrCodePrint");
+
     var el_input_color = getElementInputBackgroundColor();
 
     el_input_color.value = g_supporter_name_background_color;
 
     hideQrCodeImage();
 
-    var season_start_year = 2021; // TODO
-
-    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
-
-    //QQQ setTestArrayWithSupporterName();
+    getSeasonStartYear(callbackSeasonStartYearPrint);
 
 } // onloadQrCodePrint
+
+// Callback after determining season start year with a PHP function
+function callbackSeasonStartYearPrint(i_season_start_year)
+{
+    QrProgress.Append('callbackSeasonStartYearPrint ' + i_season_start_year.toString());
+
+    g_season_start_year = i_season_start_year;
+
+    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlPrint, g_season_start_year);
+
+} // callbackSeasonStartYearPrint
+
+// Callback after loading Supporter.xml
+function afterLoadOfSupporterXmlPrint(i_supporter_xml)
+{
+    QrProgress.Append('Enter afterLoadOfSupporterXmlPrint');
+
+    //QQQ setTestArrayFromXmlObject(i_supporter_xml);
+
+    setSupporterDataArrayFromXmlObject(i_supporter_xml);
+
+} // afterLoadOfSupporterXmlPrint
 
 // User clicked the button generate QR codes for supporters
 function clickGenerateSupporterQrCodes()
@@ -150,7 +170,7 @@ function getContentDivAllPagesString(i_season_str)
 
     var b_reverse = false;
 
-    var n_names = g_supporter_names.length;
+    var n_names = g_supporter_data_array.length;
     
     var n_pages = parseInt(n_names/10.0);
 
@@ -222,7 +242,7 @@ function getElementDivPrintRowContainerString(i_b_reverse, i_index_supporter_sta
 {
     var ret_print_row_container_str = '';
 	
-    if (i_index_supporter_start >= g_supporter_names.length)
+    if (i_index_supporter_start >= g_supporter_data_array.length)
     {
 		alert("getElementPrintPageString i_index_supporter_start= " + i_index_supporter_start.toString());
 		
@@ -256,7 +276,7 @@ function getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_seaso
 {
     var ret_print_page_str = '';
 	
-    if (i_index_supporter_start >= g_supporter_names.length)
+    if (i_index_supporter_start >= g_supporter_data_array.length)
     {
 		alert("getElementPrintPageString i_index_supporter_start= " + i_index_supporter_start.toString());
 		
@@ -286,7 +306,7 @@ function getElementDivAllPrintRowsString(i_b_reverse, i_index_supporter_start, i
 {
     var ret_all_print_rows_str = '';
 	
-    if (i_index_supporter_start >= g_supporter_names.length)
+    if (i_index_supporter_start >= g_supporter_data_array.length)
     {
         return ret_all_print_rows_str;
     }
@@ -326,7 +346,7 @@ function getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i
 {
     var ret_print_page_row_str = '';
 
-    if (i_index_supporter_start >= g_supporter_names.length)
+    if (i_index_supporter_start >= g_supporter_data_array.length)
     {
         return ret_print_page_row_str;
     }
@@ -369,7 +389,7 @@ function getElementDivCardBoxLeftString(i_index_supporter, i_season_str, i_tab)
 {
     var ret_card_box_left_str = '';
 
-    if (i_index_supporter >= g_supporter_names.length)
+    if (i_index_supporter >= g_supporter_data_array.length)
     {
         return ret_card_box_left_str;
     }
@@ -413,7 +433,7 @@ function getElementDivCardBoxRightString(i_index_supporter, i_season_str, i_tab)
 {
     var ret_card_box_right_str = '';
 
-    if (i_index_supporter >= g_supporter_names.length)
+    if (i_index_supporter >= g_supporter_data_array.length)
     {
         return ret_card_box_right_str;
     }
@@ -571,8 +591,12 @@ function getElementDivSupporterNameString(i_index_supporter, i_tab)
     ret_supporter_name_str = ret_supporter_name_str + getDivStartString(id_div_supporter_name, cl_div_supporter_name);
 
     ret_supporter_name_str = ret_supporter_name_str + getNewLineString();
+
+    var supporter_data = g_supporter_data_array[i_index_supporter];
+
+    var name_str = supporter_data.getFirstAndFamilyName();
 	
-	ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab + 1) + g_supporter_names[i_index_supporter] + getNewLineString();
+	ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab + 1) + name_str + getNewLineString();
 
     ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab);
 
