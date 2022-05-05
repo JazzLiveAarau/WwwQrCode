@@ -45,6 +45,25 @@ class QrStrings
 
     } // getSubdirectorySeasonName
 
+    /*QQQQQQ
+    // Returns the path to the subdirectory season e.g. QrCode/QrFiles/Season_2021_2022 
+    static getRelativeUrlSubdirectorySeasonName(i_season_start_year)
+    {
+        var rel_path = '';
+
+        rel_path = rel_path + this.getPathSubdirectoryQrFiles();
+
+        rel_path = rel_path + this.getSubdirectorySeasonName(i_season_start_year);
+
+        var path_length = rel_path.length;
+
+        //Test QQQQ  rel_path = rel_path.substring(0, path_length - 1); // Remove last slash
+
+        return rel_path;
+
+    } // getRelativeUrlSubdirectorySeasonName
+    QQQQ*/
+
     // Get supporter XML file name
     static getSupporterXmlFileName()
     {
@@ -52,12 +71,42 @@ class QrStrings
 
     } // getSupporterXmlFileName
 
+   // Returns the path to the QR files XML file e.g. QrCode/QrFiles/Season_2021_2022/QrFiles.xml 
+   static getRelativeUrlSupporterXmlFile(i_season_start_year)
+   {
+       var rel_path = '';
+
+       rel_path = rel_path + this.getPathSubdirectoryQrFiles();
+
+       rel_path = rel_path + this.getSubdirectorySeasonName(i_season_start_year);
+
+       rel_path = rel_path + this.getSupporterXmlFileName();
+
+       return rel_path;
+
+   } // getRelativeUrlSupporterXmlFile
+
     // Get QR files XML file name
     static getQrFilesXmlFileName()
     {
         return 'QrFiles.xml';
 
     } // getQrFilesXmlFileName
+
+    // Returns the path to the QR files XML file e.g. QrCode/QrFiles/Season_2021_2022/QrFiles.xml 
+    static getRelativeUrlQrFilesXmlFile(i_season_start_year)
+    {
+        var rel_path = '';
+
+        rel_path = rel_path + this.getPathSubdirectoryQrFiles();
+
+        rel_path = rel_path + this.getSubdirectorySeasonName(i_season_start_year);
+
+        rel_path = rel_path + this.getQrFilesXmlFileName();
+
+        return rel_path;
+
+    } // getRelativeUrlQrFilesXmlFile
 
     // Returns the name and path for the QR image file
     static getRelativeUrlQrFileImage(i_season_start_year, i_download_code_str)

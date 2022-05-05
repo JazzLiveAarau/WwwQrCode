@@ -82,6 +82,48 @@ class SupporterXml
         
     } // getFamilyName
 
+    // Returns the house number for a given supporter number
+    getHouseNumber(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getHouseNumber(), i_supporter_number);
+        
+    } // getHouseNumber
+
+    // Returns the postal code for a given supporter number
+    getPostalCode(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getPostalCode(), i_supporter_number);
+        
+    } // getPostalCode
+
+    // Returns the domicil for a given supporter number
+    getDomicil(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getDomicil(), i_supporter_number);
+        
+    } // getDomicil
+
+    // Returns the email for a given supporter number
+    getEmail(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getEmail(), i_supporter_number);
+        
+    } // getEmail
+
+    // Returns the sponsor flag for a given supporter number
+    getSponsor(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getSponsor(), i_supporter_number);
+        
+    } // getSponsor
+
+    // Returns the comment for a given supporter number
+    getComment(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getComment(), i_supporter_number);
+        
+    } // getComment
+
     // Returns the contribution (as string) for a given supporter number
     getContribution(i_supporter_number)
     {
@@ -344,6 +386,12 @@ class SupporterTags
         this.m_tag_supporter = "Supporter";
         this.m_tag_first_name = "Vorname";
         this.m_tag_family_name = "FamilienName";
+        this.m_tag_house_number = "Hausnummer";
+        this.m_tag_postal_code = "PLZ";
+        this.m_tag_domicil = "Wohnort";
+        this.m_tag_email = "e-Mail";
+        this.m_tag_sponsor = "Sponsor";
+        this.m_tag_comment = "Kommentar";
         this.m_tag_contribution = "Beitrag-";
     }
 
@@ -353,6 +401,12 @@ class SupporterTags
     getSupporter(){return this.m_tag_supporter;} 
     getFirstName(){return this.m_tag_first_name;} 
     getFamilyName(){return this.m_tag_family_name;} 
+    getHouseNumber(){return this.m_tag_house_number;} 
+    getPostalCode(){return this.m_tag_postal_code;} 
+    getDomicil(){return this.m_tag_domicil;}
+    getEmail(){return this.m_tag_email;}
+    getSponsor(){return this.m_tag_sponsor;}
+    getComment(){return this.m_tag_comment;}
     getContribution()
     {
         var ret_tag = this.m_tag_contribution + this.m_start_season_year.toString() + '-' +
@@ -363,3 +417,8 @@ class SupporterTags
     } // getContribution
 
 } // SupporterTags
+
+/*
+
+
+*/

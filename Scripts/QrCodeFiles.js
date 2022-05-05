@@ -22,6 +22,8 @@ var g_supporter_xml_object = null;
 // Instance of the class QrFilesXml handling the XML file QrFiles,xml
 var g_qr_files_xml_object = null;
 
+var g_season_start_year = -12345;
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -39,25 +41,40 @@ function onloadQrCodeFiles()
 
     hideQrCodeImage();
 
-    var season_start_year = 2021; // TODO
-
-    createQrFileXmlIfNotAlreadyExisting(season_start_year);
-
-    g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, season_start_year);
-
+    getSeasonStartYear(callbackSeasonStartYear);
 
 } // onloadQrCodeFiles
+
+// Callback after determining season start year with a PHP function
+function callbackSeasonStartYear(i_season_start_year)
+{
+    QrProgress.Append('callbackSeasonStartYear ' + i_season_start_year.toString());
+
+    g_season_start_year = i_season_start_year;
+
+    createQrFileXmlIfNotAlreadyExisting(g_season_start_year);
+
+    g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, g_season_start_year);
+
+} // callbackSeasonStartYear
 
 // Afier loading QrFiles.xml
 function afterLoadOfQrFilesXml()
 {
     QrProgress.Append("Enter afterLoadOfQrFilesXml");
 
-    var season_start_year = 2021; // TODO
-
-    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
+    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, g_season_start_year);
 
 } // afterLoadOfQrFilesXml
+
+// Callback function after load of XML file Supporter.xml
+function afterLoadOfSupporterXmlFile(i_supporter_xml)
+{
+    QrProgress.Append('Enter afterLoadOfSupporterXmlFile');
+
+    setTestArrayFromXmlObject(i_supporter_xml);
+
+} // afterLoadOfSupporterXmlFile
 
 // User clicked button create QR files
 function clickCreateQrFiles()
@@ -68,6 +85,82 @@ function clickCreateQrFiles()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Season Start Year /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Reurns the season start year
+function getSeasonStartYear(i_callbackSeasonStartYear)
+{
+    QrProgress.Append('Enter getSeasonStartYear');
+
+    var ret_start_year = -12345;
+
+    var date_object = new Date();
+
+    var current_year = date_object.getFullYear();
+
+    var qr_file_xml_this_year = QrStrings. getRelativeUrlSupporterXmlFile(current_year);
+
+    var qr_file_xml_prev_year = QrStrings. getRelativeUrlSupporterXmlFile(current_year - 1);
+
+    QrProgress.Append(qr_file_xml_prev_year);
+
+    seasonStartYearJQueryPost(current_year.toString(), qr_file_xml_this_year, qr_file_xml_prev_year, i_callbackSeasonStartYear);
+
+} // getSeasonStartYear
+
+// Get the season start year using JQuery function "post"
+// Please refer to SeasonStartYear.php for a detailed description of "post"
+// Input parameter i_file_name is a server file name
+// The function returns true if the directory or the file exists
+function seasonStartYearJQueryPost(i_current_year, i_file_name_this, i_file_name_prev, i_callback_function_name)
+{
+    QrProgress.Append('Enter seasonStartYearJQueryPost');
+
+    var current_year = i_current_year;
+    var file_name_this = '../' + i_file_name_this;
+    var file_name_prev = '../' + i_file_name_prev;
+
+    $.post
+      ('Php/SeasonStartYear.php',
+        {
+		  current_year: current_year,
+          file_name_this: file_name_this,
+		  file_name_prev: file_name_prev
+        },
+        function(data_year_str,status_save)
+		{
+            if (status_save == "success")
+            {
+                //alert(data_year_str);
+
+                QrProgress.Append('data_year_str = ' + data_year_str.trim());
+				
+				var season_start_year = parseInt(data_year_str.trim());
+				
+				i_callback_function_name(season_start_year);
+
+                return true;
+              
+            }
+            else
+            {
+				alert("Execution of SeasonStartYear.php failed");
+				
+				return false;
+            }          
+        } // function
+      ); // post
+	  
+	
+} // seasonStartYearJQueryPost
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Season Start Year ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -136,9 +229,7 @@ function saveOneQrFileOnServer(i_index_supporter)
 
     var xml_content_str = g_supporter_data_url[i_index_supporter];
 
-    //QQ var file_name_path = getServerQrFileName(download_code_str);
-    var season_start_year = 2021; // TODO QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-    var file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_str);
+    var file_name_path = QrStrings.getRelativeUrlQrFileImage(g_season_start_year, download_code_str);
 
     if (!saveFileWithJQueryPostFunction(file_name_path, xml_content_str))
     {
@@ -183,7 +274,7 @@ function createQrFileXmlIfNotAlreadyExisting(i_season_start_year)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Basic Save File Functions  ////////////////////////////////
+///////////////////////// Start Basic PHP Functions  //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -254,8 +345,52 @@ function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_st
 	
 } // createFileIfNotExistingWithJQueryPostFunction
 
+// Determine if a file exists using the JQuery function "post"
+// Please refer to ExistsFileOrDirectory.php for a detailed description of "post"
+// Input parameter i_file_name is a server file name
+// The function returns true if the directory or the file exists
+function existsFileJQueryPost(i_file_name, i_callback_function_name)
+{
+  var file_name = '../' + i_file_name;
+
+    $.post
+      ('Php/ExistsFile.php',
+        {
+          file_name: file_name
+        },
+        function(data_exists,status_save)
+		{
+            if (status_save == "success")
+            {
+                //alert(data_exists);
+
+                QrProgress.Append('data_exists = ' + data_exists.trim());
+                
+				if (data_exists.trim() == "TRUE")
+				{
+					//return true;
+                    i_callback_function_name(true);
+				}
+				else
+				{
+					//return false;
+                    i_callback_function_name(false);
+				}
+            }
+            else
+            {
+				alert("Execution of ExistsFileOrDirectory.php failed");
+				
+				return false;
+            }          
+        } // function
+      ); // post
+	  
+	
+} // existsFileJQueryPost
+
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Basic Save File Functions  //////////////////////////////////
+///////////////////////// End Basic PHP Functions  ////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////

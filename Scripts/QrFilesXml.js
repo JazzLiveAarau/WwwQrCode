@@ -82,6 +82,48 @@ class QrFilesXml
         
     } // getFamilyName
 
+    // Returns the house number for a given  QR File number
+    getHouseNumber(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getHouseNumber(), i_qr_file_number);
+        
+    } // getHouseNumber
+
+    // Returns the postal code for a given  QR File number
+    getPostalCode(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getPostalCode(), i_qr_file_number);
+        
+    } // getPostalCode
+
+    // Returns the domicil for a given  QR File number
+    getDomicil(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getDomicil(), i_qr_file_number);
+        
+    } // getDomicil
+
+    // Returns the email for a given  QR File number
+    getEmail(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getEmail(), i_qr_file_number);
+        
+    } // getEmail
+
+    // Returns the sponsor flag for a given  QR File number
+    getSponsor(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getSponsor(), i_qr_file_number);
+        
+    } // getSponsor
+
+    // Returns the comment for a given  QR File number
+    getComment(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getComment(), i_qr_file_number);
+        
+    } // getComment
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Get Qr File Data ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
@@ -321,6 +363,12 @@ class QrFilesTags
         this.m_tag_qr_file = "QrFile";
         this.m_tag_first_name = "Vorname";
         this.m_tag_family_name = "FamilienName";
+        this.m_tag_house_number = "Hausnummer";
+        this.m_tag_postal_code = "PLZ";
+        this.m_tag_domicil = "Wohnort";
+        this.m_tag_email = "e-Mail";
+        this.m_tag_sponsor = "Sponsor";
+        this.m_tag_comment = "Kommentar";
   
     }
 
@@ -330,6 +378,12 @@ class QrFilesTags
     getQrFile(){return this.m_tag_qr_file;} 
     getFirstName(){return this.m_tag_first_name;} 
     getFamilyName(){return this.m_tag_family_name;} 
-
+    getHouseNumber(){return this.m_tag_house_number;} 
+    getPostalCode(){return this.m_tag_postal_code;} 
+    getDomicil(){return this.m_tag_domicil;}
+    getEmail(){return this.m_tag_email;}
+    getSponsor(){return this.m_tag_sponsor;}
+    getComment(){return this.m_tag_comment;}
 
 } // QrFilesTags
+
