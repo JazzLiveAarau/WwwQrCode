@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-03
+// Date: 2022-05-04
 // Author: Gunnar Lidén
 
 // File content
@@ -26,6 +26,8 @@ var g_supporter_names = [];
 // Callback function after load of XML file Supporter.xml
 function afterLoadOfSupporterXmlFile(i_xml)
 {
+    QrProgress.Append('Enter afterLoadOfSupporterXmlFile');
+
     var n_supporters = i_xml.getNumberOfSupporters();
 
     setTestArrayFromXmlObject(i_xml);
@@ -47,6 +49,8 @@ function afterLoadOfSupporterXmlFile(i_xml)
 // Set the array with data from the XML file Supporter.xml
 function setTestArrayFromXmlObject(i_xml)
 {
+    QrProgress.Append('Enter setTestArrayFromXmlObject');
+
     g_supporter_names = [];
 
     var n_supporters = i_xml.getNumberOfSupporters();
@@ -68,40 +72,13 @@ function setTestArrayFromXmlObject(i_xml)
             out_index = out_index + 1;
         }
     }
+
+    QrProgress.Append('g_supporter_names is set (' + g_supporter_names.length.toString() + ')');
+    
+    QrProgress.Append('Exit setTestArrayFromXmlObject');
     
 } // setTestArrayFromXmlObject
 
-/*QQQQQ
-// Set the array g_supporter_names
-function setTestArrayWithSupporterName()
-{
-    g_supporter_names[0] = 'Franz Amrein';
-    g_supporter_names[1] = 'Duk Won Barthelmess-Lee';
-    g_supporter_names[2] = 'Madlen Bärtschi';
-    g_supporter_names[3] = 'Elisabeth Bösch';
-    g_supporter_names[4] = 'Andres Brändli';
-    g_supporter_names[5] = 'Matthias Bruppacher';
-    g_supporter_names[6] = 'Sonja Buchser';
-    g_supporter_names[7] = 'Hans Byland';
-    g_supporter_names[8] = 'Michel Emmenegger';
-    g_supporter_names[9] = 'Annette Farnhammer';
-    g_supporter_names[10] = 'Erich Fischer';
-    g_supporter_names[11] = 'Noldi Gnädig';
-    g_supporter_names[12] = 'Christoph Grathwohl';
-    g_supporter_names[13] = 'Ruth Grathwohl';
-    g_supporter_names[14] = 'Peter Günthart';
-    g_supporter_names[15] = 'Esther Günthart';
-    g_supporter_names[16] = 'Beat Hächler';
-    g_supporter_names[17] = 'Anne Halter';
-    g_supporter_names[18] = 'Lilli Hannak';
-    g_supporter_names[19] = 'Johannes Hänggli';
-    g_supporter_names[20] = 'Gina Hänggli';
-    g_supporter_names[21] = 'Peter Häuptli';
-    g_supporter_names[22] = 'Jörg Hauser';
-
-} // setTestArrayWithSupporterName
-
-QQQ*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Test Temporary Functions ////////////////////////////////////

@@ -22,10 +22,6 @@ var g_supporter_xml_object = null;
 // Instance of the class QrFilesXml handling the XML file QrFiles,xml
 var g_qr_files_xml_object = null;
 
-// Instance of the class QrStrings
-var g_qr_strings = null;
-        
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -37,9 +33,11 @@ var g_qr_strings = null;
 // On load function for QR code files
 function onloadQrCodeFiles()
 {
+    QrProgress.Msg("Enter onloadQrCodeFiles");
+
     g_gr_strings = new QrStrings();
 
-    // Temporary QQQQQ hideQrCodeImage();
+    hideQrCodeImage();
 
     var season_start_year = 2021; // TODO
 
@@ -53,6 +51,8 @@ function onloadQrCodeFiles()
 // Afier loading QrFiles.xml
 function afterLoadOfQrFilesXml()
 {
+    QrProgress.Append("Enter afterLoadOfQrFilesXml");
+
     var season_start_year = 2021; // TODO
 
     g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, season_start_year);
@@ -79,6 +79,8 @@ function clickCreateQrFiles()
 //    Call of generateQrCodeAllSupporters
 function createQrFilesForAllSupporters()
 {
+    QrProgress.Msg('Enter createQrFilesForAllSupporters');
+
     var qr_case = 'DataUrl'; 
 
     var canvas_size = 210;
@@ -89,16 +91,34 @@ function createQrFilesForAllSupporters()
 
     saveAllQrFilesOnServer();
 
+    QrProgress.Append('Exit createQrFilesForAllSupporters');
+
 } // createQrFilesForAllSupporters
 
 function saveAllQrFilesOnServer()
 {
+    QrProgress.Append('Enter saveAllQrFilesOnServer');
+
     var n_end = g_supporter_data_url.length;
 
     for (var index_supporter=0; index_supporter < n_end; index_supporter++)
     {
         saveOneQrFileOnServer(index_supporter);
     }
+
+    var b_execute_server = execApplicationOnServer();
+
+    if (b_execute_server)
+    {
+        QrProgress.Append('Number of created files ' + n_end.toString());
+    }
+    else
+    {
+        QrProgress.Append('Number files ' + n_end.toString() + '. But not created (exec VSC)');
+    }
+
+
+    QrProgress.Append('Exit saveAllQrFilesOnServer');
 
 } // saveAllQrFilesOnServer
 
@@ -242,19 +262,6 @@ function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_st
 ///////////////////////// Start Utility Functions /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-/*QQQQQ
-// Returns the name and path for the QR file
-function getServerQrFileName(i_download_code_str)
-{
-    var start_path = g_qr_start_part_file_name;
-
-    var full_name = g_qr_start_part_file_name + i_download_code_str + '.txt';
-
-    return full_name;
-
-} // getServerQrFileName
-QQQ*/
-
 // Returns true if the application runs on the server
 function execApplicationOnServer()
 {
@@ -297,7 +304,83 @@ function getRandomDownloadCode()
 
 } // getRandomDownloadCode
 
+// Class showing progress messages
+// Please note that it is not nessary to create an instance of this class
+// The constructor makes nothing and the member functions are static
+class QrProgress
+{
+    constructor()
+    {
+        this.m_el_div_show_progress = getElementDivQrShowProgress();
+    }
+
+    static Msg(i_message_str)
+    {
+        var el_qr_progress = getElementDivQrShowProgress();
+
+        el_qr_progress.innerHTML = i_message_str;
+    }
+
+    static Append(i_append_str)
+    {   
+        var el_qr_progress = getElementDivQrShowProgress();
+
+        var existing_message_str =  el_qr_progress.innerHTML;
+
+        el_qr_progress.innerHTML = existing_message_str + '<br>' +  i_append_str;
+    }
+
+} // QrProgress
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Utility Functions ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Hide And Display Functions ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Hide the div qr show progress
+function hideDivQrShowProgress()
+{
+    var el_image = getElementDivQrShowProgress();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrShowProgress
+
+// Display the div qr show progress
+function displayDivQrShowProgress()
+{
+    var el_image = getElementDivQrShowProgress();
+
+    el_image.style.display = 'block';
+
+} // displayDivQrShowProgress
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Hide And Display Functions //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Get Html Elements, Identities And Classes /////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Get the input element for the div qr show progress
+function getElementDivQrShowProgress()
+{
+    return document.getElementById(getIdDivQrShowProgress());
+
+} // getElementDivQrShowProgress
+
+// Returns the identity of the div qr show progress
+function getIdDivQrShowProgress()
+{
+    return 'id_div_qr_show_progress';
+
+} // getIdDivQrShowProgress
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Get Html Elements, Identities And Classes ///////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 

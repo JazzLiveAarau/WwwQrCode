@@ -30,9 +30,10 @@ body
     clear: both;
 }
 
-.cl_qr_code_controls
+.cl_qr_code_files_container
 {
-    margin-left: 80mm;
+    width: 330px;
+    margin-left: 2mm;
 }
 
 .cl_canvas_qr_code
@@ -48,4 +49,15 @@ body
     margin-left: 70px;
     color:white;
     cursor:pointer;
+}
+
+.cl_div_qr_show_progress
+{
+    height: auto;
+    font-size: 3.8mm;
+    font-weight: bold;
+    padding: 1mm;
+    border: solid 1px black;
+    text-align: left;
+    clear: both;    
 }
