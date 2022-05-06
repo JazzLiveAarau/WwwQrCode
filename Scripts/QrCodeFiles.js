@@ -319,6 +319,8 @@ function testOfQrFilesXmlFunctions()
     var file_number_change = 3;
     testOfQrFilesXmlOneFileChangeData(file_number_change);
 
+    testOfQrFilesXmlAppendFile();
+
     console.log("Exit testOfQrFilesXmlFunctions");
 
 } // testOfQrFilesXmlFunctions
@@ -440,6 +442,83 @@ function testOfQrFilesXmlOneFileChangeData(i_file_number)
     console.log("Exit testOfQrFilesXmlOneFileChangeData File number " + i_file_number.toString());
 
 } // testOfQrFilesXmlOneFileChangeData
+
+
+// Test of the append functions in QrFilesXml
+function testOfQrFilesXmlAppendFile()
+{
+    console.log("Enter testOfQrFilesXmlAppendFile");
+
+    if (g_qr_files_xml_object == null)
+    {
+        alert("testOfQrFilesXmlAppendFile Object QrFilesXml is null");
+
+        return;
+    }
+	
+    var xml_object = g_qr_files_xml_object;
+	
+	number_files = xml_object.getNumberOfQrFiles();
+	
+	console.log("number_files= " + number_files.toString());
+	
+	xml_object.appendNode();
+	
+	append_number_files = xml_object.getNumberOfQrFiles();
+	
+	console.log("append_number_files= " + append_number_files.toString());
+	
+	var file_number = append_number_files;
+	
+	console.log("file_number= " + file_number.toString());
+	
+	testOfQrFilesXmlOneFileListData(file_number);
+	
+    xml_object.setFirstName(file_number, "Gunnar");
+
+    xml_object.setFamilyName(file_number, "Lidén");
+
+    xml_object.setHouseNumber(file_number, "10");
+
+    xml_object.setPostalCode(file_number, "5722");
+
+    xml_object.setDomicil(file_number, "Gränichen");
+
+    xml_object.setEmail(file_number, "gunnar@viewsoncad.ch");
+
+    xml_object.setSponsor(file_number, "FALSH");
+
+    xml_object.setComment(file_number, "Test of append function");
+
+	xml_object.setSupporterContribution(file_number, "70");
+
+	xml_object.setSupporter(file_number, "FALSCH");
+
+	xml_object.setSupporterAdmission(file_number, "FALSCH");
+
+	xml_object.setMusicianAdmission(file_number, "FALSCH");
+
+	xml_object.setFreeAdmission(file_number, "FALSCH");
+
+	xml_object.setSponsorAdmission(file_number, "FALSCH");
+
+	xml_object.setMemberAdmission(file_number, "FALSCH");
+
+	xml_object.setDownloadOne(file_number, "grjuze12");
+
+	xml_object.setDownloadTwo(file_number, "");
+
+	xml_object.setEmailSent(file_number, "FALSCH");
+
+	xml_object.setMailSent(file_number, "FALSCH");
+
+
+    testOfQrFilesXmlOneFileListData(file_number);
+
+
+    console.log("Exit testOfQrFilesXmlAppendFile File number " + file_number.toString());
+
+} // testOfQrFilesXmlAppendFile
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
