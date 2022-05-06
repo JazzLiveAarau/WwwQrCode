@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-05
+// Date: 2022-05-06
 // Author: Gunnar Lidén
 
 // File content
@@ -11,7 +11,8 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Array with SupporterData objects
+// Array with SupporterData objects. Objects only for persons that paid the limit sum or 
+// more. The limit is retrieved with function QrStrings.getSupporterContributionLimitValue
 var g_supporter_data_array = [];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +47,7 @@ function setSupporterDataArrayFromXmlObject(i_xml)
     {
         var contribution_int = i_xml.getContributionInt(supporter_number);
 
-        if (contribution_int - 60 >= 0)
+        if (contribution_int - QrStrings.getSupporterContributionLimitValue() >= 0)
         {
             var supporter_data = new SupporterData(i_xml, g_season_start_year, supporter_number);
 

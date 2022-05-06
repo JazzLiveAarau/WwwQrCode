@@ -212,133 +212,133 @@ class QrFilesXml
     // Sets the first name for a given  QR File number
     setFirstName(i_qr_file_number, i_node_value)
     {
-        return this.setNodeValue(this.m_tags.getFirstName(), i_qr_file_number, i_node_value);
+        this.setQrFileNodeValue(this.m_tags.getFirstName(), i_qr_file_number, i_node_value);
         
     } // setFirstName 
 
     // Sets the family name for a given  QR File number
     setFamilyName(i_qr_file_number, i_node_value)
     {
-        return this.setNodeValue(this.m_tags.getFamilyName(), i_qr_file_number, i_node_value);
+        this.setQrFileNodeValue(this.m_tags.getFamilyName(), i_qr_file_number, i_node_value);
         
     } // setFamilyName
 
     // Sets the house number for a given  QR File number
     setHouseNumber(i_qr_file_number, i_node_value)
     {
-        return this.setNodeValue(this.m_tags.getHouseNumber(), i_qr_file_number, i_node_value);
+        this.setQrFileNodeValue(this.m_tags.getHouseNumber(), i_qr_file_number, i_node_value);
         
     } // setHouseNumber  
 
     // Sets the postal code for a given  QR File number
     setPostalCode(i_qr_file_number, i_node_value)
     {
-        return this.setNodeValue(this.m_tags.getPostalCode(), i_qr_file_number, i_node_value);
+        this.setQrFileNodeValue(this.m_tags.getPostalCode(), i_qr_file_number, i_node_value);
         
     } // setPostalCode  
 
     // Sets the domicil for a given  QR File number
     setDomicil(i_qr_file_number, i_node_value)
     {
-        return this.setNodeValue(this.m_tags.getDomicil(), i_qr_file_number, i_node_value);
+        this.setQrFileNodeValue(this.m_tags.getDomicil(), i_qr_file_number, i_node_value);
         
     } // setDomicil  
 
     // Sets the email for a given  QR File number
     setEmail(i_qr_file_number, i_node_value)
     {
-        return this.setNodeValue(this.m_tags.getEmail(), i_qr_file_number, i_node_value);
+        this.setQrFileNodeValue(this.m_tags.getEmail(), i_qr_file_number, i_node_value);
         
     } // setEmail 
 
      // Sets the sponsor flag for a given  QR File number
      setSponsor(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getSponsor(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getSponsor(), i_qr_file_number, i_node_value);
          
      } // setSponsor    
 
      // Sets the comment for a given  QR File number
      setComment(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getComment(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getComment(), i_qr_file_number, i_node_value);
          
      } // setComment    
 
      // Sets the supporter contribution for a given  QR File number
      setSupporterContribution(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getSupporterContribution(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getSupporterContribution(), i_qr_file_number, i_node_value);
          
      } // setSupporterContribution 
 
      // Sets the supporter flag  for a given  QR File number
      setSupporter(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getSupporter(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getSupporter(), i_qr_file_number, i_node_value);
          
      } // setSupporter 
 
      // Sets the supporter admission flag for a given  QR File number
      setSupporterAdmission(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getSupporterAdmission(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getSupporterAdmission(), i_qr_file_number, i_node_value);
          
      } // setSupporterAdmission 
 
      // Sets the musician admission flag for a given  QR File number
      setMusicianAdmission(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getMusicianAdmission(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getMusicianAdmission(), i_qr_file_number, i_node_value);
          
      } // setMusicianAdmission
 
      // Sets the free admission flag for a given  QR File number
      setFreeAdmission(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getFreeAdmission(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getFreeAdmission(), i_qr_file_number, i_node_value);
          
      } // setFreeAdmission
 
      // Sets the sponsor admission flag for a given  QR File number
      setSponsorAdmission(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getSponsorAdmission(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getSponsorAdmission(), i_qr_file_number, i_node_value);
          
      } // setSponsorAdmission
 
      // Sets the member admission flag for a given  QR File number
      setMemberAdmission(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getMemberAdmission(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getMemberAdmission(), i_qr_file_number, i_node_value);
          
      } // setMemberAdmission
 
      // Sets the download one code for a given  QR File number
      setDownloadOne(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getDownloadOne(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getDownloadOne(), i_qr_file_number, i_node_value);
          
      } // setDownloadOne
 
      // Sets the download two code for a given  QR File number
      setDownloadTwo(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getDownloadTwo(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getDownloadTwo(), i_qr_file_number, i_node_value);
          
      } // setDownloadTwo
 
      // Sets the email sent flag  for a given  QR File number
      setEmailSent(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getEmailSent(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getEmailSent(), i_qr_file_number, i_node_value);
          
      } // setEmailSent
 
      // Sets the mail sent flag  for a given  QR File number
      setMailSent(i_qr_file_number, i_node_value)
      {
-         return this.setNodeValue(this.m_tags.getMailSent(), i_qr_file_number, i_node_value);
+         this.setQrFileNodeValue(this.m_tags.getMailSent(), i_qr_file_number, i_node_value);
          
      } // setMailSent
 
@@ -523,7 +523,7 @@ class QrFilesXml
     } // getNodeValue 
 
     // Sets the node value for a given given QR file  number and a tag name
-	setNodeValue(i_qr_file_tag, i_qr_file_number, i_qr_file_node_value)
+	setQrFileNodeValue(i_qr_file_tag, i_qr_file_number, i_qr_file_node_value)
 	{	
 		if (!this.checkXmlObject()){ return; }
 
@@ -544,7 +544,7 @@ class QrFilesXml
 		
 		this.setNodeValue(qr_file_node, i_qr_file_tag, node_value);
 		
-	} // setNodeValue
+	} // setQrFileNodeValue
 
     ///////////////////////////////////////////////////////////////////////////
     /////// Start Node Functions //////////////////////////////////////////////
