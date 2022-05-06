@@ -103,6 +103,8 @@ function onloadQrCodeFiles()
 
     hideQrCodeImage();
 
+    hideDivQrDisplayXml();
+
     getSeasonStartYear(callbackSeasonStartYearFiles);
 
 } // onloadQrCodeFiles
@@ -125,7 +127,7 @@ function afterLoadOfQrFilesXml()
 {
     QrProgress.Append("Enter afterLoadOfQrFilesXml");
 
-    testOfQrFilesXmlFunctions(); // QQQQQQQQQQQQQQQQQQQQQQ Test QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    // testOfQrFilesXmlFunctions();
 
     g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlFile, g_season_start_year);
 
@@ -321,9 +323,31 @@ function testOfQrFilesXmlFunctions()
 
     testOfQrFilesXmlAppendFile();
 
+    testOfQrFilesXmlSave();
+
     console.log("Exit testOfQrFilesXmlFunctions");
 
 } // testOfQrFilesXmlFunctions
+
+// Test of the append functions in QrFilesXml
+function testOfQrFilesXmlSave()
+{
+    console.log("Enter testOfQrFilesXmlSave");
+
+    if (g_qr_files_xml_object == null)
+    {
+        alert("testOfQrFilesXmlSave Object QrFilesXml is null");
+
+        return;
+    }
+
+    debugDisplayXmlAsText();
+
+    g_qr_files_xml_object.saveXmlFileOnServer();
+
+    console.log("Exit testOfQrFilesXmlSave");
+
+} // testOfQrFilesXmlSave
 
 // Test of get functions in QrFilesXml for one file 
 function testOfQrFilesXmlOneFileListData(i_file_number)

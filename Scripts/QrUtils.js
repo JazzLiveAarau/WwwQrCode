@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-05
+// Date: 2022-05-06
 // Author: Gunnar Lidén
 
 // File content
@@ -328,4 +328,119 @@ function getIdDivQrShowProgress()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Debug Display XML /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// For debug display XML as text
+function debugDisplayXmlAsText()
+{
+    var b_execute_server = execApplicationOnServer();
+    
+    if (!b_execute_server)
+    {
+        var el_div_display_xml = getElementDivDisplayXml();
+
+        el_div_display_xml.style.display = 'block';
+
+        var el_display_xml_text_area = getElementDisplayXmlTextArea();
+
+        displayQrFilesXmlOnScreen(el_display_xml_text_area);
+
+        displayDivQrDisplayXml();
+    }
+
+} // debugDisplayXmlAsText
+
+// Displays the XML file on the screen if the input control is set
+function displayQrFilesXmlOnScreen(i_el_display_ctrl)
+{
+  if (null == i_el_display_ctrl)
+  {
+    return;
+  }
+
+  var b_html = false;
+
+  var xml_str = xmlToFormattedString(g_qr_files_xml_object.getXmlObject(), b_html);
+	
+  if (null != xml_str)
+  {
+    i_el_display_ctrl.innerHTML = xml_str;
+  }
+
+} // displayQrFilesXmlOnScreen
+
+// Hide the div qr display xml
+function hideDivQrDisplayXml()
+{
+    var el_image = getElementDivQrDisplayXml();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrDisplayXml
+
+// Display the div qr display xml
+function displayDivQrDisplayXml()
+{
+    var el_image = getElementDivQrDisplayXml();
+
+    el_image.style.display = 'block';
+
+} // displayDivQrDisplayXml
+
+// Get the input element for the div qr display xml
+function getElementDivQrDisplayXml()
+{
+    return document.getElementById(getIdDivQrDisplayXml());
+
+} // getElementDivQrDisplayXml
+
+// Returns the identity of the div qr display xml
+function getIdDivQrDisplayXml()
+{
+    return 'id_qr_div_display_xml';
+
+} // getIdDivQrDisplayXml
+
+// Get the text area element for the display of the XML file
+function getElementDisplayXmlTextArea()
+{
+    return document.getElementById(getIdDisplayXmlTextArea());
+
+} // getElementDisplayXmlTextArea
+
+// Returns the identity of the text area element for the display of the XML file
+function getIdDisplayXmlTextArea()
+{
+    return 'id_display_xml_text_area';
+
+} // getIdDisplayXmlTextArea
+
+// Get the div for the display of the XML file
+function getElementDivDisplayXml()
+{
+    return document.getElementById(getIdDivDisplayXml());
+
+} // getElementDivDisplayXml
+
+// Returns the identity of the div for the display of the XML file
+function getIdDivDisplayXml()
+{
+    return 'id_qr_div_display_xml';
+
+} // getIdDivDisplayXml
+
+// Returns the class of the div for the display of the XML file
+function getClassDivDisplayXml()
+{
+    return 'cl_qr_div_display_xml';
+
+} // getClassDivDisplayXml
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Debug Display XML /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////

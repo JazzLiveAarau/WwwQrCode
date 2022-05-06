@@ -45,6 +45,9 @@
     <!-- Utility functions for all QR web pages -->
     <script type="text/javascript" src="Scripts/QrUtils.js"></script>
 
+    <!-- Create a pretty print (formatted) string of an XML object -->
+    <script type="text/javascript" src="Scripts/PrettyPrintXml.js"></script>
+
 
   </head>
   <body onload= "onloadQrCodeFiles()" >
@@ -66,6 +69,10 @@
       </div>
 
     </div> <!-- cl_qr_code_files_container -->
+
+    <div id="id_qr_div_display_xml" >
+      <textarea id="id_display_xml_text_area" rows="20" cols="122">Text...</textarea>
+    </div>
 
     <script type="text/javascript" >
   
