@@ -338,6 +338,122 @@ class QrFilesXml
          
      } // setMailSent
 
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////// Start Append Jazz Task Node  ////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    
+	// Appends a node to the XML object
+	appendNode()
+	{
+	   // See also function appendReservation in file ReservationConcerts.js
+	   // https://www.webdeveloper.com/forum/d/231973-append-xml-node-in-javascript/3
+	   
+	   var new_task = this.m_file_xml.createElement(this.m_tags.getQrFile());
+	   
+	   var first_name_node = this.m_file_xml.createElement(this.m_tags.getFirstName());
+	   var first_name_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   first_name_node.appendChild(first_name_text);
+	   new_task.appendChild(first_name_node);
+
+	   var family_name_node = this.m_file_xml.createElement(this.m_tags.getFamilyName());
+	   var family_name_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   family_name_node.appendChild(family_name_text);
+	   new_task.appendChild(family_name_node);
+
+	   var house_number_node = this.m_file_xml.createElement(this.m_tags.getHouseNumber());
+	   var house_number_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   house_number_node.appendChild(house_number_text);
+	   new_task.appendChild(house_number_node);
+
+	   var postal_code_node = this.m_file_xml.createElement(this.m_tags.getPostalCode());
+	   var postal_code_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   postal_code_node.appendChild(postal_code_text);
+	   new_task.appendChild(postal_code_node);
+
+	   var domicil_node = this.m_file_xml.createElement(this.m_tags.getDomicil());
+	   var domicil_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   domicil_node.appendChild(domicil_text);
+	   new_task.appendChild(domicil_node);
+
+	   var email_node = this.m_file_xml.createElement(this.m_tags.getEmail());
+	   var email_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   email_node.appendChild(email_text);
+	   new_task.appendChild(email_node);
+
+	   var sponsor_node = this.m_file_xml.createElement(this.m_tags.getSponsor());
+	   var sponsor_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   sponsor_node.appendChild(sponsor_text);
+	   new_task.appendChild(sponsor_node);
+
+	   var comment_node = this.m_file_xml.createElement(this.m_tags.getComment());
+	   var comment_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   comment_node.appendChild(comment_text);
+	   new_task.appendChild(comment_node);
+
+	   var supporter_contribution_node = this.m_file_xml.createElement(this.m_tags.getSupporterContribution());
+	   var supporter_contribution_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   supporter_contribution_node.appendChild(supporter_contribution_text);
+	   new_task.appendChild(supporter_contribution_node);
+
+	   var supporter_node = this.m_file_xml.createElement(this.m_tags.getSupporter());
+	   var supporter_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   supporter_node.appendChild(supporter_text);
+	   new_task.appendChild(supporter_node);
+
+	   var supporter_admission_node = this.m_file_xml.createElement(this.m_tags.getSupporterAdmission());
+	   var supporter_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   supporter_admission_node.appendChild(supporter_admission_text);
+	   new_task.appendChild(supporter_admission_node);
+
+	   var supporter_admission_node = this.m_file_xml.createElement(this.m_tags.getSupporterAdmission());
+	   var supporter_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   supporter_admission_node.appendChild(supporter_admission_text);
+	   new_task.appendChild(supporter_admission_node);
+
+	   var musician_admission_node = this.m_file_xml.createElement(this.m_tags.getMusicianAdmission());
+	   var musician_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   musician_admission_node.appendChild(musician_admission_text);
+	   new_task.appendChild(musician_admission_node); 
+
+	   var free_admission_node = this.m_file_xml.createElement(this.m_tags.getFreeAdmission());
+	   var free_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   free_admission_node.appendChild(free_admission_text);
+	   new_task.appendChild(free_admission_node);
+
+	   var sponsor_admission_node = this.m_file_xml.createElement(this.m_tags.getSponsorAdmission());
+	   var sponsor_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   sponsor_admission_node.appendChild(sponsor_admission_text);
+	   new_task.appendChild(sponsor_admission_node);
+
+	   var member_admission_node = this.m_file_xml.createElement(this.m_tags.getMemberAdmission());
+	   var member_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   member_admission_node.appendChild(member_admission_text);
+	   new_task.appendChild(member_admission_node);
+
+	   var download_one_node = this.m_file_xml.createElement(this.m_tags.getDownloadOne());
+	   var download_one_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   download_one_node.appendChild(download_one_text);
+	   new_task.appendChild(download_one_node);
+
+	   var download_two_node = this.m_file_xml.createElement(this.m_tags.getDownloadTwo());
+	   var download_two_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   download_two_node.appendChild(download_two_text);
+	   new_task.appendChild(download_two_node);
+       
+	   var email_sent_node = this.m_file_xml.createElement(this.m_tags.getEmailSent());
+	   var email_sent_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   email_sent_node.appendChild(email_sent_text);
+	   new_task.appendChild(email_sent_node);
+
+	   var mail_sent_node = this.m_file_xml.createElement(this.m_tags.getMailSent());
+	   var mail_sent_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   mail_sent_node.appendChild(mail_sent_text);
+	   new_task.appendChild(mail_sent_node);
+
+       this.m_file_xml.documentElement.appendChild(new_task);	
+
+    } // appendNode
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Number Qr Files  //////////////////////////
     ///////////////////////////////////////////////////////////////////////////
