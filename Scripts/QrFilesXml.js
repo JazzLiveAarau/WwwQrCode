@@ -124,9 +124,219 @@ class QrFilesXml
         
     } // getComment
 
+    // Returns the supporter contribution for a given  QR File number
+    getSupporterContribution(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getSupporterContribution(), i_qr_file_number);
+        
+    } // getSupporterContribution
+
+    // Returns the supporter flag for a given  QR File number
+    getSupporter(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getSupporter(), i_qr_file_number);
+        
+    } // getSupporter
+
+    // Returns the supporter admission flag for a given  QR File number
+    getSupporterAdmission(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getSupporterAdmission(), i_qr_file_number);
+        
+    } // getSupporterAdmission
+
+    // Returns the musician admission flag for a given  QR File number
+    getMusicianAdmission(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getMusicianAdmission(), i_qr_file_number);
+        
+    } // getMusicianAdmission
+
+    // Returns the free admission flag for a given  QR File number
+    getFreeAdmission(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getFreeAdmission(), i_qr_file_number);
+        
+    } // getFreeAdmission
+
+    // Returns the sponsor admission flag for a given  QR File number
+    getSponsorAdmission(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getSponsorAdmission(), i_qr_file_number);
+        
+    } // getSponsorAdmission
+
+    // Returns the member admission flag for a given  QR File number
+    getMemberAdmission(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getMemberAdmission(), i_qr_file_number);
+        
+    } // getMemberAdmission
+
+    // Returns the download one code for a given  QR File number
+    getDownloadOne(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getDownloadOne(), i_qr_file_number);
+        
+    } // getDownloadOne
+
+    // Returns the download two code for a given  QR File number
+    getDownloadTwo(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getDownloadTwo(), i_qr_file_number);
+        
+    } // getDownloadTwo
+
+    // Returns the email sent flag for a given  QR File number
+    getEmailSent(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getEmailSent(), i_qr_file_number);
+        
+    } // getEmailSent    
+
+    // Returns the mail sent flag for a given  QR File number
+    getMailSent(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getMailSent(), i_qr_file_number);
+        
+    } // getMailSent    
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Get Qr File Data ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
+
+    // Sets the first name for a given  QR File number
+    setFirstName(i_qr_file_number, i_node_value)
+    {
+        return this.setNodeValue(this.m_tags.getFirstName(), i_qr_file_number, i_node_value);
+        
+    } // setFirstName 
+
+    // Sets the family name for a given  QR File number
+    setFamilyName(i_qr_file_number, i_node_value)
+    {
+        return this.setNodeValue(this.m_tags.getFamilyName(), i_qr_file_number, i_node_value);
+        
+    } // setFamilyName
+
+    // Sets the house number for a given  QR File number
+    setHouseNumber(i_qr_file_number, i_node_value)
+    {
+        return this.setNodeValue(this.m_tags.getHouseNumber(), i_qr_file_number, i_node_value);
+        
+    } // setHouseNumber  
+
+    // Sets the postal code for a given  QR File number
+    setPostalCode(i_qr_file_number, i_node_value)
+    {
+        return this.setNodeValue(this.m_tags.getPostalCode(), i_qr_file_number, i_node_value);
+        
+    } // setPostalCode  
+
+    // Sets the domicil for a given  QR File number
+    setDomicil(i_qr_file_number, i_node_value)
+    {
+        return this.setNodeValue(this.m_tags.getDomicil(), i_qr_file_number, i_node_value);
+        
+    } // setDomicil  
+
+    // Sets the email for a given  QR File number
+    setEmail(i_qr_file_number, i_node_value)
+    {
+        return this.setNodeValue(this.m_tags.getEmail(), i_qr_file_number, i_node_value);
+        
+    } // setEmail 
+
+     // Sets the sponsor flag for a given  QR File number
+     setSponsor(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getSponsor(), i_qr_file_number, i_node_value);
+         
+     } // setSponsor    
+
+     // Sets the comment for a given  QR File number
+     setComment(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getComment(), i_qr_file_number, i_node_value);
+         
+     } // setComment    
+
+     // Sets the supporter contribution for a given  QR File number
+     setSupporterContribution(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getSupporterContribution(), i_qr_file_number, i_node_value);
+         
+     } // setSupporterContribution 
+
+     // Sets the supporter flag  for a given  QR File number
+     setSupporter(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getSupporter(), i_qr_file_number, i_node_value);
+         
+     } // setSupporter 
+
+     // Sets the supporter admission flag for a given  QR File number
+     setSupporterAdmission(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getSupporterAdmission(), i_qr_file_number, i_node_value);
+         
+     } // setSupporterAdmission 
+
+     // Sets the musician admission flag for a given  QR File number
+     setMusicianAdmission(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getMusicianAdmission(), i_qr_file_number, i_node_value);
+         
+     } // setMusicianAdmission
+
+     // Sets the free admission flag for a given  QR File number
+     setFreeAdmission(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getFreeAdmission(), i_qr_file_number, i_node_value);
+         
+     } // setFreeAdmission
+
+     // Sets the sponsor admission flag for a given  QR File number
+     setSponsorAdmission(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getSponsorAdmission(), i_qr_file_number, i_node_value);
+         
+     } // setSponsorAdmission
+
+     // Sets the member admission flag for a given  QR File number
+     setMemberAdmission(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getMemberAdmission(), i_qr_file_number, i_node_value);
+         
+     } // setMemberAdmission
+
+     // Sets the download one code for a given  QR File number
+     setDownloadOne(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getDownloadOne(), i_qr_file_number, i_node_value);
+         
+     } // setDownloadOne
+
+     // Sets the download two code for a given  QR File number
+     setDownloadTwo(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getDownloadTwo(), i_qr_file_number, i_node_value);
+         
+     } // setDownloadTwo
+
+     // Sets the email sent flag  for a given  QR File number
+     setEmailSent(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getEmailSent(), i_qr_file_number, i_node_value);
+         
+     } // setEmailSent
+
+     // Sets the mail sent flag  for a given  QR File number
+     setMailSent(i_qr_file_number, i_node_value)
+     {
+         return this.setNodeValue(this.m_tags.getMailSent(), i_qr_file_number, i_node_value);
+         
+     } // setMailSent
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Number Qr Files  //////////////////////////
@@ -157,7 +367,7 @@ class QrFilesXml
     ///////////////////////////////////////////////////////////////////////////
 
     // Returns the node value for a given QR file number and a tag name
-    getNodeValue(i_supporter_tag, i_qr_file_number)
+    getNodeValue(i_qr_file_tag, i_qr_file_number)
     {
         var ret_data = '';
         
@@ -176,13 +386,37 @@ class QrFilesXml
         
         var qr_file_node = qr_file_nodes[i_qr_file_number-1];
         
-        var xml_node_value = this.getNodeValueTagName(qr_file_node, i_supporter_tag);
+        var xml_node_value = this.getNodeValueTagName(qr_file_node, i_qr_file_tag);
         
         ret_data = this.removeFlagNodeValueNotSet(xml_node_value);
         
         return ret_data;
         
     } // getNodeValue 
+
+    // Sets the node value for a given given QR file  number and a tag name
+	setNodeValue(i_qr_file_tag, i_qr_file_number, i_qr_file_node_value)
+	{	
+		if (!this.checkXmlObject()){ return; }
+
+		var n_qr_files = this.getNumberOfQrFiles();
+		
+		if (i_qr_file_number < 1 || i_qr_file_number > n_qr_files)
+		{
+			alert("QrFilesXml.setNodeValue QR file number is not between 1 and " + n_qr_files.toString());
+			
+			return;		
+		}
+			
+		var qr_file_nodes = this.m_file_xml.getElementsByTagName(this.m_tags.getQrFile());
+
+		var qr_file_node = qr_file_nodes[i_qr_file_number-1];
+		
+		var node_value = this.setFlagNodeValueIsNotSetForEmptyString(i_qr_file_node_value);
+		
+		this.setNodeValue(qr_file_node, i_qr_file_tag, node_value);
+		
+	} // setNodeValue
 
     ///////////////////////////////////////////////////////////////////////////
     /////// Start Node Functions //////////////////////////////////////////////
@@ -369,7 +603,17 @@ class QrFilesTags
         this.m_tag_email = "e-Mail";
         this.m_tag_sponsor = "Sponsor";
         this.m_tag_comment = "Kommentar";
-  
+        this.m_tag_supporter_contribution = "SupporterContribution";
+        this.m_tag_supporter = "Supporter";
+        this.m_tag_supporter_admission = "SupporterAdmission";
+        this.m_tag_musician_admission = "MusicianAdmission";
+        this.m_tag_free_admission = "FreeAdmission";
+        this.m_tag_sponsor_admission = "SponsorAdmission";
+        this.m_tag_member_admission = "MemberAdmission";
+        this.m_tag_download_one = "DownloadCodeOne";
+        this.m_tag_download_two = "DownloadCodeTwo";
+        this.m_tag_email_sent = "EmailSent";
+        this.m_tag_mail_sent = "MailSent";
     }
 
     // Get member variable functions
@@ -384,6 +628,16 @@ class QrFilesTags
     getEmail(){return this.m_tag_email;}
     getSponsor(){return this.m_tag_sponsor;}
     getComment(){return this.m_tag_comment;}
+    getSupporterContribution(){return this.m_tag_supporter_contribution;}
+    getSupporter(){return this.m_tag_supporter;}
+    getSupporterAdmission(){return this.m_tag_supporter_admission;}
+    getMusicianAdmission(){return this.m_tag_musician_admission;}
+    getFreeAdmission(){return this.m_tag_free_admission;}
+    getSponsorAdmission(){return this.m_tag_sponsor_admission;}
+    getMemberAdmission(){return this.m_tag_member_admission;}
+    getDownloadOne(){return this.m_tag_download_one;}
+    getDownloadTwo(){return this.m_tag_download_two;}
+    getEmailSent(){return this.m_tag_email_sent;}
+    getMailSent(){return this.m_tag_mail_sent;}
 
 } // QrFilesTags
-
