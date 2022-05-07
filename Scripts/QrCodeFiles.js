@@ -116,11 +116,16 @@ function callbackSeasonStartYearFiles(i_season_start_year)
 
     g_season_start_year = i_season_start_year;
 
-    createQrFileXmlIfNotAlreadyExisting(g_season_start_year);
-
-    g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, g_season_start_year);
+    createQrFileXmlIfNotAlreadyExisting(g_season_start_year, afterCreateQrFileXmlIfNotAlreadyExisting);
 
 } // callbackSeasonStartYearFiles
+
+// Callback after creation of QrFile.xml. 
+function afterCreateQrFileXmlIfNotAlreadyExisting()
+{
+    g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, g_season_start_year);
+
+} // afterCreateQrFileXmlIfNotAlreadyExisting
 
 // Afier loading QrFiles.xml
 function afterLoadOfQrFilesXml()
@@ -270,7 +275,7 @@ function saveOneQrFileOnServer(i_index_supporter)
 // Create the QR files XML file (QrFiles.xml) if not already existing
 // TODO Check first that the directory exist. The directory is created by the Windows
 //      application Adressen
-function createQrFileXmlIfNotAlreadyExisting(i_season_start_year)
+function createQrFileXmlIfNotAlreadyExisting(i_season_start_year, i_callback_function_name)
 {
     var b_execute_server = execApplicationOnServer();
 
@@ -283,7 +288,7 @@ function createQrFileXmlIfNotAlreadyExisting(i_season_start_year)
 
     var xml_content = '<AllQrFiles></AllQrFiles>';
 
-    if (!createFileIfNotExistingWithJQueryPostFunction(rel_path_xml_file, xml_content))
+    if (!createFileIfNotExistingWithJQueryPostFunction(rel_path_xml_file, xml_content, i_callback_function_name))
     {
         alert("createQrFileXmlIfNotAlreadyExisting Failure");
     }

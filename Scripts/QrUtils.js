@@ -51,7 +51,7 @@ function saveFileWithJQueryPostFunction(i_file_name, i_content_string)
 // Input parameter i_file_name is the server file name
 // Input parameter i_content_string is the content of the file
 // The function returns false for failure
-function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_string)
+function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_string, i_callback_function_name)
 {
   var file_name = '../' + i_file_name;
 
@@ -66,6 +66,7 @@ function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_st
             if (status_save == "success")
             {
                 // alert(data_save);
+                i_callback_function_name();
             }
             else
             {
