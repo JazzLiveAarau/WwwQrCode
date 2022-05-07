@@ -553,19 +553,27 @@ class QrFilesXml
 
     } // getQrCategoryString
 
-    getQrCombinedSeasonString(i_qr_file_number)
+    getQrCombinedSeasonImageString(i_qr_file_number)
     {
         return this.getQrCategoryString(i_qr_file_number) + ' ' + 
                this.getQrFirstAndFamilyNameString(i_qr_file_number) +  ' ' + 
                this. getQrSeasonString();
 
-    } // getQrSupporterCombinedString
+    } // getQrCombinedSeasonImageString
+
+    getQrCombinedSeasonTextString(i_qr_file_number, i_download_code)
+    {
+        return this.getQrCategoryString(i_qr_file_number) + '_' + 
+               this.getQrFirstAndFamilyNameString(i_qr_file_number) +  '_' + 
+               this. getQrSeasonString() + '_' + i_download_code;
+
+    } // getQrCombinedSeasonImageString
 
     getQrCombinedConcertString(i_qr_file_number)
     {
         return this.getQrCategoryString(i_qr_file_number) + '_' + 
                this.getQrFirstAndFamilyNameString(i_qr_file_number) +  '_' + 
-               this. getQrSeasonString();
+               this. getQrConcertString();
 
     } // getQrSupporterCombinedString
 

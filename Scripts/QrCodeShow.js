@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-05
+// Date: 2022-05-07
 // Author: Gunnar Lidén
 
 // File content
@@ -51,16 +51,18 @@ function callbackSeasonStartYearShow(i_season_start_year)
 // User clicked button show a QR file
 function clickShowQrFile()
 {
-    var file_name_server = getServerFileNameFromInputElement();
+    var file_name_image = getServerFileNameImageFromInputElement();
 
-    if (file_name_server.length == 0)
+    if (file_name_image.length == 0)
     {
         return;
     }
 
-    readTextFileOnServer(file_name_server);
+    readTextFileOnServer(file_name_image, showQrCodeImageAndTextAfterLoadFromServer);
 
     displayShowQrCodeImage();
+
+    displayDivQrCodeShowText();
 
     hideDivInputDownloadCode();
 
@@ -77,6 +79,8 @@ function clickNewQrFile()
     
     displayDivInputDownloadCode();
 
+    hideDivQrCodeShowText();
+
     displayDivButtonShowQrFile();
 
     hideDivButtonShowNewQrFile();
@@ -91,8 +95,8 @@ function clickNewQrFile()
 ///////////////////////// Start Show Qr File Functions ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Show the QR code after getting the file data from the server
-function showQrCodeAfterLoadFromServer(i_data_url)
+// Show the QR code image after getting the file data from the server
+function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
 {
     var el_image = getElementQrCodeImage();
 
@@ -104,11 +108,104 @@ function showQrCodeAfterLoadFromServer(i_data_url)
 
     displayShowQrCodeImage();
 
-} // showQrCodeAfterLoadFromServer
+    var file_name_text = getServerFileNameTextFromInputElement();
+
+    if (file_name_text.length == 0)
+    {
+        return;
+    }
+
+    readTextFileOnServer(file_name_text, showQrCodeTextAfterLoadFromServer);
+
+} // showQrCodeImageAndTextAfterLoadFromServer
+
+// Show the QR code text after getting the file data from the server
+function showQrCodeTextAfterLoadFromServer(i_qr_str)
+{
+
+    // alert("showQrCodeTextAfterLoadFromServer Input text: " + i_qr_str);
+
+    var display_text = '';
+
+    var n_underscore = 0;
+
+    for (var index_char = 0; index_char < i_qr_str.length; index_char++)
+    {
+        var current_char = i_qr_str.substring(index_char, index_char + 1);
+
+        if (current_char == "_")
+        {
+            display_text = display_text + "<br>";
+
+            n_underscore = n_underscore + 1;
+
+            if (n_underscore == 2)
+            {
+                display_text = display_text + 'Saison ';
+            }
+            else if (n_underscore == 3)
+            {
+                break;
+                // display_text = display_text + 'Code ';
+            }
+        }
+        else
+        {
+            display_text = display_text + current_char;
+        }
+    }
+
+    var el_text = getElementDivQrCodeShowText();
+
+    el_text.innerHTML = display_text;
+
+} // showQrCodeTextAfterLoadFromServer
 
 // Construct the server file name from the input code and return the name
-function getServerFileNameFromInputElement()
+function getServerFileNameImageFromInputElement()
 {
+    var down_load_code = getDownloadCodeFromInputElement();
+
+    var file_name_path_image = '';
+
+    if (execApplicationOnServer())
+    {
+        file_name_path_image = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, down_load_code);
+    }
+    else
+    {
+        file_name_path_image = QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, down_load_code);
+    }
+
+    return file_name_path_image;
+
+} // getServerFileNameImageFromInputElement
+
+// Construct the server file name from the input code and return the name
+function getServerFileNameTextFromInputElement()
+{
+    var down_load_code = getDownloadCodeFromInputElement();
+
+    var file_name_path_text = '';
+
+    if (execApplicationOnServer())
+    {
+        file_name_path_text = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileText(g_season_start_year_show, down_load_code);
+    }
+    else
+    {
+        file_name_path_text = QrStrings.getRelativeUrlQrFileText(g_season_start_year_show, down_load_code);
+    }
+
+    return file_name_path_text;
+
+} // getServerFileNameTextFromInputElement
+
+// Get the dowload code from the input element
+function getDownloadCodeFromInputElement()
+{
+    var ret_code_str = '';
+
     var el_input_code = getElementInputCodeForQrCodeFile();
 
     var code_for_qr_file_str = el_input_code.value;
@@ -119,34 +216,21 @@ function getServerFileNameFromInputElement()
     {
         alert("Bitte Code für die QR Code eingeben");
 
-        return '';
+        return ret_code_str;
     }
 
-    var code_for_qr_file_int = parseInt(code_for_qr_file_str);
-
-    if (code_for_qr_file_int < 0 || code_for_qr_file_int > 70)
+    if (code_for_qr_file_str.length != 8)
     {
-        alert("Code für QR Code ist weniger als 0 oder grösser als 70");
+        alert("Der Code hat " + code_for_qr_file_str.length.toString() + ' Zeichen und nicht 8');
 
-        return '';        
+        return ret_code_str;
     }
 
-    var download_code_str = 'index_' + code_for_qr_file_int.toString();
+    ret_code_str = code_for_qr_file_str;
+    
+    return ret_code_str;
 
-    var file_name_path = '';
-
-    if (execApplicationOnServer())
-    {
-        file_name_path = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, download_code_str);
-    }
-    else
-    {
-        file_name_path = QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, download_code_str);
-    }
-
-    return file_name_path;
-
-} // getServerFileNameFromInputElement
+} // getDownloadCodeFromInputElement
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -258,7 +342,7 @@ function displayDivButtonShowNewQrFile()
 
 // Read text file on server
 // https://stackoverflow.com/questions/4533018/how-to-read-a-text-file-from-server-using-javascript
-function readTextFileOnServer(i_file_server) 
+function readTextFileOnServer(i_file_server, i_callback_function_name) 
 {
     var raw_file = new XMLHttpRequest();
 
@@ -272,7 +356,7 @@ function readTextFileOnServer(i_file_server)
             {
                 var all_text = raw_file.responseText;
 
-                showQrCodeAfterLoadFromServer(all_text);
+                i_callback_function_name(all_text);
             }
         }
     }

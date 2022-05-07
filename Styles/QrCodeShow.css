@@ -1,5 +1,5 @@
 /* 
-File: QrCodeShow.css Date: 2022-05-04 Author: Gunnar Lidén
+File: QrCodeShow.css Date: 2022-05-07 Author: Gunnar Lidén
 
 General information
 ===================
@@ -83,5 +83,8 @@ input
 
 .cl_div_qr_code_show_text
 {
+    font-size: 3.8mm;
+    font-weight: bold;
+    margin-top: 5px;
     text-align: center;
 }

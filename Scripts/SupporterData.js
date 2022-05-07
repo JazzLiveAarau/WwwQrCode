@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-06
+// Date: 2022-05-07
 // Author: Gunnar Lidén
 
 // File content
@@ -299,15 +299,20 @@ function uploadQrFileImageAndText(i_file_number, i_xml_object)
         return;
     }
 
-    var qr_text = i_xml_object.getQrCombinedConcertString(i_file_number);
-
-    var image_data_url = generateQrCodeOnePersonDataUrl(qr_text);
-
     var download_code_one = i_xml_object.getDownloadOne(i_file_number);
+
+    var qr_text_image = i_xml_object.getQrCombinedSeasonImageString(i_file_number);
+
+    var qr_text_text = i_xml_object.getQrCombinedSeasonTextString(i_file_number, download_code_one);
+
+    var image_data_url = generateQrCodeOnePersonDataUrl(qr_text_image);
+
 
     var season_start_year = i_xml_object.getSeasonStartYear();
 
-    var file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_one);
+    var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_one);
+
+    var file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_one)
 
     var b_execute_server = execApplicationOnServer();
 
@@ -315,35 +320,57 @@ function uploadQrFileImageAndText(i_file_number, i_xml_object)
     {
         console.log("uploadQrFileImageAndText QR code file not saved. Execution with VSC (Live Server)");
         console.log("File number is " + i_file_number.toString());
-        console.log("QR text: " + qr_text);
-        console.log("File name: " + file_name_path);
+        console.log("QR text image: " + qr_text_image);
+        console.log("QR text text text:  " + qr_text_text);
+        console.log("File name image: " + file_name_path_image);
+        console.log("File name text:  " + file_name_path_text);
 
         return;
     }
 
-    if (!saveFileWithJQueryPostFunction(file_name_path, image_data_url))
+    if (!saveFileWithJQueryPostFunction(file_name_path_image, image_data_url))
     {
-        alert("uploadQrFileImageAndText Saving QR file failed");
+        alert("uploadQrFileImageAndText Saving QR file image failed");
 
         return;
     }
 
-    console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path);
+    console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path_image);
+
+    if (!saveFileWithJQueryPostFunction(file_name_path_text, qr_text_text))
+    {
+        alert("uploadQrFileImageAndText Saving QR file text failed");
+
+        return;
+    }
+
+    console.log("uploadQrFileImageAndText Uploaded text file: " + file_name_path_text);
 
     var download_code_two = i_xml_object.getDownloadTwo(i_file_number);
 
     if (download_code_two.length > 0)
     {
-        file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_two);
+        file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_two);
 
-        if (!saveFileWithJQueryPostFunction(file_name_path, image_data_url))
+        file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_two);
+
+        if (!saveFileWithJQueryPostFunction(file_name_path_image, image_data_url))
         {
-            alert("uploadQrFileImageAndText Saving QR file failed");
+            alert("uploadQrFileImageAndText Saving QR file image failed (2)");
     
             return;
         }
 
-        console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path + " Second file");
+        console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path_image + " Second file");
+
+        if (!saveFileWithJQueryPostFunction(file_name_path_text, qr_text_text))
+        {
+            alert("uploadQrFileImageAndText Saving QR file text failed (2)");
+    
+            return;
+        }
+
+        console.log("uploadQrFileImageAndText Uploaded text file: " + file_name_path_text + " Second file");
     }
 
 
