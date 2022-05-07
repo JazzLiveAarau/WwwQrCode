@@ -1,11 +1,11 @@
 // File: QrStrings.js
-// Date: 2022-05-06
+// Date: 2022-05-07
 // Author: Gunnar Lidén
 
 // File content
 // =============
 //
-// Strings for all QR code web pages
+// Strings and some parameter values for all QR code web pages
 
 // Class corresponding to the XML element <Supporter> in the file Supporter.xml
 class QrStrings
@@ -155,6 +155,45 @@ class QrStrings
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Qr Code Strings ///////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getQrCategorySupporterString()
+    {
+        return 'Supporter';
+
+    } // getQrCategorySupporterString
+
+    static getQrCategorySponsorString()
+    {
+        return 'Sponsor';
+        
+    } // getQrCategorySponsorString
+
+    static getQrCategoryMusicianString()
+    {
+        return 'Musiker';
+        
+    } // getQrCategoryMusicianString
+
+    static getQrCategoryMemberString()
+    {
+        return 'Vorstand';
+        
+    } // getQrCategoryMemberString
+
+    static getQrCategoryFreeString()
+    {
+        return 'Gratis';
+        
+    } // getQrCategoryFreeString
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Qr Code Strings /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Parameter Values //////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
@@ -164,6 +203,23 @@ class QrStrings
         return 60;
 
     } // getSupporterContributionLimitValue
+
+    // Get canvas size for QR code data url.
+    // This size is for the QR codes that will be stored as text files in
+    // the directory QrFiles/Season_NNNNN_MMMMM
+    static getCanvasSizeForDataUrl()
+    {
+        return 210;
+
+    } // getCanvasSizeForDataUrl
+
+    // Get canvas size for QR code image
+    // This size is for the printing of all QR codes
+    static getCanvasSizeForImageData()
+    {
+        return 81;
+
+    } // getCanvasSizeForImageData
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Parameter Values ////////////////////////////

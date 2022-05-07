@@ -189,7 +189,7 @@ function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_x
 
         i_xml_object.appendNode();
 
-        setDataOfAppendedQrFilesNode(supporter_data, i_xml_object);
+        setDataOfAppendedQrFilesNodeAndUpload(supporter_data, i_xml_object);
     }
 
     i_xml_object.saveXmlFileOnServer();
@@ -204,9 +204,9 @@ function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_x
 } // registerAndUploadQrFiles
 
 // Set data of appended QR files node
-function setDataOfAppendedQrFilesNode(i_supporter_data, i_xml_object)
+function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
 {
-    console.log("Enter setDataOfAppendedQrFilesNode");
+    console.log("Enter setDataOfAppendedQrFilesNodeAndUpload");
 
 	var append_number_files = i_xml_object.getNumberOfQrFiles();
 	
@@ -268,7 +268,7 @@ function setDataOfAppendedQrFilesNode(i_supporter_data, i_xml_object)
 
 	i_xml_object.setSupporter(file_number, "WAHR");
 
-	i_xml_object.setSupporterAdmission(file_number, "FALSCH");
+	i_xml_object.setSupporterAdmission(file_number, "WAHR");
 
 	i_xml_object.setMusicianAdmission(file_number, "FALSCH");
 
@@ -286,7 +286,93 @@ function setDataOfAppendedQrFilesNode(i_supporter_data, i_xml_object)
 
 	i_xml_object.setMailSent(file_number, "FALSCH");
 
-} // setDataOfAppendedQrFilesNode
+    uploadQrFileImageAndText(file_number, i_xml_object);
+
+} // setDataOfAppendedQrFilesNodeAndUpload
+
+// Upload the QR image and text file for the input file number
+function uploadQrFileImageAndText(i_file_number, i_xml_object)
+{
+
+    if (!checkInputUploadQrFileImageAndText(i_file_number, i_xml_object))
+    {
+        return;
+    }
+
+    var qr_text = i_xml_object.getQrCombinedConcertString(i_file_number);
+
+    var image_data_url = generateQrCodeOnePersonDataUrl(qr_text);
+
+    var download_code_one = i_xml_object.getDownloadOne(i_file_number);
+
+    var season_start_year = i_xml_object.getSeasonStartYear();
+
+    var file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_one);
+
+    var b_execute_server = execApplicationOnServer();
+
+    if (!b_execute_server)
+    {
+        console.log("uploadQrFileImageAndText QR code file not saved. Execution with VSC (Live Server)");
+        console.log("File number is " + i_file_number.toString());
+        console.log("QR text: " + qr_text);
+        console.log("File name: " + file_name_path);
+
+        return;
+    }
+
+    if (!saveFileWithJQueryPostFunction(file_name_path, image_data_url))
+    {
+        alert("uploadQrFileImageAndText Saving QR file failed");
+
+        return;
+    }
+
+    console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path);
+
+    var download_code_two = i_xml_object.getDownloadTwo(i_file_number);
+
+    if (download_code_two.length > 0)
+    {
+        file_name_path = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_two);
+
+        if (!saveFileWithJQueryPostFunction(file_name_path, image_data_url))
+        {
+            alert("uploadQrFileImageAndText Saving QR file failed");
+    
+            return;
+        }
+
+        console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path + " Second file");
+    }
+
+
+} // uploadQrFileImageAndText
+
+// Check input data
+function checkInputUploadQrFileImageAndText(i_file_number, i_xml_object)
+{
+    var ret_bool = true; 
+
+    if (null == i_xml_object)
+    {
+        alert("uploadQrFilesImageAndTest i_xml_object is null");
+
+        ret_bool = false;
+    }
+
+    var n_files = i_xml_object.getNumberOfQrFiles();
+    if (i_file_number < 1 || i_file_number > n_files)
+    {
+        alert("uploadQrFilesImageAndTest Input file number " + 
+        i_file_number.toString() + ' is not between 1 and ' + n_files.toString());
+
+        ret_bool = false;
+    }
+
+    return ret_bool;
+
+} // checkInputUploadQrFileImageAndText
 
 // Check the input paramaters to updateQrFilesXmlUploadQrFiles
 function checkupdateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_season_start_year)

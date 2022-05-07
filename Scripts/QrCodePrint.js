@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-05-05
+// Date: 2022-05-07
 // Author: Gunnar Lidén
 
 // File content
@@ -94,6 +94,8 @@ function generateQrCodeAllSupportersCreatePrintPages()
     var qr_case = 'ImageData'; 
 
     var canvas_size = 84;
+
+    // TODO var canvas_size = QrStrings.getCanvasSizeForImageData();
 
     qr_code_season_str = '2021-2022';
 

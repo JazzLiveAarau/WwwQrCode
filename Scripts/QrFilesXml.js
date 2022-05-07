@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-05
+// Date: 2022-05-07
 // Author: Gunnar Lidén
 
 // File content
@@ -485,11 +485,95 @@ class QrFilesXml
 
     } // getNumberOfQrFiles 
 
+    // Returns the season start year
+    getSeasonStartYear()
+    {
+        return this.m_season_start_year;
+
+    } // getSeasonStartYear
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Number Qr Files  ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-        
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Qr String Functions  //////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    getQrSeasonString()
+    {
+        return this.getSeasonStartYear().toString() + '-' +
+              (this.getSeasonStartYear() + 1).toString();
+
+    } // getQrSeasonString
+
+    getQrConcertString()
+    {
+        // Concert date needs to be stored also
+        return 'YYYYY-MM-DD TODO';
+
+    } // getQrConcertString
+
+    getQrFirstAndFamilyNameString(i_qr_file_number)
+    {
+        var first_name = this.getFirstName(i_qr_file_number);
+
+        var family_name = this.getFamilyName(i_qr_file_number);
+
+        return first_name + ' ' + family_name;
+
+    } // getQrFirstAndFamilyNameString
+
+    getQrCategoryString(i_qr_file_number)
+    {
+        var ret_category_str = 'Undefined';
+
+        if (this.getSupporterAdmission(i_qr_file_number) == "WAHR")
+        {
+            ret_category_str = QrStrings.getQrCategorySupporterString();
+        }
+        else if (this.getMusicianAdmission(i_qr_file_number) == "WAHR")
+        {
+            ret_category_str = QrStrings.getQrCategoryMusicianString();
+        }
+        else if (this.getFreeAdmission(i_qr_file_number) == "WAHR")
+        {
+            ret_category_str = QrStrings.getQrCategoryFreeString();
+        }
+        else if (this.getSponsorAdmission(i_qr_file_number) == "WAHR")
+        {
+            ret_category_str = QrStrings.getQrCategorySponsorString();
+        }
+        else if (this.getMemberAdmission(i_qr_file_number) == "WAHR")
+        {
+            ret_category_str = QrStrings.getQrCategoryMemberString();
+        }
+
+        return ret_category_str;
+
+    } // getQrCategoryString
+
+    getQrCombinedSeasonString(i_qr_file_number)
+    {
+        return this.getQrCategoryString(i_qr_file_number) + ' ' + 
+               this.getQrFirstAndFamilyNameString(i_qr_file_number) +  ' ' + 
+               this. getQrSeasonString();
+
+    } // getQrSupporterCombinedString
+
+    getQrCombinedConcertString(i_qr_file_number)
+    {
+        return this.getQrCategoryString(i_qr_file_number) + '_' + 
+               this.getQrFirstAndFamilyNameString(i_qr_file_number) +  '_' + 
+               this. getQrSeasonString();
+
+    } // getQrSupporterCombinedString
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Qr String Functions  ////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////////
     /////// Start Node Functions //////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
