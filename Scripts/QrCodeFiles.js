@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-06
+// Date: 2022-05-07
 // Author: Gunnar Lidén
 
 // File content
@@ -138,7 +138,9 @@ function afterLoadOfSupporterXmlFile(i_supporter_xml)
 {
     QrProgress.Append('Enter afterLoadOfSupporterXmlFile');
 
-    setSupporterDataArrayFromXmlObject(i_supporter_xml);
+    var supporter_data_array = setSupporterDataArrayFromXmlObject(i_supporter_xml);
+
+    updateQrFilesXmlUploadQrFiles(supporter_data_array, g_qr_files_xml_object);
 
 } // afterLoadOfSupporterXmlFile
 
@@ -482,13 +484,13 @@ function testOfQrFilesXmlAppendFile()
 	
     var xml_object = g_qr_files_xml_object;
 	
-	number_files = xml_object.getNumberOfQrFiles();
+	var number_files = xml_object.getNumberOfQrFiles();
 	
 	console.log("number_files= " + number_files.toString());
 	
 	xml_object.appendNode();
 	
-	append_number_files = xml_object.getNumberOfQrFiles();
+	var append_number_files = xml_object.getNumberOfQrFiles();
 	
 	console.log("append_number_files= " + append_number_files.toString());
 	
