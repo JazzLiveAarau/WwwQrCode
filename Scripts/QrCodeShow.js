@@ -20,6 +20,8 @@
 // Season start year
 var g_season_start_year_show = -12345;
 
+var g_gr_strings = null;
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,8 @@ var g_season_start_year_show = -12345;
 // On load function for show a QR code file
 function onloadQrCodeShow()
 {
+    g_gr_strings = new QrStrings();
+
     hideShowQrCodeImage();
 
     hideDivQrCodeShowText();
@@ -120,40 +124,9 @@ function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
 } // showQrCodeImageAndTextAfterLoadFromServer
 
 // Show the QR code text after getting the file data from the server
-function showQrCodeTextAfterLoadFromServer(i_qr_str)
+function showQrCodeTextAfterLoadFromServer(i_content_file)
 {
-
-    // alert("showQrCodeTextAfterLoadFromServer Input text: " + i_qr_str);
-
-    var display_text = '';
-
-    var n_underscore = 0;
-
-    for (var index_char = 0; index_char < i_qr_str.length; index_char++)
-    {
-        var current_char = i_qr_str.substring(index_char, index_char + 1);
-
-        if (current_char == "_")
-        {
-            display_text = display_text + "<br>";
-
-            n_underscore = n_underscore + 1;
-
-            if (n_underscore == 2)
-            {
-                display_text = display_text + 'Saison ';
-            }
-            else if (n_underscore == 3)
-            {
-                break;
-                // display_text = display_text + 'Code ';
-            }
-        }
-        else
-        {
-            display_text = display_text + current_char;
-        }
-    }
+    var display_text = QrStrings.getTextForQrCodeShow(i_content_file);
 
     var el_text = getElementDivQrCodeShowText();
 

@@ -192,6 +192,43 @@ class QrStrings
     ///////////////////////// End Qr Code Strings /////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    // Returns the text to be displayed in QrCodeShow.htm (in telephone)
+    static getTextForQrCodeShow(i_content_file)
+    {
+        var display_text = '';
+
+        var n_underscore = 0;
+    
+        for (var index_char = 0; index_char < i_content_file.length; index_char++)
+        {
+            var current_char = i_content_file.substring(index_char, index_char + 1);
+    
+            if (current_char == "_")
+            {
+                display_text = display_text + "<br>";
+    
+                n_underscore = n_underscore + 1;
+    
+                if (n_underscore == 2)
+                {
+                    display_text = display_text + 'Saison ';
+                }
+                else if (n_underscore == 3)
+                {
+                    break;
+                    // display_text = display_text + 'Code ';
+                }
+            }
+            else
+            {
+                display_text = display_text + current_char;
+            }
+        }
+
+        return display_text;
+    
+    } // getTextForQrCodeShow
+
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Parameter Values //////////////////////////
