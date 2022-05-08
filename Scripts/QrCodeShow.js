@@ -20,11 +20,23 @@
 // Season start year
 var g_season_start_year_show = -12345;
 
+// windows.localStorage key for the QR code download code
+var g_local_storage_qr_image_download_code = 'qr_code_image_download_code';
+
+// windows.localStorage key for the QR code image
+var g_local_storage_qr_image_data_url = 'qr_code_image_data_url';
+
+// windows.localStorage key for the QR code text data
+var g_local_storage_qr_text_data = 'qr_code_text_data';
+
+// An instannce of class QrString. Note that the global variable not is used
 var g_gr_strings = null;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Event Functions ///////////////////////////////////////////
@@ -41,8 +53,19 @@ function onloadQrCodeShow()
 
     hideDisplayElementsOnloadQrCodeShow();
 
-    getSeasonStartYear(callbackSeasonStartYearShow);
- 
+    var b_qr_code_saved = isQrCodeDataSavedInLocalStorage();
+
+    if (b_qr_code_saved)
+    {
+        getSeasonStartYear(displayQrCodeWithDataFromLocalStorage);
+
+        // displayQrCodeWithDataFromLocalStorage();
+    }
+    else
+    {
+        getSeasonStartYear(callbackSeasonStartYearShow);
+    }
+
 } // onloadQrCodeShow
 
 // Callback function retrieving the season start year
@@ -68,7 +91,9 @@ function clickShowQrFile()
 
     displayHideElementsClickShowQrFile();
 
-    readTextFileOnServer(file_name_image, showQrCodeImageAndTextAfterLoadFromServer);
+    var b_image_file = true;
+
+    readTextFileOnServer(b_image_file, file_name_image, showQrCodeImageAndTextAfterLoadFromServer);
 
 } // clickShowQrFile
 
@@ -77,6 +102,8 @@ function clickShowQrFile()
 function clickNewQrFile()
 {
     console.log("Enter clickNewQrFile");
+
+    deleteQrCodeDataInLocalStorage();
 
     displayHideElementsClickNewQrFile();
 
@@ -104,6 +131,40 @@ function clickCloseQrInfo()
 ///////////////////////// Start Show Qr File Functions ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Displays QR data from the local storage
+function displayQrCodeWithDataFromLocalStorage(i_season_start_year)
+{
+    console.log("Enter displayQrCodeWithDataFromLocalStorage");
+
+    if (!isQrCodeDataSavedInLocalStorage())
+    {
+        console.log(" Qr code data is not set");
+
+        alert("displayQrCodeWithDataFromLocalStorage Qr code data is not set");
+
+        return false;
+    }
+
+    g_season_start_year_show = i_season_start_year;
+
+    var local_download_code = getDownloadCodeFromLocalStorage();
+
+    var local_image_data_url = getQrImageDataUrlFromLocalStorage();
+
+    var local_text_data = getQrTextDataFromLocalStorage();
+
+    setDownloadCodeInputElement(local_download_code);
+
+    setQrCodeImageWithDataUrl(local_image_data_url);
+
+    setQrCodeTextFromTextData(local_text_data);
+
+    displayHideElementsClickShowQrFile();
+
+    console.log("Exit displayQrCodeWithDataFromLocalStorage");
+
+} // displayQrCodeWithDataFromLocalStorage
+
 // Show the QR code image after getting the file data from the server
 function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
 {
@@ -120,15 +181,7 @@ function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
         return;
     }
 
-    var el_image = getElementQrCodeImage();
-
-    el_image.width = QrStrings.getCanvasSizeForDataUrl();
-
-    el_image.height = QrStrings.getCanvasSizeForDataUrl();
-
-    console.log("Image size is " + el_image.width.toString());
-
-    el_image.src = i_data_url;
+    setQrCodeImageWithDataUrl(i_data_url);
 
     var file_name_text = getServerFileNameTextFromInputElement();
 
@@ -139,9 +192,28 @@ function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
         return;
     }
 
-    readTextFileOnServer(file_name_text, showQrCodeTextAfterLoadFromServer);
+    var b_image_file = false;
+
+    readTextFileOnServer(b_image_file, file_name_text, showQrCodeTextAfterLoadFromServer);
 
 } // showQrCodeImageAndTextAfterLoadFromServer
+
+// Set the QR code image with image data URL
+function setQrCodeImageWithDataUrl(i_data_url)
+{
+    console.log("Enter setQrCodeImageWithDataUrl");
+
+    var el_image = getElementQrCodeImage();
+
+    el_image.width = QrStrings.getCanvasSizeForDataUrl();
+
+    el_image.height = QrStrings.getCanvasSizeForDataUrl();
+
+    console.log("Image size is " + el_image.width.toString());
+
+    el_image.src = i_data_url;
+
+} // setQrCodeImageWithDataUrl
 
 // Show the QR code text after getting the file data from the server
 function showQrCodeTextAfterLoadFromServer(i_content_file)
@@ -159,15 +231,22 @@ function showQrCodeTextAfterLoadFromServer(i_content_file)
         return;
     }
 
+    setQrCodeTextFromTextData(i_content_file);
+
+    console.log("Exit showQrCodeTextAfterLoadFromServer");
+
+} // showQrCodeTextAfterLoadFromServer
+
+// Set QR code from text data, i.e. text in a file
+function setQrCodeTextFromTextData(i_content_file)
+{
     var display_text = QrStrings.getTextForQrCodeShow(i_content_file);
 
     var el_text = getElementDivQrCodeShowText();
 
     el_text.innerHTML = display_text;
 
-    console.log("Exit showQrCodeTextAfterLoadFromServer");
-
-} // showQrCodeTextAfterLoadFromServer
+} // setQrCodeTextFromTextData
 
 // Construct the server file name from the input code and return the name
 function getServerFileNameImageFromInputElement()
@@ -178,6 +257,8 @@ function getServerFileNameImageFromInputElement()
     {
         return '';
     }
+
+    initQrCodeDataInLocalStorageIfDownloadCodesNotEqual(down_load_code);
 
     var file_name_path_image = '';
 
@@ -250,6 +331,16 @@ function getDownloadCodeFromInputElement()
 
 } // getDownloadCodeFromInputElement
 
+// Sets the download code input element
+function setDownloadCodeInputElement(i_download_code)
+{
+    var el_input_code = getElementInputCodeForQrCodeFile();
+
+    el_input_code.value = i_download_code;
+
+} // setDownloadCodeInputElement
+
+// Sets the info text
 function setQrInfoText()
 {
     var el_div_text = getElementDivQrCodeShowInfoText();
@@ -479,7 +570,7 @@ function displayDivQrCodeButtonShowInfo()
 
 // Read text file on server
 // https://stackoverflow.com/questions/4533018/how-to-read-a-text-file-from-server-using-javascript
-function readTextFileOnServer(i_file_server, i_callback_function_name) 
+function readTextFileOnServer(i_b_image_file, i_file_server, i_callback_function_name) 
 {
     console.log("Enter readTextFileOnServer");
 
@@ -498,6 +589,15 @@ function readTextFileOnServer(i_file_server, i_callback_function_name)
                 console.log("File exists");
 
                 var all_text = raw_file.responseText;
+
+                if (i_b_image_file)
+                {
+                    setQrImageDataUrlInLocalStorageIfNotSet(all_text);
+                }
+                else
+                {
+                    setQrTextDataInLocalStorageIfNotSet(all_text);
+                }
 
                 i_callback_function_name(all_text);
             }

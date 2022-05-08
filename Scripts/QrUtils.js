@@ -302,6 +302,193 @@ function getIdDivQrShowProgress()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Local Storage Functions ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Returns true if QR code data is saved in local storage
+function isQrCodeDataSavedInLocalStorage()
+{
+    var download_code = getDownloadCodeFromLocalStorage();
+
+    var image_data_url = getQrImageDataUrlFromLocalStorage();
+
+    var text_data = getQrTextDataFromLocalStorage();
+
+    if (download_code.length > 0 && image_data_url.length > 0 && text_data.length > 0)
+    {
+        console.log("isQrCodeDataSavedInLocalStorage Qr Data is saved");
+
+        return true;
+    }
+    else
+    {
+        console.log("isQrCodeDataSavedInLocalStorage Qr Data is not saved");
+
+        return false;
+    }
+
+} // isQrCodeDataSavedInLocalStorage
+
+// Initialize local storage data if the input download not is equal to the stored code
+function initQrCodeDataInLocalStorageIfDownloadCodesNotEqual(i_download_code)
+{
+    console.log("Enter initQrCodeDataInLocalStorageIfDownloadCodesNotEqual");
+
+    var local_download_code = getDownloadCodeFromLocalStorage();
+
+    if (i_download_code != local_download_code)
+    {
+        console.log("Download codes arenot equal");
+
+        initQrCodeDataInLocalStorage(i_download_code);
+    }
+    else
+    {
+        console.log("Download codes are equal");
+    }
+
+} // initQrCodeDataInLocalStorageIfDownloadCodesNotEqual
+
+// Set the QR image data URL in the local storage if not set
+function setQrImageDataUrlInLocalStorageIfNotSet(i_image_data_url)
+{
+    console.log("Enter setQrImageDataUrlInLocalStorageIfNotSet");
+
+    var local_image_data_url = getQrImageDataUrlFromLocalStorage();
+
+    if (local_image_data_url.length == 0)
+    {
+        console.log("A new value is set");
+
+        setQrImageDataUrlInLocalStorage(i_image_data_url)
+    }
+    else
+    {
+        console.log("A new value is not set");
+    }
+
+} // setQrImageDataUrlInLocalStorageIfNotSet
+
+// Set the QR image data URL in the local storage if not set
+function setQrTextDataInLocalStorageIfNotSet(i_text_data)
+{
+    console.log("Enter setQrTextDataInLocalStorageIfNotSet");
+
+    var local_text_data = getQrTextDataFromLocalStorage();
+
+    if (local_text_data != i_text_data)
+    {
+        console.log("A new value is set");
+
+        setQrTextDataInLocalStorage(i_text_data);
+    }
+    else
+    {
+        console.log("A new value is not set");
+    }
+
+} // setQrTextDataInLocalStorageIfNotSet
+
+// Set the download code in the local storage
+function setDownloadCodeInLocalStorage(i_download_code)
+{
+    localStorage.setItem(this.g_local_storage_qr_image_download_code, i_download_code);
+
+} // setDownloadCodeInLocalStorage
+
+// Set the QR image data URL in the local storage
+function setQrImageDataUrlInLocalStorage(i_image_data_url)
+{
+    localStorage.setItem(this.g_local_storage_qr_image_data_url, i_image_data_url);
+
+} // setQrImageDataUrlInLocalStorage
+
+// Set the QR image data URL in the local storage
+function setQrTextDataInLocalStorage(i_text_data)
+{
+    localStorage.setItem(this.g_local_storage_qr_text_data, i_text_data);
+
+} // setQrTextDataInLocalStorage
+
+// Get the download code from the local storage
+function getDownloadCodeFromLocalStorage()
+{
+    var download_code = localStorage.getItem(this.g_local_storage_qr_image_download_code);
+
+    if (download_code == null)
+    {
+        return "";
+    }
+    else
+    {
+        return download_code;
+    }
+
+} // getDownloadCodeFromLocalStorage
+
+// Get the QR image data URL from the local storage
+function getQrImageDataUrlFromLocalStorage()
+{
+    var image_data_url = localStorage.getItem(this.g_local_storage_qr_image_data_url);
+
+    if (image_data_url == null)
+    {
+        return "";
+    }
+    else
+    {
+        return image_data_url;
+    }
+
+} // getQrImageDataUrlFromLocalStorage
+
+// Get the QR image data URL from the local storage
+function getQrTextDataFromLocalStorage()
+{
+    var qr_text_data = localStorage.getItem(this.g_local_storage_qr_text_data);
+
+    if (qr_text_data == null)
+    {
+        return "";
+    }
+    else
+    {
+        return qr_text_data;
+    }
+
+} // getQrTextDataFromLocalStorage
+
+// Saves QR code data in local storage
+function deleteQrCodeDataInLocalStorage()
+{
+    console.log("Enter deleteQrCodeDataInLocalStorage");
+
+    localStorage.setItem(this.g_local_storage_qr_image_download_code, '');
+
+    localStorage.setItem(this.g_local_storage_qr_image_data_url, '');
+
+    localStorage.setItem(this.g_local_storage_qr_text_data, '');
+
+} // deleteQrCodeDataInLocalStorage
+
+// Initialize QR code data in local storage
+function initQrCodeDataInLocalStorage(i_download_code)
+{
+    console.log("Enter initQrCodeDataInLocalStorage");
+
+    localStorage.setItem(this.g_local_storage_qr_image_download_code, i_download_code);
+
+    localStorage.setItem(this.g_local_storage_qr_image_data_url, "");
+
+    localStorage.setItem(this.g_local_storage_qr_text_data, "");
+
+} // initQrCodeDataInLocalStorage
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Local Storage Functions /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Debug Display XML /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
