@@ -260,6 +260,102 @@ class QrStrings
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Supporter Information /////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Get the supporter information HTML string for QrCodeShow.htm
+    static getSupporterInformationForQrShowString()
+    {
+        var ret_info_show = '';
+
+        ret_info_show = ret_info_show + this.getSupporterInformationOneString();
+
+        ret_info_show = ret_info_show + this.getSupporterInformationTwoString();
+
+        ret_info_show = ret_info_show + this.getSupporterInformationThreeString();
+
+        ret_info_show = ret_info_show + this.getSupporterInformationFourString();
+
+        return ret_info_show;
+
+    } // getSupporterInformationForQrShowString
+
+	// Get paragraph one supporter information string
+	static getSupporterInformationOneString()
+	{
+		var ret_all_rows = '';
+
+		ret_all_rows = ret_all_rows + '<p class= "cl_p_reverse_one" >' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'Mit diesem Ausweis erhalten Sie einen um Fr. 10.- ';
+
+		ret_all_rows = ret_all_rows + 'reduzierten Eintrittspreis in die Konzerte von ';
+
+		ret_all_rows = ret_all_rows + 'JAZZ <i>live</i> AARAU';
+
+		ret_all_rows = ret_all_rows + '</p>';
+
+		return ret_all_rows;
+
+	} // getSupporterInformationOneString
+
+	// Get paragraph two supporter information string
+	static getSupporterInformationTwoString()
+	{
+		var ret_all_rows = '';
+
+		ret_all_rows = ret_all_rows + '<p class= "cl_p_reverse_two" >' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'Konzertlokal:' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'Restaurant SPAGI BY MARCELLO' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'Metzgergasse 8, 5000 Aarau';
+
+		ret_all_rows = ret_all_rows + '</p>';
+
+		return ret_all_rows;
+
+	} // getSupporterInformationTwo
+
+	// Get paragraph three supporter information string
+	static getSupporterInformationThreeString()
+	{
+		var ret_all_rows = '';
+
+		ret_all_rows = ret_all_rows + '<p class= "cl_p_reverse_three" >' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'Eintrittspreise Fr.25.- / Fr. 15.-';
+
+		ret_all_rows = ret_all_rows + '</p>';
+
+		return ret_all_rows;
+
+	} // getSupporterInformationThree
+
+
+	// Get paragraph four supporter information string
+	static getSupporterInformationFourString()
+	{
+		var ret_all_rows = '';
+
+		ret_all_rows = ret_all_rows + '<p class= "cl_p_reverse_four" >' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'info@jazzliveaarau.ch' + '<br>';
+
+		ret_all_rows = ret_all_rows + 'www.jazzliveaarau.ch';
+
+		ret_all_rows = ret_all_rows + '</p>';
+
+		return ret_all_rows;
+
+	} // getSupporterInformationFourString    
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Supporter Information ///////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Download Code Parameters //////////////////
     ///////////////////////////////////////////////////////////////////////////
 

@@ -37,6 +37,8 @@ function onloadQrCodeShow()
 
     g_gr_strings = new QrStrings();
 
+    setQrInfoText();
+
     hideDisplayElementsOnloadQrCodeShow();
 
     getSeasonStartYear(callbackSeasonStartYearShow);
@@ -79,6 +81,20 @@ function clickNewQrFile()
     displayHideElementsClickNewQrFile();
 
 } // clickNewQrFile
+
+// User clicked the button show information
+function clickShowQrInfo()
+{
+    displayHideElementsClickShowQrInfo();
+
+} // clickShowQrInfo
+
+// User clicked the button close information
+function clickCloseQrInfo()
+{
+    displayHideElementsClickCloseQrInfo();
+
+} // clickCloseQrInfo
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
@@ -222,6 +238,15 @@ function getDownloadCodeFromInputElement()
 
 } // getDownloadCodeFromInputElement
 
+function setQrInfoText()
+{
+    var el_div_text = getElementDivQrCodeShowInfoText();
+
+    var info_text = QrStrings.getSupporterInformationForQrShowString();
+
+    el_div_text.innerHTML = info_text;
+
+} // setQrInfoText
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Show Qr File Functions //////////////////////////////////////
@@ -242,6 +267,10 @@ function hideDisplayElementsOnloadQrCodeShow()
 
     hideDivButtonShowNewQrFile();
 
+    hideDivQrCodeShowInfo();
+
+    hideDivQrCodeButtonShowInfo();
+
 } // hideDisplayElementsOnloadQrCodeShow
 
 // Displays and hides elements for function clickShowQrFile()
@@ -258,6 +287,8 @@ function displayHideElementsClickShowQrFile()
     hideDivButtonShowQrFile();
 
     displayDivButtonShowNewQrFile();
+
+    displayDivQrCodeButtonShowInfo();
 
 } // displayHideElementsClickShowQrFile
 
@@ -276,7 +307,29 @@ function displayHideElementsClickNewQrFile()
 
     hideDivButtonShowNewQrFile();
 
+    hideDivQrCodeShowInfo();
+
+    hideDivQrCodeButtonShowInfo();
+
 } // displayHideElementsClickNewQrFile
+
+// Displays and hides elements for function clickShowQrInfo()
+function displayHideElementsClickShowQrInfo()
+{
+	displayDivQrCodeShowInfo();
+	
+	hideDivQrCodeButtonShowInfo();
+
+} // displayHideElementsClickShowQrInfo
+
+// Displays and hides elements for function clickCloseQrInfo()
+function displayHideElementsClickCloseQrInfo()
+{
+	hideDivQrCodeShowInfo();
+	
+	displayDivQrCodeButtonShowInfo();
+
+} // displayHideElementsClickCloseQrInfo
 
 // Hide the QR code image
 function hideShowQrCodeImage()
@@ -367,6 +420,42 @@ function displayDivButtonShowNewQrFile()
     el_button.style.display = 'block';
 
 } // displayDivButtonShowNewQrFile
+
+// Hide the div qr code show information
+function hideDivQrCodeShowInfo()
+{
+    var el_image = getElementDivQrCodeShowInfo();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrCodeShowInfo
+
+// Display the div qr code show information
+function displayDivQrCodeShowInfo()
+{
+    var el_image = getElementDivQrCodeShowInfo();
+
+    el_image.style.display = 'block';
+
+} // displayDivQrCodeShowInfo
+
+// Hide the div qr code button show information
+function hideDivQrCodeButtonShowInfo()
+{
+    var el_image = getElementDivQrCodeButtonShowInfo();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrCodeButtonShowInfo
+
+// Display the div qr code button show information
+function displayDivQrCodeButtonShowInfo()
+{
+    var el_image = getElementDivQrCodeButtonShowInfo();
+
+    el_image.style.display = 'block';
+
+} // displayDivQrCodeButtonShowInfo
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Hide And Display Functions //////////////////////////////////
@@ -525,6 +614,48 @@ function getIdDivButtonShowNewQrFile()
     return 'id_div_button_show_new_qr_file';
 
 } // getIdDivButtonShowNewQrFile
+
+// Get the input element for the div QR code show info text
+function getElementDivQrCodeShowInfoText()
+{
+    return document.getElementById(getIdDivQrCodeShowInfoText());
+
+} // getElementDivQrCodeShowInfoText
+
+// Returns the identity of the div QR code show info text
+function getIdDivQrCodeShowInfoText()
+{
+    return 'id_div_qr_code_show_info_text';
+
+} // getIdDivQrCodeShowInfoText
+
+// Get the input element for the div qr code show information
+function getElementDivQrCodeShowInfo()
+{
+    return document.getElementById(getIdDivQrCodeShowInfo());
+
+} // getElementDivQrCodeShowInfo
+
+// Returns the identity of the div qr code show information
+function getIdDivQrCodeShowInfo()
+{
+    return 'id_div_qr_code_show_info';
+
+} // getIdDivQrCodeShowInfo
+
+// Get the input element for the div qr code button show information
+function getElementDivQrCodeButtonShowInfo()
+{
+    return document.getElementById(getIdDivQrCodeButtonShowInfo());
+
+} // getElementDivQrCodeButtonShowInfo
+
+// Returns the identity of the div qr code button show information
+function getIdDivQrCodeButtonShowInfo()
+{
+    return 'id_div_button_show_info';
+
+} // getIdDivQrCodeButtonShowInfo
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

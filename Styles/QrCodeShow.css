@@ -1,5 +1,5 @@
 /* 
-File: QrCodeShow.css Date: 2022-05-07 Author: Gunnar Lidén
+File: QrCodeShow.css Date: 2022-05-08 Author: Gunnar Lidén
 
 General information
 ===================
@@ -88,3 +88,59 @@ input
     margin-top: 5px;
     text-align: center;
 }
+
+.cl_button_show_info
+{
+    height: auto;
+    background-color: black;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.cl_div_qr_code_show_info
+{
+    height: 400px;
+    font-size: 3.8mm;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: left;   
+    /* border: solid 1px black; */
+}
+
+.cl_div_qr_code_close_info
+{
+    height: auto;
+    margin-top: 5px;
+    /* border: solid 1px red; */
+}
+
+.cl_div_button_close_info
+{
+    clear: both;
+    padding-right: 30px;
+    overflow: hidden;
+}
+
+.cl_button_close_info
+{
+    background-color: black;
+    padding:0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    float: right;
+    cursor: pointer;   
+}
+
+.cl_div_qr_code_show_info_text
+{
+    height: auto;
+    clear: both;
+    font-size: 3.8mm;
+    font-weight: bold;
+    margin-top: 0px;
+    text-align: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    /* border: solid 1px blue; */
+}
+
