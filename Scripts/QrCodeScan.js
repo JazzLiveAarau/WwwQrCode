@@ -1,5 +1,5 @@
 // File: QrCodeScan.js
-// Date: 2022-04-30
+// Date: 2022-05-08
 // Author: Gunnar Lidén
 
 // File content
@@ -44,6 +44,8 @@ function onScanSuccess(i_decoded_text, i_decode_result)
 
     hideDivQrCodeReader();
 
+    addLineBreaksScanResult();
+
 } // onScanSuccess
 
 function scanNextQrCode()
@@ -73,10 +75,76 @@ function startScanHideElements()
 
 } // startScanHideElements
 
+function onloadQrCodeScan()
+{
+    addLineBreaksScanResult(); 
+
+    // displayDivQrCodeNextScan();
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Add line breaks
+// TODO Move to class QrStrings
+function addLineBreaksScanResult()
+{
+    var el_div_result = getElementDivQrCodeReaderResult();
+
+    result_string = el_div_result.innerHTML;
+
+    if (result_string.length == 0)
+    {
+        return;
+    }
+
+    category_supporter = QrStrings.getQrCategorySupporterString();
+
+    category_sponsor = QrStrings.getQrCategorySponsorString();
+
+    var ret_str = '';
+
+    var index_name_start = -1;
+
+    if (result_string.indexOf(category_supporter) == 0)
+    {
+        ret_str = ret_str + category_supporter + '<br>';
+
+        index_name_start = category_supporter.length + 1;
+    }
+    else if (result_string.indexOf(category_sponsor) == 0)
+    {
+        ret_str = ret_str + category_supporter + '<br>';
+
+        index_name_start = category_supporter.length + 1;
+    }
+
+    if (ret_str.length == 0)
+    {
+        return;
+    }
+
+    var index_twenty = result_string.indexOf('20');
+
+    if (index_twenty < 0)
+    {
+        ret_str = ret_str + result_string.substring(ret_str.length + 1);
+
+        return ret_str;
+    }
+
+    // var n_name_chars = index_twenty - index_name_start;
+
+    var name_part = result_string.substring(index_name_start, index_twenty - 1);
+
+    ret_str = ret_str + name_part + '<br>' + result_string.substring(index_twenty);
+
+    el_div_result.innerHTML = ret_str;
+
+    return ret_str;
+
+} // addLineBreaksScanResult
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Init QR Code Scanner //////////////////////////////////////

@@ -36,13 +36,17 @@
 
   </head>
 
-  <body>
+  <body onload="onloadQrCodeScan()">
     
-    <div id="id_div_qr_reader_logo" class="cl_div_qr_reader_logo">JAZZ <i>live</i> AARAU</div>
+    <div class="cl_qr_code_scan_container" >
 
-    <div id="id_div_qr_reader_result" class="cl_div_qr_reader_result" > </div>
+      <div id="id_div_qr_reader_logo" class="cl_div_qr_reader_logo">JAZZ <i>live</i> AARAU<br>QR Code Scanner</div>
 
-    <div id="id_div_next_qr_scan" class="cl_div_next_qr_scan" onclick="scanNextQrCode()">Next scan</div>
+      <div id="id_div_qr_reader_result" class="cl_div_qr_reader_result" ></div>
+  
+      <div id="id_div_next_qr_scan" class="cl_div_next_qr_scan" onclick="scanNextQrCode()">Next scan</div>
+
+    </div> <!-- cl_qr_code_scan_container -->
 
     <div id="id_div_qr_reader"  class= "cl_div_qr_reader" ></div>
 
