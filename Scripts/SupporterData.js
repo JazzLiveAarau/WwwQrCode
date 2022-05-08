@@ -196,7 +196,7 @@ function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_x
 
     debugDisplayXmlAsText();
 
-    QrProgress.Append("Updated QrFiles.xml uploaded to server");
+    QrProgress.Append("Number of reistered and uploaded QR files is " + n_to_reg.toString());
 
 
     QrProgress.Append("Exit registerAndUploadQrFilesXml");
@@ -236,13 +236,13 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
 
     var supporter_contribution = supporter_contribution_int.toString();
 
-    var download_code_one = getRandomDownloadCode();
+    var download_code_one = i_xml_object.getRandomDownloadCode();
 
     var download_code_two = "";
 
     if (supporter_contribution_int > 2 * QrStrings.getSupporterContributionLimitValue())
     {
-        download_code_two = getRandomDownloadCode();
+        download_code_two = i_xml_object.getRandomDownloadCode();
     }
 
     // TODO Check that it not already exists

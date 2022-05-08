@@ -123,6 +123,8 @@ function callbackSeasonStartYearFiles(i_season_start_year)
 // Callback after creation of QrFile.xml. 
 function afterCreateQrFileXmlIfNotAlreadyExisting()
 {
+    QrProgress.Append('Enter afterCreateQrFileXmlIfNotAlreadyExisting');
+
     g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, g_season_start_year);
 
 } // afterCreateQrFileXmlIfNotAlreadyExisting
@@ -281,7 +283,7 @@ function createQrFileXmlIfNotAlreadyExisting(i_season_start_year, i_callback_fun
 
     if (!b_execute_server)
     {
-        return;
+        i_callback_function_name();
     }
 
     var rel_path_xml_file = QrStrings.getRelativeUrlQrFilesXmlFile(i_season_start_year);

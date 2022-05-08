@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-07
+// Date: 2022-05-08
 // Author: Gunnar Lidén
 
 // File content
@@ -733,6 +733,101 @@ class QrFilesXml
     
     ///////////////////////////////////////////////////////////////////////////
     /////// End Utility Functions /////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    /////// Start Download Code Functions /////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Get a random download code that not already is used for an existing file
+    getRandomDownloadCode()
+    {
+        var n_try = 100;
+
+        for (var try_number = 1; try_number < n_try; try_number++)
+        {
+            var random_code = this.getRandomCode();
+
+            var b_unique = this.isUniqueDownloadCode(random_code);
+
+            if (b_unique)
+            {
+                return random_code;
+            }
+        }
+
+        alert("QrFilesXml.getRandomDownloadCode Failure creating an unique download code. n_try= " + n_try.toString());
+
+        return "UniqueCodeCouldNotBeGenerated";
+
+    } // getRandomDownloadCode
+
+    // Check if the random code is unique, i.e. not already used
+    isUniqueDownloadCode(i_download_code)
+    {
+        var n_files = this.getNumberOfQrFiles();
+
+        var b_unique = true;
+
+        for (var file_number = 1; file_number <= n_files; file_number++)
+        {
+            var download_code_one = this.getDownloadOne(file_number);
+
+            var download_code_two = this.getDownloadTwo(file_number);
+
+            if (download_code_one == i_download_code)
+            {
+                b_unique = false;
+
+                break;
+
+            } // download_code_one
+
+            if (download_code_two.length > 0)
+            {
+                if (download_code_two == i_download_code)
+                {
+                    b_unique = false;
+    
+                    break;
+                }
+            } // download_code_two
+
+        } // file_number
+
+        if (!b_unique)
+        {
+            console.log("QrFilesXml.isUniqueDownloadCode There was a not unique code: " + i_download_code);
+        }
+
+        return b_unique;
+
+    } // isUniqueDownloadCode
+
+    // Get a random code
+    getRandomCode()
+    {
+        // https://stackoverflow.com/questions/9719570/generate-random-password-string-with-requirements-in-javascript
+        
+        var allowed_chars = QrStrings.getDownloadCodeAllowedChars();
+
+        var string_length = QrStrings.getDownloadCodeLength();
+
+        var ret_string = '';
+
+        for (var char_number = 1; char_number <= string_length; char_number++) 
+        {
+            var random_index = Math.floor(Math.random() * allowed_chars.length);
+
+            ret_string = ret_string + allowed_chars.substring(random_index, random_index + 1);
+        }
+
+        return ret_string;
+
+    } // getRandomCode
+
+    ///////////////////////////////////////////////////////////////////////////
+    /////// End Download Code Functions ///////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
