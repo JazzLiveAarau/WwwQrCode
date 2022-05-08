@@ -113,6 +113,8 @@ function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
     {
         hideShowQrCodeImage();
 
+        hideDivQrCodeButtonShowInfo();
+
         showQrCodeTextAfterLoadFromServer(QrStrings.errorUnvalidDownloadCode());
 
         return;
@@ -172,6 +174,11 @@ function getServerFileNameImageFromInputElement()
 {
     var down_load_code = getDownloadCodeFromInputElement();
 
+    if (down_load_code.length == 0)
+    {
+        return '';
+    }
+
     var file_name_path_image = '';
 
     if (execApplicationOnServer())
@@ -191,6 +198,11 @@ function getServerFileNameImageFromInputElement()
 function getServerFileNameTextFromInputElement()
 {
     var down_load_code = getDownloadCodeFromInputElement();
+
+    if (down_load_code.length == 0)
+    {
+        return '';
+    }
 
     var file_name_path_text = '';
 
@@ -220,16 +232,16 @@ function getDownloadCodeFromInputElement()
 
     if (code_for_qr_file_str.length == 0)
     {
-        alert("Bitte Code für die QR Code eingeben");
+        alert(QrStrings.errorDownloadCodeNotSet());
 
-        return ret_code_str;
+        return '';
     }
 
-    if (code_for_qr_file_str.length != 8)
+    if (code_for_qr_file_str.length != QrStrings.getDownloadCodeLength())
     {
-        alert("Der Code hat " + code_for_qr_file_str.length.toString() + ' Zeichen und nicht 8');
+        alert(QrStrings.errorNotTheRightNumberOfCharactersForDownloadCode());
 
-        return ret_code_str;
+        return '';
     }
 
     ret_code_str = code_for_qr_file_str;

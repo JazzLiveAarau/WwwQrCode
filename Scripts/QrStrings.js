@@ -210,6 +210,20 @@ class QrStrings
 
     } // errorUnvalidDownloadCode
 
+    // The user did not give the input download code
+    static errorDownloadCodeNotSet()
+    {
+        return "Bitte Code für die QR Code eingeben";
+
+    } // errorDownloadCodeNotSet
+
+    // Input download code has not the right number of characters
+    static errorNotTheRightNumberOfCharactersForDownloadCode()
+    {
+        return 'Anzahl Zeichen im Code muss ' + this.getDownloadCodeLength().toString() + ' sein';
+
+    } // errorNotTheRightNumberOfCharactersForDownloadCode
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Error Strings ///////////////////////////////
     ///////////////////////////////////////////////////////////////////////////

@@ -15,6 +15,7 @@ body
 {
     font-family: Arial;
     font-size: 4.8mm;
+    background-color: rgb(223, 224, 225);
 }
 
 .cl_div_qr_show_logo
@@ -50,7 +51,7 @@ body
 
 .cl_button_show_qr_file 
 {
-    background-color:#323036;
+    background-color: black;
     padding:8px;
     margin-top: 10px;
     margin-bottom: 10px;
