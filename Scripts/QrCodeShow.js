@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-07
+// Date: 2022-05-08
 // Author: Gunnar Lidén
 
 // File content
@@ -33,13 +33,11 @@ var g_gr_strings = null;
 // On load function for show a QR code file
 function onloadQrCodeShow()
 {
+    console.log("Enter onloadQrCodeShow");
+
     g_gr_strings = new QrStrings();
 
-    hideShowQrCodeImage();
-
-    hideDivQrCodeShowText();
-
-    hideDivButtonShowNewQrFile();
+    hideDisplayElementsOnloadQrCodeShow();
 
     getSeasonStartYear(callbackSeasonStartYearShow);
  
@@ -55,39 +53,30 @@ function callbackSeasonStartYearShow(i_season_start_year)
 // User clicked button show a QR file
 function clickShowQrFile()
 {
+    console.log("Enter clickShowQrFile");
+
     var file_name_image = getServerFileNameImageFromInputElement();
+
+    console.log("file_name_image " + file_name_image);
 
     if (file_name_image.length == 0)
     {
         return;
     }
 
+    displayHideElementsClickShowQrFile();
+
     readTextFileOnServer(file_name_image, showQrCodeImageAndTextAfterLoadFromServer);
 
-    displayShowQrCodeImage();
-
-    displayDivQrCodeShowText();
-
-    hideDivInputDownloadCode();
-
-    hideDivButtonShowQrFile();
-
-    displayDivButtonShowNewQrFile();
-
 } // clickShowQrFile
+
 
 // User clicked download a new QR code
 function clickNewQrFile()
 {
-    hideShowQrCodeImage();
-    
-    displayDivInputDownloadCode();
+    console.log("Enter clickNewQrFile");
 
-    hideDivQrCodeShowText();
-
-    displayDivButtonShowQrFile();
-
-    hideDivButtonShowNewQrFile();
+    displayHideElementsClickNewQrFile();
 
 } // clickNewQrFile
 
@@ -102,17 +91,30 @@ function clickNewQrFile()
 // Show the QR code image after getting the file data from the server
 function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
 {
+    console.log("Enter showQrCodeImageAndTextAfterLoadFromServer");
+
+    if (i_data_url == QrStrings.failureLoadingQrFileCode())
+    {
+        hideShowQrCodeImage();
+
+        showQrCodeTextAfterLoadFromServer(QrStrings.errorUnvalidDownloadCode());
+
+        return;
+    }
+
     var el_image = getElementQrCodeImage();
 
-    el_image.width = '210';
+    el_image.width = QrStrings.getCanvasSizeForDataUrl();
 
-    el_image.height = '210';
+    el_image.height = QrStrings.getCanvasSizeForDataUrl();
+
+    console.log("Image size is " + el_image.width.toString());
 
     el_image.src = i_data_url;
 
-    displayShowQrCodeImage();
-
     var file_name_text = getServerFileNameTextFromInputElement();
+
+    console.log("file_name_text " + file_name_text);
 
     if (file_name_text.length == 0)
     {
@@ -126,11 +128,26 @@ function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
 // Show the QR code text after getting the file data from the server
 function showQrCodeTextAfterLoadFromServer(i_content_file)
 {
+    console.log("Enter showQrCodeTextAfterLoadFromServer");
+
+    console.log("i_content_file= " + i_content_file);
+
+    if (i_content_file == QrStrings.failureLoadingQrFileCode())
+    {
+        console.log("Error code " + i_content_file);
+
+        alert("showQrCodeTextAfterLoadFromServer Error code " + i_content_file);
+
+        return;
+    }
+
     var display_text = QrStrings.getTextForQrCodeShow(i_content_file);
 
     var el_text = getElementDivQrCodeShowText();
 
     el_text.innerHTML = display_text;
+
+    console.log("Exit showQrCodeTextAfterLoadFromServer");
 
 } // showQrCodeTextAfterLoadFromServer
 
@@ -214,6 +231,53 @@ function getDownloadCodeFromInputElement()
 ///////////////////////// Start Hide And Display Functions ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Hides and displays elements for function onloadQrCodeShow()
+function hideDisplayElementsOnloadQrCodeShow()
+{
+    console.log("Enter hideDisplayElementsOnloadQrCodeShow");
+
+    hideShowQrCodeImage();
+
+    hideDivQrCodeShowText();
+
+    hideDivButtonShowNewQrFile();
+
+} // hideDisplayElementsOnloadQrCodeShow
+
+// Displays and hides elements for function clickShowQrFile()
+function displayHideElementsClickShowQrFile()
+{
+    console.log("Enter hideDisplayElementsOnloadQrCodeShow");
+
+    displayShowQrCodeImage();
+
+    displayDivQrCodeShowText();
+
+    hideDivInputDownloadCode();
+
+    hideDivButtonShowQrFile();
+
+    displayDivButtonShowNewQrFile();
+
+} // displayHideElementsClickShowQrFile
+
+// Displays and hides elements for function clickShowQrFile()
+function displayHideElementsClickNewQrFile()
+{
+    console.log("Enter displayHideElementsClickNewQrFile");
+
+    hideShowQrCodeImage();
+    
+    displayDivInputDownloadCode();
+
+    hideDivQrCodeShowText();
+
+    displayDivButtonShowQrFile();
+
+    hideDivButtonShowNewQrFile();
+
+} // displayHideElementsClickNewQrFile
+
 // Hide the QR code image
 function hideShowQrCodeImage()
 {
@@ -222,7 +286,6 @@ function hideShowQrCodeImage()
     el_image.style.display = 'none';
 
 } // hideShowQrCodeImage
-
 
 // Display the QR code image
 function displayShowQrCodeImage()
@@ -317,6 +380,10 @@ function displayDivButtonShowNewQrFile()
 // https://stackoverflow.com/questions/4533018/how-to-read-a-text-file-from-server-using-javascript
 function readTextFileOnServer(i_file_server, i_callback_function_name) 
 {
+    console.log("Enter readTextFileOnServer");
+
+    console.log("i_file_server= " + i_file_server);
+
     var raw_file = new XMLHttpRequest();
 
     raw_file.open("GET", i_file_server, false);
@@ -327,9 +394,17 @@ function readTextFileOnServer(i_file_server, i_callback_function_name)
         {
             if(raw_file.status === 200 || raw_file.status == 0)
             {
+                console.log("File exists");
+
                 var all_text = raw_file.responseText;
 
                 i_callback_function_name(all_text);
+            }
+            else if (raw_file.status == 404)
+            {
+                console.log("File is missing");
+
+                i_callback_function_name(QrStrings.failureLoadingQrFileCode());
             }
         }
     }
