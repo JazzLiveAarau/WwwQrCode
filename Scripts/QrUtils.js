@@ -53,6 +53,21 @@ function saveFileWithJQueryPostFunction(i_file_name, i_content_string)
 // The function returns false for failure
 function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_string, i_callback_function_name)
 {
+    QrProgress.Append('Enter createFileIfNotExistingWithJQueryPostFunction ');
+
+    QrProgress.Append('i_file_name= ' + i_file_name);
+
+    var b_execute_server = execApplicationOnServer();
+
+    QrProgress.Append('b_execute_server ' + b_execute_server.toString());
+
+    if (!b_execute_server)
+    {
+        // i_callback_function_name();
+
+        alert("createFileIfNotExistingWithJQueryPostFunction Programming error")
+    }
+
   var file_name = '../' + i_file_name;
 
     $.post
@@ -79,6 +94,7 @@ function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_st
     return true;	  
 	
 } // createFileIfNotExistingWithJQueryPostFunction
+
 
 // Determine if a file exists using the JQuery function "post"
 // Please refer to ExistsFileOrDirectory.php for a detailed description of "post"

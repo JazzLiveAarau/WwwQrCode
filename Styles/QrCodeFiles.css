@@ -1,5 +1,5 @@
 /* 
-File: QrCodeFiles.css Date: 2022-05-02 Author: Gunnar Lidén
+File: QrCodeFiles.css Date: 2022-05-09 Author: Gunnar Lidén
 
 General information
 ===================
@@ -39,16 +39,6 @@ body
 .cl_canvas_qr_code
 {
     clear: both;
-}
-
-.cl_button_create_qr_files 
-{
-    background-color:#323036;
-    padding:8px;
-    margin: 30px;
-    margin-left: 70px;
-    color:white;
-    cursor:pointer;
 }
 
 .cl_div_qr_show_progress

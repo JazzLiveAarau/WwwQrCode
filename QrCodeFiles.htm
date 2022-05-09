@@ -48,6 +48,12 @@
     <!-- Create a pretty print (formatted) string of an XML object -->
     <script type="text/javascript" src="Scripts/PrettyPrintXml.js"></script>
 
+    <!-- Classes for standard controls: Text box, button and dropdown  -->
+    <script type="text/javascript" src="Scripts/JazzControls.js"></script>
+
+    <!-- Test functions -->
+    <script type="text/javascript" src="Scripts/QrTests.js"></script>
+
 
   </head>
   <body onload= "onloadQrCodeFiles()" >
@@ -55,10 +61,6 @@
     <div class="cl_qr_code_files_container" >
 
       <div id="id_div_qr_generate_logo" class="cl_div_qr_generate_logo">JAZZ <i>live</i> AARAU</div>
-
-      <div>
-        <button class="cl_button_create_qr_files" onclick="clickCreateQrFiles()">Create QR Files</button>
-      </div>
 
       <div>
         <canvas id="id_canvas_qr_code"></canvas>
