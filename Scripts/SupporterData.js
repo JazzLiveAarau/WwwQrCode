@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-07
+// Date: 2022-05-09
 // Author: Gunnar Lidén
 
 // File content
@@ -159,6 +159,8 @@ function updateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_season
 
     QrProgress.Append("Exit updateQrFilesXmlUploadQrFiles");
 
+    QrProgress.Msg("QR Codes neue Supporter hochgeladen");
+
 } // updateQrFilesXmlUploadQrFiles
 
 // Register files in XML file QrFiles.xml and upload QR files
@@ -192,11 +194,11 @@ function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_x
         setDataOfAppendedQrFilesNodeAndUpload(supporter_data, i_xml_object);
     }
 
-    i_xml_object.saveXmlFileOnServer();
+    i_xml_object.saveXmlFileOnServerCallback(callbackAfterUpdateAndSaveOfQrFilesXml);
 
     debugDisplayXmlAsText();
 
-    QrProgress.Append("Number of reistered and uploaded QR files is " + n_to_reg.toString());
+    QrProgress.Append("Number of registered and uploaded QR files is " + n_to_reg.toString());
 
 
     QrProgress.Append("Exit registerAndUploadQrFilesXml");

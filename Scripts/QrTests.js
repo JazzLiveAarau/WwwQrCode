@@ -343,10 +343,31 @@ function saveAllQrFilesOnServer()
 
 } // saveAllQrFilesOnServer
 
+// Saves one QR file on the server.
+function saveOneQrFileOnServer(i_index_supporter)
+{
+    var b_execute_server = execApplicationOnServer();
+
+    if (!b_execute_server)
+    {
+        return;
+    }
+
+    var download_code_str = 'index_' + i_index_supporter.toString();
+
+    var xml_content_str = g_supporter_data_url[i_index_supporter];
+
+    var file_name_path = QrStrings.getRelativeUrlQrFileImage(g_season_start_year, download_code_str);
+
+    if (!saveFileWithJQueryPostFunction(file_name_path, xml_content_str))
+    {
+        alert("saveOneQrFileOnServer Saving QR file failed");
+    }
+
+} // saveOneQrFileOnServer
 
 
-
-QQQQQQQQQQQQQ Temporary */
+ */
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create All QR Files (no longer used) ////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////

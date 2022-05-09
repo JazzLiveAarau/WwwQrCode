@@ -63,9 +63,11 @@ function createFileIfNotExistingWithJQueryPostFunction(i_file_name, i_content_st
 
     if (!b_execute_server)
     {
-        // i_callback_function_name();
+        i_callback_function_name();
 
         alert("createFileIfNotExistingWithJQueryPostFunction Programming error")
+
+        return false;
     }
 
   var file_name = '../' + i_file_name;
@@ -546,6 +548,24 @@ function displayQrFilesXmlOnScreen(i_el_display_ctrl)
   }
 
 } // displayQrFilesXmlOnScreen
+
+// Hide the div qr show progress
+function hideDivQrShowProgress()
+{
+    var el_image = getElementDivQrShowProgress();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrShowProgress
+
+// Display the div qr show progress
+function displayDivQrShowProgress()
+{
+    var el_image = getElementDivQrShowProgress();
+
+    el_image.style.display = 'block';
+
+} // displayDivQrShowProgress
 
 // Hide the div qr display xml
 function hideDivQrDisplayXml()

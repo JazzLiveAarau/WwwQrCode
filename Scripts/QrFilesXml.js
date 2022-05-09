@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-08
+// Date: 2022-05-09
 // Author: Gunnar Lidén
 
 // File content
@@ -524,6 +524,22 @@ class QrFilesXml
 
     } // getQrFirstAndFamilyNameString
 
+    // Returns an array of first and family names
+    getQrFirstAndFamilyNameArray()
+    {
+        var ret_name_array = [];
+
+        var n_files = this.getNumberOfQrFiles();
+
+        for (var file_number = 1; file_number <= n_files; file_number++)
+        {
+            ret_name_array[file_number - 1] = this.getQrFirstAndFamilyNameString(file_number);
+        }
+
+        return ret_name_array;
+
+    } // getQrFirstAndFamilyNameStringArray
+
     getQrCategoryString(i_qr_file_number)
     {
         var ret_category_str = 'Undefined';
@@ -902,6 +918,66 @@ class QrFilesXml
 		}
 		
 	} // saveXmlFileOnServer
+
+	// Saves the XML as a (an updated) file QrFiles.xml on the server and calls the callback function
+	// For the case that the application executes locally and the input display element is set
+	// the updated XML file will be displayed. 
+	saveXmlFileOnServerCallback(i_callback_function)
+	{
+	  var b_execute_server = execApplicationOnServer();
+	 
+	  if (!b_execute_server)
+	  {
+		i_callback_function();
+
+        return;
+	  }
+
+	  var b_html = false;
+
+	  var xml_content_str = xmlToFormattedString(this.getXmlObject(), b_html);
+		
+	  var file_name_path = QrStrings. getRelativeUrlQrFilesXmlFile(this.m_season_start_year);
+		
+	  if (!this.saveFileWithJQueryPostFunctionCallback(file_name_path, xml_content_str, i_callback_function))
+		{
+			alert("QrFilesXml.saveXmlFileOnServer Saving QR files XML file failed");
+		}
+		
+	} // saveXmlFileOnServerCallback
+
+    // Save a file with the JQuery function "post"
+    // Please refer to SaveFileOnServer.php for a detailed description of "post"
+    // Input parameter i_file_name is the server file name
+    // Input parameter i_content_string is the content of the file
+    // The function returns false for failure
+    saveFileWithJQueryPostFunctionCallback(i_file_name, i_content_string, i_callback_function)
+    {
+    var file_name = '../' + i_file_name;
+
+        $.post
+        ('Php/SaveFileOnServer.php',
+            {
+            file_content: i_content_string,
+            file_name: file_name
+            },
+            function(data_save,status_save)
+            {
+                if (status_save == "success")
+                {
+                    i_callback_function();
+                }
+                else
+                {
+                    alert("Execution of SaveFileOnServer.php failed");
+                    return false;
+                }          
+            } // function
+        ); // post
+        
+        return true;	  
+        
+    } // saveFileWithJQueryPostFunctionCallback
 
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////// End Save XML Functions //////////////////////////

@@ -77,6 +77,12 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Active supporter index
+var g_supportes_active_index = -12345;
+
+// The supporter dropdown control
+var g_supporter_drop_down = null;
+
 // Instance of the class SupporterXml handling the XML file Supporter.xml
 var g_supporter_xml_object = null;
 
@@ -101,6 +107,8 @@ function onloadQrCodeFiles()
 
     g_gr_strings = new QrStrings();
 
+    setAllQrFilesControls();
+
     hideQrCodeImage();
 
     hideDivQrDisplayXml();
@@ -116,11 +124,7 @@ function callbackSeasonStartYearFiles(i_season_start_year)
 
     g_season_start_year = i_season_start_year;
 
-    // Something is wrong with this function
-    //TODO QQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-    // createQrFileXmlIfNotAlreadyExisting(g_season_start_year, afterCreateQrFileXmlIfNotAlreadyExisting);
-
-    afterCreateQrFileXmlIfNotAlreadyExisting();
+     createQrFileXmlIfNotAlreadyExisting(g_season_start_year, afterCreateQrFileXmlIfNotAlreadyExisting);
 
 } // callbackSeasonStartYearFiles
 
@@ -155,8 +159,73 @@ function afterLoadOfSupporterXmlFile(i_supporter_xml)
 
 } // afterLoadOfSupporterXmlFile
 
+// Callback function the update and save of the file QrFiles.xml
+function callbackAfterUpdateAndSaveOfQrFilesXml()
+{
+    QrProgress.Append('Enter callbackAfterUpdateAndSaveOfQrFilesXml');
+
+    createSupporterDropdown();
+    
+    QrProgress.Msg("QR Codes neue Supporter hochgeladen");
+
+} // callbackAfterUpdateAndSaveOfQrFilesXml
+
+// User selected a supporter
+function eventSelectSupporterDropdown()
+{
+
+} // eventSelectSupporterDropdown
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Set Controls //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Set all the controls and title for this web page
+function setAllQrFilesControls()
+{
+    setQrFilesTitle();
+
+} // setAllQrFilesControls
+
+// Set the title for this web page
+function setQrFilesTitle()
+{
+    var el_title = getElementDivQrFilesTitle();
+
+    el_title.innerHTML = QrStrings.getTitleQrCodeFiles();
+
+} // setQrFilesTitle
+
+// Creates the supporter dropdown control
+function createSupporterDropdown()
+{
+    QrProgress.Append('Enter createSupporterDropdown');
+
+    g_supporter_drop_down = new JazzDropdown("id_qr_supporter_dropdown", getIdDivQrSupporterDropdown());
+
+    var supporter_name_array =  g_qr_files_xml_object.getQrFirstAndFamilyNameArray();
+
+    g_supporter_drop_down.setNameArray(supporter_name_array);
+
+    g_supporter_drop_down.setOnchangeFunctionName("eventSelectSupporterDropdown");
+
+    g_supporter_drop_down.setLabelText("Supporter wählen");
+
+    g_supporter_drop_down.setLabelTextPositionAbove();
+
+    g_supporter_drop_down.setTitle("Supporter wählen");
+
+    // g_supporter_drop_down.setAppendString("Neuer Supporter");
+
+} // createSupporterDropdown
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Set Controls ////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -188,6 +257,55 @@ function generateQrCodeOnePersonDataUrl(i_qr_text)
 ///////////////////////// End Generate QR Code For One Person /////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Hide And Display Functions ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Hide And Display Functions //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Get the element div title QRFiles.htm 
+function getElementDivQrFilesTitle()
+{
+    return document.getElementById(getIdDivQrFilesTitle());
+
+} // getElementDivQrFilesTitle
+
+// Returns the identity of the div title QRFiles.htm 
+function getIdDivQrFilesTitle()
+{
+    return 'id_div_qr_files_title';
+
+} // getIdDivQrFilesTitle
+
+// Get the element div supporter dropdown
+function getElementDivQrSupporterDropdown()
+{
+    return document.getElementById(getIdDivQrSupporterDropdown());
+
+} // getElementDivQrSupporterDropdown
+
+// Returns the identity of the div supporter dropdown
+function getIdDivQrSupporterDropdown()
+{
+    return 'id_div_qr_supporter_dropdown';
+
+} // getIdDivQrSupporterDropdown
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Get Html Elements, Identities And Classes /////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Get Html Elements, Identities And Classes ///////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Create Qr File Xml File ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
 // Create the QR files XML file (QrFiles.xml) if not already existing
 // TODO Check first that the directory exist. The directory is created by the Windows
@@ -205,6 +323,8 @@ function createQrFileXmlIfNotAlreadyExisting(i_season_start_year, i_callback_fun
     if (!b_execute_server)
     {
         i_callback_function_name();
+
+        return;
     }
 
     var rel_path_xml_file = QrStrings.getRelativeUrlQrFilesXmlFile(i_season_start_year);
@@ -218,56 +338,8 @@ function createQrFileXmlIfNotAlreadyExisting(i_season_start_year, i_callback_fun
 
 } // createQrFileXmlIfNotAlreadyExisting
 
-
-// Saves one QR file on the server.
-function saveOneQrFileOnServer(i_index_supporter)
-{
-    var b_execute_server = execApplicationOnServer();
-
-    if (!b_execute_server)
-    {
-        return;
-    }
-
-    var download_code_str = 'index_' + i_index_supporter.toString();
-
-    var xml_content_str = g_supporter_data_url[i_index_supporter];
-
-    var file_name_path = QrStrings.getRelativeUrlQrFileImage(g_season_start_year, download_code_str);
-
-    if (!saveFileWithJQueryPostFunction(file_name_path, xml_content_str))
-    {
-        alert("saveOneQrFileOnServer Saving QR file failed");
-    }
-
-} // saveOneQrFileOnServer
-
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Hide And Display Functions ////////////////////////////////
+///////////////////////// End Create Qr File Xml File /////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
-
-// Hide the div qr show progress
-function hideDivQrShowProgress()
-{
-    var el_image = getElementDivQrShowProgress();
-
-    el_image.style.display = 'none';
-
-} // hideDivQrShowProgress
-
-// Display the div qr show progress
-function displayDivQrShowProgress()
-{
-    var el_image = getElementDivQrShowProgress();
-
-    el_image.style.display = 'block';
-
-} // displayDivQrShowProgress
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Hide And Display Functions //////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
