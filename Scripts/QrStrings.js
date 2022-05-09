@@ -168,7 +168,7 @@ class QrStrings
     // Returns the title for web page QrCodeFiles.htm
     static getTitleQrCodeFiles()
     {
-        return this.getTitleJazzLiveAarau() + '<br>' + 'QR Supporter';
+        return this.getTitleJazzLiveAarau() + '<br>' + 'QR Send & Print';
 
     } // getTitleQrCodeFiles
 

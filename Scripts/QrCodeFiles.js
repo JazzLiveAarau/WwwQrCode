@@ -77,11 +77,11 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Active supporter index
-var g_supportes_active_index = -12345;
+// Active file number
+var g_files_active_number = -12345;
 
 // The supporter dropdown control
-var g_supporter_drop_down = null;
+var g_files_drop_down = null;
 
 // Instance of the class SupporterXml handling the XML file Supporter.xml
 var g_supporter_xml_object = null;
@@ -164,17 +164,17 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 {
     QrProgress.Append('Enter callbackAfterUpdateAndSaveOfQrFilesXml');
 
-    createSupporterDropdown();
+    createFilesDropdown();
     
     QrProgress.Msg("QR Codes neue Supporter hochgeladen");
 
 } // callbackAfterUpdateAndSaveOfQrFilesXml
 
-// User selected a supporter
-function eventSelectSupporterDropdown()
+// User selected a file
+function eventSelectFileDropdown()
 {
 
-} // eventSelectSupporterDropdown
+} // eventSelectFileDropdown
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
@@ -200,28 +200,34 @@ function setQrFilesTitle()
 
 } // setQrFilesTitle
 
-// Creates the supporter dropdown control
-function createSupporterDropdown()
+// Creates the files dropdown control
+function createFilesDropdown()
 {
-    QrProgress.Append('Enter createSupporterDropdown');
+    QrProgress.Append('Enter createFilesDropdown');
 
-    g_supporter_drop_down = new JazzDropdown("id_qr_supporter_dropdown", getIdDivQrSupporterDropdown());
+    g_files_drop_down = new JazzDropdown("id_qr_files_dropdown", getIdDivQrFilesDropdown());
 
-    var supporter_name_array =  g_qr_files_xml_object.getQrFirstAndFamilyNameArray();
+    var b_supporter_above_limit = true;
 
-    g_supporter_drop_down.setNameArray(supporter_name_array);
+    var b_only_not_sent = true;
 
-    g_supporter_drop_down.setOnchangeFunctionName("eventSelectSupporterDropdown");
+    var file_number_array =  g_qr_files_xml_object.getFilteredFileNumberArray(b_supporter_above_limit, b_only_not_sent);
 
-    g_supporter_drop_down.setLabelText("Supporter wählen");
+    var name_array = g_qr_files_xml_object.getQrFirstAndFamilyNamesFiltered(file_number_array);
 
-    g_supporter_drop_down.setLabelTextPositionAbove();
+    g_files_drop_down.setNameArray(name_array);
 
-    g_supporter_drop_down.setTitle("Supporter wählen");
+    g_files_drop_down.setOnchangeFunctionName("eventSelectFileDropdown");
 
-    // g_supporter_drop_down.setAppendString("Neuer Supporter");
+    g_files_drop_down.setLabelText("Supporter wählen");
 
-} // createSupporterDropdown
+    g_files_drop_down.setLabelTextPositionAbove();
+
+    g_files_drop_down.setTitle("Supporter wählen");
+
+    // g_files_drop_down.setAppendString("Neuer Supporter");
+
+} // createFilesDropdown
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -283,16 +289,16 @@ function getIdDivQrFilesTitle()
 // Get the element div supporter dropdown
 function getElementDivQrSupporterDropdown()
 {
-    return document.getElementById(getIdDivQrSupporterDropdown());
+    return document.getElementById(getIdDivQrFilesDropdown());
 
 } // getElementDivQrSupporterDropdown
 
 // Returns the identity of the div supporter dropdown
-function getIdDivQrSupporterDropdown()
+function getIdDivQrFilesDropdown()
 {
-    return 'id_div_qr_supporter_dropdown';
+    return 'id_div_qr_files_dropdown';
 
-} // getIdDivQrSupporterDropdown
+} // getIdDivQrFilesDropdown
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Elements, Identities And Classes /////////////////

@@ -138,12 +138,26 @@ class QrFilesXml
         
     } // getSupporter
 
-    // Returns the supporter admission flag for a given  QR File number
+    // Returns the supporter admission flag for a given  QR File number (WAHR or FALSCH)
     getSupporterAdmission(i_qr_file_number)
     {
         return this.getNodeValue(this.m_tags.getSupporterAdmission(), i_qr_file_number);
         
     } // getSupporterAdmission
+
+    // Returns the supporter admission flag for a given  QR File number (true or false)
+    getSupporterAdmissionBool(i_qr_file_number)
+    {
+        if (this.getSupporterAdmission(i_qr_file_number) == 'WAHR')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // getSupporterAdmissionBool
 
     // Returns the musician admission flag for a given  QR File number
     getMusicianAdmission(i_qr_file_number)
@@ -187,19 +201,47 @@ class QrFilesXml
         
     } // getDownloadTwo
 
-    // Returns the email sent flag for a given  QR File number
+    // Returns the email sent flag for a given  QR File number (WAHR or TRUE)
     getEmailSent(i_qr_file_number)
     {
         return this.getNodeValue(this.m_tags.getEmailSent(), i_qr_file_number);
         
     } // getEmailSent    
 
-    // Returns the mail sent flag for a given  QR File number
+    // Returns the email sent flag for a given  QR File number (true or false)
+    getEmailSentBool(i_qr_file_number)
+    {
+        if (this.getEmailSent(i_qr_file_number) == 'WAHR')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // getEmailSentBool
+
+    // Returns the mail sent flag for a given  QR File number (WAHR or TRUE)
     getMailSent(i_qr_file_number)
     {
         return this.getNodeValue(this.m_tags.getMailSent(), i_qr_file_number);
         
-    } // getMailSent    
+    } // getMailSent
+
+    // Returns the mail sent flag for a given  QR File number (true or false)
+    getMailSentBool(i_qr_file_number)
+    {
+        if (this.getMailSent(i_qr_file_number) == 'WAHR')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // getMailSentBool
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Get Qr File Data ////////////////////////////
@@ -344,6 +386,96 @@ class QrFilesXml
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Set Qr File Data ////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+	///////////////////////// Start Get Filtered Arrays  //////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Returns an array of file numbers
+    // i_b_supporters: Supporter contribution >= 
+    // i_b_not_sent: Only files that were not sent
+    getFilteredFileNumberArray(i_b_supporter, i_b_not_sent)
+    {
+        console.log('Enter QrFilesXml.getFilteredFileNumberArray');
+
+        var ret_file_numbers = [];
+
+        var n_files = this.getNumberOfQrFiles();
+
+        var index_ret_file = 0;
+
+        var debug_n_sent = 0;
+
+        for (var file_number = 1; file_number <= n_files; file_number++)
+        {
+            var contribution = this.getSupporterContribution(file_number);
+
+            var b_supporter = this.getSupporterAdmissionBool(file_number);
+
+            var b_email = this.getEmailSentBool(file_number);
+
+            var b_mail = this.getMailSentBool(file_number);
+
+            var b_limit = true;
+
+            if (contribution < QrStrings.getSupporterContributionLimitValue())
+            {
+                b_limit = false;
+            }
+
+            if (b_supporter && b_limit )
+            {
+                b_supporter = true;
+            }
+
+            var b_ret_sent = false;
+
+            if (b_email || b_mail)
+            {
+                b_ret_sent = true;
+            }
+
+            if (b_supporter && !b_ret_sent)
+            {
+                ret_file_numbers[index_ret_file] = file_number;
+
+                index_ret_file = index_ret_file + 1;
+            }
+            else
+            {
+                debug_n_sent = debug_n_sent + 1;
+            }
+            
+        } // file_number
+
+        console.log('Number of already sent (not returned file numbers) is ' + debug_n_sent.toString());
+
+        return ret_file_numbers;
+
+    } // getFilteredFileNumberArray
+
+    // getQrFirstAndFamilyNameString(i_qr_file_number)
+    getQrFirstAndFamilyNamesFiltered(i_file_number_array)
+    {
+        var ret_names = [];
+
+        for (var index_number=0; index_number < i_file_number_array.length; index_number++)
+        {
+            var file_number = i_file_number_array[index_number];
+
+            var first_family_name = this.getQrFirstAndFamilyNameString(file_number);
+
+            ret_names[index_number] = first_family_name;
+        }
+
+        return ret_names;
+
+    } // getQrFirstAndFamilyNamesFiltered
+
+
+    ///////////////////////////////////////////////////////////////////////////
+	///////////////////////// End Get Filtered Arrays  ////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////
@@ -523,22 +655,6 @@ class QrFilesXml
         return first_name + ' ' + family_name;
 
     } // getQrFirstAndFamilyNameString
-
-    // Returns an array of first and family names
-    getQrFirstAndFamilyNameArray()
-    {
-        var ret_name_array = [];
-
-        var n_files = this.getNumberOfQrFiles();
-
-        for (var file_number = 1; file_number <= n_files; file_number++)
-        {
-            ret_name_array[file_number - 1] = this.getQrFirstAndFamilyNameString(file_number);
-        }
-
-        return ret_name_array;
-
-    } // getQrFirstAndFamilyNameStringArray
 
     getQrCategoryString(i_qr_file_number)
     {
