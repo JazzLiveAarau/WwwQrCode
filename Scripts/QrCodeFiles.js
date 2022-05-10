@@ -117,7 +117,7 @@ var g_address_text_box = null;
 var g_email_text_box = null;
 
 // The text box for the supporter contribution
-var g_email_text_box = null;
+var g_contribution_text_box = null;
 
 // Instance of the class SupporterXml handling the XML file Supporter.xml
 var g_supporter_xml_object = null;
@@ -201,6 +201,8 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
     QrProgress.Append('Enter callbackAfterUpdateAndSaveOfQrFilesXml');
 
     createAllControls();
+
+    setControlsSupporter();
     
     QrProgress.Msg("QR Codes neue Supporter hochgeladen");
 
@@ -209,13 +211,15 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 // User selected a file
 function eventSelectFileDropdown()
 {
-    QrProgress.Append('Enter eventSelectFileDropdown');
+    // QrProgress.Append('Enter eventSelectFileDropdown');
 
     var option_number = g_files_drop_down.getSelectOptionNumber();
 
     g_files_active_number = getFileNumberFromDropdownNumber(option_number);
 
-    QrProgress.Append('g_files_active_number= ' + g_files_active_number.toString());
+    setControlsSupporter();
+
+    // QrProgress.Append('g_files_active_number= ' + g_files_active_number.toString());
 
 } // eventSelectFileDropdown
 
@@ -267,6 +271,69 @@ function setQrFilesTitle()
 
 } // setQrFilesTitle
 
+// Set all controls for case Supporter
+function setControlsSupporter()
+{
+    setTextBoxQrPersonName();
+
+    setTextBoxQrComment();
+
+    setTextBoxQrAddress();
+
+    setTextBoxQrEmail();
+
+    setTextBoxQrContribution();
+
+} // setControlsSupporter
+
+// Set the text box person name for the active file number
+function setTextBoxQrPersonName()
+{
+    var person_name = g_qr_files_xml_object.getQrFirstAndFamilyNameString(g_files_active_number);
+
+    g_person_name_text_box.setValue(person_name);
+
+} // setTextBoxQrPersonName
+
+// Set the text box comment for the active file number
+function setTextBoxQrComment()
+{
+    var person_comment = g_qr_files_xml_object.getComment(g_files_active_number);
+
+    g_comment_text_box.setValue(person_comment);
+
+} // setTextBoxQrComment
+
+// Set the text box address for the active file number
+function setTextBoxQrAddress()
+{
+    var person_address = g_qr_files_xml_object.getFullAddress(g_files_active_number);
+
+    g_address_text_box.setValue(person_address);
+
+} // setTextBoxQrAddress
+
+// Set the text box email for the active file number
+function setTextBoxQrEmail()
+{
+    var person_email = g_qr_files_xml_object.getEmail(g_files_active_number);
+
+    g_email_text_box.setValue(person_email);
+
+} // setTextBoxQrEmail
+
+// Set the text box contribution for the active file number
+function setTextBoxQrContribution()
+{
+    var contribution_int = g_qr_files_xml_object.getSupporterContribution(g_files_active_number);
+    
+    var contribution_str = contribution_int.toString();
+
+    g_contribution_text_box.setValue(contribution_str);
+
+} // setTextBoxQrContribution
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Controls ////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -296,7 +363,7 @@ function createAllControls()
 
     createTextBoxQrEmail();
 
-    createTextBoxQrDistribution();
+    createTextBoxQrContribution();
 
 } // createAllControls
 
@@ -411,6 +478,8 @@ function createTextBoxQrPersonName()
 
     g_person_name_text_box.setTitle(QrStrings.getTitleQrPersonName());
 
+    g_person_name_text_box.setValue("Test First name and family name");
+
     // g_person_name_text_box.setReadOnlyFlag(true);
 
     // g_person_name_text_box.setOninputFunctionName("oninputTitle");
@@ -420,7 +489,7 @@ function createTextBoxQrPersonName()
 // Create the text box for the comment
 function createTextBoxQrComment()
 {
-    g_comment_text_box = new JazzTextBox("id_person_name_text_box", getIdDivQrComment());
+    g_comment_text_box = new JazzTextBox("id_comment_text_box", getIdDivQrComment());
 
     g_comment_text_box.setLabelText(QrStrings.getLabelTextboxQrComment());
 
@@ -431,6 +500,8 @@ function createTextBoxQrComment()
     g_comment_text_box.setTitle(QrStrings.getTitleTextboxQrComment());
 	
 	g_comment_text_box.setReadOnlyFlag(true);
+
+    g_comment_text_box.setValue("Test Comment");
 
     // g_comment_text_box.setOninputFunctionName("oninputTitle");
   
@@ -451,6 +522,9 @@ function createTextBoxQrAddress()
 	
 	g_address_text_box.setReadOnlyFlag(true);
 
+    g_address_text_box.setValue("Test Addrees");
+
+
     // g_address_text_box.setOninputFunctionName("oninputTitle");
   
 } // createTextBoxQrAddress
@@ -470,28 +544,32 @@ function createTextBoxQrEmail()
 	
 	g_email_text_box.setReadOnlyFlag(true);
 
+    g_email_text_box.setValue("Test Email");
+
     // g_email_text_box.setOninputFunctionName("oninputTitle");
   
 } // createTextBoxQrEmail
 
 // Create the text box for the supporter contribution
-function createTextBoxQrDistribution()
+function createTextBoxQrContribution()
 {
-    g_email_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrDistribution());
+    g_contribution_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrDistribution());
 
-    g_email_text_box.setLabelText(QrStrings.getLabelTextboxQrDistribution());
+    g_contribution_text_box.setLabelText(QrStrings.getLabelTextboxQrDistribution());
 
-    g_email_text_box.setSize("5");
+    g_contribution_text_box.setSize("5");
 
-    g_email_text_box.setLabelTextPositionAbove();
+    g_contribution_text_box.setLabelTextPositionAbove();
 
-    g_email_text_box.setTitle(QrStrings.getTitleTextboxQrDistribution());
+    g_contribution_text_box.setTitle(QrStrings.getTitleTextboxQrDistribution());
 	
-	g_email_text_box.setReadOnlyFlag(true);
+	g_contribution_text_box.setReadOnlyFlag(true);
+
+    g_contribution_text_box.setValue("Summa");
 
     // g_email_text_box.setOninputFunctionName("oninputTitle");
   
-} // createTextBoxQrDistribution
+} // createTextBoxQrContribution
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////

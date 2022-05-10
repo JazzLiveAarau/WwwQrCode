@@ -656,6 +656,20 @@ class QrFilesXml
 
     } // getQrFirstAndFamilyNameString
 
+    getFullAddress(i_qr_file_number)
+    {
+        var street = 'StrasseTODO';
+
+        var house_number = this.getHouseNumber(i_qr_file_number);
+
+        var postal_code = this.getPostalCode(i_qr_file_number);
+
+        var domicil = this.getDomicil(i_qr_file_number);
+
+        return street + ' ' + house_number + ', ' + postal_code + ' ' + domicil;
+        
+    } // getFullAddress
+
     getQrCategoryString(i_qr_file_number)
     {
         var ret_category_str = 'Undefined';

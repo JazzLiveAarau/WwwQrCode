@@ -231,14 +231,14 @@ class QrStrings
     // Label for the text box person name
     static getLabelQrPersonName()
     {
-        return 'Name';
+        return 'QR Code Name';
 
     } // getLabelQrPersonName
 
     // Title (tooltip) for the text box person name
     static getTitleQrPersonName()
     {
-        return 'E-Mail oder Brief an diese Person senden';
+        return 'Der Name für den QR Code. Wird normalerweise nicht geändert';
 
     } // getTitleQrPersonName
 
