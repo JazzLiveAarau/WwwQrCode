@@ -1,5 +1,5 @@
 /* 
-File: QrCodePrint.css Date: 2022-05-02 Author: Gunnar Lidén
+File: QrCodePrint.css Date: 2022-05-10 Author: Gunnar Lidén
 
 General information
 ===================
@@ -15,18 +15,21 @@ body
 {
     font-family: Arial;
     font-size: 4.8mm;
+    background-color: rgb(223, 224, 225);
 }
 
 .cl_div_qr_generate_logo
 {
-    height: 12mm;
+    height: 22mm;
     width: 330px;
-    margin-top: 5mm;
+    margin-top: 3mm;
+    padding-top: 2mm;
     font-size: 8.6mm;
     font-weight: bold;
     color: rgb(255,0,10);
     background-color: black;
     text-align: center;
+    margin-bottom: 5mm;
     clear: both;
 }
 
@@ -52,14 +55,27 @@ input
     clear: both;
 }
 
-.cl_button_qr_generate 
+.cl_div_qr_buttons
+{
+    clear: both;
+}
+
+.cl_button_qr_print 
 {
     background-color:#323036;
     padding:8px;
-    margin: 30px;
-    margin-left: 70px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 40px;
+    margin-right: 30px;
     color:white;
+    float: left;
     cursor:pointer;
+}
+
+.cl_div_qr_background_color
+{
+    clear: both;
 }
 
 /* Size and background color (white) of the A4 pages that shall be printed.  */

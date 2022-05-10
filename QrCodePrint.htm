@@ -47,21 +47,27 @@
 
     <div class="cl_qr_code_controls" >
 
-      <div id="id_div_qr_generate_logo" class="cl_div_qr_generate_logo">JAZZ <i>live</i> AARAU</div>
+      <div id="id_div_qr_generate_logo" class="cl_div_qr_generate_logo">JAZZ <i>live</i> AARAU<br>QR Print Supporter</div>
 
-      <div>
-        <button class="cl_button_qr_generate" onclick="clickGenerateSupporterQrCodes()">Supporter QR Codes</button>
-      </div>
+      <div class="cl_div_qr_buttons" >
+        <div>
+          <button class="cl_button_qr_print" onclick="clickGenerateSupporterQrCodes()">Vorderseite</button>
+        </div>
 
-      <div>
-        <canvas id="id_canvas_qr_code"></canvas>
-      </div>
+        <div>
+          <button class="cl_button_qr_print" onclick="clickGenerateSupporterQrReverseSide()">Rückseite</button>
+        </div>
 
-      <div>Hintergrundfarbe für die Supporternamen: <br><input id="id_input_color" type="text" /></div>
+      </div> <!--  cl_div_qr_buttons -->
 
-      <div>
-        <button class="cl_button_qr_generate" onclick="clickGenerateSupporterQrReverseSide()">Reverse side</button>
-      </div>
+      <div class= "cl_div_qr_background_color" >
+
+        <div>Hintergrundfarbe für die Supporternamen: <br><input id="id_input_color" type="text" /></div>
+
+      </div> <!-- cl_div_qr_background_color -->
+      
+
+      <div> <canvas id="id_canvas_qr_code"></canvas> </div>
 
       <div id="id_div_qr_show_progress" class="cl_div_qr_show_progress" >
         File n created 

@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-05-07
+// Date: 2022-05-10
 // Author: Gunnar Lidén
 
 // File content
@@ -65,12 +65,16 @@ function afterLoadOfSupporterXmlPrint(i_supporter_xml)
 
     setSupporterDataArrayFromXmlObject(i_supporter_xml);
 
+    QrProgress.Msg("");
+
 } // afterLoadOfSupporterXmlPrint
 
 // User clicked the button generate QR codes for supporters
 function clickGenerateSupporterQrCodes()
 {
     generateQrCodeAllSupportersCreatePrintPages();
+
+    QrProgress.Msg("");
 
 } // clickGenerateSupporterQrCodes
 

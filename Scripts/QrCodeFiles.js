@@ -78,7 +78,16 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Active file number
-var g_files_active_number = -12345;
+var g_files_active_number = 1;
+
+// File numbers that shall be handled
+var g_file_number_array = [];
+
+function getFileNumberFromDropdownNumber(i_option_number)
+{
+    return g_file_number_array[i_option_number - 1];
+
+} // getFileNumberFromDropdownNumber
 
 // The supporter dropdown control
 var g_files_drop_down = null;
@@ -173,6 +182,13 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 // User selected a file
 function eventSelectFileDropdown()
 {
+    QrProgress.Append('Enter eventSelectFileDropdown');
+
+    var option_number = g_files_drop_down.getSelectOptionNumber();
+
+    g_files_active_number = getFileNumberFromDropdownNumber(option_number);
+
+    QrProgress.Append('g_files_active_number= ' + g_files_active_number.toString());
 
 } // eventSelectFileDropdown
 
@@ -211,9 +227,9 @@ function createFilesDropdown()
 
     var b_only_not_sent = true;
 
-    var file_number_array =  g_qr_files_xml_object.getFilteredFileNumberArray(b_supporter_above_limit, b_only_not_sent);
+    g_file_number_array =  g_qr_files_xml_object.getFilteredFileNumberArray(b_supporter_above_limit, b_only_not_sent);
 
-    var name_array = g_qr_files_xml_object.getQrFirstAndFamilyNamesFiltered(file_number_array);
+    var name_array = g_qr_files_xml_object.getQrFirstAndFamilyNamesFiltered(g_file_number_array);
 
     g_files_drop_down.setNameArray(name_array);
 
