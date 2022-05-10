@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-09
+// Date: 2022-05-10
 // Author: Gunnar Lidén
 
 // File content
@@ -152,6 +152,70 @@ class QrStrings
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End XML Strings /////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Strings Qr Files //////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Caption for the button QR Files send or print supporter cards
+    static getCaptionButtonQrFilesSupporter()
+    {
+        return 'Supporter';
+
+    } // getCaptionButtonQrFilesSupporter
+
+    // Title (tooltip) for the button QR Files send or print supporter cards
+    static getTitleButtonQrFilesSupporter()
+    {
+        return 'Supporter-Karten als E-Mail oder Brief senden';
+
+    } // getTitleButtonQrFilesSupporter
+
+    // Caption for the button QR Files send or print sponsor cards
+    static getCaptionButtonQrFilesSponsor()
+    {
+        return 'Sponsor';
+
+    } // getCaptionButtonQrFilesSponsor
+
+    // Title (tooltip) for the button QR Files send or print sponsor cards
+    static getTitleButtonQrFilesSponsor()
+    {
+        return 'Sponsor Gratis-Eintritte als E-Mail oder Brief senden';
+
+    } // getTitleButtonQrFilesSponsor
+
+    // Caption for the button QR Files send or print free cards
+    static getCaptionButtonQrFilesFree()
+    {
+        return 'Gratis';
+
+    } // getCaptionButtonQrFilesFree
+
+    // Title (tooltip) for the button QR Files send or print free cards
+    static getTitleButtonQrFilesFree()
+    {
+        return 'Gratis-Eintritte als E-Mail oder Brief senden';
+
+    } // getTitleButtonQrFilesFree    
+
+    // Caption for the button QR Files send or print musician cards
+    static getCaptionButtonQrFilesMusician()
+    {
+        return 'Musiker';
+
+    } // getCaptionButtonQrFilesMusician
+
+    // Title (tooltip) for the button QR Files send or print musician cards
+    static getTitleButtonQrFilesMusician()
+    {
+        return 'Musiker Gratis-Eintritte als E-Mail oder Brief senden';
+
+    } // getTitleButtonQrFilesMusician    
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Strings Qr Files ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
