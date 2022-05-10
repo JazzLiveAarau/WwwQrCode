@@ -104,6 +104,20 @@ var g_qr_free_button = null;
 // The button musician
 var g_qr_musician_button = null;
 
+// The text box for the person name
+var g_person_name_text_box = null;
+
+// The text box for the comment
+var g_comment_text_box = null;
+
+// The text box for the address
+var g_address_text_box = null;
+
+// The text box for the email address
+var g_email_text_box = null;
+
+// The text box for the supporter contribution
+var g_email_text_box = null;
 
 // Instance of the class SupporterXml handling the XML file Supporter.xml
 var g_supporter_xml_object = null;
@@ -274,6 +288,16 @@ function createAllControls()
 
     createQrMusicianButton();
 
+    createTextBoxQrPersonName();
+
+    createTextBoxQrComment();
+
+    createTextBoxQrAddress();
+
+    createTextBoxQrEmail();
+
+    createTextBoxQrDistribution();
+
 } // createAllControls
 
 
@@ -364,15 +388,110 @@ function createFilesDropdown()
 
     g_files_drop_down.setOnchangeFunctionName("eventSelectFileDropdown");
 
-    g_files_drop_down.setLabelText("Supporter wählen");
+    g_files_drop_down.setLabelText(QrStrings.getLabelQrFilesDropdown());
 
     g_files_drop_down.setLabelTextPositionAbove();
 
-    g_files_drop_down.setTitle("Supporter wählen");
+    g_files_drop_down.setTitle(QrStrings.getTitleQrFilesDropdown());
 
     // g_files_drop_down.setAppendString("Neuer Supporter");
 
 } // createFilesDropdown
+
+// Create the person name text box
+function createTextBoxQrPersonName()
+{
+    g_person_name_text_box = new JazzTextBox("id_person_name_text_box", getIdDivQrPersonName());
+
+    g_person_name_text_box.setLabelText(QrStrings.getLabelQrPersonName());
+
+    g_person_name_text_box.setSize("42");
+
+    g_person_name_text_box.setLabelTextPositionAbove();
+
+    g_person_name_text_box.setTitle(QrStrings.getTitleQrPersonName());
+
+    // g_person_name_text_box.setReadOnlyFlag(true);
+
+    // g_person_name_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxQrPersonName
+
+// Create the text box for the comment
+function createTextBoxQrComment()
+{
+    g_comment_text_box = new JazzTextBox("id_person_name_text_box", getIdDivQrComment());
+
+    g_comment_text_box.setLabelText(QrStrings.getLabelTextboxQrComment());
+
+    g_comment_text_box.setSize("42");
+
+    g_comment_text_box.setLabelTextPositionAbove();
+
+    g_comment_text_box.setTitle(QrStrings.getTitleTextboxQrComment());
+	
+	g_comment_text_box.setReadOnlyFlag(true);
+
+    // g_comment_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxQrComment
+
+// Create the text box for the address
+function createTextBoxQrAddress()
+{
+    g_address_text_box = new JazzTextBox("id_address_text_box", getIdDivQrAddress());
+
+    g_address_text_box.setLabelText(QrStrings.getLabelTextboxQrAddress());
+
+    g_address_text_box.setSize("42");
+
+    g_address_text_box.setLabelTextPositionAbove();
+
+    g_address_text_box.setTitle(QrStrings.getTitleTextboxQrAddress());
+	
+	g_address_text_box.setReadOnlyFlag(true);
+
+    // g_address_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxQrAddress
+
+// Create the text box for the email address
+function createTextBoxQrEmail()
+{
+    g_email_text_box = new JazzTextBox("id_email_text_box", getIdDivQrEmail());
+
+    g_email_text_box.setLabelText(QrStrings.getLabelTextboxQrEmail());
+
+    g_email_text_box.setSize("30");
+
+    g_email_text_box.setLabelTextPositionAbove();
+
+    g_email_text_box.setTitle(QrStrings.getTitleTextboxQrEmail());
+	
+	g_email_text_box.setReadOnlyFlag(true);
+
+    // g_email_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxQrEmail
+
+// Create the text box for the supporter contribution
+function createTextBoxQrDistribution()
+{
+    g_email_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrDistribution());
+
+    g_email_text_box.setLabelText(QrStrings.getLabelTextboxQrDistribution());
+
+    g_email_text_box.setSize("5");
+
+    g_email_text_box.setLabelTextPositionAbove();
+
+    g_email_text_box.setTitle(QrStrings.getTitleTextboxQrDistribution());
+	
+	g_email_text_box.setReadOnlyFlag(true);
+
+    // g_email_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxQrDistribution
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -476,6 +595,76 @@ function getIdDivQrMusicianButton()
     return 'id_div_qr_button_musician';
 
 } // getIdDivQrMusicianButton
+
+// Get the element div text box for the person name
+function getElementDivQrPersonName()
+{
+    return document.getElementById(getIdDivQrPersonName());
+
+} // getElementDivQrMusicianButton
+
+// Returns the identity of the div text box for the person name
+function getIdDivQrPersonName()
+{
+    return 'id_div_person_name_text_box';
+
+} // getIdDivQrPersonName
+
+// Get the element div text box for the comment
+function getElementDivQrComment()
+{
+    return document.getElementById(getIdDivQrComment());
+
+} // getElementDivQrComment
+
+// Returns the identity of the div text box for the comment
+function getIdDivQrComment()
+{
+    return 'id_div_comment_text_box';
+
+} // getIdDivQrComment
+
+// Get the element div text box for the address
+function getElementDivQrAddress()
+{
+    return document.getElementById(getIdDivQrAddress());
+
+} // getElementDivQrAddress
+
+// Returns the identity of the div text box for the address
+function getIdDivQrAddress()
+{
+    return 'id_div_address_text_box';
+
+} // getIdDivQrAddress
+
+// Get the element div text box for the email address
+function getElementDivQrEmail()
+{
+    return document.getElementById(getIdDivQrEmail());
+
+} // getElementDivQrEmail
+
+// Returns the identity of the div text box for the email address
+function getIdDivQrEmail()
+{
+    return 'id_div_email_text_box';
+
+} // getIdDivQrEmail
+
+// Get the element div text box for the supporter contribution
+function getElementDivQrDistribution()
+{
+    return document.getElementById(getIdDivQrDistribution());
+
+} // getElementDivQrDistribution
+
+// Returns the identity of the div text box for the supporter contribution
+function getIdDivQrDistribution()
+{
+    return 'id_div_contribution_text_box';
+
+} // getIdDivQrDistribution
 
 // Get the element div title QRFiles.htm 
 function getElementDivQrFilesTitle()

@@ -214,6 +214,104 @@ class QrStrings
 
     } // getTitleButtonQrFilesMusician    
 
+    // Label for the files dropdown
+    static getLabelQrFilesDropdown()
+    {
+        return 'Person wählen';
+
+    } // getLabelQrFilesDropdown
+
+    // Title (tooltip) for the files dropdown
+    static getTitleQrFilesDropdown()
+    {
+        return 'E-Mail oder Brief an diese Person senden';
+
+    } // getTitleQrFilesDropdown        
+
+    // Label for the text box person name
+    static getLabelQrPersonName()
+    {
+        return 'Name';
+
+    } // getLabelQrPersonName
+
+    // Title (tooltip) for the text box person name
+    static getTitleQrPersonName()
+    {
+        return 'E-Mail oder Brief an diese Person senden';
+
+    } // getTitleQrPersonName
+
+    // Label for the text box comment
+    static getLabelTextboxQrComment()
+    {
+        return 'Kommentar';
+
+    } // getLabelTextboxQrComment
+
+    // Title (tooltip) for the text box comment
+    static getTitleTextboxQrComment()
+    {
+        return 'Kommentar';
+
+    } // getTitleTextboxQrComment    
+
+    // Label for the text box address
+    static getLabelTextboxQrAddress()
+    {
+        return 'Adresse';
+
+    } // getLabelTextboxQrAddress
+
+    // Title (tooltip) for the text box address
+    static getTitleTextboxQrAddress()
+    {
+        return 'Adresse';
+
+    } // getTitleTextboxQrAddress
+
+    // Label for the text box email
+    static getLabelTextboxQrEmail()
+    {
+        return 'E-Mail';
+
+    } // getLabelTextboxQrEmail
+
+    // Title (tooltip) for the text box email
+    static getTitleTextboxQrEmail()
+    {
+        return 'E-Mail';
+
+    } // getTitleTextboxQrEmail    
+
+        // Label for the text box contribution
+    static getLabelTextboxQrDistribution()
+    {
+        return 'Beitrag';
+
+    } // getLabelTextboxQrDistribution
+
+    // Title (tooltip) for the text box contribution
+    static getTitleTextboxQrDistribution()
+    {
+        return 'Supporter Beitrag';
+
+    } // getTitleTextboxQrDistribution 
+
+    // Label for the text box contribution
+    static getLabelTextboxQrDistribution()
+    {
+        return 'Beitrag';
+
+    } // getLabelTextboxQrDistribution
+
+    // Title (tooltip) for the text box contribution
+    static getTitleTextboxQrDistribution()
+    {
+        return 'Supporter Beitrag';
+
+    } // getTitleTextboxQrDistribution    
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Strings Qr Files ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////

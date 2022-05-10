@@ -37,6 +37,7 @@ body
 {
     width: 330px;
     margin-left: 2mm;
+    overflow: hidden;
 }
 
 .cl_div_qr_buttons_category
@@ -77,6 +78,66 @@ body
     padding-top: 10px;
     margin-bottom: 10px;
     clear: both;    
+}
+
+.cl_div_person_name_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.cl_div_person_name_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    clear: both;    
+}
+
+.cl_div_comment_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    clear: both;        
+}
+
+.cl_div_address_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    clear: both;   
+}
+
+.cl_div_email_contribution
+{
+    clear: both;
+}
+
+.cl_div_email_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    float: left;       
+}
+
+.cl_div_contribution_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    float: left;    
 }
 
 .cl_canvas_qr_code
