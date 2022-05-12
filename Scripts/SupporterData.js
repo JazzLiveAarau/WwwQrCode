@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-09
+// Date: 2022-05-12
 // Author: Gunnar Lidén
 
 // File content
@@ -210,6 +210,8 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
 {
     console.log("Enter setDataOfAppendedQrFilesNodeAndUpload");
 
+    //QQ var qr_strings = new QrStrings();
+
 	var append_number_files = i_xml_object.getNumberOfQrFiles();
 	
 	console.log("append_number_files= " + append_number_files.toString());
@@ -221,6 +223,8 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
     var first_name = i_supporter_data.getFirstName();
 
     var family_name = i_supporter_data.getFamilyName();
+
+    var street = i_supporter_data.getStreet();
     
     var house_number = i_supporter_data.getHouseNumber();
     
@@ -229,8 +233,6 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
     var domicil = i_supporter_data.getDomicil();
     
     var email = i_supporter_data.getEmail();
-    
-    var sponsor = "FALSCH";
     
     var comment = i_supporter_data.getComment();
     
@@ -254,6 +256,8 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
 
     i_xml_object.setFamilyName(file_number, family_name);
 
+    i_xml_object.setStreet(file_number, street);
+
     i_xml_object.setHouseNumber(file_number, house_number);
 
     i_xml_object.setPostalCode(file_number, postal_code);
@@ -262,31 +266,35 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
 
     i_xml_object.setEmail(file_number, email);
 
-    i_xml_object.setSponsor(file_number, sponsor);
+    i_xml_object.setSponsor(file_number, QrStrings.getBoolFalseString());
 
     i_xml_object.setComment(file_number, comment);
 
 	i_xml_object.setSupporterContribution(file_number, supporter_contribution);
 
-	i_xml_object.setSupporter(file_number, "WAHR");
+	i_xml_object.setSupporter(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setSupporterAdmission(file_number, "WAHR");
+	i_xml_object.setSupporterAdmission(file_number, QrStrings.getBoolTrueString());
 
-	i_xml_object.setMusicianAdmission(file_number, "FALSCH");
+	i_xml_object.setMusicianAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setFreeAdmission(file_number, "FALSCH");
+	i_xml_object.setFreeAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setSponsorAdmission(file_number, "FALSCH");
+	i_xml_object.setSponsorAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setMemberAdmission(file_number, "FALSCH");
+	i_xml_object.setMemberAdmission(file_number, QrStrings.getBoolFalseString());
 
 	i_xml_object.setDownloadOne(file_number, download_code_one);
 
 	i_xml_object.setDownloadTwo(file_number, download_code_two);
 
-	i_xml_object.setEmailSent(file_number, "FALSCH");
+	i_xml_object.setEmailSent(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setMailSent(file_number, "FALSCH");
+	i_xml_object.setMailSent(file_number, QrStrings.getBoolFalseString());
+
+    i_xml_object.setPrintSent(file_number, QrStrings.getBoolFalseString());
+
+    i_xml_object.setPrintBatch(file_number, QrStrings.getBoolFalseString());
 
     uploadQrFileImageAndText(file_number, i_xml_object);
 
@@ -472,6 +480,8 @@ class SupporterData
 
         this.m_family_name = '';
 
+        this.m_street = '';
+
         this.m_house_number = '';
 
         this.m_postal_code = '';
@@ -494,6 +504,8 @@ class SupporterData
 
         this.m_family_name = this.m_xml.getFamilyName(this.m_supporter_number);
 
+        this.m_street = this.m_xml.getStreet(this.m_supporter_number);
+
         this.m_house_number = this.m_xml.getHouseNumber(this.m_supporter_number);
 
         this.m_postal_code = this.m_xml.getPostalCode(this.m_supporter_number);
@@ -511,6 +523,8 @@ class SupporterData
     getFirstName() { return this.m_first_name }
 
     getFamilyName() { return this.m_family_name } 
+
+    getStreet() { return this.m_street } 
 
     getHouseNumber() { return this.m_house_number } 
 

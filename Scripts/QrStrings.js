@@ -150,6 +150,20 @@ class QrStrings
 
     } // getXmlNodeValueNotYetSet
 
+    // Returns the string for boolean true
+    static getBoolTrueString()
+    {
+        return 'WAHR';
+
+    } // getBoolTrueString
+
+    // Returns the string for boolean false
+    static getBoolFalseString()
+    {
+        return 'FALSCH';
+
+    } // getBoolFalseString
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End XML Strings /////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////

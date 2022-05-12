@@ -1,5 +1,5 @@
 // File: SupporterXml.js
-// Date: 2022-05-04
+// Date: 2022-05-12
 // Author: Gunnar Lidén
 
 // File content
@@ -81,6 +81,13 @@ class SupporterXml
         return this.getNodeValue(this.m_tags.getFamilyName(), i_supporter_number);
         
     } // getFamilyName
+
+    // Returns the street for a given supporter number
+    getStreet(i_supporter_number)
+    {
+        return this.getNodeValue(this.m_tags.getStreet(), i_supporter_number);
+        
+    } // getStreet
 
     // Returns the house number for a given supporter number
     getHouseNumber(i_supporter_number)
@@ -383,6 +390,7 @@ class SupporterTags
         this.m_tag_supporter = "Supporter";
         this.m_tag_first_name = "Vorname";
         this.m_tag_family_name = "FamilienName";
+        this.m_tag_street = "Strasse";
         this.m_tag_house_number = "Hausnummer";
         this.m_tag_postal_code = "PLZ";
         this.m_tag_domicil = "Wohnort";
@@ -398,6 +406,7 @@ class SupporterTags
     getSupporter(){return this.m_tag_supporter;} 
     getFirstName(){return this.m_tag_first_name;} 
     getFamilyName(){return this.m_tag_family_name;} 
+    getStreet(){return this.m_tag_street;} 
     getHouseNumber(){return this.m_tag_house_number;} 
     getPostalCode(){return this.m_tag_postal_code;} 
     getDomicil(){return this.m_tag_domicil;}

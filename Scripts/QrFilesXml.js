@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-09
+// Date: 2022-05-12
 // Author: Gunnar Lidén
 
 // File content
@@ -45,6 +45,12 @@ class QrFilesXml
         // Flag value that a node value not have been set (NotYetSetNodeValue)
         this.m_not_yet_set_node_value = QrStrings.getXmlNodeValueNotYetSet();
 
+        // String for boolean true
+        this.m_bool_true_str = QrStrings.getBoolTrueString();
+
+        // String for boolean false
+        this.m_bool_false_str = QrStrings.getBoolFalseString();
+
         // Loads the XML object and calls the function m_callback_function_name
         this.loadXmlFile(this, this.getUrlForQrFilesXml(), this.m_callback_function_name);
 
@@ -81,6 +87,13 @@ class QrFilesXml
         return this.getNodeValue(this.m_tags.getFamilyName(), i_qr_file_number);
         
     } // getFamilyName
+
+    // Returns the street for a given  QR File number
+    getStreet(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getStreet(), i_qr_file_number);
+        
+    } // getStreet
 
     // Returns the house number for a given  QR File number
     getHouseNumber(i_qr_file_number)
@@ -243,6 +256,62 @@ class QrFilesXml
 
     } // getMailSentBool
 
+    // Returns the print sent flag for a given  QR File number (WAHR or TRUE)
+    getPrintSent(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getPrintSent(), i_qr_file_number);
+        
+    } // getPrintSent
+
+    // Returns the print sent flag for a given  QR File number (true or false)
+    getPrintSentBool(i_qr_file_number)
+    {
+        if (this.getPrintSent(i_qr_file_number) == 'WAHR')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // getPrintSentBool
+
+    // Returns the print batch flag for a given  QR File number (WAHR or TRUE)
+    getPrintBatch(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getPrintBatch(), i_qr_file_number);
+        
+    } // getPrintBatch
+
+    // Returns the print batch flag for a given  QR File number (true or false)
+    getPrintBatchBool(i_qr_file_number)
+    {
+        if (this.getPrintBatch(i_qr_file_number) == 'WAHR')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // getPrintBatchBool
+
+    // Returns the QR code name one for a given  QR File number (WAHR or TRUE)
+    getQrCodeNameOne(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getQrCodeNameOne(), i_qr_file_number);
+        
+    } // getQrCodeNameOne
+
+    // Returns the QR code name two for a given  QR File number
+    getQrCodeNameTwo(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getQrCodeNameTwo(), i_qr_file_number);
+        
+    } // getQrCodeNameTwo
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Get Qr File Data ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
@@ -264,6 +333,13 @@ class QrFilesXml
         this.setQrFileNodeValue(this.m_tags.getFamilyName(), i_qr_file_number, i_node_value);
         
     } // setFamilyName
+
+    // Sets the street for a given  QR File number
+    setStreet(i_qr_file_number, i_node_value)
+    {
+        this.setQrFileNodeValue(this.m_tags.getStreet(), i_qr_file_number, i_node_value);
+        
+    } // setStreet  
 
     // Sets the house number for a given  QR File number
     setHouseNumber(i_qr_file_number, i_node_value)
@@ -370,19 +446,47 @@ class QrFilesXml
          
      } // setDownloadTwo
 
-     // Sets the email sent flag  for a given  QR File number
+     // Sets the email sent flag  for a given  QR File number (WAHR or FALSCH)
      setEmailSent(i_qr_file_number, i_node_value)
      {
          this.setQrFileNodeValue(this.m_tags.getEmailSent(), i_qr_file_number, i_node_value);
          
      } // setEmailSent
 
-     // Sets the mail sent flag  for a given  QR File number
+     // Sets the mail sent flag  for a given  QR File number (WAHR or FALSCH)
      setMailSent(i_qr_file_number, i_node_value)
      {
          this.setQrFileNodeValue(this.m_tags.getMailSent(), i_qr_file_number, i_node_value);
          
      } // setMailSent
+
+     // Sets the print sent flag  for a given  QR File number (WAHR or FALSCH)
+     setPrintSent(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getPrintSent(), i_qr_file_number, i_node_value);
+         
+     } // setPrintSent
+
+     // Sets the print batch flag  for a given  QR File number (WAHR or FALSCH)
+     setPrintBatch(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getPrintBatch(), i_qr_file_number, i_node_value);
+         
+     } // setPrintBatch
+
+     // Sets the QR code name one for a given  QR File number 
+     setQrCodeNameOne(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getQrCodeNameOne(), i_qr_file_number, i_node_value);
+         
+     } // setQrCodeNameOne
+
+     // Sets the QR code name two for a given  QR File number 
+     setQrCodeNameTwo(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getQrCodeNameTwo(), i_qr_file_number, i_node_value);
+         
+     } // setQrCodeNameTwo
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Set Qr File Data ////////////////////////////
@@ -500,6 +604,11 @@ class QrFilesXml
 	   family_name_node.appendChild(family_name_text);
 	   new_task.appendChild(family_name_node);
 
+        var street_node = this.m_file_xml.createElement(this.m_tags.getStreet());
+        var street_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+        street_node.appendChild(street_text);
+        new_task.appendChild(street_node);
+
 	   var house_number_node = this.m_file_xml.createElement(this.m_tags.getHouseNumber());
 	   var house_number_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
 	   house_number_node.appendChild(house_number_text);
@@ -521,7 +630,7 @@ class QrFilesXml
 	   new_task.appendChild(email_node);
 
 	   var sponsor_node = this.m_file_xml.createElement(this.m_tags.getSponsor());
-	   var sponsor_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var sponsor_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   sponsor_node.appendChild(sponsor_text);
 	   new_task.appendChild(sponsor_node);
 
@@ -536,37 +645,37 @@ class QrFilesXml
 	   new_task.appendChild(supporter_contribution_node);
 
 	   var supporter_node = this.m_file_xml.createElement(this.m_tags.getSupporter());
-	   var supporter_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var supporter_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   supporter_node.appendChild(supporter_text);
 	   new_task.appendChild(supporter_node);
 
 	   var supporter_admission_node = this.m_file_xml.createElement(this.m_tags.getSupporterAdmission());
-	   var supporter_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var supporter_admission_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   supporter_admission_node.appendChild(supporter_admission_text);
 	   new_task.appendChild(supporter_admission_node);
 
 	   var supporter_admission_node = this.m_file_xml.createElement(this.m_tags.getSupporterAdmission());
-	   var supporter_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var supporter_admission_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   supporter_admission_node.appendChild(supporter_admission_text);
 	   new_task.appendChild(supporter_admission_node);
 
 	   var musician_admission_node = this.m_file_xml.createElement(this.m_tags.getMusicianAdmission());
-	   var musician_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var musician_admission_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   musician_admission_node.appendChild(musician_admission_text);
 	   new_task.appendChild(musician_admission_node); 
 
 	   var free_admission_node = this.m_file_xml.createElement(this.m_tags.getFreeAdmission());
-	   var free_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var free_admission_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   free_admission_node.appendChild(free_admission_text);
 	   new_task.appendChild(free_admission_node);
 
 	   var sponsor_admission_node = this.m_file_xml.createElement(this.m_tags.getSponsorAdmission());
-	   var sponsor_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var sponsor_admission_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   sponsor_admission_node.appendChild(sponsor_admission_text);
 	   new_task.appendChild(sponsor_admission_node);
 
 	   var member_admission_node = this.m_file_xml.createElement(this.m_tags.getMemberAdmission());
-	   var member_admission_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var member_admission_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   member_admission_node.appendChild(member_admission_text);
 	   new_task.appendChild(member_admission_node);
 
@@ -581,14 +690,34 @@ class QrFilesXml
 	   new_task.appendChild(download_two_node);
        
 	   var email_sent_node = this.m_file_xml.createElement(this.m_tags.getEmailSent());
-	   var email_sent_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var email_sent_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   email_sent_node.appendChild(email_sent_text);
 	   new_task.appendChild(email_sent_node);
 
 	   var mail_sent_node = this.m_file_xml.createElement(this.m_tags.getMailSent());
-	   var mail_sent_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   var mail_sent_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
 	   mail_sent_node.appendChild(mail_sent_text);
 	   new_task.appendChild(mail_sent_node);
+
+	   var print_sent_node = this.m_file_xml.createElement(this.m_tags.getPrintSent());
+	   var print_sent_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
+	   print_sent_node.appendChild(print_sent_text);
+	   new_task.appendChild(print_sent_node);
+
+	   var print_batch_node = this.m_file_xml.createElement(this.m_tags.getPrintBatch());
+	   var print_batch_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
+	   print_batch_node.appendChild(print_batch_text);
+	   new_task.appendChild(print_batch_node);
+
+	   var qr_name_one_node = this.m_file_xml.createElement(this.m_tags.getQrCodeNameOne());
+	   var qr_name_one_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   qr_name_one_node.appendChild(qr_name_one_text);
+	   new_task.appendChild(qr_name_one_node);
+
+	   var qr_name_two_node = this.m_file_xml.createElement(this.m_tags.getQrCodeNameTwo());
+	   var qr_name_two_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   qr_name_two_node.appendChild(qr_name_two_text);
+	   new_task.appendChild(qr_name_two_node);
 
        this.m_file_xml.documentElement.appendChild(new_task);	
 
@@ -658,7 +787,7 @@ class QrFilesXml
 
     getFullAddress(i_qr_file_number)
     {
-        var street = 'StrasseTODO';
+        var street = this.getStreet(i_qr_file_number);
 
         var house_number = this.getHouseNumber(i_qr_file_number);
 
@@ -1151,6 +1280,7 @@ class QrFilesTags
         this.m_tag_qr_file = "QrFile";
         this.m_tag_first_name = "Vorname";
         this.m_tag_family_name = "FamilienName";
+        this.m_tag_street = "Strasse";
         this.m_tag_house_number = "Hausnummer";
         this.m_tag_postal_code = "PLZ";
         this.m_tag_domicil = "Wohnort";
@@ -1168,6 +1298,11 @@ class QrFilesTags
         this.m_tag_download_two = "DownloadCodeTwo";
         this.m_tag_email_sent = "EmailSent";
         this.m_tag_mail_sent = "MailSent";
+
+        this.m_tag_print_sent = "PrintSent";
+        this.m_tag_print_batch = "PrintBatch";
+        this.m_tag_qr_code_name_one = "QrCodeNameOne";
+        this.m_tag_qr_code_name_two = "QrCodeNameTwo";
     }
 
     // Get member variable functions
@@ -1176,6 +1311,7 @@ class QrFilesTags
     getQrFile(){return this.m_tag_qr_file;} 
     getFirstName(){return this.m_tag_first_name;} 
     getFamilyName(){return this.m_tag_family_name;} 
+    getStreet(){return this.m_tag_street;} 
     getHouseNumber(){return this.m_tag_house_number;} 
     getPostalCode(){return this.m_tag_postal_code;} 
     getDomicil(){return this.m_tag_domicil;}
@@ -1193,5 +1329,10 @@ class QrFilesTags
     getDownloadTwo(){return this.m_tag_download_two;}
     getEmailSent(){return this.m_tag_email_sent;}
     getMailSent(){return this.m_tag_mail_sent;}
+
+    getPrintSent(){return this.m_tag_print_sent;}
+    getPrintBatch(){return this.m_tag_print_batch;}
+    getQrCodeNameOne(){return this.m_tag_qr_code_name_one;}
+    getQrCodeNameTwo(){return this.m_tag_qr_code_name_two;}
 
 } // QrFilesTags
