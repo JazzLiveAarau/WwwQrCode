@@ -47,6 +47,11 @@ body
     clear: both;
 }
 
+.cl_div_qr_buttons_category button
+{
+    background-color: white;
+}
+
 .cl_div_qr_button_supporter
 {
     float: left;
@@ -73,10 +78,15 @@ body
 
 .cl_div_qr_buttons_execution
 {
-    margin-top: 50px;
+    margin-top: 20px;
     font-size: 4.3mm;
     font-weight: bold;
     clear: both;
+}
+
+.cl_div_qr_buttons_execution button
+{
+    background-color: white;
 }
 
 .cl_div_qr_button_send_email
@@ -139,6 +149,11 @@ body
     clear: both;        
 }
 
+.cl_div_comment_text_box input
+{
+    background-color: rgb(223, 224, 225);
+}
+
 .cl_div_address_text_box
 {
     font-size: 4.3mm;
@@ -147,6 +162,12 @@ body
     margin-bottom: 10px;
     clear: both;   
 }
+
+.cl_div_address_text_box input
+{
+    background-color: rgb(223, 224, 225);
+}
+
 
 .cl_div_email_contribution
 {
@@ -162,6 +183,11 @@ body
     float: left;       
 }
 
+.cl_div_email_text_box input
+{
+    background-color: rgb(223, 224, 225);
+}
+
 .cl_div_contribution_text_box
 {
     font-size: 4.3mm;
@@ -170,6 +196,11 @@ body
     margin-bottom: 10px;
     margin-left: 10px;
     float: left;    
+}
+
+.cl_div_contribution_text_box input
+{
+    background-color: rgb(223, 224, 225);
 }
 
 .cl_canvas_qr_code
@@ -186,4 +217,9 @@ body
     border: solid 1px black;
     text-align: left;
     clear: both;    
+}
+
+textarea
+{
+    margin-top: 60px;
 }

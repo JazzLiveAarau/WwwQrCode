@@ -753,6 +753,22 @@ class QrFilesXml
 
     } // getSeasonStartYear
 
+    // Returns true if contribution would be enough for two supporter (cards)
+    contributionForTwoPersons(i_file_number)
+    {
+        var contribution = this.getSupporterContribution(i_file_number);
+
+        if (contribution >= 2 * QrStrings.getSupporterContributionLimitValue())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // contributionForTwoPersons
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Number Qr Files  ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////

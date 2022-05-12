@@ -103,7 +103,7 @@ function createAllControls()
 // Creates the supporter control
 function createQrSupporterButton()
 {
-    g_qr_supporter_button = new JazzButton("id_button_delete", getIdDivQrSupporterButton());
+    g_qr_supporter_button = new JazzButton("id_qr_button_supporter", getIdDivQrSupporterButton());
 
     g_qr_supporter_button.setOnclickFunctionName("eventClickQrSupporterButton");
 
@@ -171,7 +171,7 @@ function createQrMusicianButton()
 // Creates the send email control
 function createQrSendEmailButton()
 {
-    g_qr_send_email_button = new JazzButton("id_button_delete", getIdDivQrSendEmailButton());
+    g_qr_send_email_button = new JazzButton("id_qr_button_send_email", getIdDivQrSendEmailButton());
 
     g_qr_send_email_button.setOnclickFunctionName("eventClickQrSendEmailButton");
 
@@ -188,7 +188,7 @@ function createQrSendEmailButton()
 // Creates the send mail (post) button
 function createQrSendPostButton()
 {
-    g_qr_send_post_button = new JazzButton("id_qr_button_sponsor", getIdDivQrSendPostButton());
+    g_qr_send_post_button = new JazzButton("id_qr_button_send_post", getIdDivQrSendPostButton());
 
     g_qr_send_post_button.setOnclickFunctionName("eventClickQrSendPostButton");
 
@@ -205,7 +205,7 @@ function createQrSendPostButton()
 // Creates the print batch button
 function createQrPrintBatchButton()
 {
-    g_qr_print_batch_button = new JazzButton("id_qr_button_sponsor", getIdDivQrPrintBatchButton());
+    g_qr_print_batch_button = new JazzButton("id_qr_button_print_batch", getIdDivQrPrintBatchButton());
 
     g_qr_print_batch_button.setOnclickFunctionName("eventClickPrintBatchButton");
 
@@ -222,7 +222,7 @@ function createQrPrintBatchButton()
 // Creates the file done button
 function createQrFileDoneButton()
 {
-    g_qr_file_done_button = new JazzButton("id_qr_button_musician", getIdDivQrFileDoneButton());
+    g_qr_file_done_button = new JazzButton("id_qr_button_file_done", getIdDivQrFileDoneButton());
 
     g_qr_file_done_button.setOnclickFunctionName("eventClickQrFileDoneButton");
 
@@ -394,6 +394,32 @@ function createTextBoxQrContribution()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Controls /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Hide And Display Functions ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Hide the div qr code name two
+function hideDivQrCodeNameTwo()
+{
+    var el_code_name_two = getElementDivQrCodeNameTwo();
+
+    el_code_name_two.style.display = 'none';
+
+} // hideDivQrCodeNameTwo
+
+// Display the div qr code code name two
+function displayDivQrCodeNameTwo()
+{
+    var el_code_name_two = getElementDivQrCodeNameTwo();
+
+    el_code_name_two.style.display = 'block';
+
+} // displayDivQrCodeNameTwo
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Hide And Display Functions //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
