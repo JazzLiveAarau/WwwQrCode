@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-08
+// Date: 2022-05-12
 // Author: Gunnar Lidén
 
 // File content
@@ -103,6 +103,18 @@ var g_qr_free_button = null;
 
 // The button musician
 var g_qr_musician_button = null;
+
+// The button send email
+var g_qr_send_email_button = null;
+
+// The button send mail (post)
+var g_qr_send_post_button = null;
+
+// The button print batch
+var g_qr_print_batch_button = null;
+
+// The button file done
+var g_qr_file_done_button = null;
 
 // The text box for the person name
 var g_person_name_text_box = null;
@@ -247,6 +259,30 @@ function eventClickQrMusicianButton()
 
 } // eventClickQrMusicianButton
 
+// User clicked the send email button
+function eventClickQrSendEmailButton()
+{
+
+} // eventClickQrSendEmailButton
+
+// User clicked the send mail (post) button
+function eventClickQrSendPostButton()
+{
+
+} // eventClickQrSendPostButton
+
+// User clicked the print batch button
+function eventClickPrintBatchButton()
+{
+
+} // eventClickPrintBatchButton
+
+// User clicked the file done button
+function eventClickQrFileDoneButton()
+{
+
+} // eventClickQrFileDoneButton
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -355,6 +391,14 @@ function createAllControls()
 
     createQrMusicianButton();
 
+    createQrSendEmailButton();
+
+    createQrSendPostButton();
+
+    createQrFileDoneButton();
+
+    createQrPrintBatchButton();
+
     createTextBoxQrPersonName();
 
     createTextBoxQrComment();
@@ -435,6 +479,74 @@ function createQrMusicianButton()
     g_qr_musician_button.setTitle(QrStrings.getTitleButtonQrFilesMusician());
 
 } // createQrMusicianButton
+
+// Creates the send email control
+function createQrSendEmailButton()
+{
+    g_qr_send_email_button = new JazzButton("id_button_delete", getIdDivQrSendEmailButton());
+
+    g_qr_send_email_button.setOnclickFunctionName("eventClickQrSendEmailButton");
+
+    g_qr_send_email_button.setCaption(QrStrings.getCaptionButtonQrFilesSendEmail());
+
+    g_qr_send_email_button.setWidth("77px");
+
+    g_qr_send_email_button.setLabelText("");
+
+    g_qr_send_email_button.setTitle(QrStrings.getTitleButtonQrFilesSendEmail());
+
+} // createQrSendEmailButton
+
+// Creates the send mail (post) button
+function createQrSendPostButton()
+{
+    g_qr_send_post_button = new JazzButton("id_qr_button_sponsor", getIdDivQrSendPostButton());
+
+    g_qr_send_post_button.setOnclickFunctionName("eventClickQrSendPostButton");
+
+    g_qr_send_post_button.setCaption(QrStrings.getCaptionButtonQrFilesSendPost());
+
+    g_qr_send_post_button.setWidth("77px");
+
+    g_qr_send_post_button.setLabelText("");
+
+    g_qr_send_post_button.setTitle(QrStrings.getTitleButtonQrFilesSendPost());
+
+} // createQrSendPostButton
+
+// Creates the print batch button
+function createQrPrintBatchButton()
+{
+    g_qr_print_batch_button = new JazzButton("id_qr_button_sponsor", getIdDivQrPrintBatchButton());
+
+    g_qr_print_batch_button.setOnclickFunctionName("eventClickPrintBatchButton");
+
+    g_qr_print_batch_button.setCaption(QrStrings.getCaptionButtonQrFilesPrintBatch());
+
+    g_qr_print_batch_button.setWidth("77px");
+
+    g_qr_print_batch_button.setLabelText("");
+
+    g_qr_print_batch_button.setTitle(QrStrings.getTitleButtonQrFilesPrintBatch());
+
+} // createQrPrintBatchButton
+
+// Creates the file done button
+function createQrFileDoneButton()
+{
+    g_qr_file_done_button = new JazzButton("id_qr_button_musician", getIdDivQrFileDoneButton());
+
+    g_qr_file_done_button.setOnclickFunctionName("eventClickQrFileDoneButton");
+
+    g_qr_file_done_button.setCaption(QrStrings.getCaptionButtonQrFilesFileDone());
+
+    g_qr_file_done_button.setWidth("77px");
+
+    g_qr_file_done_button.setLabelText("");
+
+    g_qr_file_done_button.setTitle(QrStrings.getTitleButtonQrFilesFileDone());
+
+} // createQrFileDoneButton
 
 // Creates the files dropdown control
 function createFilesDropdown()
@@ -632,14 +744,14 @@ function getIdDivQrSupporterButton()
 
 } // getIdDivQrSupporterButton
 
-// Get the element div qr button supporter
+// Get the element div qr button sponsor
 function getElementDivQrSponsorButton()
 {
     return document.getElementById(getIdDivQrSponsorButton());
 
 } // getElementDivQrSponsorButton
 
-// Returns the identity of the div qr button supporter
+// Returns the identity of the div qr button sponsor
 function getIdDivQrSponsorButton()
 {
     return 'id_div_qr_button_sponsor';
@@ -660,19 +772,75 @@ function getIdDivQrFreeButton()
 
 } // getIdDivQrFreeButton
 
-// Get the element div qr button free
+// Get the element div qr button musician
 function getElementDivQrMusicianButton()
 {
     return document.getElementById(getIdDivQrMusicianButton());
 
 } // getElementDivQrMusicianButton
 
-// Returns the identity of the div qr button free
+// Returns the identity of the div qr button musician
 function getIdDivQrMusicianButton()
 {
     return 'id_div_qr_button_musician';
 
 } // getIdDivQrMusicianButton
+
+// Get the element div qr button send email
+function getElementDivQrSendEmailButton()
+{
+    return document.getElementById(getIdDivQrSendEmailButton());
+
+} // getElementDivQrSendEmailButton
+
+// Returns the identity of the div qr button send email
+function getIdDivQrSendEmailButton()
+{
+    return 'id_div_qr_button_send_email';
+
+} // getIdDivQrSendEmailButton
+
+// Get the element div qr button send post
+function getElementDivQrSendPostButton()
+{
+    return document.getElementById(getIdDivQrSendPostButton());
+
+} // getElementDivQrSendPostButton
+
+// Returns the identity of the div qr button send post
+function getIdDivQrSendPostButton()
+{
+    return 'id_div_qr_button_send_post';
+
+} // getIdDivQrSendPostButton
+
+// Get the element div qr button print batch
+function getElementDivQrPrintBatchButton()
+{
+    return document.getElementById(getIdDivQrPrintBatchButton());
+
+} // getElementDivQrPrintBatchButton
+
+// Returns the identity of the div qr button print batch
+function getIdDivQrPrintBatchButton()
+{
+    return 'id_div_qr_button_print_batch';
+
+} // getIdDivQrPrintBatchButton
+
+// Get the element div qr button file done
+function getElementDivQrFileDoneButton()
+{
+    return document.getElementById(getIdDivQrFileDoneButton());
+
+} // getElementDivQrFileDoneButton
+
+// Returns the identity of the div qr button file done
+function getIdDivQrFileDoneButton()
+{
+    return 'id_div_qr_button_file_done';
+
+} // getIdDivQrFileDoneButton
 
 // Get the element div text box for the person name
 function getElementDivQrPersonName()

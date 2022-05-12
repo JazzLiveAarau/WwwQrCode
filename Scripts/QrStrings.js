@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-10
+// Date: 2022-05-12
 // Author: Gunnar Lidén
 
 // File content
@@ -214,6 +214,62 @@ class QrStrings
 
     } // getTitleButtonQrFilesMusician    
 
+    // Caption for the button QR Files send email
+    static getCaptionButtonQrFilesSendEmail()
+    {
+        return 'E-Mail';
+
+    } // getCaptionButtonQrFilesSendEmail
+
+    // Title (tooltip) for the button QR Files send email
+    static getTitleButtonQrFilesSendEmail()
+    {
+        return 'QR Code als E-Mail senden';
+
+    } // getTitleButtonQrFilesSendEmail
+
+    // Caption for the button QR Files send post (mail)
+    static getCaptionButtonQrFilesSendPost()
+    {
+        return 'Brief';
+
+    } // getCaptionButtonQrFilesSendPost
+
+    // Title (tooltip) for the button QR Files send post (mail)
+    static getTitleButtonQrFilesSendPost()
+    {
+        return 'QR Code als Brief senden';
+
+    } // getTitleButtonQrFilesSendPost
+
+    // Caption for the button QR Files print batch
+    static getCaptionButtonQrFilesPrintBatch()
+    {
+        return 'Print';
+
+    } // getCaptionButtonQrFilesPrintBatch
+
+    // Title (tooltip) for the button QR Files print batch
+    static getTitleButtonQrFilesPrintBatch()
+    {
+        return 'Print Batch, d.h. eine Gruppe QR Codes gesammelt drucken';
+
+    } // getTitleButtonQrFilesPrintBatch    
+
+    // Caption for the button QR Files file is done (sent as email, mail or printed)
+    static getCaptionButtonQrFilesFileDone()
+    {
+        return 'Erledigt';
+
+    } // getCaptionButtonQrFilesFileDone
+
+    // Title (tooltip) for the button QR Files file is done (sent as email, mail or printed)
+    static getTitleButtonQrFilesFileDone()
+    {
+        return 'QR Code ist als E-Mail oder Brief gesendet. Oder als Karten gesammelt gedruckt.';
+
+    } // getTitleButtonQrFilesFileDone    
+	
     // Label for the files dropdown
     static getLabelQrFilesDropdown()
     {

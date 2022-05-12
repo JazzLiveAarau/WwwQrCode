@@ -1,5 +1,5 @@
 /* 
-File: QrCodeFiles.css Date: 2022-05-10 Author: Gunnar Lidén
+File: QrCodeFiles.css Date: 2022-05-12 Author: Gunnar Lidén
 
 General information
 ===================
@@ -67,6 +67,38 @@ body
 }
 
 .cl_div_qr_button_musician
+{
+    float: left;
+}
+
+.cl_div_qr_buttons_execution
+{
+    margin-top: 50px;
+    font-size: 4.3mm;
+    font-weight: bold;
+    clear: both;
+}
+
+.cl_div_qr_button_send_email
+{
+    float: left;
+    margin-right: 6px;
+    margin-left: 2px;
+}
+
+.cl_div_qr_button_send_post
+{
+    float: left;
+    margin-right: 6px;
+}
+
+.cl_div_qr_button_print_batch
+{
+    float: left;
+    margin-right: 6px;
+}
+
+.cl_div_qr_button_file_done
 {
     float: left;
 }
