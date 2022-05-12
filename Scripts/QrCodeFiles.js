@@ -268,7 +268,9 @@ function setQrFilesTitle()
 // Set all controls for case Supporter
 function setControlsSupporter()
 {
-    setTextBoxQrPersonName();
+    setTextBoxQrCodeNameOne();
+
+    setTextBoxQrCodeNameTwo();
 
     setTextBoxQrComment();
 
@@ -280,14 +282,23 @@ function setControlsSupporter()
 
 } // setControlsSupporter
 
-// Set the text box person name for the active file number
-function setTextBoxQrPersonName()
+// Set the text box QR code name one for the active file number
+function setTextBoxQrCodeNameOne()
 {
-    var person_name = g_qr_files_xml_object.getQrFirstAndFamilyNameString(g_files_active_number);
+    var qr_code_name_one = g_qr_files_xml_object.getQrFirstAndFamilyNameString(g_files_active_number);
 
-    g_person_name_text_box.setValue(person_name);
+    g_qr_code_name_one_text_box.setValue(qr_code_name_one);
 
-} // setTextBoxQrPersonName
+} // setTextBoxQrCodeNameOne
+
+// Set the text box QR code name two for the active file number
+function setTextBoxQrCodeNameTwo()
+{
+    var qr_code_name_two = '';
+
+    g_qr_code_name_two_text_box.setValue(qr_code_name_two);
+
+} // setTextBoxQrCodeNameTwo
 
 // Set the text box comment for the active file number
 function setTextBoxQrComment()

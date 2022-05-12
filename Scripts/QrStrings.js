@@ -298,19 +298,33 @@ class QrStrings
 
     } // getTitleQrFilesDropdown        
 
-    // Label for the text box person name
-    static getLabelQrPersonName()
+    // Label for the text box QR code name one
+    static getLabelQrCodeNameOne()
     {
         return 'QR Code Name';
 
-    } // getLabelQrPersonName
+    } // getLabelQrCodeNameOne
 
-    // Title (tooltip) for the text box person name
-    static getTitleQrPersonName()
+    // Title (tooltip) for the text box QR code name one
+    static getTitleQrCodeNameOne()
     {
-        return 'Der Name für den QR Code. Wird normalerweise nicht geändert';
+        return 'Der Name für den QR Code 1';
 
-    } // getTitleQrPersonName
+    } // getTitleQrCodeNameOne
+
+    // Label for the text box QR code name one
+    static getLabelQrCodeNameTwo()
+    {
+        return 'QR Code Name 2';
+
+    } // getLabelQrCodeNameTwo
+
+    // Title (tooltip) for the text box QR code name one
+    static getTitleQrCodeNameTwo()
+    {
+        return 'Der Name für den QR Code 2';
+
+    } // getTitleQrCodeNameTwo 
 
     // Label for the text box comment
     static getLabelTextboxQrComment()

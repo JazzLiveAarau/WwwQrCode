@@ -112,7 +112,7 @@ body
     clear: both;    
 }
 
-.cl_div_person_name_text_box
+.cl_div_qr_code_name_one_text_box
 {
     font-size: 4.3mm;
     font-weight: bold;
@@ -121,14 +121,14 @@ body
     clear: both;
 }
 
-.cl_div_person_name_text_box
+.cl_div_qr_code_name_two_text_box
 {
     font-size: 4.3mm;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 10px;
-    clear: both;    
-}
+    clear: both;
+} 
 
 .cl_div_comment_text_box
 {

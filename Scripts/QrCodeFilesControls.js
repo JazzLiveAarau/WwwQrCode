@@ -38,8 +38,11 @@ var g_qr_print_batch_button = null;
 // The button file done
 var g_qr_file_done_button = null;
 
-// The text box for the person name
-var g_person_name_text_box = null;
+// The text box for the QR code name one
+var g_qr_code_name_one_text_box = null;
+
+// The text box for the QR code name two
+var g_qr_code_name_two_text_box = null;
 
 // The text box for the comment
 var g_comment_text_box = null;
@@ -82,7 +85,9 @@ function createAllControls()
 
     createQrPrintBatchButton();
 
-    createTextBoxQrPersonName();
+    createTextBoxQrCodeNameOne();
+
+    createTextBoxQrCodeNameTwo();
 
     createTextBoxQrComment();
 
@@ -260,26 +265,47 @@ function createFilesDropdown()
 
 } // createFilesDropdown
 
-// Create the person name text box
-function createTextBoxQrPersonName()
+// Create the QR code name one text box
+function createTextBoxQrCodeNameOne()
 {
-    g_person_name_text_box = new JazzTextBox("id_person_name_text_box", getIdDivQrPersonName());
+    g_qr_code_name_one_text_box = new JazzTextBox("id_qr_code_name_one_text_box", getIdDivQrCodeNameOne());
 
-    g_person_name_text_box.setLabelText(QrStrings.getLabelQrPersonName());
+    g_qr_code_name_one_text_box.setLabelText(QrStrings.getLabelQrCodeNameOne());
 
-    g_person_name_text_box.setSize("42");
+    g_qr_code_name_one_text_box.setSize("42");
 
-    g_person_name_text_box.setLabelTextPositionAbove();
+    g_qr_code_name_one_text_box.setLabelTextPositionAbove();
 
-    g_person_name_text_box.setTitle(QrStrings.getTitleQrPersonName());
+    g_qr_code_name_one_text_box.setTitle(QrStrings.getTitleQrCodeNameOne());
 
-    g_person_name_text_box.setValue("Test First name and family name");
+    g_qr_code_name_one_text_box.setValue("Test First name and family name");
 
-    // g_person_name_text_box.setReadOnlyFlag(true);
+    // g_qr_code_name_one_text_box.setReadOnlyFlag(true);
 
-    // g_person_name_text_box.setOninputFunctionName("oninputTitle");
+    // g_qr_code_name_one_text_box.setOninputFunctionName("oninputTitle");
   
-} // createTextBoxQrPersonName
+} // createTextBoxQrCodeNameOne
+
+ // Create the QR code name two text box
+ function createTextBoxQrCodeNameTwo()
+ {
+     g_qr_code_name_two_text_box = new JazzTextBox("id_qr_code_name_two_text_box", getIdDivQrCodeNameTwo());
+ 
+     g_qr_code_name_two_text_box.setLabelText(QrStrings.getLabelQrCodeNameTwo());
+ 
+     g_qr_code_name_two_text_box.setSize("42");
+ 
+     g_qr_code_name_two_text_box.setLabelTextPositionAbove();
+ 
+     g_qr_code_name_two_text_box.setTitle(QrStrings.getTitleQrCodeNameTwo());
+ 
+     g_qr_code_name_two_text_box.setValue("Test Nnnn");
+ 
+     // g_qr_code_name_two_text_box.setReadOnlyFlag(true);
+ 
+     // g_qr_code_name_two_text_box.setOninputFunctionName("oninputTitle");
+   
+ } // createTextBoxQrCodeNameTwo 
 
 // Create the text box for the comment
 function createTextBoxQrComment()
@@ -486,19 +512,33 @@ function getIdDivQrFileDoneButton()
 
 } // getIdDivQrFileDoneButton
 
-// Get the element div text box for the person name
-function getElementDivQrPersonName()
+// Get the element div text box for the QR code name one
+function getElementDivQrCodeNameOne()
 {
-    return document.getElementById(getIdDivQrPersonName());
+    return document.getElementById(getIdDivQrCodeNameOne());
 
 } // getElementDivQrMusicianButton
 
-// Returns the identity of the div text box for the person name
-function getIdDivQrPersonName()
+// Returns the identity of the div text box for the QR code name one
+function getIdDivQrCodeNameOne()
 {
-    return 'id_div_person_name_text_box';
+    return 'id_div_qr_code_name_one_text_box';
 
-} // getIdDivQrPersonName
+} // getIdDivQrCodeNameOne
+
+ // Get the element div text box for the QR code name two
+ function getElementDivQrCodeNameTwo()
+ {
+     return document.getElementById(getIdDivQrCodeNameTwo());
+ 
+ } // getElementDivQrMusicianButton
+ 
+ // Returns the identity of the div text box for the QR code name two
+ function getIdDivQrCodeNameTwo()
+ {
+     return 'id_div_qr_code_name_two_text_box';
+ 
+ } // getIdDivQrCodeNameTwo 
 
 // Get the element div text box for the comment
 function getElementDivQrComment()
