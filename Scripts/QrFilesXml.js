@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-12
+// Date: 2022-05-13
 // Author: Gunnar Lidén
 
 // File content
@@ -312,6 +312,41 @@ class QrFilesXml
         
     } // getQrCodeNameTwo
 
+    // Returns the concert year for a given  QR File number
+    getConcertYear(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getConcertYear(), i_qr_file_number);
+        
+    } // getConcertYear
+
+    // Returns the concert month for a given  QR File number
+    getConcertMonth(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getConcertMonth(), i_qr_file_number);
+        
+    } // getConcertMonth
+
+    // Returns the concert day for a given  QR File number
+    getConcertDay(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getConcertDay(), i_qr_file_number);
+        
+    } // getConcertDay
+
+    // Returns the sum paid for a concert for a given  QR File number
+    getConcertPaid(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getConcertPaid(), i_qr_file_number);
+        
+    } // getConcertPaid
+
+    // Returns the telephone number for a given  QR File number
+    getTelephone(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getTelephone(), i_qr_file_number);
+        
+    } // getTelephone
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Get Qr File Data ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
@@ -487,6 +522,41 @@ class QrFilesXml
          this.setQrFileNodeValue(this.m_tags.getQrCodeNameTwo(), i_qr_file_number, i_node_value);
          
      } // setQrCodeNameTwo
+
+     // Sets the concert year for a given  QR File number 
+     setConcertYear(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getConcertYear(), i_qr_file_number, i_node_value);
+         
+     } // setConcertYear
+
+     // Sets the concert month for a given  QR File number 
+     setConcertMonth(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getConcertMonth(), i_qr_file_number, i_node_value);
+         
+     } // setConcertMonth
+
+     // Sets the concert day for a given  QR File number 
+     setConcertDay(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getConcertDay(), i_qr_file_number, i_node_value);
+         
+     } // setConcertDay
+
+     // Sets the sum paid for a concert for a given  QR File number 
+     setConcertPaid(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getConcertPaid(), i_qr_file_number, i_node_value);
+         
+     } // setConcertPaid
+
+     // Sets the telephon number for a given  QR File number 
+     setTelephone(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getTelephone(), i_qr_file_number, i_node_value);
+         
+     } // setTelephone
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Set Qr File Data ////////////////////////////
@@ -718,6 +788,31 @@ class QrFilesXml
 	   var qr_name_two_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
 	   qr_name_two_node.appendChild(qr_name_two_text);
 	   new_task.appendChild(qr_name_two_node);
+
+	   var concert_year_node = this.m_file_xml.createElement(this.m_tags.getConcertYear());
+	   var concert_year_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   concert_year_node.appendChild(concert_year_text);
+	   new_task.appendChild(concert_year_node);
+
+	   var concert_month_node = this.m_file_xml.createElement(this.m_tags.getConcertMonth());
+	   var concert_month_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   concert_month_node.appendChild(concert_month_text);
+	   new_task.appendChild(concert_month_node);
+
+	   var concert_day_node = this.m_file_xml.createElement(this.m_tags.getConcertDay());
+	   var concert_month_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   concert_day_node.appendChild(concert_month_text);
+	   new_task.appendChild(concert_day_node);
+
+	   var concert_paid_node = this.m_file_xml.createElement(this.m_tags.getConcertPaid());
+	   var concert_paid_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   concert_paid_node.appendChild(concert_paid_text);
+	   new_task.appendChild(concert_paid_node);
+
+	   var telephone_node = this.m_file_xml.createElement(this.m_tags.getTelephone());
+	   var telephone_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   telephone_node.appendChild(telephone_text);
+	   new_task.appendChild(telephone_node);
 
        this.m_file_xml.documentElement.appendChild(new_task);	
 
@@ -1314,11 +1409,16 @@ class QrFilesTags
         this.m_tag_download_two = "DownloadCodeTwo";
         this.m_tag_email_sent = "EmailSent";
         this.m_tag_mail_sent = "MailSent";
-
         this.m_tag_print_sent = "PrintSent";
         this.m_tag_print_batch = "PrintBatch";
         this.m_tag_qr_code_name_one = "QrCodeNameOne";
         this.m_tag_qr_code_name_two = "QrCodeNameTwo";
+
+        this.m_tag_concert_year = "ConcertYear";
+        this.m_tag_concert_month = "ConcertMonth";
+        this.m_tag_concert_day = "ConcertDay";
+        this.m_tag_concert_paid = "ConcertPaid";
+        this.m_tag_telephone = "Telephone";
     }
 
     // Get member variable functions
@@ -1345,10 +1445,15 @@ class QrFilesTags
     getDownloadTwo(){return this.m_tag_download_two;}
     getEmailSent(){return this.m_tag_email_sent;}
     getMailSent(){return this.m_tag_mail_sent;}
-
     getPrintSent(){return this.m_tag_print_sent;}
     getPrintBatch(){return this.m_tag_print_batch;}
     getQrCodeNameOne(){return this.m_tag_qr_code_name_one;}
     getQrCodeNameTwo(){return this.m_tag_qr_code_name_two;}
+
+    getConcertYear(){return this.m_tag_concert_year;}
+    getConcertMonth(){return this.m_tag_concert_month;}
+    getConcertDay(){return this.m_tag_concert_day;}
+    getConcertPaid(){return this.m_tag_concert_paid;}
+    getTelephone(){return this.m_tag_telephone;}
 
 } // QrFilesTags
