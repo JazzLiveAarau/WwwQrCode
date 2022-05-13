@@ -62,7 +62,11 @@ var g_concert_date_text_box = null;
 // The text box for the telephone number
 var g_telephone_text_box = null;
 
+// The text box for the season color def string
+var g_season_color_def_str_text_box = null;
 
+// The text box for the season color display
+var g_season_color_display_text_box = null;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
@@ -108,6 +112,10 @@ function createAllControls()
     createTextboxQrConcertDate();
 
     createTextBoxQrTelephone();
+
+    createTextBoxSeasonColorDef();
+
+    createTextBoxSeasonColorDisplay();
 
 } // createAllControls
 
@@ -403,7 +411,7 @@ function createTextBoxQrContribution()
 // Create the text box for the concert date
 function createTextboxQrConcertDate()
 {
-    g_concert_date_text_box = new JazzTextBox("id_email_text_box", getIdDivQrConcertDate());
+    g_concert_date_text_box = new JazzTextBox("id_concert_date_text_box", getIdDivQrConcertDate());
 
     g_concert_date_text_box.setLabelText(QrStrings.getLabelTextboxQrConcertDate());
 
@@ -424,7 +432,7 @@ function createTextboxQrConcertDate()
 // Create the text box for the telephone number
 function createTextBoxQrTelephone()
 {
-    g_telephone_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrTelephone());
+    g_telephone_text_box = new JazzTextBox("id_telephone_text_box", getIdDivQrTelephone());
 
     g_telephone_text_box.setLabelText(QrStrings.getLabelTextboxTelephone());
 
@@ -441,6 +449,48 @@ function createTextBoxQrTelephone()
     // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
   
 } // createTextBoxQrTelephone
+
+// Create the text box for the season color def string
+function createTextBoxSeasonColorDef()
+{
+    g_season_color_def_str_text_box = new JazzTextBox("id_season_color_def_str", getIdDivSeasonColorDefStr());
+
+    g_season_color_def_str_text_box.setLabelText(QrStrings.getLabelTextboxSeasonColorDefStr());
+
+    g_season_color_def_str_text_box.setSize("14");
+
+    g_season_color_def_str_text_box.setLabelTextPositionAbove();
+
+    g_season_color_def_str_text_box.setTitle(QrStrings.getTitleTextboxSeasonColorDefStr());
+	
+	//  g_season_color_def_str_text_box.setReadOnlyFlag(true);
+
+    g_season_color_def_str_text_box.setValue("rgb(25, 213, 230)");
+
+    // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxSeasonColorDef
+
+// Create the text box for the season color display
+function createTextBoxSeasonColorDisplay()
+{
+    g_season_color_display_text_box = new JazzTextBox("id_season_color_display", getIdDivSeasonDisplay());
+
+    g_season_color_display_text_box.setLabelText(QrStrings.getLabelTextboxSeasonColorDisplay());
+
+    g_season_color_display_text_box.setSize("20");
+
+    g_season_color_display_text_box.setLabelTextPositionAbove();
+
+    g_season_color_display_text_box.setTitle(QrStrings.getTitleTextboxSeasonColorDisplay());
+	
+	g_season_color_display_text_box.setReadOnlyFlag(true);
+
+    g_season_color_display_text_box.setValue("");
+
+    // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxSeasonColorDisplay
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Controls /////////////////////////////////////////////
@@ -1317,6 +1367,34 @@ function getIdDivQrTelephone()
     return 'id_div_telephon_text_box';
 
 } // getIdDivQrTelephone
+
+// Get the element div text box for the season color def string
+function getElementDivSeasonColorDefStr()
+{
+    return document.getElementById(getIdDivSeasonColorDefStr());
+
+} // getElementDivSeasonColorDefStr
+
+// Returns the identity of the div text box for the season color def string
+function getIdDivSeasonColorDefStr()
+{
+    return 'id_div_season_color_def_str';
+
+} // getIdDivSeasonColorDefStr
+
+// Get the element div text box for the season color display
+function getElementDivSeasonDisplay()
+{
+    return document.getElementById(getIdDivSeasonDisplay());
+
+} // getElementDivSeasonDisplay
+
+// Returns the identity of the div text box for the season color display
+function getIdDivSeasonDisplay()
+{
+    return 'id_div_season_color_display';
+
+} // getIdDivSeasonDisplay
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

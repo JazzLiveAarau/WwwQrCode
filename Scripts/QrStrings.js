@@ -396,7 +396,7 @@ class QrStrings
 
     } // getTitleTextboxQrConcertDate    
 
-        // Label for the text box telephone
+    // Label for the text box telephone
     static getLabelTextboxTelephone()
     {
         return 'Telefon';
@@ -409,6 +409,34 @@ class QrStrings
         return 'Telefon';
 
     } // getTitleTextboxTelephone 
+
+    // Label for the season color def string
+    static getLabelTextboxSeasonColorDefStr()
+    {
+        return 'Farbcode';
+
+    } // getLabelTextboxSeasonColorDefStr
+
+    // Title (tooltip) for the season color def string
+    static getTitleTextboxSeasonColorDefStr()
+    {
+        return 'Farbcode';
+
+    } // getTitleTextboxSeasonColorDefStr 
+
+    // Label for the season color display
+    static getLabelTextboxSeasonColorDisplay()
+    {
+        return 'Saison-Farbe';
+
+    } // getLabelTextboxSeasonColorDisplay
+
+    // Title (tooltip) for the season color display
+    static getTitleTextboxSeasonColorDisplay()
+    {
+        return 'Saison-Farbe';
+
+    } // getTitleTextboxSeasonColorDisplay 
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Strings Qr Files ////////////////////////////

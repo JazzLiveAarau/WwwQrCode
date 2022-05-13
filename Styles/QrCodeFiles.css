@@ -40,8 +40,44 @@ body
     overflow: hidden;
 }
 
+.cl_div_container_season_color
+{
+    clear: both;
+}
+
+.cl_div_season_color_def_str
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    float: right;    
+}
+
+.cl_div_season_color_def_str input
+{
+    text-align: center;
+}
+
+.cl_div_season_color_display
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    float: left;    
+}
+
+.cl_div_season_color_display input
+{
+    background-color: rgb(25, 213, 230);
+}
+
 .cl_div_qr_buttons_category
 {
+    padding-top: 20px;
     font-size: 4.3mm;
     font-weight: bold;
     clear: both;
