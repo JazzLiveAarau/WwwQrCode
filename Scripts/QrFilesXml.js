@@ -1413,7 +1413,6 @@ class QrFilesTags
         this.m_tag_print_batch = "PrintBatch";
         this.m_tag_qr_code_name_one = "QrCodeNameOne";
         this.m_tag_qr_code_name_two = "QrCodeNameTwo";
-
         this.m_tag_concert_year = "ConcertYear";
         this.m_tag_concert_month = "ConcertMonth";
         this.m_tag_concert_day = "ConcertDay";
@@ -1449,7 +1448,6 @@ class QrFilesTags
     getPrintBatch(){return this.m_tag_print_batch;}
     getQrCodeNameOne(){return this.m_tag_qr_code_name_one;}
     getQrCodeNameTwo(){return this.m_tag_qr_code_name_two;}
-
     getConcertYear(){return this.m_tag_concert_year;}
     getConcertMonth(){return this.m_tag_concert_month;}
     getConcertDay(){return this.m_tag_concert_day;}

@@ -203,6 +203,40 @@ body
     background-color: rgb(223, 224, 225);
 }
 
+.cl_div_concert_date_telephone
+{
+    clear: both;
+}
+
+.cl_div_concert_date_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    float: left;       
+}
+
+.cl_div_concert_date_text_box input
+{
+    background-color: rgb(223, 224, 225);
+}
+
+.cl_div_telephon_text_box
+{
+    font-size: 4.3mm;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    float: left;    
+}
+
+.cl_div_telephon_text_box input
+{
+    background-color: rgb(223, 224, 225);
+}
+
 .cl_canvas_qr_code
 {
     clear: both;

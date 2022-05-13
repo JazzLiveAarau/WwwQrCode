@@ -56,6 +56,14 @@ var g_email_text_box = null;
 // The text box for the supporter contribution
 var g_contribution_text_box = null;
 
+// The text box for the concert date
+var g_concert_date_text_box = null;
+
+// The text box for the telephone number
+var g_telephone_text_box = null;
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -96,6 +104,10 @@ function createAllControls()
     createTextBoxQrEmail();
 
     createTextBoxQrContribution();
+
+    createTextboxQrConcertDate();
+
+    createTextBoxQrTelephone();
 
 } // createAllControls
 
@@ -388,8 +400,139 @@ function createTextBoxQrContribution()
   
 } // createTextBoxQrContribution
 
+// Create the text box for the concert date
+function createTextboxQrConcertDate()
+{
+    g_concert_date_text_box = new JazzTextBox("id_email_text_box", getIdDivQrConcertDate());
+
+    g_concert_date_text_box.setLabelText(QrStrings.getLabelTextboxQrConcertDate());
+
+    g_concert_date_text_box.setSize("17");
+
+    g_concert_date_text_box.setLabelTextPositionAbove();
+
+    g_concert_date_text_box.setTitle(QrStrings.getTitleTextboxQrConcertDate());
+	
+	g_concert_date_text_box.setReadOnlyFlag(true);
+
+    g_concert_date_text_box.setValue("Test Email");
+
+    // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextboxQrConcertDate
+
+// Create the text box for the telephone number
+function createTextBoxQrTelephone()
+{
+    g_telephone_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrTelephone());
+
+    g_telephone_text_box.setLabelText(QrStrings.getLabelTextboxTelephone());
+
+    g_telephone_text_box.setSize("18");
+
+    g_telephone_text_box.setLabelTextPositionAbove();
+
+    g_telephone_text_box.setTitle(QrStrings.getTitleTextboxTelephone());
+	
+	g_telephone_text_box.setReadOnlyFlag(true);
+
+    g_telephone_text_box.setValue("Summe");
+
+    // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
+  
+} // createTextBoxQrTelephone
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Controls /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Set Category Buttons Styles ///////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Set style for category buttons that not have been selected
+function setCategoryButtonsNoneSelected()
+{
+	 var el_div_supporter_button = getElementDivQrSupporterButton();
+	 
+	 var el_div_sponsor_button = getElementDivQrSponsorButton();
+	 
+	 var el_div_free_button = getElementDivQrFreeButton();
+	 
+	 var el_div_musician_button = getElementDivQrMusicianButton();
+
+     var el_supporter_button = el_div_supporter_button.getElementsByTagName('button')[0];
+
+     var el_sponsor_button = el_div_sponsor_button.getElementsByTagName('button')[0];
+
+     var el_free_button = el_div_free_button.getElementsByTagName('button')[0];
+
+     var el_musician_button = el_div_musician_button.getElementsByTagName('button')[0];
+	 
+	 el_supporter_button.style.borderColor = 'black'; // 'border 1px solid black';
+	 
+	 el_sponsor_button.style.borderColor = 'black';
+	 
+	 el_free_button.style.borderColor = 'black';
+	 
+	 el_musician_button.style.borderColor = 'black';
+ 
+ } setCategoryButtonsNoneSelected
+ 
+ // Set style showing that button supporter is selected
+ function setCategoryButtonSupporterSelected()
+ {
+	setCategoryButtonsNoneSelected();
+	
+    var el_div_supporter_button = getElementDivQrSupporterButton();
+
+    var el_supporter_button = el_div_supporter_button.getElementsByTagName('button')[0];
+	
+	 el_supporter_button.style.borderColor = 'blue';
+ 
+ } // setCategoryButtonSupporterSelected
+
+ // Set style showing that button sponsor is selected
+ function setCategoryButtonSponsorSelected()
+ {
+	setCategoryButtonsNoneSelected();
+	
+    var el_div_sponsor_button = getElementDivQrSponsorButton();
+
+    var el_sponsor_button = el_div_sponsor_button.getElementsByTagName('button')[0];
+	
+    el_sponsor_button.style.borderColor = 'blue';
+ 
+ } // setCategoryButtonSponsorSelected
+
+ // Set style showing that button free is selected
+ function setCategoryButtonFreeSelected()
+ {
+	setCategoryButtonsNoneSelected();
+	
+    var el_div_free_button = getElementDivQrFreeButton();
+
+    var el_free_button = el_div_free_button.getElementsByTagName('button')[0];
+	
+    el_free_button.style.borderColor = 'blue';
+ 
+ } // setCategoryButtonFreeSelected
+
+  // Set style showing that button musician is selected
+  function setCategoryButtonMusicianSelected()
+  {
+     setCategoryButtonsNoneSelected();
+     
+     var el_div_musician_button = getElementDivQrMusicianButton();
+ 
+     var el_musician_button = el_div_musician_button.getElementsByTagName('button')[0];
+     
+     el_musician_button.style.borderColor = 'blue';
+  
+  } // setCategoryButtonMusicianSelected
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Set Category Buttons Styles /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -416,6 +559,8 @@ function displayControlSupporters()
 	displayDivQrEmail();
 	
 	displayDivQrContribution();	
+
+    displayAllExecutionButtons();
 
 } // displayControlSupporters
 
@@ -476,6 +621,10 @@ function hideAllTextBoxes()
 	
 	hideDivQrContribution();
 
+    hideDivQrConcertDate();
+
+    hideDivQrTelephone();
+
 } // hideAllTextBoxes
 
 // Displays all text text boxes
@@ -494,6 +643,10 @@ function displayAllTextBoxes()
 	displayDivQrEmail();
 	
 	displayDivQrContribution();
+
+    displayDivQrConcertDate();
+
+    displayDivQrTelephone();
 
 } // displayAllTextBoxes
 
@@ -680,6 +833,51 @@ function displayDivQrContribution()
     el_contribution.style.display = 'block';
 
 } // displayDivQrContribution
+
+
+// Hide the div qr code concert date
+function hideDivQrConcertDate()
+{
+    console.log('hideDivQrConcertDate Enter');
+
+    var el_concert_date = getElementDivQrConcertDate();
+
+    el_concert_date.style.display = 'none';
+
+} // hideDivQrConcertDate
+
+// Display the div qr code code concert date
+function displayDivQrConcertDate()
+{
+    console.log('displayDivQrConcertDate Enter');
+
+    var el_concert_date = getElementDivQrConcertDate();
+
+    el_concert_date.style.display = 'block';
+
+} // displayDivQrConcertDate
+
+// Hide the div qr code telephone number
+function hideDivQrTelephone()
+{
+    console.log('hideDivQrTelephone Enter');
+
+    var el_telephone = getElementDivQrTelephone();
+
+    el_telephone.style.display = 'none';
+
+} // hideDivQrTelephone
+
+// Display the div qr code code telephone number
+function displayDDivQrTelephone()
+{
+    console.log('displayDDivQrTelephone Enter');
+
+    var el_telephone = getElementDDivQrTelephone();
+
+    el_telephone.style.display = 'block';
+
+} // displayDDivQrTelephone
 
 // Hide the div qr code supporter button
 function hideDivQrSupporterButton()
@@ -1089,6 +1287,36 @@ function getIdDivQrFilesDropdown()
     return 'id_div_qr_files_dropdown';
 
 } // getIdDivQrFilesDropdown
+
+
+// Get the element div text box for the concert date
+function getElementDivQrConcertDate()
+{
+    return document.getElementById(getIdDivQrConcertDate());
+
+} // getElementDivQrConcertDate
+	  
+
+// Returns the identity of the div text box for the concert date
+function getIdDivQrConcertDate()
+{
+    return 'id_div_concert_date_text_box';
+
+} // getIdDivQrConcertDate
+
+// Get the element div text box for the telephone number
+function getElementDivQrTelephone()
+{
+    return document.getElementById(getIdDivQrTelephone());
+
+} // getElementDivQrTelephone
+
+// Returns the identity of the div text box for the telephone number
+function getIdDivQrTelephone()
+{
+    return 'id_div_telephon_text_box';
+
+} // getIdDivQrTelephone
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

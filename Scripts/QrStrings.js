@@ -382,19 +382,33 @@ class QrStrings
 
     } // getTitleTextboxQrDistribution 
 
-    // Label for the text box contribution
-    static getLabelTextboxQrDistribution()
+    // Label for the text box concert date
+    static getLabelTextboxQrConcertDate()
     {
-        return 'Beitrag';
+        return 'Datum Konzert';
 
-    } // getLabelTextboxQrDistribution
+    } // getLabelTextboxQrConcertDate
 
-    // Title (tooltip) for the text box contribution
-    static getTitleTextboxQrDistribution()
+    // Title (tooltip) for the text box concert date
+    static getTitleTextboxQrConcertDate()
     {
-        return 'Supporter Beitrag';
+        return 'Datum Konzert';
 
-    } // getTitleTextboxQrDistribution    
+    } // getTitleTextboxQrConcertDate    
+
+        // Label for the text box telephone
+    static getLabelTextboxTelephone()
+    {
+        return 'Telefon';
+
+    } // getLabelTextboxTelephone
+
+    // Title (tooltip) for the text box telephone
+    static getTitleTextboxTelephone()
+    {
+        return 'Telefon';
+
+    } // getTitleTextboxTelephone 
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Strings Qr Files ////////////////////////////
