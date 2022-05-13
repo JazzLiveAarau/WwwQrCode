@@ -370,7 +370,7 @@ function createTextBoxQrEmail()
 // Create the text box for the supporter contribution
 function createTextBoxQrContribution()
 {
-    g_contribution_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrDistribution());
+    g_contribution_text_box = new JazzTextBox("id_contribution_text_box", getIdDivQrContribution());
 
     g_contribution_text_box.setLabelText(QrStrings.getLabelTextboxQrDistribution());
 
@@ -396,9 +396,186 @@ function createTextBoxQrContribution()
 ///////////////////////// Start Hide And Display Functions ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Displays all supporter controls
+function displayControlSupporters()
+{
+    console.log('displayControlSupporters Enter');
+
+	hideAllTextBoxes();
+
+    displayDivQrFilesDropdown();
+
+	displayDivQrCodeNameOne();
+	
+	hideDivQrCodeNameTwo();
+	
+	displayDivQrComment();
+	
+	displayDivQrAddress();
+	
+	displayDivQrEmail();
+	
+	displayDivQrContribution();	
+
+} // displayControlSupporters
+
+// Displays all sponsor controls
+function displayControlSponsor()
+{
+    console.log('displayControlSupporters Enter');
+
+    hideDropdownTextBoxesExecutionButtons();
+
+} // displayControlSponsor
+
+// Displays all free controls
+function displayControlFree()
+{
+    console.log('displayControlFree Enter');
+    
+    hideDropdownTextBoxesExecutionButtons();
+
+} // displayControlFree
+
+// Displays all musician controls
+function displayControlMusician()
+{
+    console.log('displayControlMusicians Enter');
+    
+    hideDropdownTextBoxesExecutionButtons();
+
+} // displayControlMusician
+
+// Hides dropdow, text boxes and execution buttons
+function hideDropdownTextBoxesExecutionButtons()
+{
+    console.log('hideDropdownTextBoxesExecutionButtons Enter');
+
+    hideDivQrFilesDropdown();
+
+    hideAllTextBoxes();
+
+    hideAllExecutionButtons();
+
+} // hideDropdownTextBoxesExecutionButtons
+
+// Hides all text text boxes
+function hideAllTextBoxes()
+{
+    console.log('hideAllTextBoxes Enter');
+
+	hideDivQrCodeNameOne();
+	
+	hideDivQrCodeNameTwo();
+	
+	hideDivQrComment();
+	
+	hideDivQrAddress();
+	
+	hideDivQrEmail();
+	
+	hideDivQrContribution();
+
+} // hideAllTextBoxes
+
+// Displays all text text boxes
+function displayAllTextBoxes()
+{
+    console.log('displayAllTextBoxes Enter');
+
+	displayDivQrCodeNameOne();
+	
+	displayDivQrCodeNameTwo();
+	
+	displayDivQrComment();
+	
+	displayDivQrAddress();
+	
+	displayDivQrEmail();
+	
+	displayDivQrContribution();
+
+} // displayAllTextBoxes
+
+// Hides all execution buttons
+function hideAllExecutionButtons()
+{
+    console.log('hideAllExecutionButtons Enter');
+
+    hideDivQrSendEmailButton();
+
+    hideDivQrSendPostButton();
+
+    hideDivQrPrintBatchButton();
+
+    hideDivQrFileDoneButton();
+
+} // hideAllExecutionButtons
+
+// Displays all execution buttons
+function displayAllExecutionButtons()
+{
+    console.log('displayAllExecutionButtons Enter');
+
+    displayDivQrSendEmailButton();
+
+    displayDivQrSendPostButton();
+
+    displayDivQrPrintBatchButton();
+
+    displayDivQrFileDoneButton();
+
+} // displayAllExecutionButtons
+
+// Hide the div qr code files dropdown
+function hideDivQrFilesDropdown()
+{
+    console.log('hideDivQrFilesDropdown Enter');
+
+    var el_dropdown = getElementDivQrFilesDropdown();
+
+    el_dropdown.style.display = 'none';
+
+} // hideDivQrFilesDropdown
+
+// Display the div qr code code files dropdown
+function displayDivQrFilesDropdown()
+{
+    console.log('displayDivQrFilesDropdown Enter');
+
+    var el_dropdown = getElementDivQrFilesDropdown();
+
+    el_dropdown.style.display = 'block';
+
+} // displayDivQrFilesDropdown
+
+// Hide the div qr code name one
+function hideDivQrCodeNameOne()
+{
+    console.log('hideDivQrCodeNameOne Enter');
+
+    var el_code_name_one = getElementDivQrCodeNameOne();
+
+    el_code_name_one.style.display = 'none';
+
+} // hideDivQrCodeNameOne
+
+// Display the div qr code code name one
+function displayDivQrCodeNameOne()
+{
+    console.log('displayDivQrCodeNameOne Enter');
+
+    var el_code_name_one = getElementDivQrCodeNameOne();
+
+    el_code_name_one.style.display = 'block';
+
+} // displayDivQrCodeNameOne
+
 // Hide the div qr code name two
 function hideDivQrCodeNameTwo()
 {
+    console.log('hideDivQrCodeNameTwo Enter');
+
     var el_code_name_two = getElementDivQrCodeNameTwo();
 
     el_code_name_two.style.display = 'none';
@@ -408,11 +585,278 @@ function hideDivQrCodeNameTwo()
 // Display the div qr code code name two
 function displayDivQrCodeNameTwo()
 {
+    console.log('displayDivQrCodeNameTwo Enter');
+
     var el_code_name_two = getElementDivQrCodeNameTwo();
 
     el_code_name_two.style.display = 'block';
 
 } // displayDivQrCodeNameTwo
+
+// Hide the div qr code comment
+function hideDivQrComment()
+{
+    console.log('hideDivQrComment Enter');
+
+    var el_comment = getElementDivQrComment();
+
+    el_comment.style.display = 'none';
+
+} // hideDivQrComment
+
+// Display the div qr code code comment
+function displayDivQrComment()
+{
+    console.log('displayDivQrComment Enter');
+
+    var el_comment = getElementDivQrComment();
+
+    el_comment.style.display = 'block';
+
+} // displayDivQrComment
+
+// Hide the div qr code address
+function hideDivQrAddress()
+{
+    console.log('hideDivQrAddress Enter');
+
+    var el_address = getElementDivQrAddress();
+
+    el_address.style.display = 'none';
+
+} // hideDivQrAddress
+
+// Display the div qr code code address
+function displayDivQrAddress()
+{
+    console.log('displayDivQrAddress Enter');
+
+    var el_address = getElementDivQrAddress();
+
+    el_address.style.display = 'block';
+
+} // displayDivQrAddress
+
+// Hide the div qr code email
+function hideDivQrEmail()
+{
+    console.log('hideDivQrEmail Enter');
+
+    var el_email = getElementDivQrEmail();
+
+    el_email.style.display = 'none';
+
+} // hideDivQrEmail
+
+// Display the div qr code code email
+function displayDivQrEmail()
+{
+    console.log('displayDivQrEmail Enter');
+
+    var el_email = getElementDivQrEmail();
+
+    el_email.style.display = 'block';
+
+} // displayDivQrEmail
+
+// Hide the div qr code contribution
+function hideDivQrContribution()
+{
+    console.log('hideDivQrContribution Enter');
+
+    var el_contribution = getElementDivQrContribution();
+
+    el_contribution.style.display = 'none';
+
+} // hideDivQrContribution
+
+// Display the div qr code code contribution
+function displayDivQrContribution()
+{
+    console.log('displayDivQrContribution Enter');
+
+    var el_contribution = getElementDivQrContribution();
+
+    el_contribution.style.display = 'block';
+
+} // displayDivQrContribution
+
+// Hide the div qr code supporter button
+function hideDivQrSupporterButton()
+{
+    console.log('hideDivQrSupporterButton Enter');
+
+    var el_supporter_button = getElementDivQrSupporterButton();
+
+    el_supporter_button.style.display = 'none';
+
+} // hideDivQrSupporterButton
+
+// Display the div qr code code supporter button
+function displayDivQrSupporterButton()
+{
+    console.log('displayDivQrSupporterButton Enter');
+
+    var el_supporter_button = getElementDivQrSupporterButton();
+
+    el_supporter_button.style.display = 'block';
+
+} // displayDivQrSupporterButton
+
+// Hide the div qr code sponsor button
+function hideDivQrSponsorButton()
+{
+    console.log('hideDivQrSponsorButton Enter');
+
+    var el_sponsor_button = getElementDivQrSponsorButton();
+
+    el_sponsor_button.style.display = 'none';
+
+} // hideDivQrSponsorButton
+
+// Display the div qr code code sponsor button
+function displayDivQrSponsorButton()
+{
+    console.log('displayDivQrSponsorButton Enter');
+
+    var el_sponsor_button = getElementDivQrSponsorButton();
+
+    el_sponsor_button.style.display = 'block';
+
+} // displayDivQrSponsorButton
+
+// Hide the div qr code free button
+function hideDivQrFreeButton()
+{
+    console.log('hideDivQrFreeButton Enter');
+
+    var el_free_button = getElementDivQrFreeButton();
+
+    el_free_button.style.display = 'none';
+
+} // hideDivQrFreeButton
+
+// Display the div qr code code free button
+function displayDivQrFreeButton()
+{
+    console.log('displayDivQrFreeButton Enter');
+
+    var el_free_button = getElementDivQrFreeButton();
+
+    el_free_button.style.display = 'block';
+
+} // displayDivQrFreeButton
+
+// Hide the div qr code musician button
+function hideDivQrMusicianButton()
+{
+    console.log('hideDivQrMusicianButton Enter');
+
+    var el_musician_button = getElementDivQrMusicianButton();
+
+    el_musician_button.style.display = 'none';
+
+} // hideDivQrMusicianButton
+
+// Display the div qr code code musician button
+function displayDivQrMusicianButton()
+{
+    console.log('displayDivQrMusicianButton Enter');
+
+    var el_musician_button = getElementDivQrMusicianButton();
+
+    el_musician_button.style.display = 'block';
+
+} // displayDivQrMusicianButton
+
+// Hide the div qr code send email button
+function hideDivQrSendEmailButton()
+{
+    console.log('hideDivQrSendEmailButton Enter');
+
+    var el_send_email_button = getElementDivQrSendEmailButton();
+
+    el_send_email_button.style.display = 'none';
+
+} // hideDivQrSendEmailButton
+
+// Display the div qr code code send email button
+function displayDivQrSendEmailButton()
+{
+    console.log('displayDivQrSendEmailButton Enter');
+
+    var el_send_email_button = getElementDivQrSendEmailButton();
+
+    el_send_email_button.style.display = 'block';
+
+} // displayDivQrSendEmailButton
+
+// Hide the div qr code send post button
+function hideDivQrSendPostButton()
+{
+    console.log('hideDivQrSendPostButton Enter');
+
+    var el_send_post_button = getElementDivQrSendPostButton();
+
+    el_send_post_button.style.display = 'none';
+
+} // hideDivQrSendPostButton
+
+// Display the div qr code code send post button
+function displayDivQrSendPostButton()
+{
+    console.log('displayDivQrSendPostButton Enter');
+
+    var el_send_post_button = getElementDivQrSendPostButton();
+
+    el_send_post_button.style.display = 'block';
+
+} // displayDivQrSendPostButton
+
+// Hide the div qr code print batch button
+function hideDivQrPrintBatchButton()
+{
+    console.log('hideDivQrPrintBatchButton Enter');
+
+    var el_print_batch_button = getElementDivQrPrintBatchButton();
+
+    el_print_batch_button.style.display = 'none';
+
+} // hideDivQrPrintBatchButton
+
+// Display the div qr code code print batch button
+function displayDivQrPrintBatchButton()
+{
+    console.log('displayDivQrPrintBatchButton Enter');
+
+    var el_print_batch_button = getElementDivQrPrintBatchButton();
+
+    el_print_batch_button.style.display = 'block';
+
+} // displayDivQrPrintBatchButton
+
+// Hide the div qr code file done button
+function hideDivQrFileDoneButton()
+{
+    console.log('hideDivQrFileDoneButton Enter');
+
+    var el_file_done_button = getElementDivQrFileDoneButton();
+
+    el_file_done_button.style.display = 'none';
+
+} // hideDivQrFileDoneButton
+
+// Display the div qr code code file done button
+function displayDivQrFileDoneButton()
+{
+    console.log('displayDivQrFileDoneButton Enter');
+
+    var el_file_done_button = getElementDivQrFileDoneButton();
+
+    el_file_done_button.style.display = 'block';
+
+} // displayDivQrFileDoneButton
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Hide And Display Functions //////////////////////////////////
@@ -605,18 +1049,18 @@ function getIdDivQrEmail()
 } // getIdDivQrEmail
 
 // Get the element div text box for the supporter contribution
-function getElementDivQrDistribution()
+function getElementDivQrContribution()
 {
-    return document.getElementById(getIdDivQrDistribution());
+    return document.getElementById(getIdDivQrContribution());
 
-} // getElementDivQrDistribution
+} // getElementDivQrContribution
 
 // Returns the identity of the div text box for the supporter contribution
-function getIdDivQrDistribution()
+function getIdDivQrContribution()
 {
     return 'id_div_contribution_text_box';
 
-} // getIdDivQrDistribution
+} // getIdDivQrContribution
 
 // Get the element div title QRFiles.htm 
 function getElementDivQrFilesTitle()
@@ -633,11 +1077,11 @@ function getIdDivQrFilesTitle()
 } // getIdDivQrFilesTitle
 
 // Get the element div supporter dropdown
-function getElementDivQrSupporterDropdown()
+function getElementDivQrFilesDropdown()
 {
     return document.getElementById(getIdDivQrFilesDropdown());
 
-} // getElementDivQrSupporterDropdown
+} // getElementDivQrFilesDropdown
 
 // Returns the identity of the div supporter dropdown
 function getIdDivQrFilesDropdown()

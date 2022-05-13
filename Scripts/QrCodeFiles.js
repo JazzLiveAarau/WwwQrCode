@@ -102,6 +102,8 @@ function setActiveCategory(i_category_str)
 
     g_active_category = i_category_str;
 
+    console.log('setActiveCategory g_active_category= ' + g_active_category);
+
 } // setActiveCategory
 
 // Returns the active category Supporter, Sponsor, Musician, Free, ....
@@ -172,6 +174,8 @@ function onloadQrCodeFiles()
 {
     QrProgress.Msg("Enter onloadQrCodeFiles");
 
+    console.log('onloadQrCodeFiles Enter');
+
     g_gr_strings = new QrStrings();
 
     setActiveCategory(QrStrings.getQrCategoryUndefinedString());
@@ -191,6 +195,8 @@ function callbackSeasonStartYearFiles(i_season_start_year)
 {
     QrProgress.Append('callbackSeasonStartYearFiles ' + i_season_start_year.toString());
 
+    console.log('callbackSeasonStartYearFiles Enter');
+
     g_season_start_year = i_season_start_year;
 
      createQrFileXmlIfNotAlreadyExisting(g_season_start_year, afterCreateQrFileXmlIfNotAlreadyExisting);
@@ -202,6 +208,8 @@ function afterCreateQrFileXmlIfNotAlreadyExisting()
 {
     QrProgress.Append('Enter afterCreateQrFileXmlIfNotAlreadyExisting');
 
+    console.log('afterCreateQrFileXmlIfNotAlreadyExisting Enter');
+
     g_qr_files_xml_object = new QrFilesXml(afterLoadOfQrFilesXml, g_season_start_year);
 
 } // afterCreateQrFileXmlIfNotAlreadyExisting
@@ -209,6 +217,8 @@ function afterCreateQrFileXmlIfNotAlreadyExisting()
 // Afier loading QrFiles.xml
 function afterLoadOfQrFilesXml()
 {
+    console.log('afterLoadOfQrFilesXml Enter');
+
     QrProgress.Append("Enter afterLoadOfQrFilesXml");
 
     // testOfQrFilesXmlFunctions();
@@ -222,6 +232,8 @@ function afterLoadOfSupporterXmlFile(i_supporter_xml)
 {
     QrProgress.Append('Enter afterLoadOfSupporterXmlFile');
 
+    console.log('afterLoadOfSupporterXmlFile Enter');
+
     var supporter_data_array = setSupporterDataArrayFromXmlObject(i_supporter_xml);
 
     updateQrFilesXmlUploadQrFiles(supporter_data_array, g_qr_files_xml_object);
@@ -233,9 +245,15 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 {
     QrProgress.Append('Enter callbackAfterUpdateAndSaveOfQrFilesXml');
 
+    console.log('callbackAfterUpdateAndSaveOfQrFilesXml Enter');
+
     createAllControls();
 
     setControlsCategoryUndefined();
+
+    hideDropdownTextBoxesExecutionButtons();
+
+    console.log('callbackAfterUpdateAndSaveOfQrFilesXml Exit');
     
     QrProgress.Msg("QR Codes neue Supporter hochgeladen");
 
@@ -245,6 +263,8 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 function eventSelectFileDropdown()
 {
     // QrProgress.Append('Enter eventSelectFileDropdown');
+
+    console.log('eventSelectFileDropdown Enter');
 
     var option_number = g_files_drop_down.getSelectOptionNumber();
 
@@ -275,6 +295,7 @@ function eventSelectFileDropdown()
         setControlsFree();
     }
 
+    console.log('eventSelectFileDropdown Exit');
 
     // QrProgress.Append('g_files_active_number= ' + g_files_active_number.toString());
 
@@ -283,28 +304,64 @@ function eventSelectFileDropdown()
 // User clicked the supporter button
 function eventClickQrSupporterButton()
 {
+    console.log('eventClickQrSupporterButton Enter');
+
+    setActiveCategory(QrStrings.getQrCategorySupporterString());
+
+    g_files_active_number = 1;
+
+    setSupporterDropdown();
+
     setControlsSupporter();
+
+    displayControlSupporters();
+
+    console.log('eventClickQrSupporterButton Exit');
 
 } // eventClickQrSupporterButton
 
 // User clicked the sponsor button
 function eventClickQrSponsorButton()
 {
+    console.log('eventClickQrSponsorButton Enter');
+
+    setActiveCategory(QrStrings.getQrCategorySponsorString());
+
     setControlsSponsor();
+
+    displayControlSponsor();
+
+    console.log('eventClickQrSponsorButton Exit');
 
 } // eventClickQrSponsorButton
 
 // User clicked the free button
 function eventClickQrFreeButton()
 {
+    console.log('eventClickQrFreeButton Enter');
+
+    setActiveCategory(QrStrings.getQrCategoryFreeString());
+
     setControlsFree();
+
+    displayControlFree();
+
+    console.log('eventClickQrFreeButton Exit');
 
 } // eventClickQrFreeButton
 
 // User clicked the musician button
 function eventClickQrMusicianButton()
 {
+    console.log('eventClickQrMusicianButton Enter');
+
+    setActiveCategory(QrStrings.getQrCategoryMusicianString());
+
     setControlsMusician();
+
+    displayControlMusician();
+
+    console.log('eventClickQrMusicianButton Exit');
     
 } // eventClickQrMusicianButton
 
@@ -359,7 +416,7 @@ function setQrFilesTitle()
 // Set controls for category (case) Supporter
 function setControlsSupporter()
 {
-    setSupporterDropdown();
+    console.log('setControlsSupporter Enter');
 
     setTextBoxQrCodeNameOne();
 
@@ -382,39 +439,59 @@ function setControlsSupporter()
         hideDivQrCodeNameTwo();
     }
 
+    console.log('setControlsSupporter Exit');
+
 } // setControlsSupporter
 
 // Set controls for category (case) Sponsor
 function setControlsSponsor()
 {
+    console.log('setControlsSponsor Enter');
+
     setControlsCategoryUndefined();
+
+    console.log('setControlsSponsor Exit');
 
 } // setControlsSponsor
 
 // Set controls for category (case) Musician
 function setControlsMusician()
 {
+    console.log('setControlsMusician Enter');
+
     setControlsCategoryUndefined();
+
+    console.log('setControlsMusician Exit');
 
 } // setControlsMusician
 
 // Set controls for category (case) Member
 function setControlsMember()
 {
+    console.log('setControlsMember Enter');
+
     setControlsCategoryUndefined();
+
+    console.log('setControlsMember Exit');
 
 } // setControlsMember
 
 // Set controls for category (case) Free
 function setControlsFree()
 {
+    console.log('setControlsFree Enter');
+
     setControlsCategoryUndefined();
+
+    console.log('setControlsFree Exit');
 
 } // setControlsFree
 
 // Sets the contols for category undefined
 function setControlsCategoryUndefined()
 {
+    console.log('setControlsCategoryUndefined Enter');
+
     var name_array_init = [];
 
     name_array_init[0] = '';  
@@ -435,11 +512,15 @@ function setControlsCategoryUndefined()
 
     g_contribution_text_box.setValue("");
 
+    console.log('setControlsCategoryUndefined Exit');
+
 } // setControlsCategoryUndefined
 
 // Sets the files dropdown control for supporters
 function setSupporterDropdown()
 {
+    console.log('setSupporterDropdown Enter');
+
     var b_supporter_above_limit = true;
 
     var b_only_not_sent = true;
@@ -449,6 +530,8 @@ function setSupporterDropdown()
     var name_array = g_qr_files_xml_object.getQrFirstAndFamilyNamesFiltered(g_file_number_array);
 
     g_files_drop_down.setNameArray(name_array);
+
+    console.log('setSupporterDropdown Exit');
     
 } // setSupporterDropdown
 
