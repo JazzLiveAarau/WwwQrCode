@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-12
+// Date: 2022-05-13
 // Author: Gunnar Lidén
 
 // File content
@@ -89,6 +89,67 @@ function getFileNumberFromDropdownNumber(i_option_number)
 
 } // getFileNumberFromDropdownNumber
 
+// Active category Supporter, Sponsor, Musician, Free, ....
+var g_active_category = null;
+
+// Sets the active category Supporter, Sponsor, Musician, Free, ....
+function setActiveCategory(i_category_str)
+{
+    if (!checkActiveCategory(i_category_str))
+    {
+        return;
+    }
+
+    g_active_category = i_category_str;
+
+} // setActiveCategory
+
+// Returns the active category Supporter, Sponsor, Musician, Free, ....
+function getActiveCategory()
+{
+    return g_active_category;
+    
+} // getActiveCategory
+
+// // Returns true if the input category is Supporter, Sponsor, Musician, Free, ....
+function checkActiveCategory(i_category_str)
+{
+    var ret_b_active = false;
+
+    if (i_category_str == QrStrings.getQrCategoryUndefinedString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategorySupporterString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategorySponsorString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategoryMusicianString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategoryMemberString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategoryFreeString())
+    {
+        ret_b_active = true;
+    }
+
+    if (!ret_b_active)
+    {
+        alert("checkActiveCategory Not an implemented category= " + i_category_str);
+    }
+
+    return ret_b_active;
+
+} // checkActiveCategory
+
 // Instance of the class SupporterXml handling the XML file Supporter.xml
 var g_supporter_xml_object = null;
 
@@ -112,6 +173,8 @@ function onloadQrCodeFiles()
     QrProgress.Msg("Enter onloadQrCodeFiles");
 
     g_gr_strings = new QrStrings();
+
+    setActiveCategory(QrStrings.getQrCategoryUndefinedString());
 
     setAllQrFilesControls();
 
@@ -172,7 +235,7 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 
     createAllControls();
 
-    setControlsSupporter();
+    setControlsCategoryUndefined();
     
     QrProgress.Msg("QR Codes neue Supporter hochgeladen");
 
@@ -187,7 +250,31 @@ function eventSelectFileDropdown()
 
     g_files_active_number = getFileNumberFromDropdownNumber(option_number);
 
-    setControlsSupporter();
+    if (getActiveCategory() == QrStrings.getQrCategoryUndefinedString())
+    {
+        setControlsCategoryUndefined();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
+    {
+        setControlsSupporter();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategorySponsorString())
+    {
+        setControlsSponsor();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
+    {
+        setControlsMusician();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategoryMemberString())
+    {
+        setControlsMember();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategoryFreeString())
+    {
+        setControlsFree();
+    }
+
 
     // QrProgress.Append('g_files_active_number= ' + g_files_active_number.toString());
 
@@ -196,25 +283,29 @@ function eventSelectFileDropdown()
 // User clicked the supporter button
 function eventClickQrSupporterButton()
 {
+    setControlsSupporter();
 
 } // eventClickQrSupporterButton
 
 // User clicked the sponsor button
 function eventClickQrSponsorButton()
 {
+    setControlsSponsor();
 
 } // eventClickQrSponsorButton
 
 // User clicked the free button
 function eventClickQrFreeButton()
 {
+    setControlsFree();
 
 } // eventClickQrFreeButton
 
 // User clicked the musician button
 function eventClickQrMusicianButton()
 {
-
+    setControlsMusician();
+    
 } // eventClickQrMusicianButton
 
 // User clicked the send email button
@@ -265,9 +356,11 @@ function setQrFilesTitle()
 
 } // setQrFilesTitle
 
-// Set all controls for case Supporter
+// Set controls for category (case) Supporter
 function setControlsSupporter()
 {
+    setSupporterDropdown();
+
     setTextBoxQrCodeNameOne();
 
     setTextBoxQrCodeNameTwo();
@@ -290,6 +383,74 @@ function setControlsSupporter()
     }
 
 } // setControlsSupporter
+
+// Set controls for category (case) Sponsor
+function setControlsSponsor()
+{
+    setControlsCategoryUndefined();
+
+} // setControlsSponsor
+
+// Set controls for category (case) Musician
+function setControlsMusician()
+{
+    setControlsCategoryUndefined();
+
+} // setControlsMusician
+
+// Set controls for category (case) Member
+function setControlsMember()
+{
+    setControlsCategoryUndefined();
+
+} // setControlsMember
+
+// Set controls for category (case) Free
+function setControlsFree()
+{
+    setControlsCategoryUndefined();
+
+} // setControlsFree
+
+// Sets the contols for category undefined
+function setControlsCategoryUndefined()
+{
+    var name_array_init = [];
+
+    name_array_init[0] = '';  
+
+    g_files_drop_down.setNameArray(name_array_init);
+
+    g_qr_code_name_one_text_box.setValue("");
+
+    g_qr_code_name_two_text_box.setValue("");
+
+    hideDivQrCodeNameTwo();
+
+    g_comment_text_box.setValue("");
+
+    g_address_text_box.setValue("");
+
+    g_email_text_box.setValue("");
+
+    g_contribution_text_box.setValue("");
+
+} // setControlsCategoryUndefined
+
+// Sets the files dropdown control for supporters
+function setSupporterDropdown()
+{
+    var b_supporter_above_limit = true;
+
+    var b_only_not_sent = true;
+
+    g_file_number_array =  g_qr_files_xml_object.getFilteredFileNumberArray(b_supporter_above_limit, b_only_not_sent);
+
+    var name_array = g_qr_files_xml_object.getQrFirstAndFamilyNamesFiltered(g_file_number_array);
+
+    g_files_drop_down.setNameArray(name_array);
+    
+} // setSupporterDropdown
 
 // Set the text box QR code name one for the active file number
 function setTextBoxQrCodeNameOne()

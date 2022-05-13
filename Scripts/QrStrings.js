@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-12
+// Date: 2022-05-13
 // Author: Gunnar Lidén
 
 // File content
@@ -469,6 +469,12 @@ class QrStrings
         return 'Gratis';
         
     } // getQrCategoryFreeString
+
+    static getQrCategoryUndefinedString()
+    {
+        return 'Undefined';
+
+    } // getQrCategoryUndefinedString
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Qr Code Strings /////////////////////////////

@@ -243,15 +243,11 @@ function createFilesDropdown()
 
     g_files_drop_down = new JazzDropdown("id_qr_files_dropdown", getIdDivQrFilesDropdown());
 
-    var b_supporter_above_limit = true;
+    var name_array_init = [];
 
-    var b_only_not_sent = true;
+    name_array_init[0] = '';
 
-    g_file_number_array =  g_qr_files_xml_object.getFilteredFileNumberArray(b_supporter_above_limit, b_only_not_sent);
-
-    var name_array = g_qr_files_xml_object.getQrFirstAndFamilyNamesFiltered(g_file_number_array);
-
-    g_files_drop_down.setNameArray(name_array);
+    g_files_drop_down.setNameArray(name_array_init);
 
     g_files_drop_down.setOnchangeFunctionName("eventSelectFileDropdown");
 
@@ -261,7 +257,7 @@ function createFilesDropdown()
 
     g_files_drop_down.setTitle(QrStrings.getTitleQrFilesDropdown());
 
-    // g_files_drop_down.setAppendString("Neuer Supporter");
+    // g_files_drop_down.setAppendString("Neue file");
 
 } // createFilesDropdown
 
@@ -343,7 +339,7 @@ function createTextBoxQrAddress()
 	
 	g_address_text_box.setReadOnlyFlag(true);
 
-    g_address_text_box.setValue("Test Addrees");
+    g_address_text_box.setValue("Test Address");
 
 
     // g_address_text_box.setOninputFunctionName("oninputTitle");
