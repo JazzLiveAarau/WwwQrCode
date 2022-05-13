@@ -89,6 +89,23 @@ function getFileNumberFromDropdownNumber(i_option_number)
 
 } // getFileNumberFromDropdownNumber
 
+// Instance of the class SupporterXml handling the XML file Supporter.xml
+var g_supporter_xml_object = null;
+
+// Instance of the class QrFilesXml handling the XML file QrFiles.xml
+var g_qr_files_xml_object = null;
+
+// Season start year, that defines the active season directory QrFiles/Season_20NN_20MM
+var g_season_start_year = -12345;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Global Parameters ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Active Category ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
 // Active category Supporter, Sponsor, Musician, Free, ....
 var g_active_category = null;
 
@@ -152,17 +169,45 @@ function checkActiveCategory(i_category_str)
 
 } // checkActiveCategory
 
-// Instance of the class SupporterXml handling the XML file Supporter.xml
-var g_supporter_xml_object = null;
-
-// Instance of the class QrFilesXml handling the XML file QrFiles.xml
-var g_qr_files_xml_object = null;
-
-// Season start year, that defines the active season directory QrFiles/Season_20NN_20MM
-var g_season_start_year = -12345;
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Active Category /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Global Parameters ///////////////////////////////////////////
+///////////////////////// Start Season Color //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Initial season color
+var g_qr_season_color_init = 'rgb(223, 224, 225)';
+
+// windows.localStorage key for the season color
+var g_local_storage_qr_season_color = 'qr_season_color';
+
+// Set the season color in the local storage
+function setSeasonColorInLocalStorage(i_season_color)
+{
+    localStorage.setItem(this.g_local_storage_qr_season_color, i_season_color);
+
+} // setSeasonColorInLocalStorage
+
+// Get the download code from the local storage
+function getSeasonColorInLocalStorage()
+{
+    var season_color = localStorage.getItem(this.g_local_storage_qr_season_color);
+
+    if (season_color == null)
+    {
+        return g_qr_season_color_init;
+    }
+    else
+    {
+        return season_color;
+    }
+
+} // getSeasonColorInLocalStorage
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Season Color ////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -254,6 +299,8 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
     hideDropdownTextBoxesExecutionButtons();
 
     setCategoryButtonsNoneSelected();
+
+    setTextBoxesSeasonColor();
 
     console.log('callbackAfterUpdateAndSaveOfQrFilesXml Exit');
     
@@ -407,6 +454,17 @@ function eventClickQrFileDoneButton()
 
 } // eventClickQrFileDoneButton
 
+// User changed season color value
+function oninputSeasonColor()
+{
+    var season_color = g_season_color_def_str_text_box.getValue();
+
+    setSeasonColorInLocalStorage(season_color);
+
+    setTextBoxesSeasonColor();
+
+} // oninputSeasonColor
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -430,6 +488,23 @@ function setQrFilesTitle()
     el_title.innerHTML = QrStrings.getTitleQrCodeFiles();
 
 } // setQrFilesTitle
+
+// Set the season color text boxes
+function setTextBoxesSeasonColor()
+{
+    console.log('setTextBoxesSeasonColor Enter');
+
+    var season_color = getSeasonColorInLocalStorage();
+
+    var el_div_season_display = getElementDivSeasonDisplay();
+
+    var el_season_display = el_div_season_display.getElementsByTagName('input')[0];
+
+    el_season_display.style.backgroundColor = season_color;
+
+    g_season_color_def_str_text_box.setValue(season_color);
+
+} // setTextBoxesSeasonColor
 
 // Set controls for category (case) Supporter
 function setControlsSupporter()

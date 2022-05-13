@@ -467,7 +467,7 @@ function createTextBoxSeasonColorDef()
 
     g_season_color_def_str_text_box.setValue("rgb(25, 213, 230)");
 
-    // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
+    g_season_color_def_str_text_box.setOninputFunctionName("oninputSeasonColor");
   
 } // createTextBoxSeasonColorDef
 
@@ -487,8 +487,6 @@ function createTextBoxSeasonColorDisplay()
 	g_season_color_display_text_box.setReadOnlyFlag(true);
 
     g_season_color_display_text_box.setValue("");
-
-    // g_concert_date_text_box.setOninputFunctionName("oninputTitle");
   
 } // createTextBoxSeasonColorDisplay
 
