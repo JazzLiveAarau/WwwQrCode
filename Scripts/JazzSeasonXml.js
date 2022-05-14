@@ -1,8 +1,33 @@
 // File: JazzSeasonXml.js
 // Date:2022-05-14
-//
-// Date from copied WwwTasks file: 2021-06-17
 // Author: Gunnar Lidén
+//
+// Please note that this file is used in projects WwwTask and WwwQrCodes
+// Plese make the same changes in both files
+//
+// Example how to create an instance of the this class JazzSeasonXml.
+// Please nototice that the variables g_season_xml and i_season_xml is
+// the same XML object, i.e. two alternative ways to get the resulting
+// instance of class JazzSeasonXml.
+//
+//
+// var g_season_xml = null;
+//
+// function loadExecuteSomething()
+// {
+//      g_season_xml = new JazzSeasonXml(2021, afterLoadoadExecuteSomething);
+// }
+//
+// function afterLoadoadExecuteSomething(i_season_xml)
+// {
+//
+// }
+//
+// Without i_season_xml also works
+// function afterLoadoadExecuteSomething()
+// {
+//
+// }
 
 // File content
 // =============
@@ -92,7 +117,8 @@ class JazzSeasonXml
 
             i_object_xml.setActiveXmlObject(xml_object);
 
-            i_callback_function_name(i_object_xml);    // Different to WwwTasks
+            // Please note i_object als parameter. See above 
+            i_callback_function_name(i_object_xml); 
         }
         else if (jazz_xmlhttp.readyState == 4 && jazz_xmlhttp.status == 404) 
         {
@@ -378,8 +404,6 @@ class JazzSeasonXml
         
     } // getConcertDayName    
 
-    //////////////////////////////////Added in WwwQrCode /////////////////////////////////////////////
-
     // Returns the concert start hour for a given concert number
     getConcertStartHour(i_concert_number)
     {  
@@ -487,7 +511,6 @@ class JazzSeasonXml
         
     } // getContactRemark
 
-    // Get getConcertStartHour ..
     // TODO Continue to copy from SeasonProgramXml.js in application WwwHomepage
 
     ///////////////////////////////////////////////////////////////////////////

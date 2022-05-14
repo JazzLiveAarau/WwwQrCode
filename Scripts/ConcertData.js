@@ -47,6 +47,42 @@ function afterLoadSeasonXmlFileCreateConcertData(i_xml)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Exec Event Functions //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Execute the even click on musician button
+function execEventClickQrMusicianButton()
+{
+    var dropdown_bandname_array = getDropdownBandNameArray();
+
+} // execEventClickQrMusicianButton
+
+// Get dropdown band name array
+function getDropdownBandNameArray()
+{
+    var ret_band_names = [];
+
+    var n_concert_data = g_concert_data_array.length;
+
+    for (var index_concert=0; index_concert < n_concert_data; index_concert++)
+    {
+        var concer_data = g_concert_data_array[index_concert];
+
+        var band_name = concer_data.getBandName();
+
+        ret_band_names[index_concert] = band_name;
+    }
+
+    return ret_band_names;
+
+} // getDropdownBandNameArray
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Exec Event Functions ////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Set SupporterData Array ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -236,7 +272,128 @@ class ConcertData
     getContactRemark() { return this.m_contact_remark }
 
     getConcertMusicians() { return this.m_concert_musicians }
+    
+    // Get the date string normally is used in Switzerland
+    getSwissDateString()
+    {
+        var ret_swiss_date_str = '';
+    
+        var concert_month_name = this.getMonthName(this.m_concert_month);
+    
+        ret_swiss_date_str = ret_swiss_date_str + this.m_concert_day.toString() + '. ';
+    
+        ret_swiss_date_str = ret_swiss_date_str + concert_month_name + ' ';
+    
+        ret_swiss_date_str = ret_swiss_date_str + this.m_concert_year.toString();
+    
+        return ret_swiss_date_str;
+    
+    } // getSwissDateString
 
+    // Get the ISO standard date string
+    getIsoDateString()
+    {
+        var ret_iso_date_str = '';
+    
+        var month_formatted = this.getFormattedTenNumber(this.m_concert_month);
+    
+        var day_formatted = this.getFormattedTenNumber(this.m_concert_day);
+    
+        ret_iso_date_str = ret_iso_date_str +  this.m_concert_year.toString() + '-';
+    
+        ret_iso_date_str = ret_iso_date_str + month_formatted.toString() + '-';
+    
+        ret_iso_date_str = ret_iso_date_str + day_formatted.toString();
+    
+        return ret_iso_date_str;
+    
+    } // getIsoDateString
+
+    // Returns the name of the month for a given month number
+    getMonthName(i_concert_month)
+    {
+        var ret_month = 'Undefined';
+    
+        if (1 == i_concert_month)
+        {
+            ret_month = 'Januar';
+        }
+        else if (2 == i_concert_month)
+        {
+            ret_month = 'Februar';
+        }
+        else if (3 == i_concert_month)
+        {
+            ret_month = 'März';
+        }
+        else if (4 == i_concert_month)
+        {
+            ret_month = 'April';
+        }
+        else if (5 == i_concert_month)
+        {
+            ret_month = 'Mai';
+        }
+        else if (6 == i_concert_month)
+        {
+            ret_month = 'Juni';
+        }
+        else if (7 == i_concert_month)
+        {
+            ret_month = 'Juli';
+        }
+        else if (8 == i_concert_month)
+        {
+            ret_month = 'August';
+        }
+        else if (9 == i_concert_month)
+        {
+            ret_month = 'September';
+        }
+        else if (10 == i_concert_month)
+        {
+            ret_month = 'Oktober';
+        }
+        else if (11 == i_concert_month)
+        {
+            ret_month = 'November';
+        }
+        else if (12 == i_concert_month)
+        {
+            ret_month = 'Dezember';
+        }
+    
+        return ret_month;
+    
+    } // getMonthName
+
+    // Get formatted number, i.e. starting with '0' for numbers 1 to 9
+    getFormattedTenNumber(i_number)
+    {
+        var ret_number = '';
+    
+        if (i_number >= 100)
+        {
+            //alert('getFormattedTenNumber Input number greater than or equal 100');
+    
+            // Should not occur
+    
+            return  i_number.toString();
+        }
+     
+        if (i_number <= 9)
+        {
+            ret_number = '0' + i_number.toString();
+        }
+        else
+        {
+            ret_number = i_number.toString();
+        }
+     
+        return ret_number;
+    
+    } // getFormattedTenNumber
+    
 } // ConcertData
 
 

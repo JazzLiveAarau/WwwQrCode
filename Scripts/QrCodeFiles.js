@@ -320,6 +320,8 @@ function eventClickQrMusicianButton()
 
     setCategoryButtonMusicianSelected();
 
+    execEventClickQrMusicianButton();
+
     console.log('eventClickQrMusicianButton Exit');
     
 } // eventClickQrMusicianButton
