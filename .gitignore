@@ -365,6 +365,8 @@ FodyWeavers.xsd
 # JAZZ live AARAU supporter QR files
 /QrFiles/
 
+# Season XML test data
+/XmlTestData/
 
 # FTP configuration files
 # ftp-sync.json

@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-08
+// Date: 2022-05-14
 // Author: Gunnar Lidén
 
 // File content
@@ -504,6 +504,114 @@ function initQrCodeDataInLocalStorage(i_download_code)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Local Storage Functions /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Season Color //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Initial season color
+var g_qr_season_color_init = 'rgb(223, 224, 225)';
+
+// windows.localStorage key for the season color
+var g_local_storage_qr_season_color = 'qr_season_color';
+
+// Set the season color in the local storage
+function setSeasonColorInLocalStorage(i_season_color)
+{
+    localStorage.setItem(this.g_local_storage_qr_season_color, i_season_color);
+
+} // setSeasonColorInLocalStorage
+
+// Get the download code from the local storage
+function getSeasonColorInLocalStorage()
+{
+    var season_color = localStorage.getItem(this.g_local_storage_qr_season_color);
+
+    if (season_color == null)
+    {
+        return g_qr_season_color_init;
+    }
+    else
+    {
+        return season_color;
+    }
+
+} // getSeasonColorInLocalStorage
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Season Color ////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Active Category ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Active category Supporter, Sponsor, Musician, Free, ....
+var g_active_category = null;
+
+// Sets the active category Supporter, Sponsor, Musician, Free, ....
+function setActiveCategory(i_category_str)
+{
+    if (!checkActiveCategory(i_category_str))
+    {
+        return;
+    }
+
+    g_active_category = i_category_str;
+
+    console.log('setActiveCategory g_active_category= ' + g_active_category);
+
+} // setActiveCategory
+
+// Returns the active category Supporter, Sponsor, Musician, Free, ....
+function getActiveCategory()
+{
+    return g_active_category;
+    
+} // getActiveCategory
+
+// // Returns true if the input category is Supporter, Sponsor, Musician, Free, ....
+function checkActiveCategory(i_category_str)
+{
+    var ret_b_active = false;
+
+    if (i_category_str == QrStrings.getQrCategoryUndefinedString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategorySupporterString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategorySponsorString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategoryMusicianString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategoryMemberString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_category_str == QrStrings.getQrCategoryFreeString())
+    {
+        ret_b_active = true;
+    }
+
+    if (!ret_b_active)
+    {
+        alert("checkActiveCategory Not an implemented category= " + i_category_str);
+    }
+
+    return ret_b_active;
+
+} // checkActiveCategory
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Active Category /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
