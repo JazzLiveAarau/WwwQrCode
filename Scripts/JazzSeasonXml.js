@@ -92,7 +92,7 @@ class JazzSeasonXml
 
             i_object_xml.setActiveXmlObject(xml_object);
 
-            i_callback_function_name();    
+            i_callback_function_name(i_object_xml);    // Different to WwwTasks
         }
         else if (jazz_xmlhttp.readyState == 4 && jazz_xmlhttp.status == 404) 
         {
@@ -383,107 +383,107 @@ class JazzSeasonXml
     // Returns the concert start hour for a given concert number
     getConcertStartHour(i_concert_number)
     {  
-        return getConcertNodeValue(this.m_tags.getStartHour(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getStartHour(), i_concert_number);
         
     } // getConcertStartHour
 
     // Returns the concert start minute for a given concert number
     getConcertStartMinute(i_concert_number)
     {  
-        return getConcertNodeValue(this.m_tags.getStartMinute(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getStartMinute(), i_concert_number);
         
     } // getConcertStartMinute
 
     // Returns the concert end hour for a given concert number
     getConcertEndHour(i_concert_number)
     {  
-        return getConcertNodeValue(this.m_tags.getEndHour(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getEndHour(), i_concert_number);
         
     } // getConcertEndHour
 
     // Returns the concert end minute for a given concert number
     getConcertEndMinute(i_concert_number)
     {  
-        return getConcertNodeValue(this.m_tags.getEndMinute(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getEndMinute(), i_concert_number);
         
     } // getConcertEndMinute
 
     // Returns the concert place (premises) for a given concert number
     getConcertPlace(i_concert_number)
     {  
-        return getConcertNodeValue(this.m_tags.getPlace(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getPlace(), i_concert_number);
         
     } // getConcertPlace
     
     // Returns the musician contact person email for a given concert number
     getContactPerson(i_concert_number)
     {  
-	    if (getYearAutumnInt() < 2016) return "";
+	    if (this.getYearAutumnInt() < 2016) return "";
 
-	    return getConcertNodeValue(this.m_tags.getContactPerson(), i_concert_number);
+	    return this.getConcertNodeValue(this.m_tags.getContactPerson(), i_concert_number);
 	
     } // getContactPerson
 
     // Returns the musician contact person email for a given concert number
     getContactEmail(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactEmail(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactEmail(), i_concert_number);
         
     } // getContactEmail
 
     // Returns the musician contact person telephone for a given concert number
     getContactTelephone(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactPerson(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactTelephone(), i_concert_number);
         
     } // getContactTelephone
 
     // Returns the musician contact person street for a given concert number
     getContactStreet(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactStreet(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactStreet(), i_concert_number);
         
     } // getContactStreet
 
     // Returns the musician contact person post code for a given concert number
     getContactPostCode(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactPostCode(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactPostCode(), i_concert_number);
         
     } // getContactPostCode
 
     // Returns the musician contact person city for a given concert number
     getContactCity(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactCity(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactCity(), i_concert_number);
         
     } // getContactCity
 
     // Returns the musician contact person IBAN (bank account) number for a given concert number
     getContactIbanNumber(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactIbanNumber(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactIbanNumber(), i_concert_number);
         
     } // getContactIbanNumber
 
     // Returns the musician contact person remark for a given concert number
     getContactRemark(i_concert_number)
     {  
-        if (getYearAutumnInt() < 2016) return "";
+        if (this.getYearAutumnInt() < 2016) return "";
 
-        return getConcertNodeValue(this.m_tags.getContactRemark(), i_concert_number);
+        return this.getConcertNodeValue(this.m_tags.getContactRemark(), i_concert_number);
         
     } // getContactRemark
 
@@ -983,7 +983,7 @@ class JazzSeasonTags
     getPhotoGalleryTwoZip(){return this.m_tag_season_program_photo_gallery_two_zip;}
     getContactPerson(){return this.m_tag_season_program_contact_person;}
     getContactEmail(){return this.m_tag_season_program_contact_email;}
-    getConactTelephone(){return this.m_tag_season_program_contact_telephone;}
+    getContactTelephone(){return this.m_tag_season_program_contact_telephone;}
     getContactStreet(){return this.m_tag_season_program_contact_street;}
     getContactPostCode(){return this.m_tag_season_program_contact_post_code;}
     getContactCity(){return this.m_tag_season_program_contact_city;}

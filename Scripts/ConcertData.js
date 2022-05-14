@@ -6,11 +6,13 @@
 // =============
 //
 // Get and set concert data that is used for category Musician
-// And in the future category Ticket
+// And in the future for category Ticket
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+var g_season_xml = null;
 
 // Array with ConcertData objects.
 var g_concert_data_array = [];
@@ -24,11 +26,21 @@ var g_concert_data_array = [];
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Initialization of concert data
-function initConcertData()
+function loadSeasonXmlFileCreateConcertData(i_start_season_year)
 {
+    QrProgress.Append('Enter loadSeasonXmlFileCreateConcertData');
 
-} // initConcertData
+    g_season_xml = new JazzSeasonXml(i_start_season_year, afterLoadSeasonXmlFileCreateConcertData);
 
+} // loadSeasonXmlFileCreateConcertData
+
+function afterLoadSeasonXmlFileCreateConcertData(i_xml)
+{
+    QrProgress.Append('Enter afterLoadSeasonXmlFileCreateConcertData');
+
+    setConcertDataArrayFromXmlObject(i_xml);
+
+} // afterLoadSeasonXmlFileCreateConcertData
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Init Functions //////////////////////////////////////////////
@@ -54,7 +66,7 @@ function setConcertDataArrayFromXmlObject(i_xml)
     {
         var concert_data = new ConcertData(i_xml, season_start_year, concert_number);
 
-        g_concert_data_array[out_index] = concert_data;
+        g_concert_data_array[concert_number - 1] = concert_data;
     }
 
     QrProgress.Append('g_concert_data_array is set (' + g_concert_data_array.length.toString() + ')');
@@ -177,7 +189,7 @@ class ConcertData
 
         var n_musicians = this.m_xml.getNumberOfMusicians(this.m_concert_number);
 
-        for (musician_number = 1; musician_number <= n_musicians; musician_number++)
+        for (var musician_number = 1; musician_number <= n_musicians; musician_number++)
         {
             var musician_name = this.m_xml.getMusicianName(this.m_concert_number, musician_number);
 

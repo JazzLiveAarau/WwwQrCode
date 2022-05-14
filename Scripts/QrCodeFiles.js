@@ -194,6 +194,8 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 
     setTextBoxesSeasonColor();
 
+    loadSeasonXmlFileCreateConcertData(g_season_start_year);
+
     console.log('callbackAfterUpdateAndSaveOfQrFilesXml Exit');
     
     QrProgress.Msg("QR Codes neue Supporter hochgeladen");
