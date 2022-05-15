@@ -214,17 +214,15 @@ class QrProgress
 ///////////////////////// Start Season Start Year /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Reurns the season start year
-function getSeasonStartYear(i_callbackSeasonStartYear)
+// Returns the season start year
+function getSeasonStartYear(i_callback_season_start_year)
 {
-    // QrProgress.Append('Enter getSeasonStartYear');
-
 
     if (!execApplicationOnServer())
     {
         alert("getSeasonStartYear Season start year set to 2021");
 
-        i_callbackSeasonStartYear(2021);
+        i_callback_season_start_year(2021);
 
         return;
     }
@@ -242,7 +240,7 @@ function getSeasonStartYear(i_callbackSeasonStartYear)
 
     // QrProgress.Append(qr_file_xml_prev_year);
 
-    seasonStartYearJQueryPost(current_year.toString(), qr_file_xml_this_year, qr_file_xml_prev_year, i_callbackSeasonStartYear);
+    seasonStartYearJQueryPost(current_year.toString(), qr_file_xml_this_year, qr_file_xml_prev_year, i_callback_season_start_year);
 
 } // getSeasonStartYear
 
