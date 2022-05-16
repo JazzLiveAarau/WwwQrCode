@@ -77,17 +77,22 @@ function setSupporterDataArrayFromXmlObject(i_xml)
 
 // Update the QR files XML file (QrFiles.xml) with new supportes and upload their QR files
 // Input i_xml_object is the global variable g_qr_files_xml_object
-function updateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_season_start_year)
+function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml)
 {
     // TODO Handle the case if first and/or family name is changed
 
-    QrProgress.Append("Enter updateQrFilesXmlUploadQrFiles");
+    QrProgress.Append("Enter updateQrFilesXmlUploadQrFilesSupporter");
+
+    if (!checkUpdateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml))
+    {
+        return;
+    }
 
     var n_supporters = i_supporter_array.length;
 
     QrProgress.Append("Number of supporters is " + n_supporters.toString());
 
-    var n_qr_files = i_xml_object.getNumberOfQrFiles();
+    var n_qr_files = i_qr_file_xml.getNumberOfQrFiles();
 
     QrProgress.Append("Number of registered file is " + n_qr_files.toString());
 
@@ -105,9 +110,9 @@ function updateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_season
 
         for (var qr_file_number = 1; qr_file_number <= n_qr_files; qr_file_number++)
         {
-            var first_name_qr_file = i_xml_object.getFirstName(qr_file_number);
+            var first_name_qr_file = i_qr_file_xml.getFirstName(qr_file_number);
 
-            var family_name_qr_file = i_xml_object.getFamilyName(qr_file_number);
+            var family_name_qr_file = i_qr_file_xml.getFamilyName(qr_file_number);
 
             if (first_name_qr_file == first_name && family_name_qr_file == family_name)
             {
@@ -155,13 +160,13 @@ function updateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_season
         QrProgress.Append("Index for the second file to register is " + files_to_register[1].toString());
     }
 
-    registerAndUploadQrFilesXml(files_to_register, i_supporter_array, i_xml_object);
+    registerAndUploadQrFilesXml(files_to_register, i_supporter_array, i_qr_file_xml);
 
-    QrProgress.Append("Exit updateQrFilesXmlUploadQrFiles");
+    QrProgress.Append("Exit updateQrFilesXmlUploadQrFilesSupporter");
 
     QrProgress.Msg("QR Codes neue Supporter hochgeladen");
 
-} // updateQrFilesXmlUploadQrFiles
+} // updateQrFilesXmlUploadQrFilesSupporter
 
 // Register files in XML file QrFiles.xml and upload QR files
 function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_xml_object)
@@ -412,20 +417,20 @@ function checkInputUploadQrFileImageAndText(i_file_number, i_xml_object)
 } // checkInputUploadQrFileImageAndText
 
 // Check the input paramaters to updateQrFilesXmlUploadQrFiles
-function checkupdateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_season_start_year)
+function checkUpdateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_xml_object)
 {
     var ret_bool = true;
 
     if (null == i_xml_object)
     {
-        alert("CheckupdateQrFilesXmlUploadQrFiles i_xml_object is null");
+        alert("checkUpdateQrFilesXmlUploadQrFilesSupporter i_xml_object is null");
 
         ret_bool = false;
     }
 
     if (i_supporter_array == null)
     {
-        alert("CheckupdateQrFilesXmlUploadQrFiles i_supporter_array is null");
+        alert("checkUpdateQrFilesXmlUploadQrFilesSupporter i_supporter_array is null");
 
         ret_bool = false;        
     }
@@ -433,27 +438,20 @@ function checkupdateQrFilesXmlUploadQrFiles(i_supporter_array, i_xml_object, i_s
     {
         if (i_supporter_array.length == 0)
         {
-            alert("CheckupdateQrFilesXmlUploadQrFiles i_supporter_array has zero length");
+            alert("checkUpdateQrFilesXmlUploadQrFilesSupporter i_supporter_array has zero length");
 
             ret_bool = false;           
         }
     }
 
-    if (i_season_start_year < 2020)
-    {
-        alert("CheckupdateQrFilesXmlUploadQrFiles Unvalid i_season_start_year= " + i_season_start_year.length);
-
-        ret_bool = false;           
-    }
-
     if (!ret_bool)
     {
-        QrProgress.Append("Input data to updateQrFilesXmlUploadQrFilesis not OK");       
+        QrProgress.Append("Input data to checkUpdateQrFilesXmlUploadQrFilesSupporter not OK");       
     }
 
     return ret_bool;
 
-} // checkupdateQrFilesXmlUploadQrFiles
+} // checkUpdateQrFilesXmlUploadQrFilesSupporter
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////

@@ -111,7 +111,7 @@ function setConcertDataArrayFromXmlObject(i_xml)
 
     return g_concert_data_array;
     
-} // setSupporterDataArrayFromXmlObject
+} // setConcertDataArrayFromXmlObject
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////

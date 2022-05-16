@@ -173,7 +173,7 @@ function afterLoadOfSupporterXmlFile(i_supporter_xml)
 
     var supporter_data_array = setSupporterDataArrayFromXmlObject(i_supporter_xml);
 
-    updateQrFilesXmlUploadQrFiles(supporter_data_array, g_qr_files_xml_object);
+    updateQrFilesXmlUploadQrFilesSupporter(supporter_data_array, g_qr_files_xml_object);
 
 } // afterLoadOfSupporterXmlFile
 
