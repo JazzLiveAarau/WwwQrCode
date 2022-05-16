@@ -94,7 +94,7 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
 
     var n_qr_files = i_qr_file_xml.getNumberOfQrFiles();
 
-    QrProgress.Append("Number of registered file is " + n_qr_files.toString());
+    QrProgress.Append("Number of registered files is " + n_qr_files.toString());
 
     var registered_files = [];
 
@@ -127,6 +127,9 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
 
     QrProgress.Append("Number of already registered files is " + registered_files.length.toString());
 
+    var files_to_register = getIndicesForNotRegisteredFiles(n_supporters, registered_files);
+
+    /*QQQQQQ
     var files_to_register = [];
 
     var index_to_register = 0;
@@ -152,6 +155,48 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
             index_to_register = index_to_register + 1;
         }
     }
+    QQQ*/
+
+    registerAndUploadQrFilesXmlSupporter(files_to_register, i_supporter_array, i_qr_file_xml);
+
+    QrProgress.Append("Exit updateQrFilesXmlUploadQrFilesSupporter");
+
+    // QrProgress.Msg("QR Codes neue Supporter hochgeladen");
+
+} // updateQrFilesXmlUploadQrFilesSupporter
+
+// Returns an array of indices defining objects that shall be registered
+function getIndicesForNotRegisteredFiles(i_n_array, i_registered_files)
+{
+    QrProgress.Append("Enter getIndicesForNotRegisteredFiles");
+
+    var files_to_register = [];
+
+    var index_to_register = 0;
+
+    for (var index_array = 0; index_array < i_n_array; index_array++)
+    {
+        var b_not_equal_to_any_reg = true;
+
+        for (var index_already_reg = 0; index_already_reg < i_registered_files.length; index_already_reg++)
+        {
+            var index_supporter_already_reg = i_registered_files[index_already_reg];
+
+            if (index_supporter_already_reg == index_array)
+            {
+                b_not_equal_to_any_reg = false;
+            }
+
+        } // index_already_reg
+
+        if (b_not_equal_to_any_reg)
+        {
+            files_to_register[index_to_register] = index_array;
+
+            index_to_register = index_to_register + 1;
+        }
+
+    } // index_array
 
     if (files_to_register.length >= 2)
     {
@@ -160,13 +205,13 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
         QrProgress.Append("Index for the second file to register is " + files_to_register[1].toString());
     }
 
-    registerAndUploadQrFilesXmlSupporter(files_to_register, i_supporter_array, i_qr_file_xml);
+    QrProgress.Append("Number of items to register is " + files_to_register.length.toString());
 
-    QrProgress.Append("Exit updateQrFilesXmlUploadQrFilesSupporter");
+    QrProgress.Append("Exit getIndicesForNotRegisteredFiles");
 
-    QrProgress.Msg("QR Codes neue Supporter hochgeladen");
+    return files_to_register;
 
-} // updateQrFilesXmlUploadQrFilesSupporter
+} // getIndicesForNotRegisteredFiles
 
 // Register files in XML file QrFiles.xml and upload QR files
 function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_array, i_qr_file_xml)
@@ -301,15 +346,15 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
 
     i_qr_file_xml.setPrintBatch(file_number, QrStrings.getBoolFalseString());
 
-    uploadQrFileImageAndText(file_number, i_qr_file_xml);
+    uploadQrFileImageAndTextSupporter(file_number, i_qr_file_xml);
 
 } // setDataOfAppendedQrFilesNodeAndUploadSupporter
 
 // Upload the QR image and text file for the input file number
-function uploadQrFileImageAndText(i_file_number, i_qr_file_xml)
+function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 {
 
-    if (!checkInputUploadQrFileImageAndText(i_file_number, i_qr_file_xml))
+    if (!checkInputuploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml))
     {
         return;
     }
@@ -333,7 +378,7 @@ function uploadQrFileImageAndText(i_file_number, i_qr_file_xml)
 
     if (!b_execute_server)
     {
-        console.log("uploadQrFileImageAndText QR code file not saved. Execution with VSC (Live Server)");
+        console.log("uploadQrFileImageAndTextSupporter QR code file not saved. Execution with VSC (Live Server)");
         console.log("File number is " + i_file_number.toString());
         console.log("QR text image: " + qr_text_image);
         console.log("QR text text text:  " + qr_text_text);
@@ -345,21 +390,21 @@ function uploadQrFileImageAndText(i_file_number, i_qr_file_xml)
 
     if (!saveFileWithJQueryPostFunction(file_name_path_image, image_data_url))
     {
-        alert("uploadQrFileImageAndText Saving QR file image failed");
+        alert("uploadQrFileImageAndTextSupporter Saving QR file image failed");
 
         return;
     }
 
-    console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path_image);
+    console.log("uploadQrFileImageAndTextSupporter Uploaded image file: " + file_name_path_image);
 
     if (!saveFileWithJQueryPostFunction(file_name_path_text, qr_text_text))
     {
-        alert("uploadQrFileImageAndText Saving QR file text failed");
+        alert("uploadQrFileImageAndTextSupporter Saving QR file text failed");
 
         return;
     }
 
-    console.log("uploadQrFileImageAndText Uploaded text file: " + file_name_path_text);
+    console.log("uploadQrFileImageAndTextSupporter Uploaded text file: " + file_name_path_text);
 
     var download_code_two = i_qr_file_xml.getDownloadTwo(i_file_number);
 
@@ -371,28 +416,28 @@ function uploadQrFileImageAndText(i_file_number, i_qr_file_xml)
 
         if (!saveFileWithJQueryPostFunction(file_name_path_image, image_data_url))
         {
-            alert("uploadQrFileImageAndText Saving QR file image failed (2)");
+            alert("uploadQrFileImageAndTextSupporter Saving QR file image failed (2)");
     
             return;
         }
 
-        console.log("uploadQrFileImageAndText Uploaded image file: " + file_name_path_image + " Second file");
+        console.log("uploadQrFileImageAndTextSupporter Uploaded image file: " + file_name_path_image + " Second file");
 
         if (!saveFileWithJQueryPostFunction(file_name_path_text, qr_text_text))
         {
-            alert("uploadQrFileImageAndText Saving QR file text failed (2)");
+            alert("uploadQrFileImageAndTextSupporter Saving QR file text failed (2)");
     
             return;
         }
 
-        console.log("uploadQrFileImageAndText Uploaded text file: " + file_name_path_text + " Second file");
+        console.log("uploadQrFileImageAndTextSupporter Uploaded text file: " + file_name_path_text + " Second file");
     }
 
 
-} // uploadQrFileImageAndText
+} // uploadQrFileImageAndTextSupporter
 
 // Check input data
-function checkInputUploadQrFileImageAndText(i_file_number, i_qr_file_xml)
+function checkInputuploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 {
     var ret_bool = true; 
 
@@ -414,9 +459,9 @@ function checkInputUploadQrFileImageAndText(i_file_number, i_qr_file_xml)
 
     return ret_bool;
 
-} // checkInputUploadQrFileImageAndText
+} // checkInputuploadQrFileImageAndTextSupporter
 
-// Check the input paramaters to updateQrFilesXmlUploadQrFiles
+// Check the input paramaters to updateQrFilesXmlUploadQrFilesSupporter
 function checkUpdateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml)
 {
     var ret_bool = true;

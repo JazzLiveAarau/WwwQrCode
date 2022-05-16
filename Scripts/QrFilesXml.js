@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-13
+// Date: 2022-05-16
 // Author: Gunnar Lidén
 
 // File content
@@ -178,6 +178,20 @@ class QrFilesXml
         return this.getNodeValue(this.m_tags.getMusicianAdmission(), i_qr_file_number);
         
     } // getMusicianAdmission
+
+    // Returns the musician admission flag for a given  QR File number (true or false)
+    getMusicianAdmissionBool(i_qr_file_number)
+    {
+        if (this.getMusicianAdmission(i_qr_file_number) == 'WAHR')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    } // getMusicianAdmissionBool
 
     // Returns the free admission flag for a given  QR File number
     getFreeAdmission(i_qr_file_number)
@@ -879,10 +893,11 @@ class QrFilesXml
 
     } // getQrSeasonString
 
-    getQrConcertString()
+    getQrConcertString(i_qr_file_number)
     {
-        // Concert date needs to be stored also
-        return 'YYYYY-MM-DD TODO';
+        var swiss_date = this.getSwissDateString(i_qr_file_number);
+
+        return 'Konzert ' + swiss_date;
 
     } // getQrConcertString
 
@@ -939,6 +954,29 @@ class QrFilesXml
 
     } // getQrCategoryString
 
+    getQrMusicianString(i_qr_file_number)
+    {
+        var ret_str = '';
+
+        ret_str = ret_str  + this.getQrCategoryString(i_qr_file_number) + '_'; 
+
+        var musician_guest = this.getQrCodeNameOne(i_qr_file_number);
+
+        if (musician_guest.length == 0)
+        {
+            musician_guest = 'Eingeladene Person';
+        }
+
+        ret_str = ret_str  + musician_guest + '_'; 
+
+        ret_str = ret_str  + this.getQrCodeNameTwo(i_qr_file_number) + '_'; 
+
+        ret_str = ret_str  + this.getQrConcertString(i_qr_file_number);
+
+        return ret_str;
+
+    } // getQrMusicianString
+
     getQrCombinedSeasonImageString(i_qr_file_number)
     {
         return this.getQrCategoryString(i_qr_file_number) + ' ' + 
@@ -963,6 +1001,138 @@ class QrFilesXml
 
     } // getQrSupporterCombinedString
 
+    // Get the date string normally is used in Switzerland
+    getSwissDateString(i_qr_file_number)
+    {
+        var ret_swiss_date_str = '';
+
+        var concert_year = this.getConcertYear(i_qr_file_number);
+
+        var concert_month = this.getConcertMonth(i_qr_file_number);
+
+        var concert_day = this.getConcertDay(i_qr_file_number);
+    
+        var concert_month_name = this.getMonthName(concert_month);
+    
+        ret_swiss_date_str = ret_swiss_date_str + concert_day.toString() + '. ';
+    
+        ret_swiss_date_str = ret_swiss_date_str + concert_month_name + ' ';
+    
+        ret_swiss_date_str = ret_swiss_date_str + concert_year.toString();
+    
+        return ret_swiss_date_str;
+    
+    } // getSwissDateString
+
+    // Get the ISO standard date string
+    getIsoDateString(i_qr_file_number)
+    {
+        var ret_iso_date_str = '';
+
+        var concert_year = this.getConcertYear(i_qr_file_number);
+
+        var concert_month = this.getConcertMonth(i_qr_file_number);
+
+        var concert_day = this.getConcertDay(i_qr_file_number);
+    
+        var month_formatted = this.getFormattedTenNumber(concert_month);
+    
+        var day_formatted = this.getFormattedTenNumber(concert_day);
+    
+        ret_iso_date_str = ret_iso_date_str +  concert_year.toString() + '-';
+    
+        ret_iso_date_str = ret_iso_date_str + month_formatted.toString() + '-';
+    
+        ret_iso_date_str = ret_iso_date_str + day_formatted.toString();
+    
+        return ret_iso_date_str;
+    
+    } // getIsoDateString
+
+    // Returns the name of the month for a given month number
+    getMonthName(i_concert_month)
+    {
+        var ret_month = 'Undefined';
+    
+        if (1 == i_concert_month)
+        {
+            ret_month = 'Januar';
+        }
+        else if (2 == i_concert_month)
+        {
+            ret_month = 'Februar';
+        }
+        else if (3 == i_concert_month)
+        {
+            ret_month = 'März';
+        }
+        else if (4 == i_concert_month)
+        {
+            ret_month = 'April';
+        }
+        else if (5 == i_concert_month)
+        {
+            ret_month = 'Mai';
+        }
+        else if (6 == i_concert_month)
+        {
+            ret_month = 'Juni';
+        }
+        else if (7 == i_concert_month)
+        {
+            ret_month = 'Juli';
+        }
+        else if (8 == i_concert_month)
+        {
+            ret_month = 'August';
+        }
+        else if (9 == i_concert_month)
+        {
+            ret_month = 'September';
+        }
+        else if (10 == i_concert_month)
+        {
+            ret_month = 'Oktober';
+        }
+        else if (11 == i_concert_month)
+        {
+            ret_month = 'November';
+        }
+        else if (12 == i_concert_month)
+        {
+            ret_month = 'Dezember';
+        }
+    
+        return ret_month;
+    
+    } // getMonthName
+
+    // Get formatted number, i.e. starting with '0' for numbers 1 to 9
+    getFormattedTenNumber(i_number)
+    {
+        var ret_number = '';
+    
+        if (i_number >= 100)
+        {
+            //alert('getFormattedTenNumber Input number greater than or equal 100');
+    
+            // Should not occur
+    
+            return  i_number.toString();
+        }
+     
+        if (i_number <= 9)
+        {
+            ret_number = '0' + i_number.toString();
+        }
+        else
+        {
+            ret_number = i_number.toString();
+        }
+     
+        return ret_number;
+    
+    } // getFormattedTenNumber
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Qr String Functions  ////////////////////////

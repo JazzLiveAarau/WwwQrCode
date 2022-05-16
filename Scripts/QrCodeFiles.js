@@ -198,7 +198,7 @@ function callbackAfterUpdateAndSaveOfQrFilesXml()
 
     console.log('callbackAfterUpdateAndSaveOfQrFilesXml Exit');
     
-    QrProgress.Msg("QR Codes neue Supporter hochgeladen");
+    // QrProgress.Msg("QR Codes neue Supporter hochgeladen");
 
 } // callbackAfterUpdateAndSaveOfQrFilesXml
 

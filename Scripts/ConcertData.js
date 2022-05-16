@@ -34,11 +34,13 @@ function loadSeasonXmlFileCreateConcertData(i_start_season_year)
 
 } // loadSeasonXmlFileCreateConcertData
 
-function afterLoadSeasonXmlFileCreateConcertData(i_xml)
+function afterLoadSeasonXmlFileCreateConcertData(i_season_xml)
 {
     QrProgress.Append('Enter afterLoadSeasonXmlFileCreateConcertData');
 
-    setConcertDataArrayFromXmlObject(i_xml);
+    var concert_array = setConcertDataArrayFromXmlObject(i_season_xml);
+
+    updateQrFilesXmlUploadQrFilesConcert(concert_array, i_season_xml, g_qr_files_xml_object);
 
 } // afterLoadSeasonXmlFileCreateConcertData
 
@@ -113,9 +115,363 @@ function setConcertDataArrayFromXmlObject(i_xml)
     
 } // setConcertDataArrayFromXmlObject
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set SupporterData Array /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Update Qr Files Xml Upload New Musician Guests ////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Update the QR files XML file (QrFiles.xml) with new musician guests and upload their QR files
+// Input i_qr_file_xml is the global variable g_qr_files_xml_object
+function updateQrFilesXmlUploadQrFilesConcert(i_concert_array, i_season_xml, i_qr_file_xml)
+{
+    QrProgress.Append("Enter updateQrFilesXmlUploadQrFilesConcert");
+
+    if (!checkUpdateQrFilesXmlUploadQrFilesConcert(i_concert_array, i_qr_file_xml))
+    {
+        return;
+    }
+
+    var n_concerts = i_concert_array.length;
+
+    QrProgress.Append("Number of concerts is " + n_concerts.toString());
+
+    var n_qr_files = i_qr_file_xml.getNumberOfQrFiles();
+
+    QrProgress.Append("Number of registered files is " + n_qr_files.toString());
+
+    var musician_array = [];
+
+    var index_musician_array = 0;
+
+    var registered_files = [];
+
+    var index_registered = 0;
+
+    for (var index_concert=0; index_concert < n_concerts; index_concert++)
+    {
+        var supporter_data = i_concert_array[index_concert];
+
+        var musician_names = supporter_data.getConcertMusicians();
+
+        var n_musicians = musician_names.length;
+
+        for (var index_musician=0; index_musician < n_musicians; index_musician++)
+        {
+            var concert_musician_data = new ConcertMusicianData(index_concert, index_musician);
+
+            musician_array[index_musician_array] = concert_musician_data;
+
+            var musician_name = musician_names[index_musician];
+
+            if (musicianIsRegisteredInQrFilesXml(musician_name, i_qr_file_xml))
+            {
+                registered_files[index_registered] = index_musician_array;
+
+                index_registered = index_registered + 1;    
+            }
+
+            index_musician_array = index_musician_array + 1;
+        }
+
+    } // index_concert
+
+    QrProgress.Append("Number of already registered files is " + registered_files.length.toString());
+
+    var n_musician_array = musician_array.length;
+
+    QrProgress.Append("Total number of musicians is " + n_musician_array.toString());
+
+    var files_to_register = getIndicesForNotRegisteredFiles(n_musician_array, registered_files);
+
+    var register_cm_data_array = [];
+
+    for (var index_reg = 0; index_reg < files_to_register.length; index_reg++)
+    {
+        var index_cm_array = files_to_register[index_reg];
+
+        var cm_data = musician_array[index_cm_array];
+
+        register_cm_data_array[index_reg] = cm_data;
+    }
+
+    QrProgress.Append("Number of ConcertMusicianData for registration is " + register_cm_data_array.length.toString());
+
+    registerAndUploadQrFilesXmlMusician(register_cm_data_array, i_concert_array, i_season_xml, i_qr_file_xml);
+
+} // updateQrFilesXmlUploadQrFilesConcert
+
+// Register files in XML file QrFiles.xml and upload QR files
+function registerAndUploadQrFilesXmlMusician(i_register_cm_data_array, i_concert_array, i_season_xml, i_qr_file_xml)
+{
+    QrProgress.Append("Enter registerAndUploadQrFilesXmlConcert");
+
+    var n_to_reg = i_register_cm_data_array.length;
+
+    if (n_to_reg == 0)
+    {
+        QrProgress.Append("registerAndUploadQrFilesXmlMusician No files to register");  
+        
+        return;
+    }
+
+    n_to_reg = 4; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+
+    for (var index_to_reg=0; index_to_reg < n_to_reg; index_to_reg++)
+    {
+        var concert_musician_data = i_register_cm_data_array[index_to_reg];
+
+        var index_concert_to_reg = concert_musician_data.getIndexConcert();
+
+        var concert_data = i_concert_array[index_concert_to_reg];
+
+        var index_musician_to_reg = concert_musician_data.getIndexMusician();
+
+        var musician_name = concert_data.getConcertMusician(index_musician_to_reg);
+
+        i_qr_file_xml.appendNode();
+
+        setDataOfAppendedQrFilesNodeAndUploadMusician(musician_name, concert_data, i_qr_file_xml)
+
+    } // index_to_reg
+
+    i_qr_file_xml.saveXmlFileOnServerCallback(tempForTest);
+
+    debugDisplayXmlAsText();
+
+    QrProgress.Append("Number of registered and uploaded QR files is " + n_to_reg.toString());
+
+
+    QrProgress.Append("Exit registerAndUploadQrFilesXmlMusician");
+
+} // registerAndUploadQrFilesXmlMusician
+
+function tempForTest()
+{
+    QrProgress.Append("Enter tempForTest");
+}
+
+// Set data of appended QR files node
+function setDataOfAppendedQrFilesNodeAndUploadMusician(i_musician_name, i_concert_data, i_qr_file_xml)
+{
+    console.log("Enter setDataOfAppendedQrFilesNodeAndUploadMusician");
+
+	var append_number_files = i_qr_file_xml.getNumberOfQrFiles();
+	
+	console.log("append_number_files= " + append_number_files.toString());
+	
+	var file_number = append_number_files;
+	
+	console.log("file_number= " + file_number.toString());
+
+    var download_code_one = i_qr_file_xml.getRandomDownloadCode();
+
+    var download_code_two = "";
+
+    var concert_year = i_concert_data.getConcertYear();
+
+    var concert_month = i_concert_data.getConcertMonth();
+
+    var concert_day = i_concert_data.getConcertDay();
+
+    var contact_person = i_concert_data.getContactPerson();
+
+    var contact_email = i_concert_data.getContactEmail();
+
+    var contact_street = i_concert_data.getContactStreet();
+
+    var contact_post_code = i_concert_data.getContactPostCode();
+
+    var contact_city = i_concert_data.getContactCity();
+
+
+    i_qr_file_xml.setFirstName(file_number, contact_person);
+
+    i_qr_file_xml.setEmail(file_number, contact_email);
+
+    i_qr_file_xml.setStreet(file_number, contact_street);
+
+    i_qr_file_xml.setPostalCode(file_number, contact_post_code);
+
+    i_qr_file_xml.setDomicil(file_number, contact_city);
+
+    i_qr_file_xml.setQrCodeNameTwo(file_number, i_musician_name);
+
+    i_qr_file_xml.setConcertYear(file_number, concert_year);
+
+    i_qr_file_xml.setConcertMonth(file_number, concert_month);
+
+    i_qr_file_xml.setConcertDay(file_number, concert_day);
+
+	i_qr_file_xml.setSupporter(file_number, QrStrings.getBoolFalseString());
+  
+    i_qr_file_xml.setSponsor(file_number, QrStrings.getBoolFalseString());
+
+	i_qr_file_xml.setSupporterAdmission(file_number, QrStrings.getBoolFalseString());
+
+	i_qr_file_xml.setMusicianAdmission(file_number, QrStrings.getBoolTrueString());
+
+	i_qr_file_xml.setFreeAdmission(file_number, QrStrings.getBoolFalseString());
+
+	i_qr_file_xml.setSponsorAdmission(file_number, QrStrings.getBoolFalseString());
+
+	i_qr_file_xml.setMemberAdmission(file_number, QrStrings.getBoolFalseString());
+
+	i_qr_file_xml.setDownloadOne(file_number, download_code_one);
+
+	i_qr_file_xml.setDownloadTwo(file_number, download_code_two);
+
+	i_qr_file_xml.setEmailSent(file_number, QrStrings.getBoolFalseString());
+
+	i_qr_file_xml.setMailSent(file_number, QrStrings.getBoolFalseString());
+
+    i_qr_file_xml.setPrintSent(file_number, QrStrings.getBoolFalseString());
+
+    i_qr_file_xml.setPrintBatch(file_number, QrStrings.getBoolFalseString());
+
+    uploadQrFileImageAndTextMusician(file_number, i_qr_file_xml);
+
+} // setDataOfAppendedQrFilesNodeAndUploadMusician
+
+// Upload the QR image and text file for the input file number
+function uploadQrFileImageAndTextMusician(i_file_number, i_qr_file_xml)
+{
+
+    var download_code_one = i_qr_file_xml.getDownloadOne(i_file_number);
+
+    var qr_text_image = i_qr_file_xml.getQrMusicianString(i_file_number);
+
+    var qr_text_text = i_qr_file_xml.getQrMusicianString(i_file_number);
+
+    var image_data_url = generateQrCodeOnePersonDataUrl(qr_text_image);
+
+
+    var season_start_year = i_qr_file_xml.getSeasonStartYear();
+
+    var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_one);
+
+    var file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_one)
+
+    var b_execute_server = execApplicationOnServer();
+
+    if (!b_execute_server)
+    {
+        console.log("uploadQrFileImageAndTextMusician QR code file not saved. Execution with VSC (Live Server)");
+        console.log("File number is " + i_file_number.toString());
+        console.log("QR text image: " + qr_text_image);
+        console.log("QR text text text:  " + qr_text_text);
+        console.log("File name image: " + file_name_path_image);
+        console.log("File name text:  " + file_name_path_text);
+
+        return;
+    }
+
+    if (!saveFileWithJQueryPostFunction(file_name_path_image, image_data_url))
+    {
+        alert("uploadQrFileImageAndTextMusician Saving QR file image failed");
+
+        return;
+    }
+
+    console.log("uploadQrFileImageAndTextMusician Uploaded image file: " + file_name_path_image);
+
+    if (!saveFileWithJQueryPostFunction(file_name_path_text, qr_text_text))
+    {
+        alert("uploadQrFileImageAndTextMusician Saving QR file text failed");
+
+        return;
+    }
+
+    console.log("uploadQrFileImageAndTextMusician Uploaded text file: " + file_name_path_text);
+
+} // uploadQrFileImageAndTextMusician
+
+// Help class 
+class ConcertMusicianData
+{
+    constructor(i_index_concert, i_index_musician)
+    {
+        this.m_index_concert = i_index_concert;
+
+        this.m_index_musician = i_index_musician;
+
+    } // constructor
+
+    getIndexConcert()
+    {
+        return this.m_index_concert;
+    }
+
+    getIndexMusician()
+    {
+        return this.m_index_musician;
+    }
+
+} // ConcertMusicianData
+
+// Returns true if musician is registered in QR files XML (QrFiles.xml)
+function musicianIsRegisteredInQrFilesXml(i_musician_name, i_qr_file_xml)
+{
+    var n_qr_files = i_qr_file_xml.getNumberOfQrFiles();
+
+    for (var qr_file_number = 1; qr_file_number <= n_qr_files; qr_file_number++)
+    {
+        var qr_code_name_two = i_qr_file_xml.getQrCodeNameTwo(qr_file_number);
+
+        var b_musician_admission = i_qr_file_xml.getMusicianAdmissionBool(qr_file_number);
+
+        if ( qr_code_name_two == i_musician_name && b_musician_admission)
+        {
+            return true;
+        }
+
+    } // qr_file_number
+
+    return false;
+
+} // musicianIsRegisteredInQrFilesXml
+
+// Check the input paramaters to checkUpdateQrFilesXmlUploadQrFilesConcert
+function checkUpdateQrFilesXmlUploadQrFilesConcert(i_concert_array, i_qr_file_xml)
+{
+    var ret_bool = true;
+
+    if (null == i_qr_file_xml)
+    {
+        alert("checkUpdateQrFilesXmlUploadQrFilesConcert i_qr_file_xml is null");
+
+        ret_bool = false;
+    }
+
+    if (i_concert_array == null)
+    {
+        alert("checkUpdateQrFilesXmlUploadQrFilesConcert i_concert_array is null");
+
+        ret_bool = false;        
+    }
+    else
+    {
+        if (i_concert_array.length == 0)
+        {
+            alert("checkUpdateQrFilesXmlUploadQrFilesConcert i_concert_array has zero length");
+
+            ret_bool = false;           
+        }
+    }
+
+    if (!ret_bool)
+    {
+        QrProgress.Append("Input data to checkUpdateQrFilesXmlUploadQrFilesConcert not OK");       
+    }
+
+    return ret_bool;
+
+} // checkUpdateQrFilesXmlUploadQrFilesConcert
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Update Qr Files Xml Upload New Musician Guests //////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -272,6 +628,8 @@ class ConcertData
     getContactRemark() { return this.m_contact_remark }
 
     getConcertMusicians() { return this.m_concert_musicians }
+
+    getConcertMusician(i_index_musician) { return this.m_concert_musicians[i_index_musician] }
     
     // Get the date string normally is used in Switzerland
     getSwissDateString()
