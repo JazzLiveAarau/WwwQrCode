@@ -76,7 +76,7 @@ function setSupporterDataArrayFromXmlObject(i_xml)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Update the QR files XML file (QrFiles.xml) with new supportes and upload their QR files
-// Input i_xml_object is the global variable g_qr_files_xml_object
+// Input i_qr_file_xml is the global variable g_qr_files_xml_object
 function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml)
 {
     // TODO Handle the case if first and/or family name is changed
@@ -160,7 +160,7 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
         QrProgress.Append("Index for the second file to register is " + files_to_register[1].toString());
     }
 
-    registerAndUploadQrFilesXml(files_to_register, i_supporter_array, i_qr_file_xml);
+    registerAndUploadQrFilesXmlSupporter(files_to_register, i_supporter_array, i_qr_file_xml);
 
     QrProgress.Append("Exit updateQrFilesXmlUploadQrFilesSupporter");
 
@@ -169,15 +169,15 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
 } // updateQrFilesXmlUploadQrFilesSupporter
 
 // Register files in XML file QrFiles.xml and upload QR files
-function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_xml_object)
+function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_array, i_qr_file_xml)
 {
-    QrProgress.Append("Enter registerAndUploadQrFilesXml");
+    QrProgress.Append("Enter registerAndUploadQrFilesXmlSupporter");
 
     var n_to_reg = i_files_to_register.length;
 
     if (n_to_reg == 0)
     {
-        QrProgress.Append("registerAndUploadQrFilesXml No files to register");  
+        QrProgress.Append("registerAndUploadQrFilesXmlSupporter No files to register");  
         
         return;
     }
@@ -194,30 +194,30 @@ function registerAndUploadQrFilesXml(i_files_to_register, i_supporter_array, i_x
 
         var supporter_data = i_supporter_array[index_supporter_data];
 
-        i_xml_object.appendNode();
+        i_qr_file_xml.appendNode();
 
-        setDataOfAppendedQrFilesNodeAndUpload(supporter_data, i_xml_object);
+        setDataOfAppendedQrFilesNodeAndUploadSupporter(supporter_data, i_qr_file_xml);
     }
 
-    i_xml_object.saveXmlFileOnServerCallback(callbackAfterUpdateAndSaveOfQrFilesXml);
+    i_qr_file_xml.saveXmlFileOnServerCallback(callbackAfterUpdateAndSaveOfQrFilesXml);
 
     debugDisplayXmlAsText();
 
     QrProgress.Append("Number of registered and uploaded QR files is " + n_to_reg.toString());
 
 
-    QrProgress.Append("Exit registerAndUploadQrFilesXml");
+    QrProgress.Append("Exit registerAndUploadQrFilesXmlSupporter");
 
 } // registerAndUploadQrFiles
 
 // Set data of appended QR files node
-function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
+function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_file_xml)
 {
-    console.log("Enter setDataOfAppendedQrFilesNodeAndUpload");
+    console.log("Enter setDataOfAppendedQrFilesNodeAndUploadSupporter");
 
     //QQ var qr_strings = new QrStrings();
 
-	var append_number_files = i_xml_object.getNumberOfQrFiles();
+	var append_number_files = i_qr_file_xml.getNumberOfQrFiles();
 	
 	console.log("append_number_files= " + append_number_files.toString());
 	
@@ -245,85 +245,85 @@ function setDataOfAppendedQrFilesNodeAndUpload(i_supporter_data, i_xml_object)
 
     var supporter_contribution = supporter_contribution_int.toString();
 
-    var download_code_one = i_xml_object.getRandomDownloadCode();
+    var download_code_one = i_qr_file_xml.getRandomDownloadCode();
 
     var download_code_two = "";
 
     if (supporter_contribution_int > 2 * QrStrings.getSupporterContributionLimitValue())
     {
-        download_code_two = i_xml_object.getRandomDownloadCode();
+        download_code_two = i_qr_file_xml.getRandomDownloadCode();
     }
 
     // TODO Check that it not already exists
 
 	
-    i_xml_object.setFirstName(file_number, first_name);
+    i_qr_file_xml.setFirstName(file_number, first_name);
 
-    i_xml_object.setFamilyName(file_number, family_name);
+    i_qr_file_xml.setFamilyName(file_number, family_name);
 
-    i_xml_object.setStreet(file_number, street);
+    i_qr_file_xml.setStreet(file_number, street);
 
-    i_xml_object.setHouseNumber(file_number, house_number);
+    i_qr_file_xml.setHouseNumber(file_number, house_number);
 
-    i_xml_object.setPostalCode(file_number, postal_code);
+    i_qr_file_xml.setPostalCode(file_number, postal_code);
 
-    i_xml_object.setDomicil(file_number, domicil);
+    i_qr_file_xml.setDomicil(file_number, domicil);
 
-    i_xml_object.setEmail(file_number, email);
+    i_qr_file_xml.setEmail(file_number, email);
 
-    i_xml_object.setSponsor(file_number, QrStrings.getBoolFalseString());
+    i_qr_file_xml.setSponsor(file_number, QrStrings.getBoolFalseString());
 
-    i_xml_object.setComment(file_number, comment);
+    i_qr_file_xml.setComment(file_number, comment);
 
-	i_xml_object.setSupporterContribution(file_number, supporter_contribution);
+	i_qr_file_xml.setSupporterContribution(file_number, supporter_contribution);
 
-	i_xml_object.setSupporter(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setSupporter(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setSupporterAdmission(file_number, QrStrings.getBoolTrueString());
+	i_qr_file_xml.setSupporterAdmission(file_number, QrStrings.getBoolTrueString());
 
-	i_xml_object.setMusicianAdmission(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setMusicianAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setFreeAdmission(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setFreeAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setSponsorAdmission(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setSponsorAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setMemberAdmission(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setMemberAdmission(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setDownloadOne(file_number, download_code_one);
+	i_qr_file_xml.setDownloadOne(file_number, download_code_one);
 
-	i_xml_object.setDownloadTwo(file_number, download_code_two);
+	i_qr_file_xml.setDownloadTwo(file_number, download_code_two);
 
-	i_xml_object.setEmailSent(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setEmailSent(file_number, QrStrings.getBoolFalseString());
 
-	i_xml_object.setMailSent(file_number, QrStrings.getBoolFalseString());
+	i_qr_file_xml.setMailSent(file_number, QrStrings.getBoolFalseString());
 
-    i_xml_object.setPrintSent(file_number, QrStrings.getBoolFalseString());
+    i_qr_file_xml.setPrintSent(file_number, QrStrings.getBoolFalseString());
 
-    i_xml_object.setPrintBatch(file_number, QrStrings.getBoolFalseString());
+    i_qr_file_xml.setPrintBatch(file_number, QrStrings.getBoolFalseString());
 
-    uploadQrFileImageAndText(file_number, i_xml_object);
+    uploadQrFileImageAndText(file_number, i_qr_file_xml);
 
-} // setDataOfAppendedQrFilesNodeAndUpload
+} // setDataOfAppendedQrFilesNodeAndUploadSupporter
 
 // Upload the QR image and text file for the input file number
-function uploadQrFileImageAndText(i_file_number, i_xml_object)
+function uploadQrFileImageAndText(i_file_number, i_qr_file_xml)
 {
 
-    if (!checkInputUploadQrFileImageAndText(i_file_number, i_xml_object))
+    if (!checkInputUploadQrFileImageAndText(i_file_number, i_qr_file_xml))
     {
         return;
     }
 
-    var download_code_one = i_xml_object.getDownloadOne(i_file_number);
+    var download_code_one = i_qr_file_xml.getDownloadOne(i_file_number);
 
-    var qr_text_image = i_xml_object.getQrCombinedSeasonImageString(i_file_number);
+    var qr_text_image = i_qr_file_xml.getQrCombinedSeasonImageString(i_file_number);
 
-    var qr_text_text = i_xml_object.getQrCombinedSeasonTextString(i_file_number, download_code_one);
+    var qr_text_text = i_qr_file_xml.getQrCombinedSeasonTextString(i_file_number, download_code_one);
 
     var image_data_url = generateQrCodeOnePersonDataUrl(qr_text_image);
 
 
-    var season_start_year = i_xml_object.getSeasonStartYear();
+    var season_start_year = i_qr_file_xml.getSeasonStartYear();
 
     var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_one);
 
@@ -361,7 +361,7 @@ function uploadQrFileImageAndText(i_file_number, i_xml_object)
 
     console.log("uploadQrFileImageAndText Uploaded text file: " + file_name_path_text);
 
-    var download_code_two = i_xml_object.getDownloadTwo(i_file_number);
+    var download_code_two = i_qr_file_xml.getDownloadTwo(i_file_number);
 
     if (download_code_two.length > 0)
     {
@@ -392,18 +392,18 @@ function uploadQrFileImageAndText(i_file_number, i_xml_object)
 } // uploadQrFileImageAndText
 
 // Check input data
-function checkInputUploadQrFileImageAndText(i_file_number, i_xml_object)
+function checkInputUploadQrFileImageAndText(i_file_number, i_qr_file_xml)
 {
     var ret_bool = true; 
 
-    if (null == i_xml_object)
+    if (null == i_qr_file_xml)
     {
-        alert("uploadQrFilesImageAndTest i_xml_object is null");
+        alert("uploadQrFilesImageAndTest i_qr_file_xml is null");
 
         ret_bool = false;
     }
 
-    var n_files = i_xml_object.getNumberOfQrFiles();
+    var n_files = i_qr_file_xml.getNumberOfQrFiles();
     if (i_file_number < 1 || i_file_number > n_files)
     {
         alert("uploadQrFilesImageAndTest Input file number " + 
@@ -417,13 +417,13 @@ function checkInputUploadQrFileImageAndText(i_file_number, i_xml_object)
 } // checkInputUploadQrFileImageAndText
 
 // Check the input paramaters to updateQrFilesXmlUploadQrFiles
-function checkUpdateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_xml_object)
+function checkUpdateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml)
 {
     var ret_bool = true;
 
-    if (null == i_xml_object)
+    if (null == i_qr_file_xml)
     {
-        alert("checkUpdateQrFilesXmlUploadQrFilesSupporter i_xml_object is null");
+        alert("checkUpdateQrFilesXmlUploadQrFilesSupporter i_qr_file_xml is null");
 
         ret_bool = false;
     }
