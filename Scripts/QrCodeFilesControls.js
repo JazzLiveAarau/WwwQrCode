@@ -1,11 +1,11 @@
 // File: QrCodeFileControls.js
-// Date: 2022-05-12
+// Date: 2022-05-17
 // Author: Gunnar Lidén
 
 // File content
 // =============
 //
-// Controls for QR Code files
+// Create controls for QR Code files
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
@@ -638,6 +638,20 @@ function displayControlMusician()
     hideDropdownTextBoxesExecutionButtons();
 
     displayDivQrFilesDropdown();
+
+    hideAllTextBoxes();
+
+	displayDivQrCodeNameOne();
+	
+	displayDivQrCodeNameTwo();
+	
+	displayDivQrAddress();
+	
+	displayDivQrEmail();
+
+    // Date is not displayed displayDivQrConcertDate();
+
+    // TODO Function is missing displayDivQrTelephone();
 
 } // displayControlMusician
 

@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-12
+// Date: 2022-05-17
 // Author: Gunnar Lidén
 
 // File content
@@ -129,34 +129,6 @@ function updateQrFilesXmlUploadQrFilesSupporter(i_supporter_array, i_qr_file_xml
 
     var files_to_register = getIndicesForNotRegisteredFiles(n_supporters, registered_files);
 
-    /*QQQQQQ
-    var files_to_register = [];
-
-    var index_to_register = 0;
-
-    for (var index_supporter_reg=0; index_supporter_reg < n_supporters; index_supporter_reg++)
-    {
-        var b_not_equal_to_any_reg = true;
-
-        for (var index_already_reg = 0; index_already_reg < registered_files.length; index_already_reg++)
-        {
-            var index_supporter_already_reg = registered_files[index_already_reg];
-
-            if (index_supporter_already_reg == index_supporter_reg)
-            {
-                b_not_equal_to_any_reg = false;
-            }
-        }
-
-        if (b_not_equal_to_any_reg)
-        {
-            files_to_register[index_to_register] = index_supporter_reg;
-
-            index_to_register = index_to_register + 1;
-        }
-    }
-    QQQ*/
-
     registerAndUploadQrFilesXmlSupporter(files_to_register, i_supporter_array, i_qr_file_xml);
 
     QrProgress.Append("Exit updateQrFilesXmlUploadQrFilesSupporter");
@@ -274,6 +246,8 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
 
     var family_name = i_supporter_data.getFamilyName();
 
+    var first_family_name = first_name + ' ' + family_name;
+
     var street = i_supporter_data.getStreet();
     
     var house_number = i_supporter_data.getHouseNumber();
@@ -305,6 +279,8 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
     i_qr_file_xml.setFirstName(file_number, first_name);
 
     i_qr_file_xml.setFamilyName(file_number, family_name);
+
+    i_qr_file_xml.setQrCodeNameOne(file_number, first_family_name);
 
     i_qr_file_xml.setStreet(file_number, street);
 
