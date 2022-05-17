@@ -680,7 +680,7 @@ class QrFilesXml
 
             var concert_date = this.getSwissDateString(file_number);
 
-            var musician_name = this.getQrCodeNameTwo(file_number);
+            var musician_name = this.getFirstName(file_number);
     
             var dropdown_str = concert_date + ' ' + musician_name;
             

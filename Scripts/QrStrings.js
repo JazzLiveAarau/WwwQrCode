@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-13
+// Date: 2022-05-17
 // Author: Gunnar Lidén
 
 // File content
@@ -137,6 +137,21 @@ class QrStrings
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Directories And Files ///////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Color Strings /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getBackgroundColor()
+    {
+        return 'rgb(223, 224, 225)';
+
+    } // getBackgroundColor
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Color Strings ///////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
@@ -298,84 +313,140 @@ class QrStrings
 
     } // getTitleQrFilesDropdown        
 
-    // Label for the text box QR code name one
+    // Supporter: Label for the text box QR code name one
     static getLabelQrCodeNameOne()
     {
         return 'QR Code Name';
 
-    } // getLabelQrCodeNameOne
+    } // getLabelQrCodeNameOne getLabelQrCodeNameOneMusician
 
-    // Title (tooltip) for the text box QR code name one
+    // Musician: Label for the text box QR code name one
+    static getLabelQrCodeNameOneMusician()
+    {
+        return 'Name der eingeladenen Person';
+
+    } // getLabelQrCodeNameOne 
+
+    // Supporter: Title (tooltip) for the text box QR code name one
     static getTitleQrCodeNameOne()
     {
-        return 'Der Name für den QR Code 1';
+        return 'Name der Supporter im QR Code';
 
     } // getTitleQrCodeNameOne
 
-    // Label for the text box QR code name one
+    // Musician: Title (tooltip) for the text box QR code name one
+    static getTitleQrCodeNameOneMusician()
+    {
+        return 'Name der eingeladenen Person';
+
+    } // getTitleQrCodeNameOne
+
+    // Supporter: Label for the text box QR code name one
     static getLabelQrCodeNameTwo()
     {
         return 'QR Code Name 2';
 
     } // getLabelQrCodeNameTwo
 
-    // Title (tooltip) for the text box QR code name one
+    // Musician: Label for the text box QR code name one
+    static getLabelQrCodeNameTwoMusician()
+    {
+        return 'Kontaktperson der Band';
+
+    } // getLabelQrCodeNameTwoMusician
+
+    // Supporter: Title (tooltip) for the text box QR code name one
     static getTitleQrCodeNameTwo()
     {
         return 'Der Name für den QR Code 2';
 
     } // getTitleQrCodeNameTwo 
 
-    // Label for the text box comment
+    // Musician: Title (tooltip) for the text box QR code name one
+    static getTitleQrCodeNameTwoMusician()
+    {
+        return 'Kontaktperson der Band';
+
+    } // getTitleQrCodeNameTwoMusician 
+
+    // Supporter: Label for the text box comment
     static getLabelTextboxQrComment()
     {
         return 'Kommentar';
 
     } // getLabelTextboxQrComment
 
-    // Title (tooltip) for the text box comment
+    // Supporter: Title (tooltip) for the text box comment
     static getTitleTextboxQrComment()
     {
         return 'Kommentar';
 
     } // getTitleTextboxQrComment    
 
-    // Label for the text box address
+    // Supporter: Label for the text box address
     static getLabelTextboxQrAddress()
     {
         return 'Adresse';
 
     } // getLabelTextboxQrAddress
 
-    // Title (tooltip) for the text box address
+    // Musician: Label for the text box address
+    static getLabelTextboxQrAddressMusician()
+    {
+        return 'Adresse der Kontakperson';
+
+    } // getLabelTextboxQrAddressMusician
+
+    // Supporter: Title (tooltip) for the text box address
     static getTitleTextboxQrAddress()
     {
         return 'Adresse';
 
     } // getTitleTextboxQrAddress
 
-    // Label for the text box email
+    // Musician: Title (tooltip) for the text box address
+    static getTitleTextboxQrAddressMusician()
+    {
+        return 'Adresse der Kontakperson';
+
+    } // getTitleTextboxQrAddressMusician
+
+    // Supporter: Label for the text box email
     static getLabelTextboxQrEmail()
     {
         return 'E-Mail';
 
     } // getLabelTextboxQrEmail
 
-    // Title (tooltip) for the text box email
+    // Musician: Label for the text box email
+    static getLabelTextboxQrEmailMusician()
+    {
+        return 'E-Mail der Kontaktperson';
+
+    } // getLabelTextboxQrEmailMusician
+
+    // Supporter: Title (tooltip) for the text box email
     static getTitleTextboxQrEmail()
     {
         return 'E-Mail';
 
     } // getTitleTextboxQrEmail    
 
-        // Label for the text box contribution
+    // Musician: Title (tooltip) for the text box email
+    static getTitleTextboxQrEmailMusician()
+    {
+        return 'E-Mail der Kontaktperson';
+
+    } // getTitleTextboxQrEmailMusician   
+
+    // Supporter: Label for the text box contribution
     static getLabelTextboxQrDistribution()
     {
         return 'Beitrag';
 
     } // getLabelTextboxQrDistribution
 
-    // Title (tooltip) for the text box contribution
+    // Supporter: Title (tooltip) for the text box contribution
     static getTitleTextboxQrDistribution()
     {
         return 'Supporter Beitrag';

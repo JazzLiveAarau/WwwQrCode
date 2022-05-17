@@ -284,7 +284,7 @@ function createFilesDropdown()
 // Create the QR code name one text box
 function createTextBoxQrCodeNameOne()
 {
-    g_qr_code_name_one_text_box = new JazzTextBox("id_qr_code_name_one_text_box", getIdDivQrCodeNameOne());
+    g_qr_code_name_one_text_box = new JazzTextBox(getIdQrCodeNameOne(), getIdDivQrCodeNameOne());
 
     g_qr_code_name_one_text_box.setLabelText(QrStrings.getLabelQrCodeNameOne());
 
@@ -305,7 +305,7 @@ function createTextBoxQrCodeNameOne()
  // Create the QR code name two text box
  function createTextBoxQrCodeNameTwo()
  {
-     g_qr_code_name_two_text_box = new JazzTextBox("id_qr_code_name_two_text_box", getIdDivQrCodeNameTwo());
+     g_qr_code_name_two_text_box = new JazzTextBox(getIdQrCodeNameTwo(), getIdDivQrCodeNameTwo());
  
      g_qr_code_name_two_text_box.setLabelText(QrStrings.getLabelQrCodeNameTwo());
  
@@ -1254,6 +1254,20 @@ function getIdDivQrCodeNameOne()
 
 } // getIdDivQrCodeNameOne
 
+// Get the element text box for the QR code name one
+function getElementQrCodeNameOne()
+{
+    return document.getElementById(getIdQrCodeNameOne());
+
+} // getElementDivQrMusicianButton
+
+// Returns the identity of the text box for the QR code name one
+function getIdQrCodeNameOne()
+{
+    return 'id_qr_code_name_one_text_box';
+
+} // getIdQrCodeNameOne
+
  // Get the element div text box for the QR code name two
  function getElementDivQrCodeNameTwo()
  {
@@ -1268,6 +1282,20 @@ function getIdDivQrCodeNameOne()
  
  } // getIdDivQrCodeNameTwo 
 
+  // Get the element text box for the QR code name two
+  function getElementQrCodeNameTwo()
+  {
+      return document.getElementById(getIdQrCodeNameTwo());
+  
+  } // getElementDivQrMusicianButton
+  
+  // Returns the identity of the text box for the QR code name two
+  function getIdQrCodeNameTwo()
+  {
+      return 'id_qr_code_name_two_text_box';
+  
+  } // getIdQrCodeNameTwo 
+  
 // Get the element div text box for the comment
 function getElementDivQrComment()
 {

@@ -324,9 +324,11 @@ function eventClickQrMusicianButton()
 
     g_files_active_number = getFileNumberFromDropdownNumber(option_number);
 
+    displayControlMusician();
+
     setControlsMusician();
 
-    displayControlMusician();
+    setStylesMusician();
 
     setCategoryButtonMusicianSelected();
 

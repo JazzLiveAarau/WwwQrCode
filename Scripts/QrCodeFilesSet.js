@@ -253,7 +253,7 @@ function setTextBoxQrContribution()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Set Styles ////////////////////////////////////////////////
+///////////////////////// Start Set Styles Supporter //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Supporter: Set styles
@@ -263,9 +263,13 @@ function setStylesSupporter()
 
     setTextBoxQrCodeNameTwoStyleSupporter();
 
+    setTextBoxQrAddressStyleSupporter();
+
+    setTextBoxQrEmailStyleSupporter();
+
 } // setStylesSupporter
 
-// Supporter: Set styles for the text box QR code name one for the active file number
+// Supporter: Set styles for the text box QR code name one 
 function setTextBoxQrCodeNameOneStyleSupporter()
 {
     g_qr_code_name_one_text_box.setLabelText(QrStrings.getLabelQrCodeNameOne());
@@ -280,25 +284,139 @@ function setTextBoxQrCodeNameOneStyleSupporter()
 
     g_qr_code_name_one_text_box.setOninputFunctionName("");
 
+    // Must come after settings above ... Backround color should be implementet ..
+    var el_name_one = getElementQrCodeNameOne();
+
+    el_name_one.style.backgroundColor = 'white';
+
 } // setTextBoxQrCodeNameOneStyleSupporter
 
-// Supporter: Set styles for the text box QR code name one for the active file number
+// Supporter: Set styles for the text box QR code name one
 function setTextBoxQrCodeNameTwoStyleSupporter()
 {
-    g_qr_code_name_one_text_box.setLabelText(QrStrings.getLabelQrCodeNameTwo());
+    g_qr_code_name_two_text_box.setLabelText(QrStrings.getLabelQrCodeNameTwo());
+
+    //g_qr_code_name_two_text_box.setSize("42");
+
+    //g_qr_code_name_two_text_box.setLabelTextPositionAbove();
+
+    g_qr_code_name_two_text_box.setTitle(QrStrings.getTitleQrCodeNameTwo());
+
+    g_qr_code_name_two_text_box.setReadOnlyFlag(false);
+
+    g_qr_code_name_two_text_box.setOninputFunctionName("");
+
+    // Must come after settings above ... Backround color should be implementet ..
+    var el_name_two = getElementQrCodeNameTwo();
+
+    el_name_two.style.backgroundColor = 'white';    
+
+} // setTextBoxQrCodeNameTwoStyleSupporter
+
+// Supporter: Set styles for the text box address
+function setTextBoxQrAddressStyleSupporter()
+{
+    g_address_text_box.setLabelText(QrStrings.getLabelTextboxQrAddress());
+
+    g_address_text_box.setTitle(QrStrings.getTitleTextboxQrAddress());
+	
+} // setTextBoxQrAddressStyleSupporter
+
+// Supporter: Set styles for the text box email
+function setTextBoxQrEmailStyleSupporter()
+{
+    g_email_text_box.setLabelText(QrStrings.getLabelTextboxQrEmail());
+
+    g_email_text_box.setTitle(QrStrings.getTitleTextboxQrEmail());
+  
+} // setTextBoxQrEmailStyleSupporter
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Set Styles Supporter ////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Set Styles Musician ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Musician: Set styles
+function setStylesMusician()
+{
+    setTextBoxQrCodeNameOneStyleMusician();
+
+    setTextBoxQrCodeNameTwoStyleMusician();
+
+    setTextBoxQrAddressStyleMusician();
+
+    setTextBoxQrEmailStyleMusician();
+
+} // setStylesMusician
+
+// Musician: Set styles for the text box QR code name one for the active file number
+function setTextBoxQrCodeNameOneStyleMusician()
+{
+    g_qr_code_name_one_text_box.setLabelText(QrStrings.getLabelQrCodeNameOneMusician());
 
     //g_qr_code_name_one_text_box.setSize("42");
 
     //g_qr_code_name_one_text_box.setLabelTextPositionAbove();
 
-    g_qr_code_name_one_text_box.setTitle(QrStrings.getTitleQrCodeNameTwo());
+    g_qr_code_name_one_text_box.setTitle(QrStrings.getTitleQrCodeNameOneMusician());
 
     g_qr_code_name_one_text_box.setReadOnlyFlag(false);
 
     g_qr_code_name_one_text_box.setOninputFunctionName("");
 
-} // setTextBoxQrCodeNameTwoStyleSupporter
+    // Must come after settings above ... Backround color should be implementet ..
+
+    var el_name_one = getElementQrCodeNameOne();
+
+    el_name_one.style.backgroundColor = 'white';
+
+} // setTextBoxQrCodeNameOneStyleMusician
+
+// Musician: Set styles for the text box QR code name one for the active file number
+function setTextBoxQrCodeNameTwoStyleMusician()
+{
+    g_qr_code_name_two_text_box.setLabelText(QrStrings.getLabelQrCodeNameTwoMusician());
+
+    //g_qr_code_name_two_text_box.setSize("42");
+
+    //g_qr_code_name_one_text_box.setLabelTextPositionAbove();
+
+    g_qr_code_name_two_text_box.setTitle(QrStrings.getTitleQrCodeNameTwoMusician());
+
+    g_qr_code_name_two_text_box.setReadOnlyFlag(true);
+
+    g_qr_code_name_two_text_box.setOninputFunctionName("");
+
+    // Must come after settings above ... Backround color should be implementet ..
+
+    var el_name_two = getElementQrCodeNameTwo();
+
+    el_name_two.style.backgroundColor = QrStrings.getBackgroundColor();    
+
+} // setTextBoxQrCodeNameTwoStyleMusician
+
+// Supporter: Set styles for the text box address
+function setTextBoxQrAddressStyleMusician()
+{
+    g_address_text_box.setLabelText(QrStrings.getLabelTextboxQrAddressMusician());
+
+    g_address_text_box.setTitle(QrStrings.getTitleTextboxQrAddressMusician());
+	
+} // setTextBoxQrAddressStyleMusician
+
+// Supporter: Set styles for the text box email
+function setTextBoxQrEmailStyleMusician()
+{
+    g_email_text_box.setLabelText(QrStrings.getLabelTextboxQrEmailMusician());
+
+    g_email_text_box.setTitle(QrStrings.getTitleTextboxQrEmailMusician());
+  
+} // setTextBoxQrEmailStyleMusician
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Set Styles //////////////////////////////////////////////////
+///////////////////////// End Set Styles Musician /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+

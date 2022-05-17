@@ -289,7 +289,7 @@ function setDataOfAppendedQrFilesNodeAndUploadMusician(i_musician_name, i_concer
     var contact_city = i_concert_data.getContactCity();
 
 
-    i_qr_file_xml.setFirstName(file_number, contact_person);
+    i_qr_file_xml.setFirstName(file_number, i_musician_name);
 
     i_qr_file_xml.setEmail(file_number, contact_email);
 
@@ -299,7 +299,7 @@ function setDataOfAppendedQrFilesNodeAndUploadMusician(i_musician_name, i_concer
 
     i_qr_file_xml.setDomicil(file_number, contact_city);
 
-    i_qr_file_xml.setQrCodeNameTwo(file_number, i_musician_name);
+    i_qr_file_xml.setQrCodeNameTwo(file_number, contact_person);
 
     i_qr_file_xml.setConcertYear(file_number, concert_year);
 
