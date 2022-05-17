@@ -314,6 +314,8 @@ function eventClickQrMusicianButton()
 
     setActiveCategory(QrStrings.getQrCategoryMusicianString());
 
+    setMusicianDropdown();
+
     setControlsMusician();
 
     displayControlMusician();
@@ -448,7 +450,7 @@ function setControlsMusician()
 {
     console.log('setControlsMusician Enter');
 
-    setControlsCategoryUndefined();
+    // TODO setControlsCategoryUndefined();
 
     console.log('setControlsMusician Exit');
 
@@ -523,6 +525,25 @@ function setSupporterDropdown()
     console.log('setSupporterDropdown Exit');
     
 } // setSupporterDropdown
+
+// Sets the files dropdown control for musicians
+function setMusicianDropdown()
+{
+    console.log('setMusicianDropdown Enter');
+
+    var b_supporter_above_limit = null;
+
+    var b_only_not_sent = true;
+
+    g_file_number_array =  g_qr_files_xml_object.getFilteredFileNumberArray(b_supporter_above_limit, b_only_not_sent);
+
+    var date_musician_array = g_qr_files_xml_object.getDropdownStringArrayMusician(g_file_number_array);
+
+    g_files_drop_down.setNameArray(date_musician_array);
+
+    console.log('setMusicianDropdown Exit');
+    
+} // setMusicianDropdown
 
 // Set the text box QR code name one for the active file number
 function setTextBoxQrCodeNameOne()

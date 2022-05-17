@@ -637,6 +637,8 @@ function displayControlMusician()
     
     hideDropdownTextBoxesExecutionButtons();
 
+    displayDivQrFilesDropdown();
+
 } // displayControlMusician
 
 // Hides dropdow, text boxes and execution buttons

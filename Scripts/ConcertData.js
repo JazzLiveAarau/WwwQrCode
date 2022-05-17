@@ -1,5 +1,5 @@
 // File: ConcertData.js
-// Date: 2022-05-15
+// Date: 2022-05-17
 // Author: Gunnar Lidén
 
 // File content
@@ -251,6 +251,8 @@ function registerAndUploadQrFilesXmlMusician(i_register_cm_data_array, i_concert
 function tempForTest()
 {
     QrProgress.Append("Enter tempForTest");
+
+    QrProgress.Msg("QR Dateien sind hochgeladen");
 }
 
 // Set data of appended QR files node

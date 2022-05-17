@@ -593,55 +593,146 @@ class QrFilesXml
 
         var index_ret_file = 0;
 
-        var debug_n_sent = 0;
-
         for (var file_number = 1; file_number <= n_files; file_number++)
         {
-            var contribution = this.getSupporterContribution(file_number);
-
-            var b_supporter = this.getSupporterAdmissionBool(file_number);
-
-            var b_email = this.getEmailSentBool(file_number);
-
-            var b_mail = this.getMailSentBool(file_number);
-
-            var b_limit = true;
-
-            if (contribution < QrStrings.getSupporterContributionLimitValue())
+            if (getActiveCategory() == QrStrings.getQrCategoryUndefinedString())
             {
-                b_limit = false;
+                alert("QrFiles.XmlgetFilteredFileNumberArray Nothing is returned for category " + getActiveCategory());
+
+                return ret_file_numbers;
             }
-
-            if (b_supporter && b_limit )
+            else if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
             {
-                b_supporter = true;
+                this.addSupporterToFilteredList(file_number, i_b_supporter, i_b_not_sent, ret_file_numbers);
             }
-
-            var b_ret_sent = false;
-
-            if (b_email || b_mail)
+            else if (getActiveCategory() == QrStrings.getQrCategorySponsorString())
             {
-                b_ret_sent = true;
+                alert("QrFiles.XmlgetFilteredFileNumberArray Not yet implemented " + getActiveCategory());
+
+                return ret_file_numbers;
             }
-
-            if (b_supporter && !b_ret_sent)
+            else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
             {
-                ret_file_numbers[index_ret_file] = file_number;
+                this.addMusicianToFilteredList(file_number, i_b_not_sent, ret_file_numbers);
+            }
+            else if (getActiveCategory() == QrStrings.getQrCategoryMemberString())
+            {
+                alert("QrFiles.XmlgetFilteredFileNumberArray Not yet implemented " + getActiveCategory());
 
-                index_ret_file = index_ret_file + 1;
+                return ret_file_numbers;
+            }
+            else if (getActiveCategory() == QrStrings.getQrCategoryFreeString())
+            {
+                alert("QrFiles.XmlgetFilteredFileNumberArray Not yet implemented " + getActiveCategory());
+
+                return ret_file_numbers;
             }
             else
             {
-                debug_n_sent = debug_n_sent + 1;
+                alert("QrFiles.XmlgetFilteredFileNumberArray Programming error. Active category is " + getActiveCategory());
+
+                return ret_file_numbers;
             }
             
         } // file_number
 
-        console.log('Number of already sent (not returned file numbers) is ' + debug_n_sent.toString());
-
         return ret_file_numbers;
 
     } // getFilteredFileNumberArray
+
+    // Musician: If filter conditions are fulfilled add file number to the input/output array
+    addMusicianToFilteredList(i_file_number, i_b_not_sent, i_file_numbers)
+    {
+        var ret_file_numbers = i_file_numbers;
+
+        var b_musician_admission = this.getMusicianAdmissionBool(i_file_number);
+
+        if (!b_musician_admission)
+        {
+            return ret_file_numbers;
+        }
+
+        var b_email = this.getEmailSentBool(i_file_number);
+
+        var b_mail = this.getMailSentBool(i_file_number);
+
+        if (b_email || b_mail)
+        {
+            return ret_file_numbers;
+        }
+
+        var index_add = ret_file_numbers.length;
+
+        ret_file_numbers[index_add] = i_file_number;
+
+        return ret_file_numbers;
+
+    } // addMusicianToFilteredList
+
+    // Returns a string array with concert dates and musician names
+    getDropdownStringArrayMusician(i_file_numbers)
+    {
+        var ret_str_array = [];
+
+        for (var index_number=0; index_number < i_file_numbers.length; index_number++)
+        {
+            var file_number = i_file_numbers[index_number];
+
+            var concert_date = this.getSwissDateString(file_number);
+
+            var musician_name = this.getQrCodeNameTwo(file_number);
+    
+            var dropdown_str = concert_date + ' ' + musician_name;
+            
+            ret_str_array[index_number] = dropdown_str;
+        }
+
+        return ret_str_array;
+
+    } // getDropdownStringArrayMusician
+
+    // Supporter: If filter conditions are fulfilled add file number to the input/output array
+    addSupporterToFilteredList(i_file_number, i_b_supporter, i_b_not_sent, i_file_numbers)
+    {
+        var ret_file_numbers = i_file_numbers;
+
+        var contribution = this.getSupporterContribution(i_file_number);
+
+        var b_supporter = this.getSupporterAdmissionBool(i_file_number);
+
+        var b_email = this.getEmailSentBool(i_file_number);
+
+        var b_mail = this.getMailSentBool(i_file_number);
+
+        var b_limit = true;
+
+        if (contribution < QrStrings.getSupporterContributionLimitValue())
+        {
+            b_limit = false;
+        }
+
+        if (b_supporter && b_limit )
+        {
+            b_supporter = true;
+        }
+
+        var b_ret_sent = false;
+
+        if (b_email || b_mail)
+        {
+            b_ret_sent = true;
+        }
+
+        if (b_supporter && !b_ret_sent)
+        {
+            var index_add = ret_file_numbers.length;
+
+            ret_file_numbers[index_add] = i_file_number;
+        }
+
+        return ret_file_numbers;
+
+    } // addSupporterToFilteredList
 
     // getQrFirstAndFamilyNameString(i_qr_file_number)
     getQrFirstAndFamilyNamesFiltered(i_file_number_array)
