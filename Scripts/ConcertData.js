@@ -420,11 +420,11 @@ function musicianIsRegisteredInQrFilesXml(i_musician_name, i_qr_file_xml)
 
     for (var qr_file_number = 1; qr_file_number <= n_qr_files; qr_file_number++)
     {
-        var qr_code_name_two = i_qr_file_xml.getQrCodeNameTwo(qr_file_number);
+        var first_name= i_qr_file_xml.getFirstName(qr_file_number);
 
         var b_musician_admission = i_qr_file_xml.getMusicianAdmissionBool(qr_file_number);
 
-        if ( qr_code_name_two == i_musician_name && b_musician_admission)
+        if (first_name == i_musician_name && b_musician_admission)
         {
             return true;
         }
