@@ -123,6 +123,8 @@ function onloadQrCodeFiles()
 
     hideDivQrDisplayXml();
 
+    hideDivQrShowProgress(); // For debug
+
     getSeasonStartYear(callbackSeasonStartYearFiles);
 
 } // onloadQrCodeFiles

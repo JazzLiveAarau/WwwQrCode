@@ -1,5 +1,5 @@
 /* 
-File: QrCodeFiles.css Date: 2022-05-12 Author: Gunnar Lidén
+File: QrCodeFiles.css Date: 2022-05-17 Author: Gunnar Lidén
 
 General information
 ===================
@@ -29,13 +29,13 @@ body
     color: rgb(255,0,10);
     background-color: black;
     text-align: center;
-    margin-bottom: 5mm;
+    margin-bottom: 10px;
     clear: both;
 }
 
 .cl_qr_code_files_container
 {
-    width: 330px;
+    width: 320px;
     margin-left: 2mm;
     overflow: hidden;
 }
@@ -47,11 +47,8 @@ body
 
 .cl_div_season_color_def_str
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
-    padding-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
     float: right;    
 }
 
@@ -62,11 +59,8 @@ body
 
 .cl_div_season_color_display
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
-    padding-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
     float: left;    
 }
 
@@ -77,8 +71,8 @@ body
 
 .cl_div_qr_buttons_category
 {
-    padding-top: 20px;
-    font-size: 4.3mm;
+    padding-top: 10px;
+    font-size: 10px;
     font-weight: bold;
     clear: both;
 }
@@ -114,8 +108,8 @@ body
 
 .cl_div_qr_buttons_execution
 {
-    margin-top: 20px;
-    font-size: 4.3mm;
+    margin-top: 5px;
+    font-size: 10px;
     font-weight: bold;
     clear: both;
 }
@@ -151,7 +145,7 @@ body
 
 .cl_div_qr_files_dropdown
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -160,28 +154,25 @@ body
 
 .cl_div_qr_code_name_one_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
-    padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     clear: both;
 }
 
 .cl_div_qr_code_name_two_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
-    padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     clear: both;
 } 
 
 .cl_div_comment_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
-    padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     clear: both;        
 }
 
@@ -192,10 +183,9 @@ body
 
 .cl_div_address_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
-    padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     clear: both;   
 }
 
@@ -212,7 +202,7 @@ body
 
 .cl_div_email_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -226,7 +216,7 @@ body
 
 .cl_div_contribution_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -237,6 +227,7 @@ body
 .cl_div_contribution_text_box input
 {
     background-color: rgb(223, 224, 225);
+    text-align: center;
 }
 
 .cl_div_concert_date_telephone
@@ -246,7 +237,7 @@ body
 
 .cl_div_concert_date_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -260,7 +251,7 @@ body
 
 .cl_div_telephon_text_box
 {
-    font-size: 4.3mm;
+    font-size: 10px;
     font-weight: bold;
     padding-top: 10px;
     margin-bottom: 10px;

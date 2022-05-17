@@ -129,7 +129,7 @@ function createQrSupporterButton()
 
     g_qr_supporter_button.setCaption(QrStrings.getCaptionButtonQrFilesSupporter());
 
-    g_qr_supporter_button.setWidth("77px");
+    g_qr_supporter_button.setWidth("74px");
 
     g_qr_supporter_button.setLabelText("");
 
@@ -146,7 +146,7 @@ function createQrSponsorButton()
 
     g_qr_sponsor_button.setCaption(QrStrings.getCaptionButtonQrFilesSponsor());
 
-    g_qr_sponsor_button.setWidth("77px");
+    g_qr_sponsor_button.setWidth("74px");
 
     g_qr_sponsor_button.setLabelText("");
 
@@ -163,7 +163,7 @@ function createQrFreeButton()
 
     g_qr_free_button.setCaption(QrStrings.getCaptionButtonQrFilesFree());
 
-    g_qr_free_button.setWidth("77px");
+    g_qr_free_button.setWidth("74px");
 
     g_qr_free_button.setLabelText("");
 
@@ -180,7 +180,7 @@ function createQrMusicianButton()
 
     g_qr_musician_button.setCaption(QrStrings.getCaptionButtonQrFilesMusician());
 
-    g_qr_musician_button.setWidth("77px");
+    g_qr_musician_button.setWidth("74px");
 
     g_qr_musician_button.setLabelText("");
 
@@ -197,7 +197,7 @@ function createQrSendEmailButton()
 
     g_qr_send_email_button.setCaption(QrStrings.getCaptionButtonQrFilesSendEmail());
 
-    g_qr_send_email_button.setWidth("77px");
+    g_qr_send_email_button.setWidth("74px");
 
     g_qr_send_email_button.setLabelText("");
 
@@ -214,7 +214,7 @@ function createQrSendPostButton()
 
     g_qr_send_post_button.setCaption(QrStrings.getCaptionButtonQrFilesSendPost());
 
-    g_qr_send_post_button.setWidth("77px");
+    g_qr_send_post_button.setWidth("74px");
 
     g_qr_send_post_button.setLabelText("");
 
@@ -231,7 +231,7 @@ function createQrPrintBatchButton()
 
     g_qr_print_batch_button.setCaption(QrStrings.getCaptionButtonQrFilesPrintBatch());
 
-    g_qr_print_batch_button.setWidth("77px");
+    g_qr_print_batch_button.setWidth("74px");
 
     g_qr_print_batch_button.setLabelText("");
 
@@ -248,7 +248,7 @@ function createQrFileDoneButton()
 
     g_qr_file_done_button.setCaption(QrStrings.getCaptionButtonQrFilesFileDone());
 
-    g_qr_file_done_button.setWidth("77px");
+    g_qr_file_done_button.setWidth("74px");
 
     g_qr_file_done_button.setLabelText("");
 
@@ -288,7 +288,7 @@ function createTextBoxQrCodeNameOne()
 
     g_qr_code_name_one_text_box.setLabelText(QrStrings.getLabelQrCodeNameOne());
 
-    g_qr_code_name_one_text_box.setSize("42");
+    g_qr_code_name_one_text_box.setSize("36");
 
     g_qr_code_name_one_text_box.setLabelTextPositionAbove();
 
@@ -309,7 +309,7 @@ function createTextBoxQrCodeNameOne()
  
      g_qr_code_name_two_text_box.setLabelText(QrStrings.getLabelQrCodeNameTwo());
  
-     g_qr_code_name_two_text_box.setSize("42");
+     g_qr_code_name_two_text_box.setSize("36");
  
      g_qr_code_name_two_text_box.setLabelTextPositionAbove();
  
@@ -330,7 +330,7 @@ function createTextBoxQrComment()
 
     g_comment_text_box.setLabelText(QrStrings.getLabelTextboxQrComment());
 
-    g_comment_text_box.setSize("42");
+    g_comment_text_box.setSize("36");
 
     g_comment_text_box.setLabelTextPositionAbove();
 
@@ -351,7 +351,7 @@ function createTextBoxQrAddress()
 
     g_address_text_box.setLabelText(QrStrings.getLabelTextboxQrAddress());
 
-    g_address_text_box.setSize("42");
+    g_address_text_box.setSize("36");
 
     g_address_text_box.setLabelTextPositionAbove();
 
@@ -373,7 +373,7 @@ function createTextBoxQrEmail()
 
     g_email_text_box.setLabelText(QrStrings.getLabelTextboxQrEmail());
 
-    g_email_text_box.setSize("30");
+    g_email_text_box.setSize("26");
 
     g_email_text_box.setLabelTextPositionAbove();
 
@@ -394,7 +394,7 @@ function createTextBoxQrContribution()
 
     g_contribution_text_box.setLabelText(QrStrings.getLabelTextboxQrDistribution());
 
-    g_contribution_text_box.setSize("5");
+    g_contribution_text_box.setSize("4");
 
     g_contribution_text_box.setLabelTextPositionAbove();
 
@@ -478,7 +478,7 @@ function createTextBoxSeasonColorDisplay()
 
     g_season_color_display_text_box.setLabelText(QrStrings.getLabelTextboxSeasonColorDisplay());
 
-    g_season_color_display_text_box.setSize("20");
+    g_season_color_display_text_box.setSize("15");
 
     g_season_color_display_text_box.setLabelTextPositionAbove();
 
@@ -648,6 +648,8 @@ function displayControlMusician()
 	displayDivQrAddress();
 	
 	displayDivQrEmail();
+
+    displayAllExecutionButtons();
 
     // Date is not displayed displayDivQrConcertDate();
 
