@@ -343,6 +343,27 @@ function eventClickQrMusicianButton()
 // User clicked the send email button
 function eventClickQrSendEmailButton()
 {
+    if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
+    {
+        var send_to = 'gunnar@viewsoncad.ch';
+
+        var send_bcc = 'qrcode@jazzliveaarau.ch';
+
+        var title_htm = QrStrings.getTitleSupporterEmail();
+
+        var supporter_name = 'Gunnar Lidén';
+
+        download_code = 'tZShP3S3';
+
+        var msg_htm = QrStrings.getMsgSupporterEmail(supporter_name, download_code);
+
+        sendEmailWithJQueryPostFunction(send_to, send_bcc, title_htm, msg_htm);
+
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
+    {
+        
+    }
 
 } // eventClickQrSendEmailButton
 

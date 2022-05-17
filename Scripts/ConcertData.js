@@ -217,7 +217,10 @@ function registerAndUploadQrFilesXmlMusician(i_register_cm_data_array, i_concert
         return;
     }
 
-    n_to_reg = 4; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    if (n_to_reg > 4)
+    {
+        n_to_reg = 4; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    }
 
     for (var index_to_reg=0; index_to_reg < n_to_reg; index_to_reg++)
     {

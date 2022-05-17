@@ -17,6 +17,42 @@ class QrStrings
     } // constructor
 
     ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Supporter Emails //////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getTitleSupporterEmail()
+    {
+        return 'JAZZ live AARAU Supporter Ausweis als QR Code';
+
+    } // getTitleSupporterEmail
+
+    static getMsgSupporterEmail(i_supporter_name, i_download_code)
+    {
+        var ret_htm = '';
+
+        ret_htm = ret_htm + 'Guten Tag ' + i_supporter_name + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Danke, dass sie ..... ' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Bitte dieser Link ' + 
+            '<a href="https://jazzliveaarau.ch/QrCode/QrCodeShow.htm">https://jazzliveaarau.ch/QrCode/QrCodeShow.htm</a>' + 
+            ' klicken' + '<br>';
+
+        ret_htm = ret_htm + 'Danach dieser Herunterladen-Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Grüsse ' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Das JAZZ <i>live</i> AARAU Team' + '<br>' + '<br>';
+
+        return ret_htm;
+
+    } // getTitleSupporterEmail
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Supporter Emails ////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Directories And Files /////////////////////
     ///////////////////////////////////////////////////////////////////////////
 

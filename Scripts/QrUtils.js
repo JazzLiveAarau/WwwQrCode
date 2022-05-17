@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-14
+// Date: 2022-05-17
 // Author: Gunnar Lidén
 
 // File content
@@ -293,6 +293,75 @@ function seasonStartYearJQueryPost(i_current_year, i_file_name_this, i_file_name
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Season Start Year ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Send Email ////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Send email with the JQuery function "post"
+// The function returns false for failure
+//    
+function sendEmailWithJQueryPostFunction(i_to, i_bcc, i_title_htm, i_msg_htm)
+{
+    $.post
+      ("Php/SendEmail.php", 
+        {
+            a_subject: i_title_htm,
+            a_msg: i_msg_htm,
+            a_to: i_to,
+            a_bcc: i_bcc
+        },
+        function(data_send, status_send)
+        {	
+            if (status_send == "success")
+            {
+                // alert("data_send= >" + data_send + "<");
+            }
+            else
+            {
+				alert("Execution of SendEmail.php failed. status_send= " + status_send);
+				return;
+            }   
+			
+			// Additional characters in data_send ????? TODO
+			// includes() does not work in Internet Explorer
+			var b_ok = false;
+			var b_failure = false;
+			if (data_send.indexOf("MailIsSent"))
+			{
+				b_ok = true;
+			}
+			if (data_send.indexOf("MailIsNotSent"))
+			{
+				b_failure = true;
+			}
+			
+			//QQ var b_ok = data_send.includes("MailIsSent");
+			//QQ var b_failure = data_send.includes("MailIsNotSent");
+			
+            if (b_ok)			
+            {
+               // alert("E-Mail ist gesendet");
+			}
+            else if (b_failure)
+            {
+               alert("TODO");
+			   return;
+			}
+            else 
+            {
+               alert("Fehler: data_send= " + data_send);
+			   return false;
+			}			
+        });	
+	
+    return true;
+	
+} // sendEmailWithJQueryPostFunction
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Send Email //////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
