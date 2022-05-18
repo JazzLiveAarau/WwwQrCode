@@ -181,7 +181,7 @@ class QrStrings
 
     static getBackgroundColor()
     {
-        return 'rgb(223, 224, 225)';
+        return 'rgb(23, 24, 225)';
 
     } // getBackgroundColor
 

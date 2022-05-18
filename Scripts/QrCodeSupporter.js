@@ -1,5 +1,5 @@
 // File: QrCodeSupporter.js
-// Date: 2022-05-05
+// Date: 2022-05-18
 // Author: Gunnar Lidén
 
 // File content
@@ -162,7 +162,7 @@ function generateQrCodeOneSupporterImageData(i_name_str, i_season_str)
     g_object_generate_qr_code.set
     (
         {
-            foreground: 'black',
+            foreground: QrStrings.getBackgroundColor(),
             size: getSupporterCanvasSize(),
             value: qr_text
         }
@@ -185,7 +185,7 @@ function generateQrCodeOneSupporterDataUrl(i_name_str, i_season_str)
     g_object_generate_qr_code.set
     (
         {
-            foreground: 'black',
+            foreground: QrStrings.getBackgroundColor(),
             size: getSupporterCanvasSize(),
             value: qr_text
         }

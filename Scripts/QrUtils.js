@@ -581,7 +581,7 @@ function initQrCodeDataInLocalStorage(i_download_code)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Initial season color
-var g_qr_season_color_init = 'rgb(223, 224, 225)';
+var g_qr_season_color_init = QrStrings.getBackgroundColor();
 
 // windows.localStorage key for the season color
 var g_local_storage_qr_season_color = 'qr_season_color';

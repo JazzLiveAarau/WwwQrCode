@@ -433,7 +433,7 @@ function generateQrCodeOnePersonDataUrl(i_qr_text)
     g_object_generate_qr_code.set
     (
         {
-            foreground: 'black',
+            foreground: QrStrings.getBackgroundColor(),
             size: QrStrings.getCanvasSizeForDataUrl(),
             value: i_qr_text
         }
