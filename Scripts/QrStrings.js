@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-17
+// Date: 2022-05-18
 // Author: Gunnar Lidén
 
 // File content
@@ -36,9 +36,9 @@ class QrStrings
 
         ret_htm = ret_htm + 'Bitte dieser Link ' + 
             '<a href="https://jazzliveaarau.ch/QrCode/QrCodeShow.htm">https://jazzliveaarau.ch/QrCode/QrCodeShow.htm</a>' + 
-            ' klicken' + '<br>';
+            ' klicken' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Danach dieser Herunterladen-Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
+        ret_htm = ret_htm + 'Danach dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
 
         ret_htm = ret_htm + 'Grüsse ' + '<br>' + '<br>';
 

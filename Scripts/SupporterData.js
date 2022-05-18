@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-17
+// Date: 2022-05-18
 // Author: Gunnar Lidén
 
 // File content
@@ -195,6 +195,8 @@ function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_a
     if (n_to_reg == 0)
     {
         QrProgress.Append("registerAndUploadQrFilesXmlSupporter No files to register");  
+
+        alert("registerAndUploadQrFilesXmlSupporter No files to register");
         
         return;
     }
@@ -203,13 +205,24 @@ function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_a
 
     QrProgress.Append("Index for the first  file to register is " + i_files_to_register[0].toString());
 
-    n_to_reg = 2; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    if (n_to_reg > 2)
+    {
+        n_to_reg = 2; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    }
 
     for (var index_reg = 0; index_reg < n_to_reg; index_reg++)
     {
         var index_supporter_data = i_files_to_register[index_reg];
 
         var supporter_data = i_supporter_array[index_supporter_data];
+
+        if (supporter_data == null)
+        {
+            alert("registerAndUploadQrFiles SupporterData object is null. n_to_reg= " + i_files_to_register.length.toString() + 
+            ' Debug n_to_reg= ' + n_to_reg.toString() + ' index_reg= ' + n_to_reg.toString());
+    
+            return;
+        }
 
         i_qr_file_xml.appendNode();
 
@@ -232,7 +245,12 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
 {
     console.log("Enter setDataOfAppendedQrFilesNodeAndUploadSupporter");
 
-    //QQ var qr_strings = new QrStrings();
+    if (i_supporter_data == null)
+    {
+        alert("setDataOfAppendedQrFilesNodeAndUploadSupporter Input SupporterData object is null");
+
+        return;
+    }
 
 	var append_number_files = i_qr_file_xml.getNumberOfQrFiles();
 	

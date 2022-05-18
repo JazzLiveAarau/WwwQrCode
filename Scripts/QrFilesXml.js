@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-16
+// Date: 2022-05-18
 // Author: Gunnar Lidén
 
 // File content
@@ -502,12 +502,40 @@ class QrFilesXml
          
      } // setEmailSent
 
+     // Sets the email sent flag  for a given  QR File number (true or false)
+     setEmailSentBool(i_qr_file_number, i_b_sent)
+     {
+         if (i_b_sent)
+         {
+            this.setEmailSent(i_qr_file_number, "WAHR");
+         }
+         else
+         {
+            this.setEmailSent(i_qr_file_number, "FALSCH");
+         }
+         
+     } // setEmailSentBool
+
      // Sets the mail sent flag  for a given  QR File number (WAHR or FALSCH)
      setMailSent(i_qr_file_number, i_node_value)
      {
          this.setQrFileNodeValue(this.m_tags.getMailSent(), i_qr_file_number, i_node_value);
          
      } // setMailSent
+
+     // Sets the mail sent flag  for a given  QR File number (true or false)
+     setMailSentBool(i_qr_file_number, i_b_sent)
+     {
+         if (i_b_sent)
+         {
+            this.setMailSent(i_qr_file_number, "WAHR");
+         }
+         else
+        {
+            this.setMailSent(i_qr_file_number, "FALSCH");
+        }
+         
+     } // setMailSentBool
 
      // Sets the print sent flag  for a given  QR File number (WAHR or FALSCH)
      setPrintSent(i_qr_file_number, i_node_value)
@@ -723,7 +751,18 @@ class QrFilesXml
             b_ret_sent = true;
         }
 
-        if (b_supporter && !b_ret_sent)
+        // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ Email filter
+
+        var email_address = this.getEmail(i_file_number);
+        var b_email_address = false;
+
+        if (email_address.length != 0)
+        {
+            b_email_address = true;
+        }
+
+        if (b_supporter && !b_ret_sent && b_email_address) //  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ Email filter
+        // if (b_supporter && !b_ret_sent)
         {
             var index_add = ret_file_numbers.length;
 

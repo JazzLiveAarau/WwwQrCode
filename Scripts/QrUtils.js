@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-17
+// Date: 2022-05-18
 // Author: Gunnar Lidén
 
 // File content
@@ -300,9 +300,9 @@ function seasonStartYearJQueryPost(i_current_year, i_file_name_this, i_file_name
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Send email with the JQuery function "post"
-// The function returns false for failure
+// The callback function returns false for failure, i.e. i_callback_function_name(false)
 //    
-function sendEmailWithJQueryPostFunction(i_to, i_bcc, i_title_htm, i_msg_htm)
+function sendEmailWithJQueryPostFunction(i_to, i_bcc, i_title_htm, i_msg_htm, i_callback_function_name)
 {
     $.post
       ("Php/SendEmail.php", 
@@ -317,46 +317,49 @@ function sendEmailWithJQueryPostFunction(i_to, i_bcc, i_title_htm, i_msg_htm)
             if (status_send == "success")
             {
                 // alert("data_send= >" + data_send + "<");
-            }
+
+                // Additional characters in data_send ????? TODO
+                // includes() does not work in Internet Explorer
+                var b_ok = false;
+                var b_failure = false;
+                if (data_send.indexOf("MailIsSent") >= 0)
+                {
+                    b_ok = true;
+                }
+                if (data_send.indexOf("MailIsNotSent") >= 0)
+                {
+                    b_failure = true;
+                }
+                
+                if (b_ok)			
+                {
+                    // alert("E-Mail ist gesendet");
+
+                    i_callback_function_name(true);
+                }
+                else if (b_failure)
+                {
+                    alert("E-Mail ist nicht gesendet");
+
+                    i_callback_function_name(false);
+                }
+                else 
+                {
+                    alert("Fehler: data_send= " + data_send);
+
+                    i_callback_function_name(false);
+                }			
+
+            } // success
             else
             {
 				alert("Execution of SendEmail.php failed. status_send= " + status_send);
-				return;
+
+				i_callback_function_name(false);
             }   
 			
-			// Additional characters in data_send ????? TODO
-			// includes() does not work in Internet Explorer
-			var b_ok = false;
-			var b_failure = false;
-			if (data_send.indexOf("MailIsSent"))
-			{
-				b_ok = true;
-			}
-			if (data_send.indexOf("MailIsNotSent"))
-			{
-				b_failure = true;
-			}
-			
-			//QQ var b_ok = data_send.includes("MailIsSent");
-			//QQ var b_failure = data_send.includes("MailIsNotSent");
-			
-            if (b_ok)			
-            {
-               // alert("E-Mail ist gesendet");
-			}
-            else if (b_failure)
-            {
-               alert("TODO");
-			   return;
-			}
-            else 
-            {
-               alert("Fehler: data_send= " + data_send);
-			   return false;
-			}			
+
         });	
-	
-    return true;
 	
 } // sendEmailWithJQueryPostFunction
 

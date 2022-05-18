@@ -7,66 +7,6 @@
 //
 // Creation of QR Code files
 //
-// This is the way it works for the supporter QR codes
-// ---------------------------------------------------
-//
-// 1. Registration of the supporter contribution
-//
-// The supporter pays the "fee" and the jazz club register the amount
-// in the Windows application Adressen
-//
-// 2. Upload of XML file to the server directory QrCode/QrFiles/Season_20NN_20MM
-// 
-// An XML file is created witd data for all persons that have contributed to the
-// jazz club. Not only the persons that have paid enough to become a supporter.
-// The XML file is uploaded by the checkin (save) after any change.
-// To which season directory is dependent on the contribution. The first registered
-// sum determines the new 'current' season, i.e. probably short before the first
-// concert of the season.
-// The URL to the XML file is QrCode/QrFiles/Season_20NN_20MM/Supporter.xml
-//
-// 3. Determine the current/active season (g_season_start_year)
-//
-// A global parameter g_season_start_year holds the value for the active season.
-// The season start year is determined by the function getSeasonStartYear. Input
-// data to this function is the name of a callback function. It is a PHP function
-// Php/SeasonStartYear.php that determines the year and the further execution must
-// wait until the PHP function is executed.
-// It is the supporter XML file Season_20NN_20MM/Supporter.xml that determines 
-// the start year. The PHP function tested with the current date year and the
-// previous year. If there is a Supporter.xml file in the season directory with
-// current year as season start year then current date year will be returned.
-// If not, the previous year will be returned.
-//
-// 4. Load of the QR files XML file (QrFiles.xml)
-//
-// For each supporter (each object in array g_supporter_data_array) an image file
-// with the QR code and a text file with the text of the QR be created in the 
-// directory QrCode/QrFiles/Season_20NN_20MM.
-// The file QrFiles.xml (in the same folder) registers the names of all files that 
-// have been created. Not the full name though. Only the 'download code' that
-// the supporter become so that the QR code can be downloaded. The 'download code'
-// defines the file name.
-// The constructor function of class QrFilesXml loads the QR files XML file, i.e.
-// downloads the file and create an XML object corresponding to the XML file.
-// The function callbackSeasonStartYearFiles creates the QrFilesXml object
-//
-// 5. Load of the supporter XML file (Supporter.xml)
-//
-// The constructor function for class SupporterXml loads the file Supporter.xml.
-// The function afterLoadOfQrFilesXml creates the XML object, and the (callback)
-// function afterLoadOfSupporterXmlFile is called when the object is created
-// 
-// 6. Creation of an array SupporterData objects (g_supporter_data_array)
-//
-// There is a class SupporterData that hold information about a supporter.
-// Objects in the array g_supporter_data_array are only for persons that paid 
-// QrStrings.getSupporterContributionLimitValue() or more.
-// Function setSupporterDataArrayFromXmlObject creates g_supporter_data_array.
-// This function called by afterLoadOfSupporterXmlFile
-//
-// 7. Upload and register QR code files for new supporters
-//
 
 
 // References
@@ -343,21 +283,58 @@ function eventClickQrMusicianButton()
 // User clicked the send email button
 function eventClickQrSendEmailButton()
 {
+    if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
+    {
+        return;
+    }
+
+    var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
+    var download_code = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
+
+    var supporter_email = g_qr_files_xml_object.getEmail(g_files_active_number);
+
+    var send_bcc = 'qrcode@jazzliveaarau.ch';
+
+    if (supporter_email.length == 0)
+    {
+        alert("Keine E-Mail Adresse vorhanden!");
+
+        return;
+    }
+
+    var prompt_str = 'Diese E-Mail Adresse ' + supporter_email + 
+        ' wird nicht verwendet. Bitte eine Test-Adresse eingeben';
+
+    var test_address = prompt(prompt_str, 'gunnar@viewsoncad.ch');
+
+    if (test_address == null || test_address.trim().length == 0)
+    {
+        alert("Unvalid Test-Adresse");
+
+        return;
+    }
+
+    var b_execute_server = execApplicationOnServer();
+
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
         var send_to = 'gunnar@viewsoncad.ch';
 
-        var send_bcc = 'qrcode@jazzliveaarau.ch';
-
         var title_htm = QrStrings.getTitleSupporterEmail();
-
-        var supporter_name = 'Gunnar Lidén';
-
-        download_code = 'tZShP3S3';
 
         var msg_htm = QrStrings.getMsgSupporterEmail(supporter_name, download_code);
 
-        sendEmailWithJQueryPostFunction(send_to, send_bcc, title_htm, msg_htm);
+        if (!b_execute_server)
+        {
+            g_qr_files_xml_object.setEmailSentBool(g_files_active_number, true);
+
+            debugDisplayXmlAsText();
+
+            return;
+        }
+
+        sendEmailWithJQueryPostFunction(send_to, send_bcc, title_htm, msg_htm, callbackSendEmail);
 
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
@@ -366,6 +343,52 @@ function eventClickQrSendEmailButton()
     }
 
 } // eventClickQrSendEmailButton
+
+// Callback function for sendEmailWithJQueryPostFunction
+function callbackSendEmail(i_b_sent)
+{
+    if (i_b_sent)
+    {
+        g_qr_files_xml_object.setEmailSentBool(g_files_active_number, true);
+
+        g_qr_files_xml_object.saveXmlFileOnServer();
+
+        var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
+        alert("E-Mail an " + supporter_name + " ist gesendet");
+
+        if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
+        {
+            updateControlsAfterChangeOfQrFilesXmlSupporter();
+        }
+        else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
+        {
+            // setControlsMusician();
+        } 
+    }
+    else
+    {
+        alert("Error: E-Mail an " + supporter_name + " ist nicht sendet");
+    }
+
+} // callbackSendEmail
+
+function updateControlsAfterChangeOfQrFilesXmlSupporter()
+{
+    setSupporterDropdown();
+
+    option_number = 1;
+
+    g_files_active_number = getFileNumberFromDropdownNumber(option_number);
+
+    setControlsSupporter();
+
+    setStylesSupporter();
+
+    displayControlSupporters();
+
+    setCategoryButtonSupporterSelected();
+}
 
 // User clicked the send mail (post) button
 function eventClickQrSendPostButton()
