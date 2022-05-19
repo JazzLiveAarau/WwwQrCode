@@ -194,11 +194,9 @@ function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_a
 
     if (n_to_reg == 0)
     {
-        QrProgress.Append("registerAndUploadQrFilesXmlSupporter No files to register");  
-
-        alert("registerAndUploadQrFilesXmlSupporter No files to register");
+        QrProgress.Append("registerAndUploadQrFilesXmlSupporter No files to register");
         
-        return;
+        callbackAfterUpdateAndSaveOfQrFilesXml();
     }
 
     QrProgress.Append("Number of QR file to register and upload is " + n_to_reg.toString());

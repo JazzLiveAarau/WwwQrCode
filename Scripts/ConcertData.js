@@ -214,7 +214,7 @@ function registerAndUploadQrFilesXmlMusician(i_register_cm_data_array, i_concert
     {
         QrProgress.Append("registerAndUploadQrFilesXmlMusician No files to register");  
         
-        return;
+        return; // No callback function is called from this function
     }
 
     if (n_to_reg > 4)
