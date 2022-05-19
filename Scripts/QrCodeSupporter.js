@@ -162,7 +162,7 @@ function generateQrCodeOneSupporterImageData(i_name_str, i_season_str)
     g_object_generate_qr_code.set
     (
         {
-            foreground: QrStrings.getBackgroundColor(),
+            foreground: getSeasonColorInLocalStorage(),
             size: getSupporterCanvasSize(),
             value: qr_text
         }
@@ -185,7 +185,7 @@ function generateQrCodeOneSupporterDataUrl(i_name_str, i_season_str)
     g_object_generate_qr_code.set
     (
         {
-            foreground: QrStrings.getBackgroundColor(),
+            foreground: getSeasonColorInLocalStorage(),
             size: getSupporterCanvasSize(),
             value: qr_text
         }

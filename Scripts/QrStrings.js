@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-18
+// Date: 2022-05-19
 // Author: Gunnar Lidén
 
 // File content
@@ -179,12 +179,17 @@ class QrStrings
     ///////////////////////// Start Color Strings /////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    static getBackgroundColor()
+    static getQrCodeColorInitValue()
     {
         return 'rgb(23, 24, 225)';
 
-    } // getBackgroundColor
+    } // getQrCodeColorInitValue
 
+    static getBackgroundColor()
+    {
+        return 'rgb(223, 224, 225)';
+
+    } // getBackgroundColor
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Color Strings ///////////////////////////////

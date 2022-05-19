@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-18
+// Date: 2022-05-19
 // Author: Gunnar Lidén
 
 // File content
@@ -581,7 +581,7 @@ function initQrCodeDataInLocalStorage(i_download_code)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Initial season color
-var g_qr_season_color_init = QrStrings.getBackgroundColor();
+var g_qr_season_color_init = QrStrings.getQrCodeColorInitValue();
 
 // windows.localStorage key for the season color
 var g_local_storage_qr_season_color = 'qr_season_color';

@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-17
+// Date: 2022-05-19
 // Author: Gunnar Lidén
 
 // File content
@@ -368,7 +368,7 @@ function callbackSendEmail(i_b_sent)
     }
     else
     {
-        alert("Error: E-Mail an " + supporter_name + " ist nicht sendet");
+        alert("Error: E-Mail an " + supporter_name + " ist nicht gesendet");
     }
 
 } // callbackSendEmail
@@ -433,7 +433,7 @@ function generateQrCodeOnePersonDataUrl(i_qr_text)
     g_object_generate_qr_code.set
     (
         {
-            foreground: QrStrings.getBackgroundColor(),
+            foreground: getSeasonColorInLocalStorage(),
             size: QrStrings.getCanvasSizeForDataUrl(),
             value: i_qr_text
         }
