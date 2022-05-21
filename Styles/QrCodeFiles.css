@@ -376,6 +376,55 @@ PagePrint
     clear: both;
 }
 
+
+.cl_div_alt_one_container_to_address
+{
+    position: relative;
+    top: 18mm;
+    left: 1%;
+    height: 131mm;
+    width: 98%;
+    border-bottom: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_to_address
+{
+    position: relative;
+    top: 50mm;
+    left: 105mm;
+    height: 40mm;
+    width: 60mm;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_container_from_address
+{
+    position: relative;
+    bottom: 18mm;
+    left: 1%;
+    height: 131mm;
+    width: 98%;
+    border-top: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_two_from_address
+{
+    position: relative;
+    top: 50mm;
+    left: 105mm;
+    height: 40mm;
+    width: 60mm;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
 @media print 
 {
     body, PagePrint 
