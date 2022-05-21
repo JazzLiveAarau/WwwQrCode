@@ -63,11 +63,15 @@ function setWidthsHeightsMarginsAltOne()
 
     var message_height = 70.0;
 
+    var message_width = 120.0;
+
     var message_top = 31.0;
 
     var container_lower_bottom = 0.0;
 
     var qr_card_height = 50.0;
+
+    var two_qr_card_width = 2.0*80.0 + 1.0;
    
     // ---------------------------
 
@@ -99,6 +103,10 @@ function setWidthsHeightsMarginsAltOne()
 
     el_message.style.top = scaleHeightValueConvertToMmm(message_top, scale_factor);
 
+    el_message.style.width = getWidthInPercentage(message_width);
+
+    el_message.style.left = getLeftInPercentage(message_width);
+
     // ---------------------------
 
     var el_container_qr_code = getElementDivAltOneContainerQrCode();
@@ -113,9 +121,11 @@ function setWidthsHeightsMarginsAltOne()
 
     el_two_qr_cards.style.bottom = scaleHeightValueConvertToMmm(lower_margin_bottom, scale_factor);
 
-    // ---------------------------
+    el_two_qr_cards.style.width = getWidthInPercentage(two_qr_card_width);
 
-    var el_page_two = getElementDivQrPrintPageTwo();
+    el_two_qr_cards.style.left = getLeftInPercentage(two_qr_card_width);
+
+    // ---------------------------
 
 } // setWidthsHeightsMarginsAltOne
 
@@ -125,6 +135,34 @@ function scaleHeightValueConvertToMmm(i_height_value, i_scale_factor)
     return ret_value = i_height_value*i_scale_factor.toString() + 'mm';
 
 } // scaleHeightValueConvertToMmm
+
+// Calculates width in percentage and returns the value as string
+function getWidthInPercentage(i_width_mm)
+{
+    var a4_width = 210.0;
+
+    var percentage_width_int = parseInt((i_width_mm/a4_width*100.0));
+
+    var percentage_width_str = percentage_width_int.toString() + '%';
+
+    return percentage_width_str;
+
+} // getWidthInPercentage
+
+// Calculates width in percentage and returns the value as string
+function getLeftInPercentage(i_width_mm)
+{
+    var a4_width = 210.0;
+
+    var dist_left_mm = (a4_width - i_width_mm)/2.0;
+
+    var percentage_left_int = parseInt((dist_left_mm/a4_width*100.0));
+
+    var percentage_left_str = percentage_left_int.toString() + '%';
+
+    return percentage_left_str;
+
+} // getLeftInPercentage
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Heights Margins Functions ///////////////////////////////
