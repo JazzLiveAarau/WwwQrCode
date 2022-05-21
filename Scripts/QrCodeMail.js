@@ -47,107 +47,84 @@ function setPrintPageOneAlternativeOne(i_supporter_data, i_season_str)
 // Set widths, heights and margins for alternative one
 function setWidthsHeightsMarginsAltOne()
 {
-    var scale_factor = 1.15;
+    var scale_factor = 1.16;
 
     var a4_height = 297.0;
 
-    // ---------------------------
+    var margin_height = 17.25;
 
-    var el_page_one = getElementDivQrPrintPageOne();
+    var upper_margin_top = 0.7;
 
-    var padding_first = 0.7;
+    var lower_margin_bottom = upper_margin_top;
 
-    var padding_first_scale = padding_first*scale_factor;
+    var container_height = (a4_height - 2.0*margin_height - upper_margin_top - lower_margin_bottom)/2.0;
 
-    var padding_first_str = padding_first_scale.toString() + 'mm';
+    var container_upper_top = 0.0;
 
-    el_page_one.style.paddingTop =  padding_first_str;
+    var message_height = 70.0;
 
+    var message_top = 31.0;
+
+    var container_lower_bottom = 0.0;
+
+    var qr_card_height = 50.0;
+   
     // ---------------------------
 
     var el_upper_margin = getElementDivAltOneUpperMargin();
 
-    var margin_height = 17.25;
+    el_upper_margin.style.height =  scaleHeightValueConvertToMmm(margin_height, scale_factor);
 
-    var margin_height_scale = margin_height*scale_factor;
-
-    var margin_height_str = margin_height_scale.toString() + 'mm';
-
-    el_upper_margin.style.height =  margin_height_str;
-
-    // ---------------------------
-
-    var margin_top_msg = 31.0;
-
-    var container_height = 131.0;
-
-    var message_height = 70.0;
-
-
-    var margin_top_msg_scaled = margin_top_msg*scale_factor;
-
-    var container_height_scaled = container_height*scale_factor;
-
-    var message_height_scaled = message_height*scale_factor;
-
-
-    var margin_top_msg_str = margin_top_msg_scaled.toString() + 'mm';
-
-    var container_height_str = container_height_scaled.toString() + 'mm';
-
-    var message_height_str = message_height_scaled.toString() + 'mm';
-
-
-    var el_container_msg = getElementDivAltOneContainerMsg();
-
-    var el_message = getElementDivAltOneMessage();
-
-    el_message.style.height = message_height_str;
-
-    el_container_msg.style.height = container_height_str;
-
-    //QQQ el_container_msg.style.paddingTop = margin_top_msg_str;
-
-    el_message.style.marginTop = margin_top_msg_str;
-
-    // ---------------------------
-/*
-    var el_container_qr_code = getElementDivAltOneContainerQrCode();
-
-    el_container_qr_code.style.height = container_height_str;
-
-    var qr_card_height = 50.0;
-
-    var qr_card_height_scaled = qr_card_height*scale_factor;
-
-    var qr_card_height_str = qr_card_height_scaled.toString() + 'mm';
-
-    var el_two_qr_cards = getElementDivAltOneTwoQrCards();
-
-    el_two_qr_cards.style.height = qr_card_height_str;
-
-    el_two_qr_cards.style.marginTop = margin_top_msg_str; // Should perhaps be different
+    el_upper_margin.style.top =  scaleHeightValueConvertToMmm(upper_margin_top, scale_factor);
 
     // ---------------------------
 
     var el_lower_margin = getElementDivAltOneLowerMargin();
 
-    el_lower_margin.style.height =  margin_height_str;
+    el_lower_margin.style.height =  scaleHeightValueConvertToMmm(margin_height, scale_factor);
 
-    var margin_top = a4_height - padding_first - margin_height - container_height - margin_top_msg - container_height - margin_height;
+    el_lower_margin.style.bottom = scaleHeightValueConvertToMmm(lower_margin_bottom, scale_factor);
 
-    var margin_top_scale = margin_top*scale_factor;
+    // ---------------------------
 
-    var margin_top_scale_str = margin_top_scale.toString() + 'mm';
+    var el_container_msg = getElementDivAltOneContainerMsg();
 
-    el_lower_margin.style.marginTop = margin_top_scale_str;
+    el_container_msg.style.height = scaleHeightValueConvertToMmm(container_height, scale_factor);
+
+    el_container_msg.style.top = scaleHeightValueConvertToMmm(container_upper_top, scale_factor);
+
+    var el_message = getElementDivAltOneMessage();
+
+    el_message.style.height = scaleHeightValueConvertToMmm(message_height, scale_factor);
+
+    el_message.style.top = scaleHeightValueConvertToMmm(message_top, scale_factor);
+
+    // ---------------------------
+
+    var el_container_qr_code = getElementDivAltOneContainerQrCode();
+
+    el_container_qr_code.style.height = scaleHeightValueConvertToMmm(container_height, scale_factor);
+
+    el_container_qr_code.style.bottom = scaleHeightValueConvertToMmm(container_lower_bottom, scale_factor);
+
+    var el_two_qr_cards = getElementDivAltOneTwoQrCards();
+
+    el_two_qr_cards.style.height = scaleHeightValueConvertToMmm(qr_card_height, scale_factor);
+
+    el_two_qr_cards.style.bottom = scaleHeightValueConvertToMmm(lower_margin_bottom, scale_factor);
 
     // ---------------------------
 
     var el_page_two = getElementDivQrPrintPageTwo();
-*/
 
 } // setWidthsHeightsMarginsAltOne
+
+// Scales a height value and makes it a millimeter string
+function scaleHeightValueConvertToMmm(i_height_value, i_scale_factor)
+{
+    return ret_value = i_height_value*i_scale_factor.toString() + 'mm';
+
+} // scaleHeightValueConvertToMmm
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Heights Margins Functions ///////////////////////////////
@@ -176,7 +153,7 @@ function getElementPrintPageOneAlternativeOneString(i_supporter_data, i_season_s
 
     ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
 
-    // ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerQrCodeString(i_tab + 1);
+    ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerQrCodeString(i_tab + 1);
 
     ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
 	

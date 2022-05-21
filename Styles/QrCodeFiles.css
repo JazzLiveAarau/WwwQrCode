@@ -289,7 +289,6 @@ textarea
 {
     height: auto;
     width: auto;
-    /* border: 1px dotted black; */
     overflow: hidden;
     clear: both;
 }
@@ -307,9 +306,11 @@ PagePrint
 
 .cl_div_alt_one_upper_margin
 {
+    position: relative;
+    top: 1mm;
+    left: 1%;
     height: 17mm;
     width: 98%;
-    margin-left: 1%;
     border: 1px dotted black;
     text-align: center;
     clear: both;
@@ -317,9 +318,11 @@ PagePrint
 
 .cl_div_alt_one_container_msg
 {
+    position: relative;
+    top: 18mm;
+    left: 1%;
     height: 131mm;
     width: 98%;
-    margin-left: 1%;
     border-bottom: 1px dotted black;
     text-align: center;
     clear: both;
@@ -327,9 +330,11 @@ PagePrint
 
 .cl_div_alt_one_message
 {
+    position: relative;
+    top: 31mm;
+    left: 21%;
     height: 70mm;
     width: 57%;
-    margin-left: 21%;
     border: 1px dotted black;
     text-align: center;
     clear: both;
@@ -337,9 +342,11 @@ PagePrint
 
 .cl_div_alt_one_container_qr_code
 {
+    position: relative;
+    bottom: 18mm;
+    left: 1%;
     height: 131mm;
     width: 98%;
-    margin-left: 1%;
     border-top: 1px dotted black;
     text-align: center;
     clear: both;
@@ -347,9 +354,11 @@ PagePrint
 
 .cl_div_alt_one_two_qr_cards
 {
+    position: relative;
+    top: 31mm;
+    left: 11%;
     height: 50mm;
     width: 77%;
-    margin-left: 11%;
     border: 1px dotted black;
     text-align: center;
     clear: both;
@@ -357,9 +366,11 @@ PagePrint
 
 .cl_div_alt_one_lower_margin
 {
+    position: relative;
+    bottom: 1mm;
+    left: 1%;
     height: 17mm;
     width: 98%;
-    margin-left: 1%;
     border: 1px dotted black;
     text-align: center;
     clear: both;
