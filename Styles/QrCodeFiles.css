@@ -1,5 +1,5 @@
 /* 
-File: QrCodeFiles.css Date: 2022-05-17 Author: Gunnar Lidén
+File: QrCodeFiles.css Date: 2022-05-21 Author: Gunnar Lidén
 
 General information
 ===================
@@ -283,4 +283,103 @@ body
 textarea
 {
     margin-top: 60px;
+}
+
+.cl_div_qr_print_page
+{
+    height: auto;
+    width: auto;
+    /* border: 1px dotted black; */
+    overflow: hidden;
+    clear: both;
+}
+
+/* Size and background color (white) of the A4 pages that shall be printed.  */
+/* Format A4 is 210 mm X 297 mm                                              */
+PagePrint 
+{
+    background: white;
+    display: block;
+    margin: 0mm;
+    width: 210mm;
+    height: 297mm;  
+}
+
+.cl_div_alt_one_upper_margin
+{
+    height: 17mm;
+    width: 98%;
+    margin-left: 1%;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_container_msg
+{
+    height: 131mm;
+    width: 98%;
+    margin-left: 1%;
+    border-bottom: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_message
+{
+    height: 70mm;
+    width: 57%;
+    margin-left: 21%;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_container_qr_code
+{
+    height: 131mm;
+    width: 98%;
+    margin-left: 1%;
+    border-top: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_two_qr_cards
+{
+    height: 50mm;
+    width: 77%;
+    margin-left: 11%;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_alt_one_lower_margin
+{
+    height: 17mm;
+    width: 98%;
+    margin-left: 1%;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
+@media print 
+{
+    body, PagePrint 
+    {
+      margin: 0;
+      box-shadow: 0;
+    }
+}
+  
+@media print 
+{
+    #Header, #Footer { display: none !important; }
+}
+
+@media print 
+{
+.page-break { display: block; page-break-before: always; }
 }

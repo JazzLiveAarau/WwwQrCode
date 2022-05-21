@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-05-10
+// Date: 2022-05-20
 // Author: Gunnar Lidén
 
 // File content

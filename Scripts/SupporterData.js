@@ -1,5 +1,5 @@
 // File: SupporterData.js
-// Date: 2022-05-18
+// Date: 2022-05-21
 // Author: Gunnar Lidén
 
 // File content
@@ -197,6 +197,8 @@ function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_a
         QrProgress.Append("registerAndUploadQrFilesXmlSupporter No files to register");
         
         callbackAfterUpdateAndSaveOfQrFilesXml();
+
+        return;
     }
 
     QrProgress.Append("Number of QR file to register and upload is " + n_to_reg.toString());
