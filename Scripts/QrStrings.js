@@ -81,6 +81,29 @@ class QrStrings
 
     } // getTitleSupporterEmail
 
+    static getToAddressSupporter(i_supporter_name, i_full_address_htm)
+    {
+        var ret_htm = '';
+
+        ret_htm = ret_htm + i_supporter_name + '<br>';
+
+        ret_htm = ret_htm + i_full_address_htm;
+
+        return ret_htm;
+
+    } // getToAddressSupporter
+
+    static getFromAddressSupporter(i_user_member_name_address)
+    {
+        var ret_htm = '';
+
+        ret_htm = ret_htm + 'JAZZ <i>live</i> AARAU' + ', ';
+
+        ret_htm = ret_htm + i_user_member_name_address;
+
+        return ret_htm;
+
+    } // getFromAddressSupporter
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Supporter Mails /////////////////////////////

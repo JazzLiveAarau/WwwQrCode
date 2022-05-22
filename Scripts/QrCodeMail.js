@@ -415,13 +415,19 @@ function getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_tab)
 
     var cl_div_to_address = getClassDivAltOneToAddress();
 
+    var supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number); // TODO Case two persons
+
+    var full_address_html = i_qr_xml.getFullAddressHtml(i_file_number);
+
+    var to_address_str = QrStrings.getToAddressSupporter(supporter_name, full_address_html);
+
     ret_to_address_str = ret_to_address_str + getTabs(i_tab);
 
     ret_to_address_str = ret_to_address_str + getDivStartString(id_div_to_address, cl_div_to_address);
 
     ret_to_address_str = ret_to_address_str + getNewLineString();
 	
-	ret_to_address_str = ret_to_address_str + getTabs(i_tab + 1) + '<br><br>To address' + getNewLineString();
+	ret_to_address_str = ret_to_address_str + getTabs(i_tab + 1) + to_address_str + getNewLineString();
 
     ret_to_address_str = ret_to_address_str + getTabs(i_tab);
 
@@ -438,6 +444,8 @@ function getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_from_address_str = '';
 
+    var from_address = QrStrings.getFromAddressSupporter(g_user_member_name_address);
+
     var id_div_from_address = getIdDivAltOneFromAddress();
 
     var cl_div_from_address = getClassDivAltOneFromAddress();
@@ -448,7 +456,7 @@ function getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_tab)
 
     ret_from_address_str = ret_from_address_str + getNewLineString();
 	
-	ret_from_address_str = ret_from_address_str + getTabs(i_tab + 1) + '<br><br>From address' + getNewLineString();
+	ret_from_address_str = ret_from_address_str + getTabs(i_tab + 1) + QrStrings.getFromAddressSupporter(g_user_member_name_address) + getNewLineString();
 
     ret_from_address_str = ret_from_address_str + getTabs(i_tab);
 
@@ -518,9 +526,9 @@ function setWidthsHeightsMarginsAltOne()
 
     var to_adress_left = a4_width - to_address_right - to_address_width;
 
-    var from_address_height = 40.0;
+    var from_address_height = 20.0;
 
-    var from_address_width = 60.0;
+    var from_address_width = 180.0;
 
     var from_address_bottom = 15.0;
 
@@ -587,8 +595,6 @@ function setWidthsHeightsMarginsAltOne()
 
     el_message.style.top = scaleHeightValueConvertToMmm(message_top, scale_factor);
 
-    //QQQ el_message.style.width = getWidthInPercentage(message_width);
-
     el_message.style.width = scaleHeightValueConvertToMmm(message_width, scale_factor);
 
     el_message.style.left = getLeftDistanceForCentrePosition(message_width);
@@ -613,8 +619,6 @@ function setWidthsHeightsMarginsAltOne()
 
     el_two_qr_cards.style.left = getLeftDistanceForCentrePosition(two_qr_card_width);
 
-    // ---------------------------
-
 
     // ---------------------------
 
@@ -632,7 +636,6 @@ function setWidthsHeightsMarginsAltOne()
 
     el_lower_margin_page_two.style.bottom = scaleHeightValueConvertToMmm(lower_margin_bottom, scale_factor);
 
-    // ---------------------------
 
    // ---------------------------
 
@@ -647,10 +650,6 @@ function setWidthsHeightsMarginsAltOne()
    el_to_address.style.height = scaleHeightValueConvertToMmm(to_address_height, scale_factor);
 
    el_to_address.style.top = scaleHeightValueConvertToMmm(to_address_top, scale_factor);
-
-   //el_to_address.style.width = getWidthInPercentage(to_address_width);
-
-   // el_to_address.style.left = getWidthInPercentage(to_adress_left);
 
    el_to_address.style.width = scaleHeightValueConvertToMmm(to_address_width, scale_factor);
 
@@ -669,10 +668,6 @@ function setWidthsHeightsMarginsAltOne()
    el_two_from_address.style.height = scaleHeightValueConvertToMmm(from_address_height, scale_factor);
 
    el_two_from_address.style.top = scaleHeightValueConvertToMmm(from_address_top, scale_factor);
-
-   //QQ el_two_from_address.style.width = getWidthInPercentage(from_address_width);
-
-   //QQ el_two_from_address.style.left = getWidthInPercentage(from_adress_left);
 
    el_two_from_address.style.width = scaleHeightValueConvertToMmm(from_address_width, scale_factor);
 
@@ -707,13 +702,8 @@ function getLeftDistanceForCentrePosition(i_width_mm)
 
     var dist_left_mm = (a4_width - i_width_mm)/2.0;
 
-    //QQ var percentage_left_int = parseInt((dist_left_mm/a4_width*100.0));
-
-    //QQ var percentage_left_str = percentage_left_int.toString() + '%';
-
     var mm_left_str = dist_left_mm.toString() + 'mm';
 
-    //QQ return percentage_left_str;
     return mm_left_str;
 
 } // getLeftDistanceForCentrePosition

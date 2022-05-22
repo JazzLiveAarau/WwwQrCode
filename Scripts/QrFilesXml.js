@@ -1054,6 +1054,21 @@ class QrFilesXml
         
     } // getFullAddress
 
+
+    getFullAddressHtml(i_qr_file_number)
+    {
+        var street = this.getStreet(i_qr_file_number);
+
+        var house_number = this.getHouseNumber(i_qr_file_number);
+
+        var postal_code = this.getPostalCode(i_qr_file_number);
+
+        var domicil = this.getDomicil(i_qr_file_number);
+
+        return street + ' ' + house_number + '<br>' + postal_code + ' ' + domicil;
+        
+    } // getFullAddressHtml
+
     getQrCategoryString(i_qr_file_number)
     {
         var ret_category_str = 'Undefined';

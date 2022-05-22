@@ -348,7 +348,6 @@ PagePrint
     height: 131mm;
     width: 98%;
     border-top: 1px dotted black;
-    text-align: center;
     clear: both;
 }
 
@@ -385,7 +384,6 @@ PagePrint
     height: 131mm;
     width: 98%;
     border-bottom: 1px dotted black;
-    text-align: center;
     clear: both;
 }
 
@@ -396,8 +394,8 @@ PagePrint
     left: 105mm;
     height: 40mm;
     width: 60mm;
-    border: 1px dotted black;
-    text-align: center;
+    /*  border: 1px dotted black;  */
+    text-align: left;
     clear: both;
 }
 
@@ -408,6 +406,8 @@ PagePrint
     left: 1%;
     height: 131mm;
     width: 98%;
+    font-size: 10px;
+    font-weight: bold;
     border-top: 1px dotted black;
     text-align: center;
     clear: both;
@@ -420,8 +420,8 @@ PagePrint
     left: 105mm;
     height: 40mm;
     width: 60mm;
-    border: 1px dotted black;
-    text-align: center;
+    /* border: 1px dotted black; */
+    text-align: left;
     clear: both;
 }
 
