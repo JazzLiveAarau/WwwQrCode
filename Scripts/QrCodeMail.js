@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Set print page one alternative one
-function setPrintPageOneAlternativeOne(i_supporter_data, i_season_str)
+function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number, i_b_person_two)
 {
     var n_tabs = 2;
 
@@ -20,9 +20,9 @@ function setPrintPageOneAlternativeOne(i_supporter_data, i_season_str)
 
     var el_page_two = getElementDivQrPrintPageTwo();
 
-    var content_page_one_alternative_one = getElementPrintPageOneAlternativeOneString(i_supporter_data, i_season_str, n_tabs);
+    var content_page_one_alternative_one = getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, n_tabs);
 
-    var content_page_two_alternative_one = getElementPrintPageTwoAlternativeOneString(i_supporter_data, i_season_str, n_tabs);
+    var content_page_two_alternative_one = getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, n_tabs);
 
     el_page_one.innerHTML = content_page_one_alternative_one;
 
@@ -39,6 +39,429 @@ function setPrintPageOneAlternativeOne(i_supporter_data, i_season_str)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Get Html Print Page Strings ///////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Get the string that defines the PrintPage element for page one alternative one
+function getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_print_page_one_str = '';
+
+    ret_print_page_one_str = ret_print_page_one_str + getTabs(i_tab);
+
+    ret_print_page_one_str = ret_print_page_one_str + '<PrintPage>';
+
+    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
+	
+	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneUpperMarginString(i_tab + 1);
+
+    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
+	
+	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
+
+    ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
+	
+	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneLowerMarginString(i_tab + 1);
+
+    ret_print_page_one_str = ret_print_page_one_str + getTabs(i_tab);
+
+    ret_print_page_one_str = ret_print_page_one_str + '</PrintPage>';;
+
+    ret_print_page_one_str = ret_print_page_one_str + getNewLineString() + getNewLineString();
+
+    return ret_print_page_one_str;
+
+} // getElementPrintPageOneAlternativeOneString
+
+// Get the string that defines the PrintPage element for page two alternative one
+function getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_print_page_two_str = '';
+
+    ret_print_page_two_str = ret_print_page_two_str + getTabs(i_tab);
+
+    ret_print_page_two_str = ret_print_page_two_str + '<PrintPage>';
+
+    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
+	
+	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneUpperMarginPageTwoString(i_tab + 1);
+
+    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
+	
+	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
+
+    ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
+	
+	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneLowerMarginPageTwoString(i_tab + 1);
+
+    ret_print_page_two_str = ret_print_page_two_str + getTabs(i_tab);
+
+    ret_print_page_two_str = ret_print_page_two_str + '</PrintPage>';;
+
+    ret_print_page_two_str = ret_print_page_two_str + getNewLineString() + getNewLineString();
+
+    return ret_print_page_two_str;
+
+} // getElementPrintPageTwoAlternativeOneString
+
+// Get the string that defines the div alternative one upper margin
+function getElementDivAltOneUpperMarginString(i_tab)
+{
+    var ret_upper_margin_str = '';
+
+    var id_div_upper_margin = getIdDivAltOneUpperMargin();
+
+    var cl_div_upper_margin = getClassDivAltOneUpperMargin();
+
+    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
+
+    ret_upper_margin_str = ret_upper_margin_str + getDivStartString(id_div_upper_margin, cl_div_upper_margin);
+
+    ret_upper_margin_str = ret_upper_margin_str + getNewLineString();
+	
+	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '<br><br>Upper margin' + getNewLineString();
+
+    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
+
+    ret_upper_margin_str = ret_upper_margin_str + getDivEndString(id_div_upper_margin, cl_div_upper_margin);
+
+    ret_upper_margin_str = ret_upper_margin_str + getNewLineString() + getNewLineString();
+
+    return ret_upper_margin_str;
+
+} // getElementDivAltOneUpperMarginString
+
+// Get the string that defines the div alternative one upper margin for page two
+function getElementDivAltOneUpperMarginPageTwoString(i_tab)
+{
+    var ret_upper_margin_str = '';
+
+    var id_div_upper_margin = getIdDivAltOneUpperMarginPageTwo();
+
+    var cl_div_upper_margin = getClassDivAltOneUpperMargin();
+
+    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
+
+    ret_upper_margin_str = ret_upper_margin_str + getDivStartString(id_div_upper_margin, cl_div_upper_margin);
+
+    ret_upper_margin_str = ret_upper_margin_str + getNewLineString();
+	
+	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '<br><br>Upper margin' + getNewLineString();
+
+    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
+
+    ret_upper_margin_str = ret_upper_margin_str + getDivEndString(id_div_upper_margin, cl_div_upper_margin);
+
+    ret_upper_margin_str = ret_upper_margin_str + getNewLineString() + getNewLineString();
+
+    return ret_upper_margin_str;
+
+} // getElementDivAltOneUpperMarginPageTwoString
+
+// Get the string that defines the div alternative one lower margin
+function getElementDivAltOneLowerMarginString(i_tab)
+{
+    var ret_lower_margin_str = '';
+
+    var id_div_lower_margin = getIdDivAltOneLowerMargin();
+
+    var cl_div_lower_margin = getClassDivAltOneLowerMargin();
+
+    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
+
+    ret_lower_margin_str = ret_lower_margin_str + getDivStartString(id_div_lower_margin, cl_div_lower_margin);
+
+    ret_lower_margin_str = ret_lower_margin_str + getNewLineString();
+	
+	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + 'Lower margin' + getNewLineString();
+
+    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
+
+    ret_lower_margin_str = ret_lower_margin_str + getDivEndString(id_div_lower_margin, cl_div_lower_margin);
+
+    ret_lower_margin_str = ret_lower_margin_str + getNewLineString() + getNewLineString();
+
+    return ret_lower_margin_str;
+
+} // getElementDivAltOneLowerMarginString
+
+// Get the string that defines the div alternative one lower margin for page two
+function getElementDivAltOneLowerMarginPageTwoString(i_tab)
+{
+    var ret_lower_margin_str = '';
+
+    var id_div_lower_margin = getIdDivAltOneLowerMarginPageTwo();
+
+    var cl_div_lower_margin = getClassDivAltOneLowerMargin();
+
+    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
+
+    ret_lower_margin_str = ret_lower_margin_str + getDivStartString(id_div_lower_margin, cl_div_lower_margin);
+
+    ret_lower_margin_str = ret_lower_margin_str + getNewLineString();
+	
+	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + 'Lower margin' + getNewLineString();
+
+    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
+
+    ret_lower_margin_str = ret_lower_margin_str + getDivEndString(id_div_lower_margin, cl_div_lower_margin);
+
+    ret_lower_margin_str = ret_lower_margin_str + getNewLineString() + getNewLineString();
+
+    return ret_lower_margin_str;
+
+} // getElementDivAltOneLowerMarginPageTwoString
+
+// Get the string that defines the div alternative one container message
+function getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_container_msg_str = '';
+
+    var id_div_container_msg = getIdDivAltOneContainerMsg();
+
+    var cl_div_container_msg = getClassDivAltOneContainerMsg();
+
+    ret_container_msg_str = ret_container_msg_str + getTabs(i_tab);
+
+    ret_container_msg_str = ret_container_msg_str + getDivStartString(id_div_container_msg, cl_div_container_msg);
+
+    ret_container_msg_str = ret_container_msg_str + getNewLineString();
+	
+	ret_container_msg_str = ret_container_msg_str + getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_container_msg_str = ret_container_msg_str + getTabs(i_tab);
+
+    ret_container_msg_str = ret_container_msg_str + getDivEndString(id_div_container_msg, cl_div_container_msg);
+
+    ret_container_msg_str = ret_container_msg_str + getNewLineString() + getNewLineString();
+
+    return ret_container_msg_str;
+
+} // getElementDivAltOneContainerMsgString
+
+// Get the string that defines the div alternative one container QR code
+function getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_container_qr_code_str = '';
+
+    var id_div_container_qr_code = getIdDivAltOneContainerQrCode();
+
+    var cl_div_container_qr_code = getClassDivAltOneContainerQrCode();
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getTabs(i_tab);
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getDivStartString(id_div_container_qr_code, cl_div_container_qr_code);
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getNewLineString();
+	
+	ret_container_qr_code_str = ret_container_qr_code_str + getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getTabs(i_tab);
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getDivEndString(id_div_container_qr_code, cl_div_container_qr_code);
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getNewLineString() + getNewLineString();
+
+    return ret_container_qr_code_str;
+
+} // getElementDivAltOneContainerQrCodeString
+
+// Get the string that defines the div alternative one message
+function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_message_str = '';
+
+    var supporter_name = '';
+
+    var download_code = '';
+
+    if (!i_b_person_two)
+    {
+        supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number);
+
+        download_code = i_qr_xml.getDownloadOne(i_file_number);
+    }
+    else
+    {
+        supporter_name = i_qr_xml.getQrCodeNameTwo(i_file_number);
+
+        download_code = i_qr_xml.getDownloadTwo(i_file_number);
+    }
+
+    var message_str = '<br>Guten Tag ' + supporter_name + '<br><br>' + 'Hier kommt die Supporter Karte. ' + '<br><br>';
+
+    message_str = message_str + 'Herunterladen-Code für QR Code Anzeiger ist ' + download_code;
+
+    var id_div_message = getIdDivAltOneMessage();
+
+    var cl_div_message = getClassDivAltOneMessage();
+
+    ret_message_str = ret_message_str + getTabs(i_tab);
+
+    ret_message_str = ret_message_str + getDivStartString(id_div_message, cl_div_message);
+
+    ret_message_str = ret_message_str + getNewLineString();
+	
+	ret_message_str = ret_message_str + getTabs(i_tab + 1) + message_str + getNewLineString();
+
+    ret_message_str = ret_message_str + getTabs(i_tab);
+
+    ret_message_str = ret_message_str + getDivEndString(id_div_message, cl_div_message);
+
+    ret_message_str = ret_message_str + getNewLineString() + getNewLineString();
+
+    return ret_message_str;
+
+} // getElementDivAltOneMessageString
+
+// Get the string that defines the div alternative one two qr cards
+function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_message_str = '';
+
+    var id_div_message = getIdDivAltOneTwoQrCards();
+
+    var cl_div_message = getClassDivAltOneTwoQrCards();
+
+    ret_message_str = ret_message_str + getTabs(i_tab);
+
+    ret_message_str = ret_message_str + getDivStartString(id_div_message, cl_div_message);
+
+    ret_message_str = ret_message_str + getNewLineString();
+	
+	ret_message_str = ret_message_str + getTabs(i_tab + 1) + '<br><br>Two QR cards' + getNewLineString();
+
+    ret_message_str = ret_message_str + getTabs(i_tab);
+
+    ret_message_str = ret_message_str + getDivEndString(id_div_message, cl_div_message);
+
+    ret_message_str = ret_message_str + getNewLineString() + getNewLineString();
+
+    return ret_message_str;
+
+} // getElementDivAltOneTwoQrCardsString
+
+// Get the string that defines the div alternative one container to address
+function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_container_to_address_str = '';
+
+    var id_div_container_to_address = getIdDivAltOneContainerToAddress();
+
+    var cl_div_container_to_address = getClassDivAltOneContainerToAddress();
+
+    ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab);
+
+    ret_container_to_address_str = ret_container_to_address_str + getDivStartString(id_div_container_to_address, cl_div_container_to_address);
+
+    ret_container_to_address_str = ret_container_to_address_str + getNewLineString();
+	
+	ret_container_to_address_str = ret_container_to_address_str + getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab);
+
+    ret_container_to_address_str = ret_container_to_address_str + getDivEndString(id_div_container_to_address, cl_div_container_to_address);
+
+    ret_container_to_address_str = ret_container_to_address_str + getNewLineString() + getNewLineString();
+
+    return ret_container_to_address_str;
+
+} // getElementDivAltOneContainerToAddressString
+
+// Get the string that defines the div alternative one container from address
+function getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_container_from_address_str = '';
+
+    var id_div_container_from_address = getIdDivAltOneContainerFromAddress();
+
+    var cl_div_container_from_address = getClassDivAltOneContainerFromAddress();
+
+    ret_container_from_address_str = ret_container_from_address_str + getTabs(i_tab);
+
+    ret_container_from_address_str = ret_container_from_address_str + getDivStartString(id_div_container_from_address, cl_div_container_from_address);
+
+    ret_container_from_address_str = ret_container_from_address_str + getNewLineString();
+	
+	ret_container_from_address_str = ret_container_from_address_str + getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+
+    ret_container_from_address_str = ret_container_from_address_str + getTabs(i_tab);
+
+    ret_container_from_address_str = ret_container_from_address_str + getDivEndString(id_div_container_from_address, cl_div_container_from_address);
+
+    ret_container_from_address_str = ret_container_from_address_str + getNewLineString() + getNewLineString();
+
+    return ret_container_from_address_str;
+
+} // getElementDivAltOneContainerFromAddressString
+
+// Get the string that defines the div alternative one to address
+function getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_to_address_str = '';
+
+    var id_div_to_address = getIdDivAltOneToAddress();
+
+    var cl_div_to_address = getClassDivAltOneToAddress();
+
+    ret_to_address_str = ret_to_address_str + getTabs(i_tab);
+
+    ret_to_address_str = ret_to_address_str + getDivStartString(id_div_to_address, cl_div_to_address);
+
+    ret_to_address_str = ret_to_address_str + getNewLineString();
+	
+	ret_to_address_str = ret_to_address_str + getTabs(i_tab + 1) + '<br><br>To address' + getNewLineString();
+
+    ret_to_address_str = ret_to_address_str + getTabs(i_tab);
+
+    ret_to_address_str = ret_to_address_str + getDivEndString(id_div_to_address, cl_div_to_address);
+
+    ret_to_address_str = ret_to_address_str + getNewLineString() + getNewLineString();
+
+    return ret_to_address_str;
+
+} // getElementDivAltOneToAddressString
+
+// Get the string that defines the div alternative one from address
+function getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+{
+    var ret_from_address_str = '';
+
+    var id_div_from_address = getIdDivAltOneFromAddress();
+
+    var cl_div_from_address = getClassDivAltOneFromAddress();
+
+    ret_from_address_str = ret_from_address_str + getTabs(i_tab);
+
+    ret_from_address_str = ret_from_address_str + getDivStartString(id_div_from_address, cl_div_from_address);
+
+    ret_from_address_str = ret_from_address_str + getNewLineString();
+	
+	ret_from_address_str = ret_from_address_str + getTabs(i_tab + 1) + '<br><br>From address' + getNewLineString();
+
+    ret_from_address_str = ret_from_address_str + getTabs(i_tab);
+
+    ret_from_address_str = ret_from_address_str + getDivEndString(id_div_from_address, cl_div_from_address);
+
+    ret_from_address_str = ret_from_address_str + getNewLineString() + getNewLineString();
+
+    return ret_from_address_str;
+
+} // getElementDivAltOneFromAddressString
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Get Html Print Page Strings /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -276,20 +699,7 @@ function scaleHeightValueConvertToMmm(i_height_value, i_scale_factor)
     return ret_value = i_height_value*i_scale_factor.toString() + 'mm';
 
 } // scaleHeightValueConvertToMmm
-/*QQQQQQ
-// Calculates width in percentage and returns the value as string
-function getWidthInPercentage(i_width_mm)
-{
-    var a4_width = 210.0;
 
-    var percentage_width_int = parseInt((i_width_mm/a4_width*100.0));
-
-    var percentage_width_str = percentage_width_int.toString() + '%';
-
-    return percentage_width_str;
-
-} // getWidthInPercentage
-QQQ*/
 // Calculates the left distance so that an element with a given mid gets in the center
 function getLeftDistanceForCentrePosition(i_width_mm)
 {
@@ -310,408 +720,6 @@ function getLeftDistanceForCentrePosition(i_width_mm)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Heights Margins Functions ///////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Get Html Print Page Strings ///////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-// Get the string that defines the PrintPage element for page one alternative one
-function getElementPrintPageOneAlternativeOneString(i_supporter_data, i_season_str, i_tab)
-{
-    var ret_print_page_one_str = '';
-
-    ret_print_page_one_str = ret_print_page_one_str + getTabs(i_tab);
-
-    ret_print_page_one_str = ret_print_page_one_str + '<PrintPage>';
-
-    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
-	
-	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneUpperMarginString(i_tab + 1);
-
-    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
-	
-	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerMsgString(i_tab + 1);
-
-    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
-
-    ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerQrCodeString(i_tab + 1);
-
-    ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
-	
-	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneLowerMarginString(i_tab + 1);
-
-    ret_print_page_one_str = ret_print_page_one_str + getTabs(i_tab);
-
-    ret_print_page_one_str = ret_print_page_one_str + '</PrintPage>';;
-
-    ret_print_page_one_str = ret_print_page_one_str + getNewLineString() + getNewLineString();
-
-    return ret_print_page_one_str;
-
-} // getElementPrintPageOneAlternativeOneString
-
-// Get the string that defines the PrintPage element for page two alternative one
-function getElementPrintPageTwoAlternativeOneString(i_supporter_data, i_season_str, i_tab)
-{
-    var ret_print_page_two_str = '';
-
-    ret_print_page_two_str = ret_print_page_two_str + getTabs(i_tab);
-
-    ret_print_page_two_str = ret_print_page_two_str + '<PrintPage>';
-
-    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
-	
-	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneUpperMarginPageTwoString(i_tab + 1);
-
-    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
-	
-	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerToAddressString(i_tab + 1);
-
-    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
-
-    ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerFromAddressString(i_tab + 1);
-
-    ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
-	
-	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneLowerMarginPageTwoString(i_tab + 1);
-
-    ret_print_page_two_str = ret_print_page_two_str + getTabs(i_tab);
-
-    ret_print_page_two_str = ret_print_page_two_str + '</PrintPage>';;
-
-    ret_print_page_two_str = ret_print_page_two_str + getNewLineString() + getNewLineString();
-
-    return ret_print_page_two_str;
-
-} // getElementPrintPageTwoAlternativeOneString
-
-// Get the string that defines the div alternative one upper margin
-function getElementDivAltOneUpperMarginString(i_tab)
-{
-    var ret_upper_margin_str = '';
-
-    var id_div_upper_margin = getIdDivAltOneUpperMargin();
-
-    var cl_div_upper_margin = getClassDivAltOneUpperMargin();
-
-    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
-
-    ret_upper_margin_str = ret_upper_margin_str + getDivStartString(id_div_upper_margin, cl_div_upper_margin);
-
-    ret_upper_margin_str = ret_upper_margin_str + getNewLineString();
-	
-	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '<br><br>Upper margin' + getNewLineString();
-
-    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
-
-    ret_upper_margin_str = ret_upper_margin_str + getDivEndString(id_div_upper_margin, cl_div_upper_margin);
-
-    ret_upper_margin_str = ret_upper_margin_str + getNewLineString() + getNewLineString();
-
-    return ret_upper_margin_str;
-
-} // getElementDivAltOneUpperMarginString
-
-// Get the string that defines the div alternative one upper margin for page two
-function getElementDivAltOneUpperMarginPageTwoString(i_tab)
-{
-    var ret_upper_margin_str = '';
-
-    var id_div_upper_margin = getIdDivAltOneUpperMarginPageTwo();
-
-    var cl_div_upper_margin = getClassDivAltOneUpperMargin();
-
-    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
-
-    ret_upper_margin_str = ret_upper_margin_str + getDivStartString(id_div_upper_margin, cl_div_upper_margin);
-
-    ret_upper_margin_str = ret_upper_margin_str + getNewLineString();
-	
-	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '<br><br>Upper margin' + getNewLineString();
-
-    ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
-
-    ret_upper_margin_str = ret_upper_margin_str + getDivEndString(id_div_upper_margin, cl_div_upper_margin);
-
-    ret_upper_margin_str = ret_upper_margin_str + getNewLineString() + getNewLineString();
-
-    return ret_upper_margin_str;
-
-} // getElementDivAltOneUpperMarginPageTwoString
-
-// Get the string that defines the div alternative one lower margin
-function getElementDivAltOneLowerMarginString(i_tab)
-{
-    var ret_lower_margin_str = '';
-
-    var id_div_lower_margin = getIdDivAltOneLowerMargin();
-
-    var cl_div_lower_margin = getClassDivAltOneLowerMargin();
-
-    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
-
-    ret_lower_margin_str = ret_lower_margin_str + getDivStartString(id_div_lower_margin, cl_div_lower_margin);
-
-    ret_lower_margin_str = ret_lower_margin_str + getNewLineString();
-	
-	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + 'Lower margin' + getNewLineString();
-
-    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
-
-    ret_lower_margin_str = ret_lower_margin_str + getDivEndString(id_div_lower_margin, cl_div_lower_margin);
-
-    ret_lower_margin_str = ret_lower_margin_str + getNewLineString() + getNewLineString();
-
-    return ret_lower_margin_str;
-
-} // getElementDivAltOneLowerMarginString
-
-// Get the string that defines the div alternative one lower margin for page two
-function getElementDivAltOneLowerMarginPageTwoString(i_tab)
-{
-    var ret_lower_margin_str = '';
-
-    var id_div_lower_margin = getIdDivAltOneLowerMarginPageTwo();
-
-    var cl_div_lower_margin = getClassDivAltOneLowerMargin();
-
-    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
-
-    ret_lower_margin_str = ret_lower_margin_str + getDivStartString(id_div_lower_margin, cl_div_lower_margin);
-
-    ret_lower_margin_str = ret_lower_margin_str + getNewLineString();
-	
-	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + 'Lower margin' + getNewLineString();
-
-    ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
-
-    ret_lower_margin_str = ret_lower_margin_str + getDivEndString(id_div_lower_margin, cl_div_lower_margin);
-
-    ret_lower_margin_str = ret_lower_margin_str + getNewLineString() + getNewLineString();
-
-    return ret_lower_margin_str;
-
-} // getElementDivAltOneLowerMarginPageTwoString
-
-// Get the string that defines the div alternative one container message
-function getElementDivAltOneContainerMsgString(i_tab)
-{
-    var ret_container_msg_str = '';
-
-    var id_div_container_msg = getIdDivAltOneContainerMsg();
-
-    var cl_div_container_msg = getClassDivAltOneContainerMsg();
-
-    ret_container_msg_str = ret_container_msg_str + getTabs(i_tab);
-
-    ret_container_msg_str = ret_container_msg_str + getDivStartString(id_div_container_msg, cl_div_container_msg);
-
-    ret_container_msg_str = ret_container_msg_str + getNewLineString();
-	
-	ret_container_msg_str = ret_container_msg_str + getElementDivAltOneMessageString(i_tab + 1);
-
-    ret_container_msg_str = ret_container_msg_str + getTabs(i_tab);
-
-    ret_container_msg_str = ret_container_msg_str + getDivEndString(id_div_container_msg, cl_div_container_msg);
-
-    ret_container_msg_str = ret_container_msg_str + getNewLineString() + getNewLineString();
-
-    return ret_container_msg_str;
-
-} // getElementDivAltOneContainerMsgString
-
-// Get the string that defines the div alternative one container QR code
-function getElementDivAltOneContainerQrCodeString(i_tab)
-{
-    var ret_container_qr_code_str = '';
-
-    var id_div_container_qr_code = getIdDivAltOneContainerQrCode();
-
-    var cl_div_container_qr_code = getClassDivAltOneContainerQrCode();
-
-    ret_container_qr_code_str = ret_container_qr_code_str + getTabs(i_tab);
-
-    ret_container_qr_code_str = ret_container_qr_code_str + getDivStartString(id_div_container_qr_code, cl_div_container_qr_code);
-
-    ret_container_qr_code_str = ret_container_qr_code_str + getNewLineString();
-	
-	ret_container_qr_code_str = ret_container_qr_code_str + getElementDivAltOneTwoQrCardsString(i_tab + 1);
-
-    ret_container_qr_code_str = ret_container_qr_code_str + getTabs(i_tab);
-
-    ret_container_qr_code_str = ret_container_qr_code_str + getDivEndString(id_div_container_qr_code, cl_div_container_qr_code);
-
-    ret_container_qr_code_str = ret_container_qr_code_str + getNewLineString() + getNewLineString();
-
-    return ret_container_qr_code_str;
-
-} // getElementDivAltOneContainerQrCodeString
-
-// Get the string that defines the div alternative one message
-function getElementDivAltOneMessageString(i_tab)
-{
-    var ret_message_str = '';
-
-    var id_div_message = getIdDivAltOneMessage();
-
-    var cl_div_message = getClassDivAltOneMessage();
-
-    ret_message_str = ret_message_str + getTabs(i_tab);
-
-    ret_message_str = ret_message_str + getDivStartString(id_div_message, cl_div_message);
-
-    ret_message_str = ret_message_str + getNewLineString();
-	
-	ret_message_str = ret_message_str + getTabs(i_tab + 1) + '<br><br>Message' + getNewLineString();
-
-    ret_message_str = ret_message_str + getTabs(i_tab);
-
-    ret_message_str = ret_message_str + getDivEndString(id_div_message, cl_div_message);
-
-    ret_message_str = ret_message_str + getNewLineString() + getNewLineString();
-
-    return ret_message_str;
-
-} // getElementDivAltOneMessageString
-
-// Get the string that defines the div alternative one two qr cards
-function getElementDivAltOneTwoQrCardsString(i_tab)
-{
-    var ret_message_str = '';
-
-    var id_div_message = getIdDivAltOneTwoQrCards();
-
-    var cl_div_message = getClassDivAltOneTwoQrCards();
-
-    ret_message_str = ret_message_str + getTabs(i_tab);
-
-    ret_message_str = ret_message_str + getDivStartString(id_div_message, cl_div_message);
-
-    ret_message_str = ret_message_str + getNewLineString();
-	
-	ret_message_str = ret_message_str + getTabs(i_tab + 1) + '<br><br>Two QR cards' + getNewLineString();
-
-    ret_message_str = ret_message_str + getTabs(i_tab);
-
-    ret_message_str = ret_message_str + getDivEndString(id_div_message, cl_div_message);
-
-    ret_message_str = ret_message_str + getNewLineString() + getNewLineString();
-
-    return ret_message_str;
-
-} // getElementDivAltOneTwoQrCardsString
-
-// Get the string that defines the div alternative one container to address
-function getElementDivAltOneContainerToAddressString(i_tab)
-{
-    var ret_container_to_address_str = '';
-
-    var id_div_container_to_address = getIdDivAltOneContainerToAddress();
-
-    var cl_div_container_to_address = getClassDivAltOneContainerToAddress();
-
-    ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab);
-
-    ret_container_to_address_str = ret_container_to_address_str + getDivStartString(id_div_container_to_address, cl_div_container_to_address);
-
-    ret_container_to_address_str = ret_container_to_address_str + getNewLineString();
-	
-	ret_container_to_address_str = ret_container_to_address_str + getElementDivAltOneToAddressString(i_tab + 1);
-
-    ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab);
-
-    ret_container_to_address_str = ret_container_to_address_str + getDivEndString(id_div_container_to_address, cl_div_container_to_address);
-
-    ret_container_to_address_str = ret_container_to_address_str + getNewLineString() + getNewLineString();
-
-    return ret_container_to_address_str;
-
-} // getElementDivAltOneContainerToAddressString
-
-// Get the string that defines the div alternative one container from address
-function getElementDivAltOneContainerFromAddressString(i_tab)
-{
-    var ret_container_from_address_str = '';
-
-    var id_div_container_from_address = getIdDivAltOneContainerFromAddress();
-
-    var cl_div_container_from_address = getClassDivAltOneContainerFromAddress();
-
-    ret_container_from_address_str = ret_container_from_address_str + getTabs(i_tab);
-
-    ret_container_from_address_str = ret_container_from_address_str + getDivStartString(id_div_container_from_address, cl_div_container_from_address);
-
-    ret_container_from_address_str = ret_container_from_address_str + getNewLineString();
-	
-	ret_container_from_address_str = ret_container_from_address_str + getElementDivAltOneFromAddressString(i_tab + 1);
-
-    ret_container_from_address_str = ret_container_from_address_str + getTabs(i_tab);
-
-    ret_container_from_address_str = ret_container_from_address_str + getDivEndString(id_div_container_from_address, cl_div_container_from_address);
-
-    ret_container_from_address_str = ret_container_from_address_str + getNewLineString() + getNewLineString();
-
-    return ret_container_from_address_str;
-
-} // getElementDivAltOneContainerFromAddressString
-
-// Get the string that defines the div alternative one to address
-function getElementDivAltOneToAddressString(i_tab)
-{
-    var ret_to_address_str = '';
-
-    var id_div_to_address = getIdDivAltOneToAddress();
-
-    var cl_div_to_address = getClassDivAltOneToAddress();
-
-    ret_to_address_str = ret_to_address_str + getTabs(i_tab);
-
-    ret_to_address_str = ret_to_address_str + getDivStartString(id_div_to_address, cl_div_to_address);
-
-    ret_to_address_str = ret_to_address_str + getNewLineString();
-	
-	ret_to_address_str = ret_to_address_str + getTabs(i_tab + 1) + '<br><br>To address' + getNewLineString();
-
-    ret_to_address_str = ret_to_address_str + getTabs(i_tab);
-
-    ret_to_address_str = ret_to_address_str + getDivEndString(id_div_to_address, cl_div_to_address);
-
-    ret_to_address_str = ret_to_address_str + getNewLineString() + getNewLineString();
-
-    return ret_to_address_str;
-
-} // getElementDivAltOneToAddressString
-
-// Get the string that defines the div alternative one from address
-function getElementDivAltOneFromAddressString(i_tab)
-{
-    var ret_from_address_str = '';
-
-    var id_div_from_address = getIdDivAltOneFromAddress();
-
-    var cl_div_from_address = getClassDivAltOneFromAddress();
-
-    ret_from_address_str = ret_from_address_str + getTabs(i_tab);
-
-    ret_from_address_str = ret_from_address_str + getDivStartString(id_div_from_address, cl_div_from_address);
-
-    ret_from_address_str = ret_from_address_str + getNewLineString();
-	
-	ret_from_address_str = ret_from_address_str + getTabs(i_tab + 1) + '<br><br>From address' + getNewLineString();
-
-    ret_from_address_str = ret_from_address_str + getTabs(i_tab);
-
-    ret_from_address_str = ret_from_address_str + getDivEndString(id_div_from_address, cl_div_from_address);
-
-    ret_from_address_str = ret_from_address_str + getNewLineString() + getNewLineString();
-
-    return ret_from_address_str;
-
-} // getElementDivAltOneFromAddressString
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Get Html Print Page Strings /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////

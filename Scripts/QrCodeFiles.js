@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-20
+// Date: 2022-05-22
 // Author: Gunnar Lidén
 
 // File content
@@ -394,13 +394,15 @@ function updateControlsAfterChangeOfQrFilesXmlSupporter()
 function eventClickQrSendPostButton()
 {
 
-    var supporter_data = g_supporter_data_array[0];
+    //QQ var supporter_data = g_supporter_data_array[0];
 
-    var season_str = '2021-2022';
+    //QQ var season_str = '2021-2022';
 
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
-        setPrintPageOneAlternativeOne(supporter_data, season_str);
+        var b_person_two = false;
+        
+        setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number, b_person_two);
 
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
