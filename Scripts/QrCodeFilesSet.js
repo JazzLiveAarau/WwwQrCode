@@ -70,9 +70,28 @@ function setControlsSupporter()
         hideDivQrCodeNameTwo();
     }
 
+    hideDisplayExecutionButtonsSupporter();
+
     console.log('setControlsSupporter Exit');
 
 } // setControlsSupporter
+
+// Function hide or display execution buttons
+function hideDisplayExecutionButtonsSupporter()
+{
+    console.log('hideDisplayExecutionButtonsSupporter Enter');
+
+    var email_address = g_qr_files_xml_object.getEmail(g_files_active_number);
+
+    var post_address = g_qr_files_xml_object.getFullAddress(g_files_active_number);
+
+    hideOrDisplayDivQrSendEmailButton(email_address);
+
+    hideOrDisplayDivQrSendPostButton(post_address);
+
+    console.log('hideDisplayExecutionButtonsSupporter Exit');
+
+} // hideDisplayExecutionButtonsSupporter
 
 // Set controls for category (case) Sponsor
 function setControlsSponsor()

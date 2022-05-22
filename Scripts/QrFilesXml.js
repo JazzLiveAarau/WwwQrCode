@@ -751,8 +751,6 @@ class QrFilesXml
             b_ret_sent = true;
         }
 
-        // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ Email filter
-
         var email_address = this.getEmail(i_file_number);
         var b_email_address = false;
 
@@ -761,8 +759,9 @@ class QrFilesXml
             b_email_address = true;
         }
 
-        if (b_supporter && !b_ret_sent && b_email_address) //  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ Email filter
-        // if (b_supporter && !b_ret_sent)
+        // Email filter if (b_supporter && !b_ret_sent && b_email_address)
+
+        if (b_supporter && !b_ret_sent)
         {
             var index_add = ret_file_numbers.length;
 

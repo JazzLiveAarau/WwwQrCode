@@ -1,5 +1,5 @@
 // File: QrCodeFileControls.js
-// Date: 2022-05-17
+// Date: 2022-05-22
 // Author: Gunnar Lidén
 
 // File content
@@ -1055,6 +1055,20 @@ function displayDivQrSendEmailButton()
 
 } // displayDivQrSendEmailButton
 
+// Hide or display the send email button is determined by the input email address
+function hideOrDisplayDivQrSendEmailButton(i_email_adress)
+{
+    if (i_email_adress.trim().length > 4)
+    {
+        displayDivQrSendEmailButton();
+    }
+    else
+    {
+        hideDivQrSendEmailButton();
+    }
+
+} // hideOrDisplayDivQrSendEmailButton
+
 // Hide the div qr code send post button
 function hideDivQrSendPostButton()
 {
@@ -1076,6 +1090,20 @@ function displayDivQrSendPostButton()
     el_send_post_button.style.display = 'block';
 
 } // displayDivQrSendPostButton
+
+// Hide or display the send post (mail) button is determined by the input mail address
+function hideOrDisplayDivQrSendPostButton(i_mail_adress)
+{
+    if (i_mail_adress.trim().length > 10)
+    {
+        displayDivQrSendPostButton();
+    }
+    else
+    {
+        hideDivQrSendPostButton();
+    }
+
+} // hideOrDisplayDivQrSendPostButton
 
 // Hide the div qr code print batch button
 function hideDivQrPrintBatchButton()
