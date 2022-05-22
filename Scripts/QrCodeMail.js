@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-21
+// Date: 2022-05-22
 // Author: Gunnar Lidén
 
 // File content
@@ -51,7 +51,7 @@ function setPrintPageOneAlternativeOne(i_supporter_data, i_season_str)
 // Set widths, heights and margins for alternative one
 function setWidthsHeightsMarginsAltOne()
 {
-    // var scale_factor = 1.16;
+    // var scale_factor = 1.16; Necessary for VSC Live Server
 
     var scale_factor = 1.0;
 
@@ -107,7 +107,7 @@ function setWidthsHeightsMarginsAltOne()
 
     var from_adress_left = a4_width - from_address_right - from_address_width;
 
-    var debug_to_consol = true;
+    var debug_to_consol = false;
 
     if (debug_to_consol)
     {
@@ -164,9 +164,11 @@ function setWidthsHeightsMarginsAltOne()
 
     el_message.style.top = scaleHeightValueConvertToMmm(message_top, scale_factor);
 
-    el_message.style.width = getWidthInPercentage(message_width);
+    //QQQ el_message.style.width = getWidthInPercentage(message_width);
 
-    el_message.style.left = getLeftInPercentage(message_width);
+    el_message.style.width = scaleHeightValueConvertToMmm(message_width, scale_factor);
+
+    el_message.style.left = getLeftDistanceForCentrePosition(message_width);
 
     // ---------------------------
 
@@ -182,9 +184,11 @@ function setWidthsHeightsMarginsAltOne()
 
     el_two_qr_cards.style.top = scaleHeightValueConvertToMmm(two_qr_card_top, scale_factor);
 
-    el_two_qr_cards.style.width = getWidthInPercentage(two_qr_card_width);
+    //QQ el_two_qr_cards.style.width = getWidthInPercentage(two_qr_card_width);
 
-    el_two_qr_cards.style.left = getLeftInPercentage(two_qr_card_width);
+    el_two_qr_cards.style.width = scaleHeightValueConvertToMmm(two_qr_card_width, scale_factor);
+
+    el_two_qr_cards.style.left = getLeftDistanceForCentrePosition(two_qr_card_width);
 
     // ---------------------------
 
@@ -221,9 +225,13 @@ function setWidthsHeightsMarginsAltOne()
 
    el_to_address.style.top = scaleHeightValueConvertToMmm(to_address_top, scale_factor);
 
-   el_to_address.style.width = getWidthInPercentage(to_address_width);
+   //el_to_address.style.width = getWidthInPercentage(to_address_width);
 
-   el_to_address.style.left = getWidthInPercentage(to_adress_left);
+   // el_to_address.style.left = getWidthInPercentage(to_adress_left);
+
+   el_to_address.style.width = scaleHeightValueConvertToMmm(to_address_width, scale_factor);
+
+   el_to_address.style.left = scaleHeightValueConvertToMmm(to_adress_left, scale_factor);
 
    // ---------------------------
 
@@ -239,9 +247,14 @@ function setWidthsHeightsMarginsAltOne()
 
    el_two_from_address.style.top = scaleHeightValueConvertToMmm(from_address_top, scale_factor);
 
-   el_two_from_address.style.width = getWidthInPercentage(from_address_width);
+   //QQ el_two_from_address.style.width = getWidthInPercentage(from_address_width);
 
-   el_two_from_address.style.left = getWidthInPercentage(from_adress_left);
+   //QQ el_two_from_address.style.left = getWidthInPercentage(from_adress_left);
+
+   el_two_from_address.style.width = scaleHeightValueConvertToMmm(from_address_width, scale_factor);
+
+   el_two_from_address.style.left = scaleHeightValueConvertToMmm(from_adress_left, scale_factor);
+
 
    // ---------------------------
 
@@ -263,7 +276,7 @@ function scaleHeightValueConvertToMmm(i_height_value, i_scale_factor)
     return ret_value = i_height_value*i_scale_factor.toString() + 'mm';
 
 } // scaleHeightValueConvertToMmm
-
+/*QQQQQQ
 // Calculates width in percentage and returns the value as string
 function getWidthInPercentage(i_width_mm)
 {
@@ -276,21 +289,24 @@ function getWidthInPercentage(i_width_mm)
     return percentage_width_str;
 
 } // getWidthInPercentage
-
-// Calculates width in percentage and returns the value as string
-function getLeftInPercentage(i_width_mm)
+QQQ*/
+// Calculates the left distance so that an element with a given mid gets in the center
+function getLeftDistanceForCentrePosition(i_width_mm)
 {
     var a4_width = 210.0;
 
     var dist_left_mm = (a4_width - i_width_mm)/2.0;
 
-    var percentage_left_int = parseInt((dist_left_mm/a4_width*100.0));
+    //QQ var percentage_left_int = parseInt((dist_left_mm/a4_width*100.0));
 
-    var percentage_left_str = percentage_left_int.toString() + '%';
+    //QQ var percentage_left_str = percentage_left_int.toString() + '%';
 
-    return percentage_left_str;
+    var mm_left_str = dist_left_mm.toString() + 'mm';
 
-} // getLeftInPercentage
+    //QQ return percentage_left_str;
+    return mm_left_str;
+
+} // getLeftDistanceForCentrePosition
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Heights Margins Functions ///////////////////////////////
