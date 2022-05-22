@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Set print page one alternative one
-function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number, i_b_person_two)
+function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 {
     var n_tabs = 2;
 
@@ -20,9 +20,9 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number, i_b_person_two)
 
     var el_page_two = getElementDivQrPrintPageTwo();
 
-    var content_page_one_alternative_one = getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, n_tabs);
+    var content_page_one_alternative_one = getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, n_tabs);
 
-    var content_page_two_alternative_one = getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, n_tabs);
+    var content_page_two_alternative_one = getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, n_tabs);
 
     el_page_one.innerHTML = content_page_one_alternative_one;
 
@@ -46,7 +46,7 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number, i_b_person_two)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Get the string that defines the PrintPage element for page one alternative one
-function getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_print_page_one_str = '';
 
@@ -60,11 +60,11 @@ function getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_b
 
     ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
 	
-	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+	ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
 
-    ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+    ret_print_page_one_str = ret_print_page_one_str + getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_print_page_one_str = ret_print_page_one_str + getNewLineString();
 	
@@ -81,7 +81,7 @@ function getElementPrintPageOneAlternativeOneString(i_qr_xml, i_file_number, i_b
 } // getElementPrintPageOneAlternativeOneString
 
 // Get the string that defines the PrintPage element for page two alternative one
-function getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_print_page_two_str = '';
 
@@ -95,11 +95,11 @@ function getElementPrintPageTwoAlternativeOneString(i_qr_xml, i_file_number, i_b
 
     ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
 	
-	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+	ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
 
-    ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+    ret_print_page_two_str = ret_print_page_two_str + getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_print_page_two_str = ret_print_page_two_str + getNewLineString();
 	
@@ -224,7 +224,7 @@ function getElementDivAltOneLowerMarginPageTwoString(i_tab)
 } // getElementDivAltOneLowerMarginPageTwoString
 
 // Get the string that defines the div alternative one container message
-function getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_container_msg_str = '';
 
@@ -238,7 +238,7 @@ function getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_b_pers
 
     ret_container_msg_str = ret_container_msg_str + getNewLineString();
 	
-	ret_container_msg_str = ret_container_msg_str + getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+	ret_container_msg_str = ret_container_msg_str + getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_container_msg_str = ret_container_msg_str + getTabs(i_tab);
 
@@ -251,7 +251,7 @@ function getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_b_pers
 } // getElementDivAltOneContainerMsgString
 
 // Get the string that defines the div alternative one container QR code
-function getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_container_qr_code_str = '';
 
@@ -265,7 +265,7 @@ function getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_b_p
 
     ret_container_qr_code_str = ret_container_qr_code_str + getNewLineString();
 	
-	ret_container_qr_code_str = ret_container_qr_code_str + getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+	ret_container_qr_code_str = ret_container_qr_code_str + getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_container_qr_code_str = ret_container_qr_code_str + getTabs(i_tab);
 
@@ -278,7 +278,7 @@ function getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_b_p
 } // getElementDivAltOneContainerQrCodeString
 
 // Get the string that defines the div alternative one message
-function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_message_str = '';
 
@@ -286,7 +286,9 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_b_person_tw
 
     var download_code = '';
 
-    if (!i_b_person_two)
+    var b_person_two = false;
+
+    if (!b_person_two)
     {
         supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number);
 
@@ -326,7 +328,7 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_b_person_tw
 } // getElementDivAltOneMessageString
 
 // Get the string that defines the div alternative one two qr cards
-function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_message_str = '';
 
@@ -353,7 +355,7 @@ function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_b_person
 } // getElementDivAltOneTwoQrCardsString
 
 // Get the string that defines the div alternative one container to address
-function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_container_to_address_str = '';
 
@@ -367,7 +369,7 @@ function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_
 
     ret_container_to_address_str = ret_container_to_address_str + getNewLineString();
 	
-	ret_container_to_address_str = ret_container_to_address_str + getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+	ret_container_to_address_str = ret_container_to_address_str + getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab);
 
@@ -380,7 +382,7 @@ function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_
 } // getElementDivAltOneContainerToAddressString
 
 // Get the string that defines the div alternative one container from address
-function getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_container_from_address_str = '';
 
@@ -394,7 +396,7 @@ function getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, 
 
     ret_container_from_address_str = ret_container_from_address_str + getNewLineString();
 	
-	ret_container_from_address_str = ret_container_from_address_str + getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab + 1);
+	ret_container_from_address_str = ret_container_from_address_str + getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_container_from_address_str = ret_container_from_address_str + getTabs(i_tab);
 
@@ -407,7 +409,7 @@ function getElementDivAltOneContainerFromAddressString(i_qr_xml, i_file_number, 
 } // getElementDivAltOneContainerFromAddressString
 
 // Get the string that defines the div alternative one to address
-function getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_to_address_str = '';
 
@@ -434,7 +436,7 @@ function getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_b_person_
 } // getElementDivAltOneToAddressString
 
 // Get the string that defines the div alternative one from address
-function getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_b_person_two, i_tab)
+function getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_tab)
 {
     var ret_from_address_str = '';
 

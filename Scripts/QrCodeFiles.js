@@ -400,9 +400,7 @@ function eventClickQrSendPostButton()
 
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
-        var b_person_two = false;
-        
-        setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number, b_person_two);
+        setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number);
 
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
