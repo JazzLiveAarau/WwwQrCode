@@ -301,9 +301,7 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
         download_code = i_qr_xml.getDownloadTwo(i_file_number);
     }
 
-    var message_str = '<br>Guten Tag ' + supporter_name + '<br><br>' + 'Hier kommt die Supporter Karte. ' + '<br><br>';
-
-    message_str = message_str + 'Herunterladen-Code für QR Code Anzeiger ist ' + download_code;
+    var message_str = QrStrings.getMsgSupporterPost(supporter_name, download_code);
 
     var id_div_message = getIdDivAltOneMessage();
 
@@ -494,11 +492,11 @@ function setWidthsHeightsMarginsAltOne()
 
     var container_upper_top = 0.0;
 
-    var message_height = 70.0;
+    var message_height = 90.0;
 
-    var message_width = 120.0;
+    var message_width = 190.0;
 
-    var message_top = 31.0;
+    var message_top = 15.0;
 
     var container_lower_bottom = 0.0;
 

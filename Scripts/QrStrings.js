@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-19
+// Date: 2022-05-22
 // Author: Gunnar Lidén
 
 // File content
@@ -34,9 +34,10 @@ class QrStrings
 
         ret_htm = ret_htm + 'Danke, dass sie ..... ' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Bitte dieser Link ' + 
-            '<a href="https://jazzliveaarau.ch/QrCode/QrCodeShow.htm">https://jazzliveaarau.ch/QrCode/QrCodeShow.htm</a>' + 
-            ' klicken' + '<br>' + '<br>';
+        var caption_str = '';
+
+        ret_htm = ret_htm + 'Bitte dieser Link ' + this.linkQrCodeShowWebPage(caption_str) + 
+                            ' klicken' + '<br>' + '<br>';
 
         ret_htm = ret_htm + 'Danach dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
 
@@ -46,10 +47,78 @@ class QrStrings
 
         return ret_htm;
 
-    } // getTitleSupporterEmail
+    } // getMsgSupporterEmail
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Supporter Emails ////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Supporter Mails ///////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getMsgSupporterPost(i_supporter_name, i_download_code)
+    {
+        var ret_htm = '';
+
+        ret_htm = ret_htm + 'Guten Tag ' + i_supporter_name + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Danke, dass Sie uns als Supporter unterstützen. ' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Unten ist Ihre Supporter-Karte zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Eine Alternative is die ' + '<b>' + ' JAZZ <i>live</i> AARAU QR Anzeiger ' + '</b>' + 'Web-Applikation zu verwenden:' + '<br>' + 
+                            '<b>' + this.urlQrCodeShowWebPage() + '</b>'  + '<br>' + '<br>';
+        ret_htm = ret_htm + 'Mit einem Code kann die Supporter-Karte heruntergeladen, im Telefon gespeichert und mit dem Telefon gezeigt werden.';
+
+        ret_htm = ret_htm + ' Der Code für Ihre Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code + '</b>' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Freundliche Grüsse ' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Das JAZZ <i>live</i> AARAU Team' + '<br>' + '<br>';
+
+        return ret_htm;
+
+    } // getTitleSupporterEmail
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Supporter Mails /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Common Exec Strings ///////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static linkQrCodeShowWebPage(i_caption_str)
+    {
+        var caption_str = this.urlQrCodeShowWebPage();
+
+        if (i_caption_str.trim().length > 0)
+        {
+            caption_str = i_caption_str.trim();
+        }
+
+        var ret_link = '';
+
+        ret_link = ret_link + '<a href="https://jazzliveaarau.ch/QrCode/QrCodeShow.htm">';
+
+        ret_link = ret_link + caption_str;
+
+        ret_link = ret_link + '</a>';
+
+        return  ret_link;
+
+    } // linkQrCodeShowWebPage
+
+    static urlQrCodeShowWebPage()
+    {
+        return  'https://jazzliveaarau.ch/QrCode/QrCodeShow.htm';
+
+    } // urlQrCodeShowWebPage
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Common Exec Strings /////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
