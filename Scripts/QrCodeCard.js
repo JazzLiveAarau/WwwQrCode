@@ -157,7 +157,7 @@ function getElementDivSupporterCardTextCanvasString(i_qr_xml, i_file_number, i_t
 
     ret_card_text_canvas_str = ret_card_text_canvas_str + getTabs(i_tab);
 
-    ret_card_text_canvas_str = ret_card_text_canvas_str + getElementDivSupporterQrCanvasString(i_qr_xml, i_file_number, i_tab);
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getElementDivSupporterQrImageString(i_qr_xml, i_file_number, i_tab);
 
     ret_card_text_canvas_str = ret_card_text_canvas_str + getNewLineString();
 
@@ -199,43 +199,41 @@ function getElementDivSupporterCardTextString(i_qr_xml, i_file_number, i_tab)
 } // getElementDivSupporterCardTextString
 
 // Get the string that defines the div supporter card QR code canvas
-function getElementDivSupporterQrCanvasString(i_qr_xml, i_file_number, i_tab)
+function getElementDivSupporterQrImageString(i_qr_xml, i_file_number, i_tab)
 {
-    var ret_supporter_card_qr_canvas_str = '';
+    var ret_supporter_card_qr_image_str = '';
 
-    var id_div_supporter_card_qr_canvas = '';
+    var id_div_supporter_card_qr_image = '';
 
-    var cl_div_supporter_card_qr_canvas = getClassDivSupporterCanvasQrCode();
+    var cl_div_supporter_card_qr_image = getClassDivSupporterImageQrCode();
 	
-	var id_supporter_card_qr_canvas = getIdSupporterQrCodeCanvas();
+	var id_supporter_card_qr_image = getIdSupporterQrCodeImage();
 
-    var cl_supporter_card_qr_canvas = getClassSupporterQrCodeCanvas();
+    var cl_supporter_card_qr_image = getClassSupporterQrCodeImage();
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getTabs(i_tab);
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getTabs(i_tab);
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getDivStartString(id_div_supporter_card_qr_canvas, cl_div_supporter_card_qr_canvas);
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getDivStartString(id_div_supporter_card_qr_image, cl_div_supporter_card_qr_image);
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getNewLineString();
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString();
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getTabs(i_tab + 1);
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getTabs(i_tab + 1);
 
-    //QQQQ ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + '<canvas ' + ' id= "' + id_supporter_card_qr_canvas + '" '  + ' class= "' + cl_supporter_card_qr_canvas + '" ' + '>';
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + '<img ' + ' id= "' + id_supporter_card_qr_image + '" '  + ' class= "' + cl_supporter_card_qr_image + '" ' + '>';
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + '<img ' + ' id= "' + id_supporter_card_qr_canvas + '" '  + ' class= "' + cl_supporter_card_qr_canvas + '" ' + '>';
-
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getNewLineString();
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString();
 	
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getTabs(i_tab + 1);
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getTabs(i_tab + 1);
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + '</canvas>';
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + '</canvas>';
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getDivEndString(id_div_supporter_card_qr_canvas, cl_div_supporter_card_qr_canvas);
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getDivEndString(id_div_supporter_card_qr_image, cl_div_supporter_card_qr_image);
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getNewLineString() + getNewLineString();
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString() + getNewLineString();
 
-    return ret_supporter_card_qr_canvas_str;
+    return ret_supporter_card_qr_image_str;
 
-} // getElementDivSupporterQrCanvasString
+} // getElementDivSupporterQrImageString
 
 function MoveToQrStringsgetSupporterCardReverseSideOne()
 {
@@ -247,7 +245,7 @@ function MoveToQrStringsgetSupporterCardReverseSideOne()
 
     ret_all_rows = ret_all_rows + 'JAZZ <i>live</i> AARAU' + '<br>' + '<br>';
 
-    ret_all_rows = ret_all_rows + 'Homepage: https://jazzliveaarau.ch' + '<br>';
+    ret_all_rows = ret_all_rows + 'Homepage: jazzliveaarau.ch' + '<br>';
 
     ret_all_rows = ret_all_rows + 'E-Mail: qrcode@jazzliveaarau.ch';
 
@@ -261,7 +259,9 @@ function MoveToQrStringsgetSupporterCardReverseQrCode(i_download_code)
 
     ret_str = ret_str + 'Mobiltelefon QR Code Anzeiger Link:' + '<br>';
 
-    ret_str = ret_str + QrStrings.urlQrCodeShowWebPage() + '<br><br>';
+    ret_str = ret_str + 'jazzliveaarau.ch/QrCode/QrCodeShow.htm' + '<br><br>';
+
+    // QrStrings.urlQrCodeShowWebPage()
 
     ret_str = ret_str + 'Der Code für diesen Ausweis ist <br>' + i_download_code;
 
@@ -353,33 +353,33 @@ function getClassDivSupporterCardReverse()
 } // getClassDivSupporterCardReverse
 
 // Returns the class of the div canvas QR code
-function getClassDivSupporterCanvasQrCode()
+function getClassDivSupporterImageQrCode()
 {
-    return 'cl_div_supporter_card_qr_canvas';
+    return 'cl_div_supporter_card_qr_image';
 
-} // getClassDivSupporterCanvasQrCode
+} // getClassDivSupporterImageQrCode
 
 
 // Get the element supporter card canvas
-function getElementSupporterQrCodeCanvas()
+function getElementSupporterQrCodeImage()
 {
-    return document.getElementById(getIdSupporterQrCodeCanvas());
+    return document.getElementById(getIdSupporterQrCodeImage());
 
 } // getElementDivQrPrintPageOne
 
 // Returns the identity of the supporter card canvas
-function getIdSupporterQrCodeCanvas()
+function getIdSupporterQrCodeImage()
 {
-    return 'id_supporter_card_qr_canvas';
+    return 'id_supporter_card_qr_image';
 
-} // getIdSupporterQrCodeCanvas
+} // getIdSupporterQrCodeImage
 
 // Returns the class for the QR code canvas
-function getClassSupporterQrCodeCanvas()
+function getClassSupporterQrCodeImage()
 {
-    return 'cl_supporter_card_qr_canvas';
+    return 'cl_supporter_card_qr_image';
 
-} // getClassSupporterQrCodeCanvas
+} // getClassSupporterQrCodeImage
 
 // Returns the class for the supporter name
 function getClassDivQrCodeName()

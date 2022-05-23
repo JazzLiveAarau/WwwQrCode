@@ -76,7 +76,7 @@ Remarks and references
     /* border: 1px solid blue; */
 }
 
-.cl_div_supporter_card_qr_canvas
+.cl_div_supporter_card_qr_image
 {
     margin-left: 7mm;
     margin-top: 0mm;
@@ -86,7 +86,7 @@ Remarks and references
     border: 1px solid green;  
 }
 
-.cl_supporter_card_qr_canvas
+.cl_supporter_card_qr_image
 {
     max-width: 100%;
     max-height: 100%;

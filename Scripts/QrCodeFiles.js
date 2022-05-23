@@ -406,7 +406,6 @@ function eventClickQrSendPostButton()
         
     }
 
-
 } // eventClickQrSendPostButton
 
 // User clicked the print batch button
@@ -462,31 +461,18 @@ function setSupporterCardQrCodeAfterLoad(i_data_url)
 
     if (i_data_url == QrStrings.failureLoadingQrFileCode())
     {
-        // hideShowQrCodeImage();
-
-        // hideDivQrCodeButtonShowInfo();
-
-        // showQrCodeTextAfterLoadFromServer(QrStrings.errorUnvalidDownloadCode());
-
         alert("setSupporterCardQrCodeAfterLoad i_data_url= " + i_data_url);
 
         return;
     }
 
-    setSupporterCardQrCodeImageWithDataUrl(i_data_url);
+  // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
+
+  var el_image = getElementSupporterQrCodeImage();
+
+  el_image.src = i_data_url;
 
 } // setSupporterCardQrCodeAfterLoad
-
-// Set the QR code image with image data URL
-function setSupporterCardQrCodeImageWithDataUrl(i_data_url)
-{
-   // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
-
-    var el_image = getElementSupporterQrCodeCanvas();
-
-    el_image.src = i_data_url;
-
-} // setSupporterCardQrCodeImageWithDataUrl
 
 // Construct the server file name from the input code and return the name
 function constructServerFileNameImage(i_qr_xml, i_file_number)
