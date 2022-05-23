@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-22
+// Date: 2022-05-23
 // Author: Gunnar Lidén
 
 // File content
@@ -396,11 +396,6 @@ function updateControlsAfterChangeOfQrFilesXmlSupporter()
 // User clicked the send mail (post) button
 function eventClickQrSendPostButton()
 {
-
-    //QQ var supporter_data = g_supporter_data_array[0];
-
-    //QQ var season_str = '2021-2022';
-
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
         setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number);
@@ -411,7 +406,6 @@ function eventClickQrSendPostButton()
         
     }
 
-    //
 
 } // eventClickQrSendPostButton
 
@@ -440,6 +434,89 @@ function oninputSeasonColor()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Set Qr Code Supporter Card ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Sets the supporter card QR code
+function setSupporterCardQrCode(i_qr_xml, i_file_number)
+{
+    var file_name_image = constructServerFileNameImage(i_qr_xml, i_file_number);
+
+    if (file_name_image.length == 0)
+    {
+        return;
+    }
+
+    var b_image_file = true;
+
+    readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeAfterLoad);
+
+} // setSupporterCardQrCode
+
+function setSupporterCardQrCodeAfterLoad(i_data_url)
+{
+    console.log("Enter setSupporterCardQrCodeAfterLoad");
+
+    if (i_data_url == QrStrings.failureLoadingQrFileCode())
+    {
+        // hideShowQrCodeImage();
+
+        // hideDivQrCodeButtonShowInfo();
+
+        // showQrCodeTextAfterLoadFromServer(QrStrings.errorUnvalidDownloadCode());
+
+        alert("setSupporterCardQrCodeAfterLoad i_data_url= " + i_data_url);
+
+        return;
+    }
+
+    setSupporterCardQrCodeImageWithDataUrl(i_data_url);
+
+} // setSupporterCardQrCodeAfterLoad
+
+// Set the QR code image with image data URL
+function setSupporterCardQrCodeImageWithDataUrl(i_data_url)
+{
+   // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
+
+    var el_image = getElementSupporterQrCodeCanvas();
+
+    el_image.src = i_data_url;
+
+} // setSupporterCardQrCodeImageWithDataUrl
+
+// Construct the server file name from the input code and return the name
+function constructServerFileNameImage(i_qr_xml, i_file_number)
+{
+    var down_load_code = i_qr_xml.getDownloadOne(i_file_number);
+
+    var season_start_year = i_qr_xml.getSeasonStartYear();
+
+    if (down_load_code.length == 0)
+    {
+        return '';
+    }
+
+    var file_name_path_image = '';
+
+    if (execApplicationOnServer())
+    {
+        file_name_path_image = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
+    }
+    else
+    {
+        file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
+    }
+
+    return file_name_path_image;
+
+} // constructServerFileNameImage
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Set Qr Code Supporter Card //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////

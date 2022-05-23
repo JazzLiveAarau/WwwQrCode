@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-22
+// Date: 2022-05-23
 // Author: Gunnar Lidén
 
 // File content
@@ -33,6 +33,8 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
     var el_two_from_address = getElementDivAltOneFromAddress();
 
     el_two_from_address.style.transform = 'rotate(180deg)';
+
+    setSupporterCardQrCode(i_qr_xml, i_file_number);
 
 } // setPrintPageOneAlternativeOne
 
@@ -518,7 +520,7 @@ function setWidthsHeightsMarginsAltOne()
 
     var two_qr_card_width = 2.0*80.0 + 1.0;
 
-    var two_qr_card_top = 15.0;
+    var two_qr_card_top = 2.0;
 
     var to_address_height = 40.0;
 

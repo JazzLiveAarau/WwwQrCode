@@ -219,7 +219,9 @@ function getElementDivSupporterQrCanvasString(i_qr_xml, i_file_number, i_tab)
 
     ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getTabs(i_tab + 1);
 
-    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + '<canvas ' + ' id= "' + id_supporter_card_qr_canvas + '" '  + ' class= "' + cl_supporter_card_qr_canvas + '" ' + '>';
+    //QQQQ ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + '<canvas ' + ' id= "' + id_supporter_card_qr_canvas + '" '  + ' class= "' + cl_supporter_card_qr_canvas + '" ' + '>';
+
+    ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + '<img ' + ' id= "' + id_supporter_card_qr_canvas + '" '  + ' class= "' + cl_supporter_card_qr_canvas + '" ' + '>';
 
     ret_supporter_card_qr_canvas_str = ret_supporter_card_qr_canvas_str + getNewLineString();
 	
@@ -245,9 +247,9 @@ function MoveToQrStringsgetSupporterCardReverseSideOne()
 
     ret_all_rows = ret_all_rows + 'JAZZ <i>live</i> AARAU' + '<br>' + '<br>';
 
-    ret_all_rows = ret_all_rows + 'info@jazzliveaarau.ch' + '<br>';
+    ret_all_rows = ret_all_rows + 'Homepage: https://jazzliveaarau.ch' + '<br>';
 
-    ret_all_rows = ret_all_rows + 'https://jazzliveaarau.ch';
+    ret_all_rows = ret_all_rows + 'E-Mail: qrcode@jazzliveaarau.ch';
 
     return ret_all_rows;
 
@@ -257,11 +259,11 @@ function MoveToQrStringsgetSupporterCardReverseQrCode(i_download_code)
 {
     var ret_str = '';
 
-    ret_str = ret_str + 'Ausweis für das Telefon auf der Webseite:' + '<br><br>';
+    ret_str = ret_str + 'Mobiltelefon QR Code Anzeiger Link:' + '<br>';
 
     ret_str = ret_str + QrStrings.urlQrCodeShowWebPage() + '<br><br>';
 
-    ret_str = ret_str + 'Code für den Ausweis: ' + '<b>' + i_download_code + '</b>';
+    ret_str = ret_str + 'Der Code für diesen Ausweis ist <br>' + i_download_code;
 
     return ret_str;
 

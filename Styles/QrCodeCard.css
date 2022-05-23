@@ -16,17 +16,17 @@ Remarks and references
     float: left;
     width: 78mm;
 	height: 48mm;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 1mm solid black;    
 }
 
 .cl_div_supporter_card_reverse
 {
     float: left;
-    margin-left: 0.3mm;
+    margin-left: 1.0mm;
     width: 78mm;
     height: 48mm;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 1mm solid black; 
     font-size: 3.0mm; 
 }
@@ -50,7 +50,7 @@ Remarks and references
     height: 8mm;
     width: 77mm;
     margin-top: 2mm;
-    margin-bottom: 2mm;
+    margin-bottom: 1mm;
     font-size: 5.6mm;
     font-weight: bold;
     text-align: center;
@@ -79,15 +79,17 @@ Remarks and references
 .cl_div_supporter_card_qr_canvas
 {
     margin-left: 7mm;
-    margin-top: 1mm;
-    height: 23mm;
-    width: 25mm;
+    margin-top: 0mm;
+    height: 26mm;
+    width: 26mm;
     float: left;
     border: 1px solid green;  
 }
 
 .cl_supporter_card_qr_canvas
 {
+    max-width: 100%;
+    max-height: 100%;
     clear: both;
 }
 

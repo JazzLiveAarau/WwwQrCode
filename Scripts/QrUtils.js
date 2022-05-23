@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-19
+// Date: 2022-05-23
 // Author: Gunnar Lidén
 
 // File content
@@ -293,6 +293,60 @@ function seasonStartYearJQueryPost(i_current_year, i_file_name_this, i_file_name
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Season Start Year ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Read Text File On Server //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Read text file on server
+// https://stackoverflow.com/questions/4533018/how-to-read-a-text-file-from-server-using-javascript
+function readTextFileOnServer(i_b_image_file, i_file_server, i_callback_function_name) 
+{
+    console.log("Enter readTextFileOnServer");
+
+    console.log("i_file_server= " + i_file_server);
+
+    var raw_file = new XMLHttpRequest();
+
+    raw_file.open("GET", i_file_server, false);
+
+    raw_file.onreadystatechange = function ()
+    {
+        if(raw_file.readyState === 4)
+        {
+            if(raw_file.status === 200 || raw_file.status == 0)
+            {
+                console.log("File exists");
+
+                var all_text = raw_file.responseText;
+
+                if (i_b_image_file)
+                {
+                    setQrImageDataUrlInLocalStorageIfNotSet(all_text);
+                }
+                else
+                {
+                    setQrTextDataInLocalStorageIfNotSet(all_text);
+                }
+
+                i_callback_function_name(all_text);
+            }
+            else if (raw_file.status == 404)
+            {
+                console.log("File is missing");
+
+                i_callback_function_name(QrStrings.failureLoadingQrFileCode());
+            }
+        }
+    }
+
+    raw_file.send(null);
+
+} // readTextFileOnServer
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Read Text File On Server ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
