@@ -340,7 +340,13 @@ function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab)
 
     ret_message_str = ret_message_str + getNewLineString();
 	
-	ret_message_str = ret_message_str + getTabs(i_tab + 1) + '<br><br>Two QR cards' + getNewLineString();
+	ret_message_str = ret_message_str + getTabs(i_tab + 1) + getElementDivSupporterCardFrontString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_message_str = ret_message_str + getNewLineString();
+
+	ret_message_str = ret_message_str + getTabs(i_tab + 1) + getElementDivSupporterCardReverseString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_message_str = ret_message_str + getNewLineString();
 
     ret_message_str = ret_message_str + getTabs(i_tab);
 

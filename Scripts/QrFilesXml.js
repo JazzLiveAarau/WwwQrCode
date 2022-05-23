@@ -1015,6 +1015,20 @@ class QrFilesXml
     ///////////////////////// Start Qr String Functions  //////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    getSupporterCardTextString()
+    {
+        var ret_str = '';
+
+        ret_str = ret_str + QrStrings.getQrCategorySupporterString() + '<br>';
+
+        ret_str = ret_str + 'Saison' + '<br>';
+
+        ret_str = ret_str + this.getQrSeasonString();
+
+        return ret_str;
+
+    } // getSupporterCardTextString
+
     getQrSeasonString()
     {
         return this.getSeasonStartYear().toString() + '-' +

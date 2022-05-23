@@ -1,0 +1,118 @@
+/* 
+File: QrCodeFiles.css Date: 2022-05-23 Author: Gunnar Lidén
+
+General information
+===================
+
+ Styles for the supporter card and other cards that shall be printed
+
+
+Remarks and references
+======================
+*/
+
+.cl_div_supporter_card_front
+{
+    float: left;
+    width: 78mm;
+	height: 48mm;
+    border-radius: 10px;
+    border: 1mm solid black;    
+}
+
+.cl_div_supporter_card_reverse
+{
+    float: left;
+    margin-left: 0.3mm;
+    width: 78mm;
+    height: 48mm;
+    border-radius: 10px;
+    border: 1mm solid black; 
+    font-size: 3.0mm; 
+}
+
+.cl_div_supporter_card_logo
+{
+    position: relative;
+    top: 2mm;
+    left: 1mm;
+    height: 8mm;
+    width: 98%;
+    font-size: 5.6mm;
+    font-weight: bold;
+    color: rgb(255,0,10);
+    text-align: center;
+    clear: both;
+}
+
+.cl_div_supporter_card_name
+{
+    height: 8mm;
+    width: 77mm;
+    margin-top: 2mm;
+    margin-bottom: 2mm;
+    font-size: 5.6mm;
+    font-weight: bold;
+    text-align: center;
+    /* border: 1px solid yellow; */
+    clear: both;
+}
+
+.cl_div_supporter_card_text_canvas
+{
+    clear: both;
+}
+
+.cl_div_supporter_card_text
+{
+    width: 38mm;
+    height: auto;
+    margin-top: 2mm;
+    font-size: 5.6mm;
+    font-weight: bold;
+    padding-top: 1mm;
+    text-align: center;
+    float: left;    
+    /* border: 1px solid blue; */
+}
+
+.cl_div_supporter_card_qr_canvas
+{
+    margin-left: 7mm;
+    margin-top: 1mm;
+    height: 23mm;
+    width: 25mm;
+    float: left;
+    border: 1px solid green;  
+}
+
+.cl_supporter_card_qr_canvas
+{
+    clear: both;
+}
+
+.cl_div_supporter_card_reverse_text
+{
+    width: 95%;
+    height: auto;
+    margin-top: 1mm;
+    font-size: 2.9mm;
+    padding: 2mm;
+    text-align: center;
+    font-weight: bold;
+    clear: both;
+    /* border: 1px solid blue; */
+}
+
+.cl_div_supporter_card_reverse_qr_show
+{
+    width: 95%;
+    height: auto;
+    margin-top: 1mm;
+    font-size: 2.9mm;
+    padding: 2mm;
+    text-align: center;
+    font-weight: bold;
+    clear: both;
+    /* border: 1px solid red; */
+}

@@ -322,7 +322,7 @@ function eventClickQrSendEmailButton()
 
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
-        var send_to = 'gunnar@viewsoncad.ch';
+        var send_to = test_address;
 
         var title_htm = QrStrings.getTitleSupporterEmail();
 
