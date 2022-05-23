@@ -67,7 +67,8 @@ class QrStrings
 
         ret_htm = ret_htm + 'Unten ist Ihre Supporter-Karte zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Eine Alternative is die ' + '<b>' + ' JAZZ <i>live</i> AARAU QR Anzeiger ' + '</b>' + 'Web-Applikation zu verwenden:' + '<br>' + 
+        ret_htm = ret_htm + 'Als Alternative ist die ' + 'Web-Applikation' + '<b>' + ' JAZZ <i>live</i> AARAU QR Anzeiger ' + '</b>' + 'zu verwenden:' + '<br>' + 
+       
                             '<b>' + this.urlQrCodeShowWebPage() + '</b>'  + '<br>' + '<br>';
         ret_htm = ret_htm + 'Mit einem Code kann die Supporter-Karte heruntergeladen, im Telefon gespeichert und mit dem Telefon gezeigt werden.';
 
