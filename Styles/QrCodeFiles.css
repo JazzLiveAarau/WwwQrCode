@@ -370,7 +370,7 @@ PagePrint
     left: 11%;
     height: 50mm;
     width: 77%;
-    border: 1px dotted black;
+    /* border: 1px dotted black; */
     text-align: center;
     clear: both;
 }

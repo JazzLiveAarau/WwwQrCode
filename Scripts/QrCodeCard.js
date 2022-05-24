@@ -14,7 +14,9 @@
 // Sets the supporter card QR code
 function setSupporterCardQrCode(i_qr_xml, i_file_number)
 {
-    var file_name_image = constructServerFileNameImage(i_qr_xml, i_file_number);
+    var b_person_two = false;
+
+    var file_name_image = constructServerFileNameImage(i_qr_xml, i_file_number, b_person_two);
 
     if (file_name_image.length == 0)
     {
@@ -46,10 +48,58 @@ function setSupporterCardQrCodeAfterLoad(i_data_url)
 
 } // setSupporterCardQrCodeAfterLoad
 
+function setSupporterCardQrCodePersonTwo(i_qr_xml, i_file_number)
+{
+    var person_two = i_qr_xml.getQrCodeNameTwo(i_file_number);
+
+    if (person_two.length == 0)
+    {
+        return;
+    }
+
+    var b_person_two = true;
+
+    var file_name_image = constructServerFileNameImage(i_qr_xml, i_file_number, b_person_two);
+
+    if (file_name_image.length == 0)
+    {
+        return;
+    }
+
+    var b_image_file = true;
+
+    readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeAfterLoadPersonTwo);
+
+} // setSupporterCardQrCodePersonTwo
+
+function setSupporterCardQrCodeAfterLoadPersonTwo(i_data_url)
+{
+    console.log("Enter setSupporterCardQrCodeAfterLoad");
+
+    if (i_data_url == QrStrings.failureLoadingQrFileCode())
+    {
+        alert("setSupporterCardQrCodeAfterLoad i_data_url= " + i_data_url);
+
+        return;
+    }
+
+  // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
+
+  var el_image = getElementSupporterQrCodeImagePersonTwo();
+
+  el_image.src = i_data_url;
+
+} // setSupporterCardQrCodeAfterLoad
+
 // Construct the server file name from the input code and return the name
-function constructServerFileNameImage(i_qr_xml, i_file_number)
+function constructServerFileNameImage(i_qr_xml, i_file_number, i_b_person_two)
 {
     var down_load_code = i_qr_xml.getDownloadOne(i_file_number);
+
+    if (i_b_person_two)
+    {
+        down_load_code = i_qr_xml.getDownloadTwo(i_file_number);
+    }
 
     var season_start_year = i_qr_xml.getSeasonStartYear();
 
@@ -170,7 +220,7 @@ function getElementDivSupporterCardFrontPersonTwoString(i_name_person_two_str, i
 
 	ret_card_front_str = ret_card_front_str + getTabs(i_tab + 1) + getElementDivQrCodeNameString(i_name_person_two_str, i_tab) + getNewLineString();
 
-    ret_card_front_str = ret_card_front_str + getTabs(i_tab + 1) + getElementDivSupporterCardTextCanvasString(i_season_card_str, i_tab + 1) + getNewLineString();
+    ret_card_front_str = ret_card_front_str + getTabs(i_tab + 1) + getElementDivSupporterCardTextCanvasPersonTwoString(i_season_card_str, i_tab + 1) + getNewLineString();
 
     ret_card_front_str = ret_card_front_str + getNewLineString();
 
@@ -304,6 +354,39 @@ function getElementDivSupporterCardTextCanvasString(i_season_card_str, i_tab)
 
 } // getElementDivSupporterCardTextCanvasString
 
+// Get the string that defines the div supporter card text canvas person two
+function getElementDivSupporterCardTextCanvasPersonTwoString(i_season_card_str, i_tab)
+{
+    var ret_card_text_canvas_str = '';
+
+    var id_div_card_text_canvas = '';
+
+    var cl_div_card_text_canvas = getClassDivSupporterTextCanvas();
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getTabs(i_tab);
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getDivStartString(id_div_card_text_canvas, cl_div_card_text_canvas);
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getNewLineString();
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getTabs(i_tab);
+	
+	ret_card_text_canvas_str = ret_card_text_canvas_str + getElementDivSupporterCardTextString(i_season_card_str, i_tab);
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getTabs(i_tab);
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getElementDivSupporterQrImagePersonTwoString(i_tab);
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getNewLineString();
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getDivEndString(id_div_card_text_canvas, cl_div_card_text_canvas);
+
+    ret_card_text_canvas_str = ret_card_text_canvas_str + getNewLineString() + getNewLineString();
+
+    return ret_card_text_canvas_str;
+
+} // getElementDivSupporterCardTextCanvasPersonTwoString
+
 // Get the string that defines the div supporter card text
 function getElementDivSupporterCardTextString(i_season_card_str, i_tab)
 {
@@ -361,6 +444,37 @@ function getElementDivSupporterQrImageString(i_tab)
     return ret_supporter_card_qr_image_str;
 
 } // getElementDivSupporterQrImageString
+
+// Get the string that defines the div supporter card QR code canvas
+function getElementDivSupporterQrImagePersonTwoString(i_tab)
+{
+    var ret_supporter_card_qr_image_str = '';
+
+    var id_div_supporter_card_qr_image = '';
+
+    var cl_div_supporter_card_qr_image = getClassDivSupporterImageQrCode();
+	
+	var id_supporter_card_qr_image = getIdSupporterQrCodeImagePersonTwo();
+
+    var cl_supporter_card_qr_image = getClassSupporterQrCodeImage();
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getTabs(i_tab);
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getDivStartString(id_div_supporter_card_qr_image, cl_div_supporter_card_qr_image);
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString();
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getTabs(i_tab + 1);
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + '<img ' + ' id= "' + id_supporter_card_qr_image + '" '  + ' class= "' + cl_supporter_card_qr_image + '" ' + '>';
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getDivEndString(id_div_supporter_card_qr_image, cl_div_supporter_card_qr_image);
+
+    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString() + getNewLineString();
+
+    return ret_supporter_card_qr_image_str;
+
+} // getElementDivSupporterQrImagePersonTwoString
 
 // Get the string that defines the div supporter card reverse text
 function getElementDivSupporterCardReverseTextString(i_tab)
@@ -463,6 +577,20 @@ function getIdSupporterQrCodeImage()
     return 'id_supporter_card_qr_image';
 
 } // getIdSupporterQrCodeImage
+
+// Get the element supporter card canvas person two
+function getElementSupporterQrCodeImagePersonTwo()
+{
+    return document.getElementById(getIdSupporterQrCodeImagePersonTwo());
+
+} // getElementDivQrPrintPageOne
+
+// Returns the identity of the supporter card canvas person two
+function getIdSupporterQrCodeImagePersonTwo()
+{
+    return 'id_supporter_card_qr_image_person_two';
+
+} // getIdSupporterQrCodeImagePersonTwo
 
 // Returns the class for the QR code canvas
 function getClassSupporterQrCodeImage()

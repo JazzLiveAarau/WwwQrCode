@@ -36,6 +36,8 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 
     setSupporterCardQrCode(i_qr_xml, i_file_number);
 
+    setSupporterCardQrCodePersonTwo(i_qr_xml, i_file_number);
+
 } // setPrintPageOneAlternativeOne
 
 

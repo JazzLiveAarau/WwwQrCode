@@ -298,6 +298,7 @@ function eventClickQrSendEmailButton()
 // Callback after setting and saving QR code names with function getInputSetAndSaveQrCodeNames
 function callbackAfterGetInputSetAndSaveQrCodeNames()
 {
+
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
         var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
@@ -363,9 +364,11 @@ function callbackSendEmail(i_b_sent)
 
         g_qr_files_xml_object.saveXmlFileOnServer();
 
+        uploadQrFileImageAndTextSupporter(g_files_active_number, g_qr_files_xml_object);
+
         var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
 
-        alert("E-Mail an " + supporter_name + " ist gesendet");
+        alert("E-Mail an " + supporter_name + " ist gesendet und QR Code Datei ist zum Server hochgeladen");
 
         if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
         {
@@ -407,8 +410,16 @@ function eventClickQrSendPostButton()
 
 } // eventClickQrSendPostButton
 
-// 
 function callbackAfterGetInputSetAndSaveQrCodeNamesSendPost()
+{
+    uploadQrFileImageAndTextSupporter(g_files_active_number, g_qr_files_xml_object);
+
+    setTimeout(callbackAfterUploadOfQrCodeFilesSendPost, 3000);
+
+} // callbackAfterGetInputSetAndSaveQrCodeNames
+
+// 
+function callbackAfterUploadOfQrCodeFilesSendPost()
 {
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {

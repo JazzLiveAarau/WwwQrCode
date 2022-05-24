@@ -1,5 +1,5 @@
 /* 
-File: QrCodeFiles.css Date: 2022-05-23 Author: Gunnar Lidén
+File: QrCodeFiles.css Date: 2022-05-24 Author: Gunnar Lidén
 
 General information
 ===================
@@ -83,7 +83,7 @@ Remarks and references
     height: 26mm;
     width: 26mm;
     float: left;
-    border: 1px solid green;  
+    /* border: 1px solid green;  */
 }
 
 .cl_supporter_card_qr_image

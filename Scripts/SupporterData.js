@@ -205,10 +205,10 @@ function registerAndUploadQrFilesXmlSupporter(i_files_to_register, i_supporter_a
 
     QrProgress.Append("Index for the first  file to register is " + i_files_to_register[0].toString());
 
-    if (n_to_reg > 2)
-    {
-        n_to_reg = 2; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-    }
+    //if (n_to_reg > 2)
+    //{
+    //    n_to_reg = 2; // QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+    //}
 
     for (var index_reg = 0; index_reg < n_to_reg; index_reg++)
     {
@@ -284,15 +284,18 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
 
     var download_code_one = i_qr_file_xml.getRandomDownloadCode();
 
+    var check_code_one = i_qr_file_xml.getRandomDownloadCode();
+
     var download_code_two = "";
 
-    if (supporter_contribution_int > 2 * QrStrings.getSupporterContributionLimitValue())
+    var check_code_two = '';
+
+    if (supporter_contribution_int >= 2.0 * QrStrings.getSupporterContributionLimitValue())
     {
         download_code_two = i_qr_file_xml.getRandomDownloadCode();
+
+        check_code_two = i_qr_file_xml.getRandomDownloadCode();
     }
-
-    // TODO Check that it not already exists
-
 	
     i_qr_file_xml.setFirstName(file_number, first_name);
 
@@ -332,6 +335,10 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
 
 	i_qr_file_xml.setDownloadTwo(file_number, download_code_two);
 
+	i_qr_file_xml.setCheckCodeOne(file_number, check_code_one);
+
+	i_qr_file_xml.setCheckCodeTwo(file_number, check_code_two);
+
 	i_qr_file_xml.setEmailSent(file_number, QrStrings.getBoolFalseString());
 
 	i_qr_file_xml.setMailSent(file_number, QrStrings.getBoolFalseString());
@@ -340,7 +347,9 @@ function setDataOfAppendedQrFilesNodeAndUploadSupporter(i_supporter_data, i_qr_f
 
     i_qr_file_xml.setPrintBatch(file_number, QrStrings.getBoolFalseString());
 
-    uploadQrFileImageAndTextSupporter(file_number, i_qr_file_xml);
+    // -------------------------------------------------------------------------------------------------- ---------------------------
+
+    // Not any longer here uploadQrFileImageAndTextSupporter(file_number, i_qr_file_xml);
 
 } // setDataOfAppendedQrFilesNodeAndUploadSupporter
 
@@ -355,9 +364,11 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 
     var download_code_one = i_qr_file_xml.getDownloadOne(i_file_number);
 
-    var qr_text_image = i_qr_file_xml.getQrCombinedSeasonImageString(i_file_number);
+    var b_person_two = false;
 
-    var qr_text_text = i_qr_file_xml.getQrCombinedSeasonTextString(i_file_number, download_code_one);
+    var qr_text_image = i_qr_file_xml.getCombinedStringForQrCode(i_file_number, b_person_two);
+
+    var qr_text_text = i_qr_file_xml.getCombinedStringForQrCode(i_file_number, b_person_two);
 
     var image_data_url = generateQrCodeOnePersonDataUrl(qr_text_image);
 
@@ -400,10 +411,20 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 
     console.log("uploadQrFileImageAndTextSupporter Uploaded text file: " + file_name_path_text);
 
-    var download_code_two = i_qr_file_xml.getDownloadTwo(i_file_number);
+    var supporter_two = i_qr_file_xml.getQrCodeNameTwo(i_file_number);
 
-    if (download_code_two.length > 0)
+    if (supporter_two.length > 0)
     {
+        var download_code_two = i_qr_file_xml.getDownloadTwo(i_file_number);
+
+        b_person_two = true;
+
+        qr_text_image = i_qr_file_xml.getCombinedStringForQrCode(i_file_number, b_person_two);
+    
+        qr_text_text = i_qr_file_xml.getCombinedStringForQrCode(i_file_number, b_person_two);
+    
+        image_data_url = generateQrCodeOnePersonDataUrl(qr_text_image);
+
         file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_two);
 
         file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_two);

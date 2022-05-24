@@ -1,5 +1,5 @@
 // File: ConcertData.js
-// Date: 2022-05-17
+// Date: 2022-05-24
 // Author: Gunnar Lidén
 
 // File content
@@ -336,7 +336,7 @@ function setDataOfAppendedQrFilesNodeAndUploadMusician(i_musician_name, i_concer
 
     i_qr_file_xml.setPrintBatch(file_number, QrStrings.getBoolFalseString());
 
-    uploadQrFileImageAndTextMusician(file_number, i_qr_file_xml);
+    // TODO uploadQrFileImageAndTextMusician(file_number, i_qr_file_xml); QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 } // setDataOfAppendedQrFilesNodeAndUploadMusician
 

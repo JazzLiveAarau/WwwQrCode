@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-18
+// Date: 2022-05-24
 // Author: Gunnar Lidén
 
 // File content
@@ -227,6 +227,20 @@ class QrFilesXml
         return this.getNodeValue(this.m_tags.getDownloadTwo(), i_qr_file_number);
         
     } // getDownloadTwo
+
+    // Returns the check one code for a given  QR file number
+    getCheckCodeOne(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getCheckCodeOne(), i_qr_file_number);
+        
+    } // getCheckCodeOne
+
+    // Returns the check two code for a given  QR file number
+    getCheckCodeTwo(i_qr_file_number)
+    {
+        return this.getNodeValue(this.m_tags.getCheckCodeTwo(), i_qr_file_number);
+        
+    } // getCheckCodeTwo
 
     // Returns the email sent flag for a given  QR File number (WAHR or TRUE)
     getEmailSent(i_qr_file_number)
@@ -494,6 +508,20 @@ class QrFilesXml
          this.setQrFileNodeValue(this.m_tags.getDownloadTwo(), i_qr_file_number, i_node_value);
          
      } // setDownloadTwo
+
+     // Sets the check one code for a given  QR File number
+     setCheckCodeOne(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getCheckCodeOne(), i_qr_file_number, i_node_value);
+         
+     } // setCheckCodeOne
+
+     // Sets the check two code for a given  QR File number
+     setCheckCodeTwo(i_qr_file_number, i_node_value)
+     {
+         this.setQrFileNodeValue(this.m_tags.getCheckCodeTwo(), i_qr_file_number, i_node_value);
+         
+     } // setCheckCodeTwo
 
      // Sets the email sent flag  for a given  QR File number (WAHR or FALSCH)
      setEmailSent(i_qr_file_number, i_node_value)
@@ -901,6 +929,16 @@ class QrFilesXml
 	   var download_two_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
 	   download_two_node.appendChild(download_two_text);
 	   new_task.appendChild(download_two_node);
+
+	   var check_code_one_node = this.m_file_xml.createElement(this.m_tags.getCheckCodeOne());
+	   var check_code_one_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   check_code_one_node.appendChild(check_code_one_text);
+	   new_task.appendChild(check_code_one_node);
+
+	   var check_code_two_node = this.m_file_xml.createElement(this.m_tags.getCheckCodeTwo());
+	   var check_code_two_text = this.m_file_xml.createTextNode(this.m_not_yet_set_node_value);
+	   check_code_two_node.appendChild(check_code_two_text);
+	   new_task.appendChild(check_code_two_node);
        
 	   var email_sent_node = this.m_file_xml.createElement(this.m_tags.getEmailSent());
 	   var email_sent_text = this.m_file_xml.createTextNode(this.m_bool_false_str);
@@ -1134,6 +1172,40 @@ class QrFilesXml
         return ret_str;
 
     } // getQrMusicianString
+
+    getCombinedStringForQrCode(i_qr_file_number, i_b_person_two)
+    {
+        var category_str = this.getQrCategoryString(i_qr_file_number);
+
+        var person_name = this.getQrCodeNameOne(i_qr_file_number);
+
+        var download_code = this.getDownloadOne(i_qr_file_number);
+
+        var check_code = this.getCheckCodeOne(i_qr_file_number);
+
+        if (i_b_person_two)
+        {
+            person_name = this.getQrCodeNameTwo(i_qr_file_number);
+
+            download_code = this.getDownloadTwo(i_qr_file_number);
+
+            check_code = this.getCheckCodeTwo(i_qr_file_number);
+        }
+
+
+        var ret_str_qr_code = '';
+
+        ret_str_qr_code = ret_str_qr_code + category_str + '_';
+
+        ret_str_qr_code = ret_str_qr_code + person_name + '_';
+
+        ret_str_qr_code = ret_str_qr_code + download_code + '_';
+
+        ret_str_qr_code = ret_str_qr_code + check_code;
+
+        return ret_str_qr_code;
+        
+    } // getCombinedStringForQrCode
 
     getQrCombinedSeasonImageString(i_qr_file_number)
     {
@@ -1462,7 +1534,7 @@ class QrFilesXml
         {
             var random_code = this.getRandomCode();
 
-            var b_unique = this.isUniqueDownloadCode(random_code);
+            var b_unique = this.isUniqueDownloadCheckCode(random_code);
 
             if (b_unique)
             {
@@ -1477,7 +1549,7 @@ class QrFilesXml
     } // getRandomDownloadCode
 
     // Check if the random code is unique, i.e. not already used
-    isUniqueDownloadCode(i_download_code)
+    isUniqueDownloadCheckCode(i_download_check_code)
     {
         var n_files = this.getNumberOfQrFiles();
 
@@ -1489,34 +1561,38 @@ class QrFilesXml
 
             var download_code_two = this.getDownloadTwo(file_number);
 
-            if (download_code_one == i_download_code)
+            var check_code_one = this.getCheckCodeOne(file_number);
+
+            var check_code_two = this.getCheckCodeTwo(file_number);
+
+            if (download_code_one == i_download_check_code || check_code_one == i_download_check_code)
             {
                 b_unique = false;
 
                 break;
 
-            } // download_code_one
+            } 
 
             if (download_code_two.length > 0)
             {
-                if (download_code_two == i_download_code)
+                if (download_code_two == i_download_check_code || check_code_two == i_download_check_code)
                 {
                     b_unique = false;
     
                     break;
                 }
-            } // download_code_two
+            } 
 
         } // file_number
 
         if (!b_unique)
         {
-            console.log("QrFilesXml.isUniqueDownloadCode There was a not unique code: " + i_download_code);
+            console.log("QrFilesXml.isUniqueDownloadCheckCode There was a not unique code: " + i_download_check_code);
         }
 
         return b_unique;
 
-    } // isUniqueDownloadCode
+    } // isUniqueDownloadCheckCode
 
     // Get a random code
     getRandomCode()
@@ -1735,6 +1811,8 @@ class QrFilesTags
         this.m_tag_member_admission = "MemberAdmission";
         this.m_tag_download_one = "DownloadCodeOne";
         this.m_tag_download_two = "DownloadCodeTwo";
+        this.m_tag_check_code_one = "CheckCodeOne";
+        this.m_tag_check_code_two = "CheckCodeTwo";
         this.m_tag_email_sent = "EmailSent";
         this.m_tag_mail_sent = "MailSent";
         this.m_tag_print_sent = "PrintSent";
@@ -1770,6 +1848,8 @@ class QrFilesTags
     getMemberAdmission(){return this.m_tag_member_admission;}
     getDownloadOne(){return this.m_tag_download_one;}
     getDownloadTwo(){return this.m_tag_download_two;}
+    getCheckCodeOne(){return this.m_tag_check_code_one;}
+    getCheckCodeTwo(){return this.m_tag_check_code_two;}
     getEmailSent(){return this.m_tag_email_sent;}
     getMailSent(){return this.m_tag_mail_sent;}
     getPrintSent(){return this.m_tag_print_sent;}
