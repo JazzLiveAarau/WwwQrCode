@@ -8,6 +8,76 @@
 // Functions for the supporter card and other cards to be printed
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Set Qr Code Supporter Card ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Sets the supporter card QR code
+function setSupporterCardQrCode(i_qr_xml, i_file_number)
+{
+    var file_name_image = constructServerFileNameImage(i_qr_xml, i_file_number);
+
+    if (file_name_image.length == 0)
+    {
+        return;
+    }
+
+    var b_image_file = true;
+
+    readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeAfterLoad);
+
+} // setSupporterCardQrCode
+
+function setSupporterCardQrCodeAfterLoad(i_data_url)
+{
+    console.log("Enter setSupporterCardQrCodeAfterLoad");
+
+    if (i_data_url == QrStrings.failureLoadingQrFileCode())
+    {
+        alert("setSupporterCardQrCodeAfterLoad i_data_url= " + i_data_url);
+
+        return;
+    }
+
+  // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
+
+  var el_image = getElementSupporterQrCodeImage();
+
+  el_image.src = i_data_url;
+
+} // setSupporterCardQrCodeAfterLoad
+
+// Construct the server file name from the input code and return the name
+function constructServerFileNameImage(i_qr_xml, i_file_number)
+{
+    var down_load_code = i_qr_xml.getDownloadOne(i_file_number);
+
+    var season_start_year = i_qr_xml.getSeasonStartYear();
+
+    if (down_load_code.length == 0)
+    {
+        return '';
+    }
+
+    var file_name_path_image = '';
+
+    if (execApplicationOnServer())
+    {
+        file_name_path_image = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
+    }
+    else
+    {
+        file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
+    }
+
+    return file_name_path_image;
+
+} // constructServerFileNameImage
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Set Qr Code Supporter Card //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Supporter Card Strings ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 

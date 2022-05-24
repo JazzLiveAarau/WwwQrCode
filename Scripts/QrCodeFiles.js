@@ -291,37 +291,44 @@ function eventClickQrSendEmailButton()
         return;
     }
 
-    var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+    getInputSetAndSaveQrCodeNames(callbackAfterGetInputSetAndSaveQrCodeNames);
 
-    var download_code = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
+} // eventClickQrSendEmailButton
 
-    var supporter_email = g_qr_files_xml_object.getEmail(g_files_active_number);
-
-    var send_bcc = 'qrcode@jazzliveaarau.ch';
-
-    if (supporter_email.length == 0)
-    {
-        alert("Keine E-Mail Adresse vorhanden!");
-
-        return;
-    }
-
-    var prompt_str = 'Diese E-Mail Adresse ' + supporter_email + 
-        ' wird nicht verwendet. Bitte eine Test-Adresse eingeben';
-
-    var test_address = prompt(prompt_str, 'gunnar@viewsoncad.ch');
-
-    if (test_address == null || test_address.trim().length == 0)
-    {
-        alert("Unvalid Test-Adresse");
-
-        return;
-    }
-
-    var b_execute_server = execApplicationOnServer();
-
+// Callback after setting and saving QR code names with function getInputSetAndSaveQrCodeNames
+function callbackAfterGetInputSetAndSaveQrCodeNames()
+{
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
+        var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
+        var download_code = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
+    
+        var supporter_email = g_qr_files_xml_object.getEmail(g_files_active_number);
+    
+        var send_bcc = 'qrcode@jazzliveaarau.ch';
+    
+        if (supporter_email.length == 0)
+        {
+            alert("Keine E-Mail Adresse vorhanden!");
+    
+            return;
+        }
+    
+        var prompt_str = 'Diese E-Mail Adresse ' + supporter_email + 
+            ' wird nicht verwendet. Bitte eine Test-Adresse eingeben';
+    
+        var test_address = prompt(prompt_str, 'gunnar@viewsoncad.ch');
+    
+        if (test_address == null || test_address.trim().length == 0)
+        {
+            alert("Unvalid Test-Adresse");
+    
+            return;
+        }
+    
+        var b_execute_server = execApplicationOnServer();
+
         var send_to = test_address;
 
         var title_htm = QrStrings.getTitleSupporterEmail();
@@ -342,10 +349,10 @@ function eventClickQrSendEmailButton()
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
     {
-        
+        alert("Send musician email not yet implemented");
     }
 
-} // eventClickQrSendEmailButton
+} // callbackAfterGetInputSetAndSaveQrCodeNames
 
 // Callback function for sendEmailWithJQueryPostFunction
 function callbackSendEmail(i_b_sent)
@@ -396,6 +403,13 @@ function updateControlsAfterChangeOfQrFilesXmlSupporter()
 // User clicked the send mail (post) button
 function eventClickQrSendPostButton()
 {
+    getInputSetAndSaveQrCodeNames(callbackAfterGetInputSetAndSaveQrCodeNamesSendPost);
+
+} // eventClickQrSendPostButton
+
+// 
+function callbackAfterGetInputSetAndSaveQrCodeNamesSendPost()
+{
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
         setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number);
@@ -403,10 +417,11 @@ function eventClickQrSendPostButton()
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
     {
+        alert("Send musician mail is not yet implemented");
         
     }
 
-} // eventClickQrSendPostButton
+} // callbackAfterGetInputSetAndSaveQrCodeNamesSendPost
 
 // User clicked the print batch button
 function eventClickPrintBatchButton()
@@ -436,73 +451,27 @@ function oninputSeasonColor()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Set Qr Code Supporter Card ////////////////////////////////
+///////////////////////// Start Get Input Save XML ////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Sets the supporter card QR code
-function setSupporterCardQrCode(i_qr_xml, i_file_number)
+// Get QR code name one and two from the input controls, set XML object and save XML file
+function getInputSetAndSaveQrCodeNames(i_callback_function)
 {
-    var file_name_image = constructServerFileNameImage(i_qr_xml, i_file_number);
+    var qr_name_one = g_qr_code_name_one_text_box.getValue();
 
-    if (file_name_image.length == 0)
-    {
-        return;
-    }
+    var qr_name_two = g_qr_code_name_two_text_box.getValue();
 
-    var b_image_file = true;
+    g_qr_files_xml_object.setQrCodeNameOne(g_files_active_number, qr_name_one);
 
-    readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeAfterLoad);
+    g_qr_files_xml_object.setQrCodeNameTwo(g_files_active_number, qr_name_two);
 
-} // setSupporterCardQrCode
+    g_qr_files_xml_object.saveXmlFileOnServerCallback(i_callback_function)
 
-function setSupporterCardQrCodeAfterLoad(i_data_url)
-{
-    console.log("Enter setSupporterCardQrCodeAfterLoad");
+} // getInputSetAndSaveQrCodeNames
 
-    if (i_data_url == QrStrings.failureLoadingQrFileCode())
-    {
-        alert("setSupporterCardQrCodeAfterLoad i_data_url= " + i_data_url);
-
-        return;
-    }
-
-  // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
-
-  var el_image = getElementSupporterQrCodeImage();
-
-  el_image.src = i_data_url;
-
-} // setSupporterCardQrCodeAfterLoad
-
-// Construct the server file name from the input code and return the name
-function constructServerFileNameImage(i_qr_xml, i_file_number)
-{
-    var down_load_code = i_qr_xml.getDownloadOne(i_file_number);
-
-    var season_start_year = i_qr_xml.getSeasonStartYear();
-
-    if (down_load_code.length == 0)
-    {
-        return '';
-    }
-
-    var file_name_path_image = '';
-
-    if (execApplicationOnServer())
-    {
-        file_name_path_image = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
-    }
-    else
-    {
-        file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
-    }
-
-    return file_name_path_image;
-
-} // constructServerFileNameImage
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Set Qr Code Supporter Card //////////////////////////////////
+///////////////////////// Start Get Input Save XML ////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
