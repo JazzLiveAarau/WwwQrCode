@@ -303,7 +303,7 @@ function callbackAfterGetInputSetAndSaveQrCodeNames()
     {
         var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
 
-        var download_code = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
+        var download_code_one = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
     
         var supporter_email = g_qr_files_xml_object.getEmail(g_files_active_number);
     
@@ -334,7 +334,16 @@ function callbackAfterGetInputSetAndSaveQrCodeNames()
 
         var title_htm = QrStrings.getTitleSupporterEmail();
 
-        var msg_htm = QrStrings.getMsgSupporterEmail(supporter_name, download_code);
+        var download_code_two = '';
+
+        var person_two = g_qr_files_xml_object.getQrCodeNameTwo(g_files_active_number);
+
+        if (person_two.length > 0)
+        {
+            download_code_two = g_qr_files_xml_object.getDownloadTwo(g_files_active_number);
+        }
+
+        var msg_htm = QrStrings.getMsgSupporterEmail(supporter_name, download_code_one, download_code_two);
 
         if (!b_execute_server)
         {

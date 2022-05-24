@@ -26,21 +26,30 @@ class QrStrings
 
     } // getTitleSupporterEmail
 
-    static getMsgSupporterEmail(i_supporter_name, i_download_code)
+    static getMsgSupporterEmail(i_supporter_name, i_download_code, i_download_code_two)
     {
         var ret_htm = '';
 
         ret_htm = ret_htm + 'Guten Tag ' + i_supporter_name + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Danke, dass sie ..... ' + '<br>' + '<br>';
+        ret_htm = ret_htm + 'Danke, dass Sie uns als Supporter unterstützen.' + '<br>' + '<br>';
 
         var caption_str = '';
 
         ret_htm = ret_htm + 'Bitte dieser Link ' + this.linkQrCodeShowWebPage(caption_str) + 
                             ' klicken' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Danach dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
+        if (i_download_code_two.length == 0)
+        {
+            ret_htm = ret_htm + 'Danach dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
+        }
+        else
+        {
+            ret_htm = ret_htm + 'Für Ausweis eins dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>';
 
+            ret_htm = ret_htm + 'Für Ausweis zwei dieser Code  <b>' + i_download_code_two + '</b> eingeben' + '<br>' + '<br>';
+        }
+        
         ret_htm = ret_htm + 'Grüsse ' + '<br>' + '<br>';
 
         ret_htm = ret_htm + 'Das JAZZ <i>live</i> AARAU Team' + '<br>' + '<br>';
@@ -57,7 +66,7 @@ class QrStrings
     ///////////////////////// Start Supporter Mails ///////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    static getMsgSupporterPost(i_supporter_name, i_download_code)
+    static getMsgSupporterPost(i_supporter_name, i_download_code, i_download_code_two)
     {
         var ret_htm = '';
 
@@ -65,14 +74,23 @@ class QrStrings
 
         ret_htm = ret_htm + 'Danke, dass Sie uns als Supporter unterstützen. ' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Unten ist Ihre Supporter-Karte zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
+        ret_htm = ret_htm + 'Unten ist Ihre Supporter-Karte8n) zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
 
         ret_htm = ret_htm + 'Als Alternative ist die ' + 'Web-Applikation' + '<b>' + ' JAZZ <i>live</i> AARAU QR Anzeiger ' + '</b>' + 'zu verwenden:' + '<br>' + 
        
                             '<b>' + this.urlQrCodeShowWebPage() + '</b>'  + '<br>' + '<br>';
-        ret_htm = ret_htm + 'Mit einem Code kann die Supporter-Karte heruntergeladen, im Telefon gespeichert und mit dem Telefon gezeigt werden.';
+        ret_htm = ret_htm + 'Mit einem Code kann die Supporter-Karte heruntergeladen, in das Telefon gespeichert und mit dem Telefon gezeigt werden.';
 
-        ret_htm = ret_htm + ' Der Code für Ihre Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code + '</b>' + '<br>' + '<br>';
+        if (i_download_code_two.length == 0)
+        {
+            ret_htm = ret_htm + ' Der Code für Ihre Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code + '</b>' + '<br>' + '<br>';
+        }
+        else
+        {
+            ret_htm = ret_htm + ' Der Code für Ihre erste Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code + '</b>' + '<br>' + '<br>';
+
+            ret_htm = ret_htm + ' Der Code für Ihre zweite Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code_two + '</b>' + '<br>' + '<br>';
+        }
 
         ret_htm = ret_htm + 'Freundliche Grüsse ' + '<br>' + '<br>';
 

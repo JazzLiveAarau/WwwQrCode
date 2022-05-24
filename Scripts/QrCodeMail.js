@@ -295,6 +295,7 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
     var download_code = '';
 
     var b_person_two = false;
+    // Don't understan this ..
 
     if (!b_person_two)
     {
@@ -309,7 +310,16 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
         download_code = i_qr_xml.getDownloadTwo(i_file_number);
     }
 
-    var message_str = QrStrings.getMsgSupporterPost(supporter_name, download_code);
+    var person_two = i_qr_xml.getQrCodeNameTwo(i_file_number);
+
+    var download_code_two = '';
+
+    if (person_two.length > 0)
+    {
+        download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+    }
+
+    var message_str = QrStrings.getMsgSupporterPost(supporter_name, download_code, download_code_two);
 
     var id_div_message = getIdDivAltOneMessage();
 
