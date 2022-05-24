@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-22
+// Date: 2022-05-24
 // Author: Gunnar Lidén
 
 // File content
@@ -111,7 +111,47 @@ class QrStrings
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////// Start Common Exec Strings ///////////////////////
+    ///////////////////////// Start Supporter Karte ///////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getSupporterCardReverseSideText()
+    {
+        var ret_reverse_txt = '';
+    
+        ret_reverse_txt = ret_reverse_txt + 'Mit diesem Ausweis erhalten Sie einen um Fr. 10.-' + '<br>';
+    
+        ret_reverse_txt = ret_reverse_txt + 'reduzierten Eintrittspreis in die Konzerte von' + '<br>';
+    
+        ret_reverse_txt = ret_reverse_txt + 'JAZZ <i>live</i> AARAU' + '<br>' + '<br>';
+    
+        ret_reverse_txt = ret_reverse_txt + 'Homepage: jazzliveaarau.ch' + '<br>';
+    
+        ret_reverse_txt = ret_reverse_txt + 'E-Mail: qrcode@jazzliveaarau.ch';
+    
+        return ret_reverse_txt;
+    
+    } // getSupporterCardReverseSideText
+
+    static getSupporterCardReverseQrCode(i_download_code)
+    {
+        var ret_reverse_qr = '';
+    
+        ret_reverse_qr = ret_reverse_qr + 'Mobiltelefon QR Code Anzeiger Link:' + '<br>';
+    
+        ret_reverse_qr = ret_reverse_qr + this.urlQrCodeShowWebPage() + '<br><br>';
+    
+        ret_reverse_qr = ret_reverse_qr + 'Der Code für diesen Ausweis ist <br>' + i_download_code;
+    
+        return ret_reverse_qr;
+    
+    } // getSupporterCardReverseQrCode
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Supporter Karte /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Common Strings ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     static linkQrCodeShowWebPage(i_caption_str)
@@ -137,12 +177,18 @@ class QrStrings
 
     static urlQrCodeShowWebPage()
     {
-        return  'https://jazzliveaarau.ch/QrCode/QrCodeShow.htm';
+        return  'jazzliveaarau.ch/QrCode/QrCodeShow.htm';
 
     } // urlQrCodeShowWebPage
 
+    static getJazzLiveAarauTextLogo()
+    {
+        return 'JAZZ <i>live</i> AARAU';
+        
+    } // getJazzLiveAarauTextLogo
+
     ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////// End Common Exec Strings /////////////////////////
+    ///////////////////////// End Common Strings //////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
@@ -892,7 +938,7 @@ class QrStrings
 
 		ret_all_rows = ret_all_rows + 'info@jazzliveaarau.ch' + '<br>';
 
-		ret_all_rows = ret_all_rows + 'www.jazzliveaarau.ch';
+		ret_all_rows = ret_all_rows + 'jazzliveaarau.ch';
 
 		ret_all_rows = ret_all_rows + '</p>';
 

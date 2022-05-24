@@ -1,5 +1,5 @@
 // File: QrCodeCard.js
-// Date: 2022-05-23
+// Date: 2022-05-24
 // Author: Gunnar Lidén
 
 // File content
@@ -94,7 +94,7 @@ function getElementDivSupporterLogoString(i_tab)
 
     ret_text_logo_str = ret_text_logo_str + getNewLineString();
 	
-	ret_text_logo_str = ret_text_logo_str + getTabs(i_tab + 1) + 'JAZZ <i>live</i> AARAU' + getNewLineString();
+	ret_text_logo_str = ret_text_logo_str + getTabs(i_tab + 1) + QrStrings.getJazzLiveAarauTextLogo() + getNewLineString();
 
     ret_text_logo_str = ret_text_logo_str + getTabs(i_tab);
 
@@ -221,12 +221,6 @@ function getElementDivSupporterQrImageString(i_qr_xml, i_file_number, i_tab)
 
     ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + '<img ' + ' id= "' + id_supporter_card_qr_image + '" '  + ' class= "' + cl_supporter_card_qr_image + '" ' + '>';
 
-    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString();
-	
-    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getTabs(i_tab + 1);
-
-    ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + '</canvas>';
-
     ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getDivEndString(id_div_supporter_card_qr_image, cl_div_supporter_card_qr_image);
 
     ret_supporter_card_qr_image_str = ret_supporter_card_qr_image_str + getNewLineString() + getNewLineString();
@@ -235,45 +229,10 @@ function getElementDivSupporterQrImageString(i_qr_xml, i_file_number, i_tab)
 
 } // getElementDivSupporterQrImageString
 
-function MoveToQrStringsgetSupporterCardReverseSideOne()
-{
-    var ret_all_rows = '';
-
-    ret_all_rows = ret_all_rows + 'Mit diesem Ausweis erhalten Sie einen um Fr. 10.-' + '<br>';
-
-    ret_all_rows = ret_all_rows + 'reduzierten Eintrittspreis in die Konzerte von' + '<br>';
-
-    ret_all_rows = ret_all_rows + 'JAZZ <i>live</i> AARAU' + '<br>' + '<br>';
-
-    ret_all_rows = ret_all_rows + 'Homepage: jazzliveaarau.ch' + '<br>';
-
-    ret_all_rows = ret_all_rows + 'E-Mail: qrcode@jazzliveaarau.ch';
-
-    return ret_all_rows;
-
-} // getSupporterCardReverseSideOne
-
-function MoveToQrStringsgetSupporterCardReverseQrCode(i_download_code)
-{
-    var ret_str = '';
-
-    ret_str = ret_str + 'Mobiltelefon QR Code Anzeiger Link:' + '<br>';
-
-    ret_str = ret_str + 'jazzliveaarau.ch/QrCode/QrCodeShow.htm' + '<br><br>';
-
-    // QrStrings.urlQrCodeShowWebPage()
-
-    ret_str = ret_str + 'Der Code für diesen Ausweis ist <br>' + i_download_code;
-
-    return ret_str;
-
-} // MoveToQrStringsgetSupporterCardReverseQrCode
-
 // Get the string that defines the div supporter card reverse text
 function getElementDivSupporterCardReverseTextString(i_qr_xml, i_file_number, i_tab)
 {
-    // TODO Define texts in QrStrings
-	var reverse_text = MoveToQrStringsgetSupporterCardReverseSideOne();
+	var reverse_text = QrStrings.getSupporterCardReverseSideText();
 	
     var ret_card_reverse_text_str = '';
 
@@ -304,7 +263,7 @@ function getElementDivSupporterCardReverseQrShowString(i_qr_xml, i_file_number, 
 {
     var download_code = i_qr_xml.getDownloadOne(i_file_number);
 
-	var reverse_qr_show_str = MoveToQrStringsgetSupporterCardReverseQrCode(download_code);
+	var reverse_qr_show_str = QrStrings.getSupporterCardReverseQrCode(download_code);
 	
     var ret_card_reverse_qr_str = '';
 
