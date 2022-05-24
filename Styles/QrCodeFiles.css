@@ -363,6 +363,18 @@ PagePrint
     clear: both;
 }
 
+.cl_div_alt_one_two_qr_cards_person_two
+{
+    position: relative;
+    top: 5mm;
+    left: 11%;
+    height: 50mm;
+    width: 77%;
+    border: 1px dotted black;
+    text-align: center;
+    clear: both;
+}
+
 .cl_div_alt_one_lower_margin
 {
     position: relative;

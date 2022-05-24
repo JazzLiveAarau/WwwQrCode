@@ -269,7 +269,11 @@ function getElementDivAltOneContainerQrCodeString(i_qr_xml, i_file_number, i_tab
 	
 	ret_container_qr_code_str = ret_container_qr_code_str + getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab + 1);
 
+    ret_container_qr_code_str = ret_container_qr_code_str + getNewLineString();
+
     ret_container_qr_code_str = ret_container_qr_code_str + getTabs(i_tab);
+
+    ret_container_qr_code_str = ret_container_qr_code_str + getElementDivAltOneTwoQrCardsPersonTwoString(i_qr_xml, i_file_number, i_tab + 1);
 
     ret_container_qr_code_str = ret_container_qr_code_str + getDivEndString(id_div_container_qr_code, cl_div_container_qr_code);
 
@@ -330,6 +334,12 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
 // Get the string that defines the div alternative one two qr cards
 function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab)
 {
+    var name_str = i_qr_xml.getQrCodeNameOne(i_file_number);
+
+    var season_card_str = i_qr_xml.getSupporterCardTextString();
+
+    var download_code_one = i_qr_xml.getDownloadOne(i_file_number);
+
     var ret_message_str = '';
 
     var id_div_message = getIdDivAltOneTwoQrCards();
@@ -342,11 +352,11 @@ function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab)
 
     ret_message_str = ret_message_str + getNewLineString();
 	
-	ret_message_str = ret_message_str + getTabs(i_tab + 1) + getElementDivSupporterCardFrontString(i_qr_xml, i_file_number, i_tab + 1);
+	ret_message_str = ret_message_str + getTabs(i_tab + 1) + getElementDivSupporterCardFrontString(name_str, season_card_str, i_tab + 1);
 
     ret_message_str = ret_message_str + getNewLineString();
 
-	ret_message_str = ret_message_str + getTabs(i_tab + 1) + getElementDivSupporterCardReverseString(i_qr_xml, i_file_number, i_tab + 1);
+	ret_message_str = ret_message_str + getTabs(i_tab + 1) + getElementDivSupporterCardReverseString(download_code_one, i_tab + 1);
 
     ret_message_str = ret_message_str + getNewLineString();
 
@@ -359,6 +369,51 @@ function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab)
     return ret_message_str;
 
 } // getElementDivAltOneTwoQrCardsString
+
+
+// Get the string that defines the div alternative one two qr cards for person two
+function getElementDivAltOneTwoQrCardsPersonTwoString(i_qr_xml, i_file_number, i_tab)
+{
+    var name_person_two_str = i_qr_xml.getQrCodeNameTwo(i_file_number);
+	
+	if (name_person_two_str.length == 0)
+	{
+		return '';
+	}
+
+    var season_card_str = i_qr_xml.getSupporterCardTextString();
+
+    var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+
+    var ret_two_qr_code_str = '';
+
+    var id_div_two_qr_code = getIdDivAltOneTwoQrCardsPersonTwo();
+
+    var cl_div_two_qr_code = getClassDivAltOneTwoQrCardsPersonTwo();
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getTabs(i_tab);
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getDivStartString(id_div_two_qr_code, cl_div_two_qr_code);
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getNewLineString();
+	
+	ret_two_qr_code_str = ret_two_qr_code_str + getTabs(i_tab + 1) + getElementDivSupporterCardFrontPersonTwoString(name_person_two_str, season_card_str, i_tab + 1);
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getNewLineString();
+
+	ret_two_qr_code_str = ret_two_qr_code_str + getTabs(i_tab + 1) + getElementDivSupporterCardReversePersonTwoString(download_code_two, i_tab + 1);
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getNewLineString();
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getTabs(i_tab);
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getDivEndString(id_div_two_qr_code, cl_div_two_qr_code);
+
+    ret_two_qr_code_str = ret_two_qr_code_str + getNewLineString() + getNewLineString();
+
+    return ret_two_qr_code_str;
+
+} // getElementDivAltOneTwoQrCardsPersonTwoString
 
 // Get the string that defines the div alternative one container to address
 function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_tab)
@@ -522,6 +577,8 @@ function setWidthsHeightsMarginsAltOne()
 
     var two_qr_card_top = 2.0;
 
+    var two_qr_card_top_person_two = 5.0;
+
     var to_address_height = 40.0;
 
     var to_address_width = 80.0;
@@ -629,6 +686,19 @@ function setWidthsHeightsMarginsAltOne()
 
 
     // ---------------------------
+
+    var el_two_qr_cards_person_two = getElementDivAltOneTwoQrCardsPersonTwo();
+
+    el_two_qr_cards_person_two.style.height = scaleHeightValueConvertToMmm(qr_card_height, scale_factor);
+
+    el_two_qr_cards_person_two.style.top = scaleHeightValueConvertToMmm(two_qr_card_top_person_two, scale_factor);
+
+    el_two_qr_cards_person_two.style.width = scaleHeightValueConvertToMmm(two_qr_card_width, scale_factor);
+
+    el_two_qr_cards_person_two.style.left = getLeftDistanceForCentrePosition(two_qr_card_width);
+
+
+     // ---------------------------
 
     var el_upper_margin_page_two = getElementDivAltOneUpperMarginPageTwo();
 
@@ -913,6 +983,27 @@ function getClassDivAltOneTwoQrCards()
     return 'cl_div_alt_one_two_qr_cards'
 
 } // getClassDivAltOneTwoQrCards
+
+// Get the element div alternative one two qr cards person two
+function getElementDivAltOneTwoQrCardsPersonTwo()
+{
+    return document.getElementById(getIdDivAltOneTwoQrCardsPersonTwo());
+
+} // getElementDivAltOneTwoQrCardsPersonTwo
+
+// Returns the identity of the div alternative one two qr cards person two
+function getIdDivAltOneTwoQrCardsPersonTwo()
+{
+    return 'id_div_alt_one_two_qr_cards_person_two';
+
+} // getIdDivAltOneTwoQrCardsPersonTwo
+
+// Returns the class for the div alternative one two qr cards person two
+function getClassDivAltOneTwoQrCardsPersonTwo()
+{
+    return 'cl_div_alt_one_two_qr_cards_person_two'
+
+} // getClassDivAltOneTwoQrCardsPersonTwo
 
 // Get the element div alternative one container to address
 function getElementDivAltOneContainerToAddress()
