@@ -443,6 +443,7 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
 
 } // callbackAfterGetInputSetAndSaveQrCodeNamesSendPost
 
+
 // User clicked the print batch button
 function eventClickPrintBatchButton()
 {

@@ -1179,6 +1179,8 @@ class QrFilesXml
 
         var person_name = this.getQrCodeNameOne(i_qr_file_number);
 
+        var season_string = this. getQrSeasonString();
+
         var download_code = this.getDownloadOne(i_qr_file_number);
 
         var check_code = this.getCheckCodeOne(i_qr_file_number);
@@ -1198,6 +1200,8 @@ class QrFilesXml
         ret_str_qr_code = ret_str_qr_code + category_str + '_';
 
         ret_str_qr_code = ret_str_qr_code + person_name + '_';
+
+        ret_str_qr_code = ret_str_qr_code + season_string + '_';
 
         ret_str_qr_code = ret_str_qr_code + download_code + '_';
 

@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-23
+// Date: 2022-05-24
 // Author: Gunnar Lidén
 
 // File content
@@ -39,7 +39,6 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
     setSupporterCardQrCodePersonTwo(i_qr_xml, i_file_number);
 
 } // setPrintPageOneAlternativeOne
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
@@ -701,13 +700,18 @@ function setWidthsHeightsMarginsAltOne()
 
     var el_two_qr_cards_person_two = getElementDivAltOneTwoQrCardsPersonTwo();
 
-    el_two_qr_cards_person_two.style.height = scaleHeightValueConvertToMmm(qr_card_height, scale_factor);
+    if (el_two_qr_cards_person_two != null)
+    {
+        // Exist only if there is a person two
 
-    el_two_qr_cards_person_two.style.top = scaleHeightValueConvertToMmm(two_qr_card_top_person_two, scale_factor);
+        el_two_qr_cards_person_two.style.height = scaleHeightValueConvertToMmm(qr_card_height, scale_factor);
 
-    el_two_qr_cards_person_two.style.width = scaleHeightValueConvertToMmm(two_qr_card_width, scale_factor);
-
-    el_two_qr_cards_person_two.style.left = getLeftDistanceForCentrePosition(two_qr_card_width);
+        el_two_qr_cards_person_two.style.top = scaleHeightValueConvertToMmm(two_qr_card_top_person_two, scale_factor);
+    
+        el_two_qr_cards_person_two.style.width = scaleHeightValueConvertToMmm(two_qr_card_width, scale_factor);
+    
+        el_two_qr_cards_person_two.style.left = getLeftDistanceForCentrePosition(two_qr_card_width);
+    }
 
 
      // ---------------------------
