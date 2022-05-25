@@ -1,5 +1,5 @@
 /* 
-File: QrCodeFiles.css Date: 2022-05-23 Author: Gunnar Lidén
+File: QrCodeFiles.css Date: 2022-05-25 Author: Gunnar Lidén
 
 General information
 ===================
@@ -334,9 +334,9 @@ PagePrint
     position: relative;
     top: 31mm;
     left: 21%;
-    height: 70mm;
+    height: auto;
     width: 57%;
-    /* border: 1px dotted black; */
+    border: 1px dotted black;
     text-align: left;
     clear: both;
 }
@@ -344,6 +344,53 @@ PagePrint
 .cl_div_alt_one_message p
 {
     max-width: 100mm;
+}
+
+.cl_div_alt_one_show_msg_qr
+{
+    position: relative;
+    top: 20mm;
+    left: 10mm;
+    height: 60mm;
+    width: 190mm;
+    border: 1px dotted black;
+    clear: both;
+}
+
+.cl_div_alt_one_show_msg
+{
+    height: 58mm;
+    width: 100mm;
+    border: 1px dotted green;
+    float: left;
+}
+
+.cl_div_alt_one_show_qr
+{
+    height: 58mm;
+    width: 85mm;
+    border: 1px dotted red;
+    float: left;
+}
+
+.cl_alt_one_show_img_one
+{
+    height: 30mm;
+    width: 30mm;
+    margin-top: 8mm;
+    margin-left: 4mm;
+    border: 1px dotted blue;
+    float: left;
+}
+
+.cl_alt_one_show_img_two
+{
+    height: 30mm;
+    width: 30mm;
+    margin-top: 8mm;
+    margin-left: 7mm;
+    border: 1px dotted blue;
+    float: left;
 }
 
 .cl_div_alt_one_container_qr_code
@@ -401,7 +448,7 @@ PagePrint
     left: 1%;
     height: 131mm;
     width: 98%;
-    border-bottom: 1px dotted black;
+    /* border-bottom: 1px dotted black; */
     clear: both;
 }
 
@@ -426,7 +473,7 @@ PagePrint
     width: 98%;
     font-size: 15px;
     font-weight: bold;
-    border-top: 1px dotted black;
+    /* border-top: 1px dotted black; */
     text-align: center;
     clear: both;
 }

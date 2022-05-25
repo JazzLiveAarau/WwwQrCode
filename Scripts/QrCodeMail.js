@@ -243,6 +243,10 @@ function getElementDivAltOneContainerMsgString(i_qr_xml, i_file_number, i_tab)
 	
 	ret_container_msg_str = ret_container_msg_str + getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab + 1);
 
+    ret_container_msg_str = ret_container_msg_str + getElementDivAltOneShowMsgQrString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_container_msg_str = ret_container_msg_str + getNewLineString();
+
     ret_container_msg_str = ret_container_msg_str + getTabs(i_tab);
 
     ret_container_msg_str = ret_container_msg_str + getDivEndString(id_div_container_msg, cl_div_container_msg);
@@ -341,6 +345,163 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
     return ret_message_str;
 
 } // getElementDivAltOneMessageString
+
+// Get the string that defines the div alternative one instructions QR Show
+function getElementDivAltOneShowMsgQrString(i_qr_xml, i_file_number, i_tab)
+{
+    var ret_show_msg_qr_str = '';
+
+    var id_div_show_msg_qr = getIdDivAltOneShowMsgQr();
+
+    var cl_div_show_msg_qr = getClassDivAltOneShowMsgQr();
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getTabs(i_tab);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getDivStartString(id_div_show_msg_qr, cl_div_show_msg_qr);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getNewLineString();
+	
+	ret_show_msg_qr_str = ret_show_msg_qr_str + getElementDivAltOneShowMsgString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getNewLineString();
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getElementDivAltOneShowQrString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getNewLineString();
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getTabs(i_tab);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getDivEndString(id_div_show_msg_qr, cl_div_show_msg_qr);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getNewLineString() + getNewLineString();
+
+    return ret_show_msg_qr_str;
+
+} // getElementDivAltOneShowMsgQrString
+
+// Get the string that defines the div alternative one instructions QR Show message
+function getElementDivAltOneShowMsgString(i_qr_xml, i_file_number, i_tab)
+{
+    var download_code = i_qr_xml.getDownloadOne(i_file_number);
+
+    var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+
+    var instruction_str = QrStrings.getInstructionsWebpageQrCodeShow(download_code, download_code_two);
+
+    var ret_show_msg_qr_str = '';
+    
+    var id_div_show_msg = getIdDivAltOneShowMsg();
+
+    var cl_div_show_msg = getClassDivAltOneShowMsg();
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getTabs(i_tab);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getDivStartString(id_div_show_msg, cl_div_show_msg);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getNewLineString();
+	
+	ret_show_msg_qr_str = ret_show_msg_qr_str + getTabs(i_tab + 1) + instruction_str + getNewLineString();
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getTabs(i_tab);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getDivEndString(id_div_show_msg, cl_div_show_msg);
+
+    ret_show_msg_qr_str = ret_show_msg_qr_str + getNewLineString() + getNewLineString();
+
+    return ret_show_msg_qr_str;
+
+} // getElementDivAltOneShowMsgString
+
+// Get the string that defines the div alternative one instructions QR Show QR
+function getElementDivAltOneShowQrString(i_qr_xml, i_file_number, i_tab)
+{
+    var ret_show_qr_qr_str = '';
+    
+    var id_div_show_qr = getIdDivAltOneShowQr();
+
+    var cl_div_show_qr = getClassDivAltOneShowQr();
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getTabs(i_tab);
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getDivStartString(id_div_show_qr, cl_div_show_qr);
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getNewLineString();
+	
+	ret_show_qr_qr_str = ret_show_qr_qr_str + getElementAltOneShowQrImgOneString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getNewLineString();
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getElementAltOneShowQrImgTwoString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getNewLineString();
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getTabs(i_tab);
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getDivEndString(id_div_show_qr, cl_div_show_qr);
+
+    ret_show_qr_qr_str = ret_show_qr_qr_str + getNewLineString() + getNewLineString();
+
+    return ret_show_qr_qr_str;
+
+} // getElementDivAltOneShowQrString
+
+// Get the string that defines the alternative one QR image one
+function getElementAltOneShowQrImgOneString(i_qr_xml, i_file_number, i_tab)
+{
+    var ret_img_one_str = '';
+    
+    var id_div_img_one = getIdAltOneShowQrImgOne();
+
+    var cl_div_img_one = getClassAltOneShowQrImgOne();
+
+    ret_img_one_str = ret_img_one_str + getTabs(i_tab);
+
+    ret_img_one_str = ret_img_one_str + getDivStartString(id_div_img_one, cl_div_img_one);
+
+    ret_img_one_str = ret_img_one_str + getNewLineString();
+	
+	ret_img_one_str = ret_img_one_str + getTabs(i_tab + 1) + '<img id= "' + getIdAltOneShowQrImgOne() + '" ' +  'class= "' + getClassAltOneShowQrImgOne() + '"' + '>';
+	
+	ret_img_one_str = ret_img_one_str + getNewLineString();
+
+    ret_img_one_str = ret_img_one_str + getTabs(i_tab);
+
+    ret_img_one_str = ret_img_one_str + getDivEndString(id_div_img_one, cl_div_img_one);
+
+    ret_img_one_str = ret_img_one_str + getNewLineString() + getNewLineString();
+
+    return ret_img_one_str;
+
+} // getElementAltOneShowQrImgOneString
+
+// Get the string that defines the alternative one QR image two
+function getElementAltOneShowQrImgTwoString(i_qr_xml, i_file_number, i_tab)
+{
+    var ret_img_two_str = '';
+    
+    var id_div_img_two = getIdAltOneShowQrImgTwo();
+
+    var cl_div_img_two = getClassAltOneShowQrImgTwo();
+
+    ret_img_two_str = ret_img_two_str + getTabs(i_tab);
+
+    ret_img_two_str = ret_img_two_str + getDivStartString(id_div_img_two, cl_div_img_two);
+
+    ret_img_two_str = ret_img_two_str + getNewLineString();
+	
+	ret_img_two_str = ret_img_two_str + getTabs(i_tab + 1) + '<img id= "' + getIdAltOneShowQrImgTwo() + '" ' +  'class= "' + getClassAltOneShowQrImgTwo() + '"' + '>';
+	
+	ret_img_two_str = ret_img_two_str + getNewLineString();
+
+    ret_img_two_str = ret_img_two_str + getTabs(i_tab);
+
+    ret_img_two_str = ret_img_two_str + getDivEndString(id_div_img_two, cl_div_img_two);
+
+    ret_img_two_str = ret_img_two_str + getNewLineString() + getNewLineString();
+
+    return ret_img_two_str;
+
+} // getElementAltOneShowQrImgTwoString
 
 // Get the string that defines the div alternative one two qr cards
 function getElementDivAltOneTwoQrCardsString(i_qr_xml, i_file_number, i_tab)
@@ -574,7 +735,7 @@ function setWidthsHeightsMarginsAltOne()
 
     var container_upper_top = 0.0;
 
-    var message_height = 90.0;
+    var message_height = 40.0;
 
     var message_width = 190.0;
 
@@ -588,7 +749,7 @@ function setWidthsHeightsMarginsAltOne()
 
     var two_qr_card_top = 5.0;
 
-    var two_qr_card_top_person_two = 5.0;
+    var two_qr_card_top_person_two = 8.0;
 
     var to_address_height = 40.0;
 
@@ -1105,6 +1266,111 @@ function getClassDivAltOneFromAddress()
     return 'cl_div_alt_one_two_from_address'
 
 } // getClassDivAltOneFromAddress
+
+// Get the element div alternative one instructions QR Show
+function getElementDivAltOneShowMsgQr()
+{
+    return document.getElementById(getIdDivAltOneShowMsgQr());
+
+} // getElementDivAltOneShowMsgQr
+
+// Returns the identity of the div alternative one instructions QR Show
+function getIdDivAltOneShowMsgQr()
+{
+    return 'id_div_alt_one_show_msg_qr';
+
+} // getIdDivAltOneShowMsgQr
+
+// Returns the class for the div alternative one instructions QR Show
+function getClassDivAltOneShowMsgQr()
+{
+    return 'cl_div_alt_one_show_msg_qr'
+
+} // getClassDivAltOneShowMsgQr
+
+// Get the element div alternative one instructions QR Show message
+function getElementDivAltOneShowMsg()
+{
+    return document.getElementById(getIdDivAltOneShowMsg());
+
+} // getElementDivAltOneShowMsg
+
+// Returns the identity of the div alternative one instructions QR Show message
+function getIdDivAltOneShowMsg()
+{
+    return 'id_div_alt_one_show_msg';
+
+} // getIdDivAltOneShowMsg
+
+// Returns the class for the div alternative one instructions QR Show message
+function getClassDivAltOneShowMsg()
+{
+    return 'cl_div_alt_one_show_msg'
+
+} // getClassDivAltOneShowMsg
+
+// Get the element div alternative one instructions QR Show QR
+function getElementDivAltOneShowQr()
+{
+    return document.getElementById(getIdDivAltOneShowQr());
+
+} // getElementDivAltOneShowQr
+
+// Returns the identity of the div alternative one instructions QR Show QR
+function getIdDivAltOneShowQr()
+{
+    return 'id_div_alt_one_show_qr';
+
+} // getIdDivAltOneShowQr
+
+// Returns the class for the div alternative one instructions QR Show QR
+function getClassDivAltOneShowQr()
+{
+    return 'cl_div_alt_one_show_qr'
+
+} // getClassDivAltOneShowQr
+
+// Get the element alternative one QR image one
+function getElementAltOneShowQrImgOne()
+{
+    return document.getElementById(getIdAltOneShowQrImgOne());
+
+} // getElementAltOneShowQrImgOne
+
+// Returns the identity of the alternative one QR image one
+function getIdAltOneShowQrImgOne()
+{
+    return 'id_alt_one_show_img_one';
+
+} // getIdAltOneShowQrImgOne
+
+// Returns the class for the alternative one QR image one
+function getClassAltOneShowQrImgOne()
+{
+    return 'cl_alt_one_show_img_one'
+
+} // getClassAltOneShowQrImgOne
+
+// Get the element alternative one QR image two
+function getElementAltOneShowQrImgTwo()
+{
+    return document.getElementById(getIdAltOneShowQrImgTwo());
+
+} // getElementAltOneShowQrImgTwo
+
+// Returns the identity of the alternative one QR image two
+function getIdAltOneShowQrImgTwo()
+{
+    return 'id_alt_one_show_img_two';
+
+} // getIdAltOneShowQrImgTwo
+
+// Returns the class for the alternative one QR image two
+function getClassAltOneShowQrImgTwo()
+{
+    return 'cl_alt_one_show_img_two'
+
+} // getClassAltOneShowQrImgTwo
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////
