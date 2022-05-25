@@ -70,9 +70,9 @@ class QrStrings
     {
         var ret_htm = '';
 
-        ret_htm = ret_htm + 'Guten Tag ' + i_supporter_name + '<br>' + '<br>';
+        ret_htm = ret_htm + 'Danke ' + i_supporter_name;
 
-        ret_htm = ret_htm + 'Danke, dass Sie uns als Supporter unterstützen. ' + '<br>' + '<br>';
+        ret_htm = ret_htm + ', dass Sie uns als Supporter unterstützen. ' + '<br>' + '<br>';
 
         if (i_download_code_two.length == 0)
         {
@@ -83,29 +83,52 @@ class QrStrings
             ret_htm = ret_htm + 'Unten sind Ihre Supporter-Karten zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
         }
 
-        ret_htm = ret_htm + 'Als Alternative ist die ' + 'Web-Applikation' + '<b>' + ' JAZZ <i>live</i> AARAU QR Anzeiger ' + '</b>' + 'zu verwenden:' + '<br>' + 
-       
-                            '<b>' + this.urlQrCodeShowWebPage() + '</b>'  + '<br>' + '<br>';
-        ret_htm = ret_htm + 'Mit einem Code kann die Supporter-Karte heruntergeladen, in das Telefon gespeichert und mit dem Telefon gezeigt werden.' + '<br>' + '<br>';
-
-        if (i_download_code_two.length == 0)
-        {
-            ret_htm = ret_htm + 'Der Code für Ihre Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code + '</b>' + '<br>' + '<br>';
-        }
-        else
-        {
-            ret_htm = ret_htm + ' Der Code für Ihre erste Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code + '</b>' + '<br>';
-
-            ret_htm = ret_htm + ' Der Code für Ihre zweite Supporter-Karte ist:' + '<br>' + '<b>' + i_download_code_two + '</b>' + '<br>' + '<br>';
-        }
-
         ret_htm = ret_htm + 'Freundliche Grüsse ' + '<br>' + '<br>';
 
         ret_htm = ret_htm + 'Das JAZZ <i>live</i> AARAU Team' + '<br>' + '<br>';
 
+        ret_htm = ret_htm + this.getInstructionsWebpageQrCodeShow(i_download_code, i_download_code_two);
+
         return ret_htm;
 
     } // getTitleSupporterEmail
+
+    static getInstructionsWebpageQrCodeShow(i_download_code, i_download_code_two)
+    {
+        var ret_instruct = '';
+
+        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU QR Anzeiger</h4>';
+
+        ret_instruct = ret_instruct + '<p>';
+
+        if (i_download_code_two.length == 0)
+        {
+            ret_instruct = ret_instruct + 'Mit einem Mobiltelefon kann den Ausweis auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
+
+            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben ';
+
+            ret_instruct = ret_instruct +  '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>' + '<br>';
+
+            ret_instruct = ret_instruct + 'Der Code für diesen Ausweis ist <b>' + i_download_code + '</b><br>' + '<br>';
+        }
+        else
+        {
+            ret_instruct = ret_instruct + 'Mit einem Mobiltelefon können die Ausweise auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
+
+            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben' + '<br>';
+
+            ret_instruct = ret_instruct + '<b>' + this.urlQrCodeShowWebPage()  + '</b><br>' + '<br>';
+
+            ret_instruct = ret_instruct + 'Der Code für den ersten Ausweis ist <b>' + i_download_code + '</b><br>';
+
+            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis ist <b>' + i_download_code_two + '</b>';
+        }
+
+        ret_instruct = ret_instruct + '</p>';
+
+        return ret_instruct;
+
+    } // getInstructionsWebpageQrCodeShow
 
     static getToAddressSupporter(i_supporter_name, i_full_address_htm)
     {

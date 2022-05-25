@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-24
+// Date: 2022-05-25
 // Author: Gunnar Lidén
 
 // File content
@@ -133,7 +133,7 @@ function getElementDivAltOneUpperMarginString(i_tab)
 
     ret_upper_margin_str = ret_upper_margin_str + getNewLineString();
 	
-	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '<br><br>Upper margin' + getNewLineString();
+	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '' + getNewLineString(); // Upper margin
 
     ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
 
@@ -160,7 +160,7 @@ function getElementDivAltOneUpperMarginPageTwoString(i_tab)
 
     ret_upper_margin_str = ret_upper_margin_str + getNewLineString();
 	
-	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '<br><br>Upper margin' + getNewLineString();
+	ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab + 1) + '' + getNewLineString(); // Upper margin
 
     ret_upper_margin_str = ret_upper_margin_str + getTabs(i_tab);
 
@@ -187,7 +187,7 @@ function getElementDivAltOneLowerMarginString(i_tab)
 
     ret_lower_margin_str = ret_lower_margin_str + getNewLineString();
 	
-	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + 'Lower margin' + getNewLineString();
+	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + '' + getNewLineString(); // Lower margin
 
     ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
 
@@ -214,7 +214,7 @@ function getElementDivAltOneLowerMarginPageTwoString(i_tab)
 
     ret_lower_margin_str = ret_lower_margin_str + getNewLineString();
 	
-	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + 'Lower margin' + getNewLineString();
+	ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab + 1) + '' + getNewLineString(); // Lower margin
 
     ret_lower_margin_str = ret_lower_margin_str + getTabs(i_tab);
 
@@ -586,7 +586,7 @@ function setWidthsHeightsMarginsAltOne()
 
     var two_qr_card_width = 2.0*80.0 + 1.0;
 
-    var two_qr_card_top = 2.0;
+    var two_qr_card_top = 5.0;
 
     var two_qr_card_top_person_two = 5.0;
 

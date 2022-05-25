@@ -311,7 +311,7 @@ PagePrint
     left: 1%;
     height: 17mm;
     width: 98%;
-    border: 1px dotted black;
+    /* border: 1px dotted black; */
     text-align: center;
     clear: both;
 }
@@ -323,6 +323,7 @@ PagePrint
     left: 1%;
     height: 131mm;
     width: 98%;
+    font-size: 4.0mm;
     border-bottom: 1px dotted black;
     text-align: center;
     clear: both;
@@ -338,6 +339,11 @@ PagePrint
     /* border: 1px dotted black; */
     text-align: left;
     clear: both;
+}
+
+.cl_div_alt_one_message p
+{
+    max-width: 100mm;
 }
 
 .cl_div_alt_one_container_qr_code
@@ -382,7 +388,7 @@ PagePrint
     left: 1%;
     height: 17mm;
     width: 98%;
-    border: 1px dotted black;
+    /* border: 1px dotted black; */
     text-align: center;
     clear: both;
 }
@@ -418,7 +424,7 @@ PagePrint
     left: 1%;
     height: 131mm;
     width: 98%;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: bold;
     border-top: 1px dotted black;
     text-align: center;
