@@ -87,8 +87,6 @@ class QrStrings
 
         ret_htm = ret_htm + 'Das JAZZ <i>live</i> AARAU Team' + '<br>' + '<br>';
 
-        // ret_htm = ret_htm + this.getInstructionsWebpageQrCodeShow(i_download_code, i_download_code_two);
-
         return ret_htm;
 
     } // getTitleSupporterEmail
@@ -105,7 +103,7 @@ class QrStrings
         {
             ret_instruct = ret_instruct + 'Mit einem Mobiltelefon kann den Ausweis auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben ';
+            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben <br>(oder QR Code rechts scannen)' + '<br>';
 
             ret_instruct = ret_instruct +  '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>' + '<br>';
 
