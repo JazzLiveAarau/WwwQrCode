@@ -348,6 +348,7 @@ PagePrint
     left: 10mm;
     height: 60mm;
     width: 190mm;
+    font-size: 3.5mm;
     border: 2px solid black;
     clear: both;
 }

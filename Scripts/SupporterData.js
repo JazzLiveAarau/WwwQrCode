@@ -474,7 +474,7 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
             return;
         }
     
-        console.log("uploadQrFileImageAndTextSupporter Uploaded link file: " + file_name_path_link + " second file");
+        console.log("uploadQrFileImageAndTextSupporter Uploaded link file: " + file_name_path_link + " Second file");
     }
 
 } // uploadQrFileImageAndTextSupporter

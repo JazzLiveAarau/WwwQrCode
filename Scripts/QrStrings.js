@@ -97,7 +97,7 @@ class QrStrings
 
         ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU QR Code Anzeiger</h4>';
 
-        ret_instruct = ret_instruct + '<p>';
+        // ret_instruct = ret_instruct + '<p>';
 
         if (i_download_code_two.length == 0)
         {
@@ -119,10 +119,12 @@ class QrStrings
 
             ret_instruct = ret_instruct + 'Der Code für den ersten Ausweis ist <b>' + i_download_code + '</b><br>';
 
-            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis ist <b>' + i_download_code_two + '</b>';
+            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis ist <b>' + i_download_code_two + '</b><br>';
         }
 
-        ret_instruct = ret_instruct + '</p>';
+        ret_instruct = ret_instruct + '<br>' + 'Der Link soll als Lesezeichen (Favorite) gespeichert werden';
+
+        // ret_instruct = ret_instruct + '</p>';
 
         return ret_instruct;
 
@@ -227,9 +229,15 @@ class QrStrings
 
     } // urlQrCodeShowWebPage
 
+    static urlFullQrCodeShowWebPage()
+    {
+        return  'https://jazzliveaarau.ch/QrCode/QrCodeShow.htm';
+
+    } // urlFullQrCodeShowWebPage
+
     static urlDownloadQrCodeShowWebPage(i_download_code)
     {
-        return  'https://jazzliveaarau.ch/QrCode/QrCodeShow.htm?' + i_download_code;
+        return  this.urlFullQrCodeShowWebPage() + '?' + i_download_code;
 
     } // urlDownloadQrCodeShowWebPage
 

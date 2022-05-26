@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-23
+// Date: 2022-05-26
 // Author: Gunnar Lidén
 
 // File content
@@ -73,7 +73,40 @@ function callbackSeasonStartYearShow(i_season_start_year)
 {
     g_season_start_year_show = i_season_start_year;
 
+    setInputQrQodeElementWithQueryString();
+
 } // callbackSeasonStartYearShow
+
+// Sets the dowload code if input as query string
+// The query string is deleted from the URL. 
+// The user should save the URL as favorite in the telephone,
+// but not with the query string
+function setInputQrQodeElementWithQueryString()
+{
+    var download_code = getDownloadCodeFromQueryString();
+
+    var el_input_code = getElementInputCodeForQrCodeFile();
+
+    el_input_code.value = download_code;
+
+} // setInputQrQodeElementWithQueryString
+
+// Returns the download code extracted from the query string
+// If there is no query string an empty string is returned
+function getDownloadCodeFromQueryString()
+{
+    var query_string = window.location.search;
+
+    if (query_string == null || query_string.length < 4)
+    {
+        return '';
+    }
+
+    var download_code = query_string.substring(1);    
+
+    return download_code;
+
+} // getDownloadCodeFromQueryString
 
 // User clicked button show a QR file
 function clickShowQrFile()
@@ -195,6 +228,13 @@ function showQrCodeImageAndTextAfterLoadFromServer(i_data_url)
     var b_image_file = false;
 
     readTextFileOnServer(b_image_file, file_name_text, showQrCodeTextAfterLoadFromServer);
+
+    var download_code_query_str = getDownloadCodeFromQueryString();
+
+    if (download_code_query_str.length != 0)
+    {
+        location.href = QrStrings.urlFullQrCodeShowWebPage();
+    }
 
 } // showQrCodeImageAndTextAfterLoadFromServer
 
