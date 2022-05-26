@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-25
+// Date: 2022-05-26
 // Author: Gunnar Lidén
 
 // File content
@@ -36,7 +36,11 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 
     setSupporterCardQrCode(i_qr_xml, i_file_number);
 
+    setSupporterCardQrCodeLink(i_qr_xml, i_file_number);
+
     setSupporterCardQrCodePersonTwo(i_qr_xml, i_file_number);
+
+    setSupporterCardQrCodeLinkPersonTwo(i_qr_xml, i_file_number);
 
 } // setPrintPageOneAlternativeOne
 

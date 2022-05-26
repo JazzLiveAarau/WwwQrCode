@@ -48,6 +48,43 @@ function setSupporterCardQrCodeAfterLoad(i_data_url)
 
 } // setSupporterCardQrCodeAfterLoad
 
+// Sets the supporter card QR code link
+function setSupporterCardQrCodeLink(i_qr_xml, i_file_number)
+{
+    var b_person_two = false;
+
+    var file_name_image = constructServerFileNameLink(i_qr_xml, i_file_number, b_person_two);
+
+    if (file_name_image.length == 0)
+    {
+        return;
+    }
+
+    var b_image_file = false;
+
+    readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeLinkAfterLoad);
+
+} // setSupporterCardQrCodeLink
+
+function setSupporterCardQrCodeLinkAfterLoad(i_data_url)
+{
+    console.log("Enter setSupporterCardQrCodeLinkAfterLoad");
+
+    if (i_data_url == QrStrings.failureLoadingQrFileCode())
+    {
+        alert("setSupporterCardQrCodeLinkAfterLoad i_data_url= " + i_data_url);
+
+        return;
+    }
+
+  // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
+
+  var el_image = getElementAltOneShowQrImgOne();
+
+  el_image.src = i_data_url;
+
+} // setSupporterCardQrCodeLinkAfterLoad
+
 function setSupporterCardQrCodePersonTwo(i_qr_xml, i_file_number)
 {
     var person_two = i_qr_xml.getQrCodeNameTwo(i_file_number);
@@ -66,7 +103,7 @@ function setSupporterCardQrCodePersonTwo(i_qr_xml, i_file_number)
         return;
     }
 
-    var b_image_file = true;
+    var b_image_file = true; // TODO Should be false. Only true for QR Code Show
 
     readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeAfterLoadPersonTwo);
 
@@ -90,6 +127,50 @@ function setSupporterCardQrCodeAfterLoadPersonTwo(i_data_url)
   el_image.src = i_data_url;
 
 } // setSupporterCardQrCodeAfterLoad
+
+// Sets the supporter card QR code link for person two
+function setSupporterCardQrCodeLinkPersonTwo(i_qr_xml, i_file_number)
+{
+    var person_two = i_qr_xml.getQrCodeNameTwo(i_file_number);
+
+    if (person_two.length == 0)
+    {
+        return;
+    }
+
+    var b_person_two = true;
+
+    var file_name_image = constructServerFileNameLink(i_qr_xml, i_file_number, b_person_two);
+
+    if (file_name_image.length == 0)
+    {
+        return;
+    }
+
+    var b_image_file = false;
+
+    readTextFileOnServer(b_image_file, file_name_image, setSupporterCardQrCodeLinkPersonTwoAfterLoad);
+
+} // setSupporterCardQrCodeLinkPersonTwo
+
+function setSupporterCardQrCodeLinkPersonTwoAfterLoad(i_data_url)
+{
+    console.log("Enter setSupporterCardQrCodeLinkPersonTwoAfterLoad");
+
+    if (i_data_url == QrStrings.failureLoadingQrFileCode())
+    {
+        alert("setSupporterCardQrCodeLinkPersonTwoAfterLoad i_data_url= " + i_data_url);
+
+        return;
+    }
+
+  // https://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container
+
+  var el_image = getElementAltOneShowQrImgTwo();
+
+  el_image.src = i_data_url;
+
+} // setSupporterCardQrCodeLinkPersonTwoAfterLoad
 
 // Construct the server file name from the input code and return the name
 function constructServerFileNameImage(i_qr_xml, i_file_number, i_b_person_two)
@@ -122,6 +203,38 @@ function constructServerFileNameImage(i_qr_xml, i_file_number, i_b_person_two)
     return file_name_path_image;
 
 } // constructServerFileNameImage
+
+// Construct the server link file name from the input code and return the name
+function constructServerFileNameLink(i_qr_xml, i_file_number, i_b_person_two)
+{
+    var down_load_code = i_qr_xml.getDownloadOne(i_file_number);
+
+    if (i_b_person_two)
+    {
+        down_load_code = i_qr_xml.getDownloadTwo(i_file_number);
+    }
+
+    var season_start_year = i_qr_xml.getSeasonStartYear();
+
+    if (down_load_code.length == 0)
+    {
+        return '';
+    }
+
+    var file_name_path_link = '';
+
+    if (execApplicationOnServer())
+    {
+        file_name_path_link = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileLink(season_start_year, down_load_code);
+    }
+    else
+    {
+        file_name_path_link = QrStrings.getRelativeUrlQrFileLink(season_start_year, down_load_code);
+    }
+
+    return file_name_path_link;
+
+} // constructServerFileNameLink
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Qr Code Supporter Card //////////////////////////////////

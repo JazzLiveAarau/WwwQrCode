@@ -374,12 +374,15 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 
     var qr_text_link = i_qr_file_xml.getUrlForQrShow(i_file_number, b_person_two);
 
+    var link_data_url = generateQrCodeOnePersonDataUrl(qr_text_link);
 
     var season_start_year = i_qr_file_xml.getSeasonStartYear();
 
     var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_one);
 
-    var file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_one)
+    var file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_one);
+
+    var file_name_path_link = QrStrings.getRelativeUrlQrFileLink(season_start_year, download_code_one);
 
     var b_execute_server = execApplicationOnServer();
 
@@ -413,6 +416,15 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 
     console.log("uploadQrFileImageAndTextSupporter Uploaded text file: " + file_name_path_text);
 
+    if (!saveFileWithJQueryPostFunction(file_name_path_link, link_data_url))
+    {
+        alert("uploadQrFileImageAndTextSupporter Saving QR file link failed");
+
+        return;
+    }
+
+    console.log("uploadQrFileImageAndTextSupporter Uploaded link file: " + file_name_path_link);
+
     var supporter_two = i_qr_file_xml.getQrCodeNameTwo(i_file_number);
 
     if (supporter_two.length > 0)
@@ -429,9 +441,13 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
 
         qr_text_link = i_qr_file_xml.getUrlForQrShow(i_file_number, b_person_two);
 
+        link_data_url = generateQrCodeOnePersonDataUrl(qr_text_link);
+
         file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, download_code_two);
 
         file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, download_code_two);
+
+        file_name_path_link = QrStrings.getRelativeUrlQrFileLink(season_start_year, download_code_two);
 
         if (!saveFileWithJQueryPostFunction(file_name_path_image, image_data_url))
         {
@@ -450,8 +466,16 @@ function uploadQrFileImageAndTextSupporter(i_file_number, i_qr_file_xml)
         }
 
         console.log("uploadQrFileImageAndTextSupporter Uploaded text file: " + file_name_path_text + " Second file");
-    }
 
+        if (!saveFileWithJQueryPostFunction(file_name_path_link, link_data_url))
+        {
+            alert("uploadQrFileImageAndTextSupporter Saving QR file link failed (2)");
+    
+            return;
+        }
+    
+        console.log("uploadQrFileImageAndTextSupporter Uploaded link file: " + file_name_path_link + " second file");
+    }
 
 } // uploadQrFileImageAndTextSupporter
 

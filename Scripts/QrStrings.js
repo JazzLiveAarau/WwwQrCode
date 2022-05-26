@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-24
+// Date: 2022-05-26
 // Author: Gunnar Lidén
 
 // File content
@@ -345,6 +345,21 @@ class QrStrings
         return rel_path;
 
     } // getRelativeUrlQrFileText
+    
+    // Returns the name and path for the QR link (to QR Show web page) file
+    static getRelativeUrlQrFileLink(i_season_start_year, i_download_code_str)
+    {
+        var rel_path = '';
+
+        rel_path = rel_path + this.getPathSubdirectoryQrFiles();
+
+        rel_path = rel_path + this.getSubdirectorySeasonName(i_season_start_year);
+
+        rel_path = rel_path + 'QrCodeLink_' + i_download_code_str + '.txt';
+
+        return rel_path;
+
+    } // getRelativeUrlQrFileLink
 
     // Returns the name and path for the QR files XML file (QrFiles.xml)
     static getRelativeUrlQrFilesXmlFile(i_season_start_year)
