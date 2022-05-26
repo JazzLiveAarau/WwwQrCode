@@ -95,7 +95,7 @@ class QrStrings
     {
         var ret_instruct = '';
 
-        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU QR Anzeiger</h4>';
+        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU QR Code Anzeiger</h4>';
 
         ret_instruct = ret_instruct + '<p>';
 
@@ -226,6 +226,12 @@ class QrStrings
         return  'jazzliveaarau.ch/QrCode/QrCodeShow.htm';
 
     } // urlQrCodeShowWebPage
+
+    static urlDownloadQrCodeShowWebPage(i_download_code)
+    {
+        return  'https://jazzliveaarau.ch/QrCode/QrCodeShow.htm?' + i_download_code;
+
+    } // urlDownloadQrCodeShowWebPage
 
     static getJazzLiveAarauTextLogo()
     {

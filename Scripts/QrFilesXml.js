@@ -1211,6 +1211,25 @@ class QrFilesXml
         
     } // getCombinedStringForQrCode
 
+    getUrlForQrShow(i_qr_file_number, i_b_person_two)
+    {
+        var url_qr_show = '';
+
+        var download_code = '';
+
+        if (!i_b_person_two)
+        {
+            download_code = this.getDownloadOne(i_qr_file_number);
+        }
+        else
+        {
+            download_code = this.getDownloadTwo(i_qr_file_number);
+        }
+
+        return url_qr_show = QrStrings.urlDownloadQrCodeShowWebPage(download_code);
+
+    } // getUrlForQrShow
+
     getQrCombinedSeasonImageString(i_qr_file_number)
     {
         return this.getQrCategoryString(i_qr_file_number) + ' ' + 
