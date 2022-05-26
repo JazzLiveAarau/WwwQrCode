@@ -175,6 +175,71 @@ function execApplicationOnServer()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Internet Available ////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// https://stackoverflow.com/questions/189430/detect-the-internet-connection-is-offline
+// https://www.codespeedy.com/check-internet-connection-status-in-javascript/
+// https://www.w3schools.com/jsref/met_win_setinterval.asp
+// https://www.w3schools.com/jsref/met_win_clearinterval.asp
+
+class Internet
+{
+    constructor(i_callback_function_on, i_callback_function_off, i_interval)
+    {
+        this.m_callback_function_on = i_callback_function_on;
+
+        this.m_callback_function_off = i_callback_function_off;
+
+        this.m_interval = i_interval;
+
+        this.m_interval_function = null;
+
+        this.startIntervalFunction();
+
+    } 
+
+    isAvailable()
+    {
+        var b_available = window.navigator.onLine;
+
+        return b_available;
+
+    } // isAvailable
+
+    startIntervalFunction()
+    {
+        this.m_interval_function = setInterval(this.execIntervalFunction, this.m_interval, this.m_callback_function_on, this.m_callback_function_off);
+
+    } // startIntervalFunction
+
+    execIntervalFunction(callback_function_on, callback_function_off)
+    {
+        var b_available = window.navigator.onLine;
+
+        if (b_available)
+        {
+            callback_function_on();
+        }
+        else
+        {
+            callback_function_off();
+        }
+
+    } // execIntervalFunction
+
+    stopIntervalFunction()
+    {
+        clearInterval(this.m_interval_function);
+    }
+
+} // InternetConnection
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Internet Available ///////////////((/////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Class QrProgress //////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 

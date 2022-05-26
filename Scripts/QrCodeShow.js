@@ -32,6 +32,12 @@ var g_local_storage_qr_text_data = 'qr_code_text_data';
 // An instannce of class QrString. Note that the global variable not is used
 var g_gr_strings = null;
 
+// Class Internet has functions to check if Internet is available
+var g_internet = null;
+
+// Flag telling if internet is available
+var g_internet_is_available = null;
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +55,21 @@ function onloadQrCodeShow()
 
     g_gr_strings = new QrStrings();
 
+    var check_interval = 10000; // milliseconds Perhaps not necessary
+
+    g_internet = new Internet(eventInternetIsAvailableQrShow, eventInternetIsNotAvailableQrShow, check_interval);
+
+    g_internet_is_available = g_internet.isAvailable();
+
+    /*
+    var change_connection = prompt('Disconnect Internet?', 'yes');
+
+    if (change_connection == 'yes')
+    {
+        g_internet_is_available = false;
+    }
+    */
+
     setQrInfoText();
 
     hideDisplayElementsOnloadQrCodeShow();
@@ -61,12 +82,39 @@ function onloadQrCodeShow()
 
         // displayQrCodeWithDataFromLocalStorage();
     }
-    else
+    else if (g_internet_is_available)
     {
         getSeasonStartYear(callbackSeasonStartYearShow);
     }
+    else
+    {
+
+        // alert(QrStrings.errorNoInternetConnectionQrCodeNotSaved());
+
+        hideDisplayElementsOnloadQrCodeShow();
+
+        displayDivQrShowInternetConnection();
+    }
 
 } // onloadQrCodeShow
+
+// 
+function eventInternetIsAvailableQrShow()
+{
+    g_internet_is_available = true;
+
+    hideDivQrShowInternetConnection();
+
+} // eventInternetIsAvailableQrShow
+
+// 
+function eventInternetIsNotAvailableQrShow()
+{
+    g_internet_is_available = false;
+
+    displayDivQrShowInternetConnection();
+
+} // eventInternetIsNotAvailableQrShow
 
 // Callback function retrieving the season start year
 function callbackSeasonStartYearShow(i_season_start_year)
@@ -414,6 +462,8 @@ function hideDisplayElementsOnloadQrCodeShow()
 
     hideDivQrCodeButtonShowInfo();
 
+    hideDivQrShowInternetConnection();
+
 } // hideDisplayElementsOnloadQrCodeShow
 
 // Displays and hides elements for function clickShowQrFile()
@@ -600,6 +650,26 @@ function displayDivQrCodeButtonShowInfo()
 
 } // displayDivQrCodeButtonShowInfo
 
+// Hide the div qr show internet connection
+function hideDivQrShowInternetConnection()
+{
+    var el_image = getElementDivQrShowInternetConnection();
+
+    el_image.style.display = 'none';
+
+} // hideDivQrShowInternetConnection
+
+// Display the div qr show internet connection
+function displayDivQrShowInternetConnection()
+{
+    var el_image = getElementDivQrShowInternetConnection();
+
+    el_image.style.display = 'block';
+
+    el_image.innerHTML = QrStrings.errorNoInternetConnectionQrCodeNotSaved();
+
+} // displayDivQrShowInternetConnection
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Hide And Display Functions //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -754,6 +824,20 @@ function getIdDivQrCodeButtonShowInfo()
     return 'id_div_button_show_info';
 
 } // getIdDivQrCodeButtonShowInfo
+
+// Get the input element for the div qr show internet connection
+function getElementDivQrShowInternetConnection()
+{
+    return document.getElementById(getIdDivQrShowInternetConnection());
+
+} // getElementDivQrShowInternetConnection
+
+// Returns the identity of the div qr show internet connection
+function getIdDivQrShowInternetConnection()
+{
+    return 'id_div_qr_show_internet_connection';
+
+} // getIdDivQrShowInternetConnection
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

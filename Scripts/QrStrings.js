@@ -880,6 +880,13 @@ class QrStrings
 
     } // errorNotTheRightNumberOfCharactersForDownloadCode
 
+    // No Internet connection and QR Code data not saved in local storage
+    static errorNoInternetConnectionQrCodeNotSaved()
+    {
+        return 'Keine Internet-Verbindung und QR Code ist im Telefon nicht gespeichert';
+
+    } // errorNoInternetConnectionQrCodeNotSaved
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Error Strings ///////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
