@@ -456,17 +456,11 @@ function getElementAltOneShowQrImgOneString(i_qr_xml, i_file_number, i_tab)
 
     ret_img_one_str = ret_img_one_str + getTabs(i_tab);
 
-    ret_img_one_str = ret_img_one_str + getDivStartString(id_div_img_one, cl_div_img_one);
-
     ret_img_one_str = ret_img_one_str + getNewLineString();
 	
-	ret_img_one_str = ret_img_one_str + getTabs(i_tab + 1) + '<img id= "' + getIdAltOneShowQrImgOne() + '" ' +  'class= "' + getClassAltOneShowQrImgOne() + '"' + '>';
+	ret_img_one_str = ret_img_one_str + getTabs(i_tab + 1) + '<img id= "' + id_div_img_one + '" ' +  'class= "' + cl_div_img_one + '"' + '>';
 	
 	ret_img_one_str = ret_img_one_str + getNewLineString();
-
-    ret_img_one_str = ret_img_one_str + getTabs(i_tab);
-
-    ret_img_one_str = ret_img_one_str + getDivEndString(id_div_img_one, cl_div_img_one);
 
     ret_img_one_str = ret_img_one_str + getNewLineString() + getNewLineString();
 
@@ -485,17 +479,11 @@ function getElementAltOneShowQrImgTwoString(i_qr_xml, i_file_number, i_tab)
 
     ret_img_two_str = ret_img_two_str + getTabs(i_tab);
 
-    ret_img_two_str = ret_img_two_str + getDivStartString(id_div_img_two, cl_div_img_two);
-
     ret_img_two_str = ret_img_two_str + getNewLineString();
 	
-	ret_img_two_str = ret_img_two_str + getTabs(i_tab + 1) + '<img id= "' + getIdAltOneShowQrImgTwo() + '" ' +  'class= "' + getClassAltOneShowQrImgTwo() + '"' + '>';
+	ret_img_two_str = ret_img_two_str + getTabs(i_tab + 1) + '<img id= "' + id_div_img_two + '" ' +  'class= "' + cl_div_img_two + '"' + '>';
 	
 	ret_img_two_str = ret_img_two_str + getNewLineString();
-
-    ret_img_two_str = ret_img_two_str + getTabs(i_tab);
-
-    ret_img_two_str = ret_img_two_str + getDivEndString(id_div_img_two, cl_div_img_two);
 
     ret_img_two_str = ret_img_two_str + getNewLineString() + getNewLineString();
 

@@ -113,7 +113,7 @@ class QrStrings
         {
             ret_instruct = ret_instruct + 'Mit einem Mobiltelefon können die Ausweise auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben <br>(oder QR Code rechts scannen)' + '<br>';
+            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben <br>(oder QR Codes rechts scannen)' + '<br>';
 
             ret_instruct = ret_instruct + '<b>' + this.urlQrCodeShowWebPage()  + '</b><br>' + '<br>';
 
