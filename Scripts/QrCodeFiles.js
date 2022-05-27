@@ -39,7 +39,7 @@ var g_qr_files_xml_object = null;
 var g_season_start_year = -12345;
 
 
-var g_user_member_name_address = 'Gunnar Lidén, Kapellenweg 10, 5722 Gränichen'; // TODO Implement!
+var g_user_member_name_address = 'Gunnar Lidén, E-Mail: gunnar.liden@jazzliveaarau.ch'; // TODO Implement!
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////

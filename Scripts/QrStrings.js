@@ -101,9 +101,9 @@ class QrStrings
 
         if (i_download_code_two.length == 0)
         {
-            ret_instruct = ret_instruct + 'Mit einem Mobiltelefon kann den Ausweis auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
+            ret_instruct = ret_instruct + 'Mit einem Mobiltelefon kann der Ausweis auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben <br>(oder QR Code rechts scannen)' + '<br>';
+            ret_instruct = ret_instruct + 'Diesen Link im Telefon eingeben <br>(oder QR Code rechts scannen)' + '<br>';
 
             ret_instruct = ret_instruct +  '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>' + '<br>';
 
@@ -113,7 +113,7 @@ class QrStrings
         {
             ret_instruct = ret_instruct + 'Mit einem Mobiltelefon können die Ausweise auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Dieser Link im Telefon eingeben <br>(oder QR Codes rechts scannen)' + '<br>';
+            ret_instruct = ret_instruct + 'Diesen Link im Telefon eingeben <br>(oder QR Codes rechts scannen)' + '<br>';
 
             ret_instruct = ret_instruct + '<b>' + this.urlQrCodeShowWebPage()  + '</b><br>' + '<br>';
 

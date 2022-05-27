@@ -468,7 +468,7 @@ PagePrint
     height: 131mm;
     width: 98%;
     font-size: 15px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     /* border-top: 1px dotted black; */
     text-align: center;
     clear: both;
