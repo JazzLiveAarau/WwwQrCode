@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-23
+// Date: 2022-05-27
 // Author: Gunnar Lidén
 
 // File content
@@ -617,6 +617,13 @@ function setQrTextDataInLocalStorage(i_text_data)
 
 } // setQrTextDataInLocalStorage
 
+// Set the season start year in the local storage
+function setSeasonStartYearInLocalStorage(i_season_start_year_int)
+{
+    localStorage.setItem(this.g_local_storage_qr_season_start_year, i_season_start_year_int.toString());
+
+} // setSeasonStartYearInLocalStorage
+
 // Get the download code from the local storage
 function getDownloadCodeFromLocalStorage()
 {
@@ -665,6 +672,22 @@ function getQrTextDataFromLocalStorage()
 
 } // getQrTextDataFromLocalStorage
 
+// Get the season start year as integer from the local storage
+function getSeasonStartYearAsIntFromLocalStorage()
+{
+    var season_start_year_str = localStorage.getItem(this.g_local_storage_qr_season_start_year);
+
+    if (season_start_year_str == null)
+    {
+        return -12345;
+    }
+    else
+    {
+        return parseInt(season_start_year_str);
+    }
+
+} // getSeasonStartYearAsIntFromLocalStorage
+
 // Saves QR code data in local storage
 function deleteQrCodeDataInLocalStorage()
 {
@@ -675,6 +698,8 @@ function deleteQrCodeDataInLocalStorage()
     localStorage.setItem(this.g_local_storage_qr_image_data_url, '');
 
     localStorage.setItem(this.g_local_storage_qr_text_data, '');
+
+    localStorage.setItem(this.g_local_storage_qr_season_start_year, '');
 
 } // deleteQrCodeDataInLocalStorage
 
@@ -688,6 +713,8 @@ function initQrCodeDataInLocalStorage(i_download_code)
     localStorage.setItem(this.g_local_storage_qr_image_data_url, "");
 
     localStorage.setItem(this.g_local_storage_qr_text_data, "");
+
+    localStorage.setItem(this.g_local_storage_qr_season_start_year, '');
 
 } // initQrCodeDataInLocalStorage
 

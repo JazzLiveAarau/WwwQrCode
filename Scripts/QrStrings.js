@@ -30,25 +30,30 @@ class QrStrings
     {
         var ret_htm = '';
 
-        ret_htm = ret_htm + 'Guten Tag ' + i_supporter_name + '<br>' + '<br>';
-
-        ret_htm = ret_htm + 'Danke, dass Sie uns als Supporter unterstützen.' + '<br>' + '<br>';
+        ret_htm = ret_htm + 'Vielen Dank ' + i_supporter_name + ', dass Sie uns als Supporter unterstützen.' + '<br>' + '<br>';
 
         var caption_str = '';
 
-        ret_htm = ret_htm + 'Bitte dieser Link ' + this.linkQrCodeShowWebPage(caption_str) + 
-                            ' klicken' + '<br>' + '<br>';
-
         if (i_download_code_two.length == 0)
         {
-            ret_htm = ret_htm + 'Danach dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>' + '<br>';
+            ret_htm = ret_htm + 'Bitte diesen Link ' + this.linkQrCodeShowWebPage(caption_str, i_download_code) + 
+            ' klicken' + '<br>' + '<br>';
+
+            ret_htm = ret_htm + 'Der Code wird <b>' + i_download_code + '</b> automatisch eingegeben' + '<br>' + '<br>';
         }
         else
         {
-            ret_htm = ret_htm + 'Für Ausweis eins dieser Code  <b>' + i_download_code + '</b> eingeben' + '<br>';
+            ret_htm = ret_htm + 'Bitte diese Links ' + this.linkQrCodeShowWebPage(caption_str, i_download_code) + 
+            '(für Ausweis eins) und ' +  this.linkQrCodeShowWebPage(caption_str, i_download_code_two) + ' (für Ausweis zwei) klicken' + '<br>' + '<br>';
 
-            ret_htm = ret_htm + 'Für Ausweis zwei dieser Code  <b>' + i_download_code_two + '</b> eingeben' + '<br>' + '<br>';
+            ret_htm = ret_htm + 'Der Code  <b>' + i_download_code + '</b>  und der Code ';
+
+            ret_htm = ret_htm + '<b>' + i_download_code_two + '</b> werden automatisch eingegeben' + '<br>' + '<br>';
+
         }
+
+        ret_htm = ret_htm + '<br>' + 'Die geöffnete Webseite <b>(' 
+        + this.urlFullQrCodeShowWebPage() + ')</b> bitte als Lesezeichen (Favorite) speichern.' + '<br>' + '<br>';
         
         ret_htm = ret_htm + 'Grüsse ' + '<br>' + '<br>';
 
@@ -202,7 +207,7 @@ class QrStrings
     ///////////////////////// Start Common Strings ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    static linkQrCodeShowWebPage(i_caption_str)
+    static linkQrCodeShowWebPage(i_caption_str, i_download_code)
     {
         var caption_str = this.urlQrCodeShowWebPage();
 
@@ -213,7 +218,9 @@ class QrStrings
 
         var ret_link = '';
 
-        ret_link = ret_link + '<a href="https://jazzliveaarau.ch/QrCode/QrCodeShow.htm">';
+        var link_qr_show = this.urlDownloadQrCodeShowWebPage(i_download_code);
+
+        ret_link = ret_link + '<a href="' +  link_qr_show + '">';
 
         ret_link = ret_link + caption_str;
 

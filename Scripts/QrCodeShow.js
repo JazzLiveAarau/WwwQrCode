@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-26
+// Date: 2022-05-27
 // Author: Gunnar Lidén
 
 // File content
@@ -19,6 +19,9 @@
 
 // Season start year
 var g_season_start_year_show = -12345;
+
+// windows.localStorage key for the QR code season_start_year
+var g_local_storage_qr_season_start_year = 'qr_season_start_year';
 
 // windows.localStorage key for the QR code download code
 var g_local_storage_qr_image_download_code = 'qr_code_image_download_code';
@@ -49,6 +52,18 @@ var g_internet_is_available = null;
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // On load function for show a QR code file
+// 1. Start interval function checking that there is connection to Internet
+//    Creation of the class Internet
+// 2. Hide most of the elements on the web page. Call of hideDisplayElementsOnloadQrCodeShow
+// 3. Determine if Internet is available (Internet.isAvailable), if QR Code data is saved
+//    in local storage (isQrCodeDataSavedInLocalStorage) and if there is no download code
+//    in the query string or if query code is equal to local storaga code. Call of
+//    noCodeInQueryStringOrEqualToLocal
+// 4. Get season start year (getSeasonStartYear, SeasonStartYear.php) with callback function
+//    - displayQrCodeWithDataFromLocalStorage if in local storage and no new code in query string and internet .... TODO Try to find another solution with no internet
+//    - callbackSeasonStartYearShow if Internet is available
+//    Show error message if there is no Internet (displayDivQrShowInternetConnection)
+//
 function onloadQrCodeShow()
 {
     console.log("Enter onloadQrCodeShow");
@@ -61,26 +76,19 @@ function onloadQrCodeShow()
 
     g_internet_is_available = g_internet.isAvailable();
 
-    /*
-    var change_connection = prompt('Disconnect Internet?', 'yes');
-
-    if (change_connection == 'yes')
-    {
-        g_internet_is_available = false;
-    }
-    */
-
     setQrInfoText();
 
     hideDisplayElementsOnloadQrCodeShow();
 
     var b_qr_code_saved = isQrCodeDataSavedInLocalStorage();
 
-    if (b_qr_code_saved)
-    {
-        getSeasonStartYear(displayQrCodeWithDataFromLocalStorage);
+    var b_query_local = noCodeInQueryStringOrEqualToLocal();
 
-        // displayQrCodeWithDataFromLocalStorage();
+    if (b_qr_code_saved && b_query_local && g_internet_is_available) 
+    {
+        var season_start_year_int = getSeasonStartYearAsIntFromLocalStorage();
+
+        displayQrCodeWithDataFromLocalStorage(season_start_year_int);
     }
     else if (g_internet_is_available)
     {
@@ -88,11 +96,6 @@ function onloadQrCodeShow()
     }
     else
     {
-
-        // alert(QrStrings.errorNoInternetConnectionQrCodeNotSaved());
-
-        hideDisplayElementsOnloadQrCodeShow();
-
         displayDivQrShowInternetConnection();
     }
 
@@ -120,6 +123,8 @@ function eventInternetIsNotAvailableQrShow()
 function callbackSeasonStartYearShow(i_season_start_year)
 {
     g_season_start_year_show = i_season_start_year;
+
+    setSeasonStartYearInLocalStorage(g_season_start_year_show);
 
     setInputQrQodeElementWithQueryString();
 
@@ -155,6 +160,30 @@ function getDownloadCodeFromQueryString()
     return download_code;
 
 } // getDownloadCodeFromQueryString
+
+// Returns true if there is no download code in the query string or
+// if query code is equal to the download code saved in local storage
+function noCodeInQueryStringOrEqualToLocal()
+{
+    var code_query =  getDownloadCodeFromQueryString();
+
+    if (code_query.length == 0)
+    {
+        return true;
+    }
+
+    var code_local_storage = getDownloadCodeFromLocalStorage();
+
+    if (code_query == code_local_storage)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+} // noCodeInQueryStringOrEqualToLocal
 
 // User clicked button show a QR file
 function clickShowQrFile()
