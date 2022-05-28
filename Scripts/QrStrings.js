@@ -96,6 +96,37 @@ class QrStrings
 
     } // getTitleSupporterEmail
 
+    static getMsgSupporterPostWindows(i_supporter_name, i_download_code, i_download_code_two)
+    {
+        var ret_txt = '';
+
+        ret_txt = ret_txt + 'Danke ' + i_supporter_name;
+
+        ret_txt = ret_txt + ', dass Sie uns als Supporter unterstützen. ' + '\n' + '\n';
+
+        if (i_download_code_two.length == 0)
+        {
+            ret_txt = ret_txt + 'Unten ist Ihre Supporter-Karte zum Ausschneiden und Zusammenfalten.' + '\n' + '\n';
+        }
+        else
+        {
+            ret_txt = ret_txt + 'Unten sind Ihre Supporter-Karten zum Ausschneiden und Zusammenfalten.' + '\n' + '\n';
+        }
+
+        ret_txt = ret_txt + 'Freundliche Grüsse ' + '\n';
+
+        ret_txt = ret_txt + 'Das JAZZ live AARAU Team' + '\n' + '\n';
+
+        return ret_txt;
+
+    }
+
+    stringConvertJazzLiveAarauToHtml(i_input_str)
+    {
+        return i_input_str.replace(/JAZZ live AARAU/g, "JAZZ <i>live</i> AARAU");
+
+    } // stringConvertJazzLiveAarauToHtml
+
     static getInstructionsWebpageQrCodeShow(i_download_code, i_download_code_two)
     {
         var ret_instruct = '';

@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-26
+// Date: 2022-05-28
 // Author: Gunnar Lidén
 
 // File content
@@ -1363,6 +1363,27 @@ function getClassAltOneShowQrImgTwo()
     return 'cl_alt_one_show_img_two'
 
 } // getClassAltOneShowQrImgTwo
+
+// Get the element the text area for editing a message
+function getElementTextAreaEdit()
+{
+    return document.getElementById(getIdTextAreaEdit());
+
+} // getElementTextAreaEdit
+
+// Returns the identity of the text area for editing a message
+function getIdTextAreaEdit()
+{
+    return 'id_message_text_area';
+
+} // getIdTextAreaEdit
+
+// Returns the class for the text area for editing a message
+function getClassTextAreaEdit()
+{
+    return 'cl_message_text_area'
+
+} // getClassTextAreaEdit
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

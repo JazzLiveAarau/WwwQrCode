@@ -1,5 +1,5 @@
 // File: QrCodeFileControls.js
-// Date: 2022-05-22
+// Date: 2022-05-28
 // Author: Gunnar Lidén
 
 // File content
@@ -67,6 +67,9 @@ var g_season_color_def_str_text_box = null;
 
 // The text box for the season color display
 var g_season_color_display_text_box = null;
+
+// The text area for editing a message
+var g_edit_message_text_area = null;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
@@ -489,6 +492,24 @@ function createTextBoxSeasonColorDisplay()
     g_season_color_display_text_box.setValue("");
   
 } // createTextBoxSeasonColorDisplay
+
+// Create the text area for editing a message
+function createTextAreaEdit()
+{
+    g_edit_message_text_area = new JazzTextArea(getIdTextAreaEdit(), getIdDivAltOneMessage());
+
+    g_edit_message_text_area.setCols("91");
+	
+	g_edit_message_text_area.setRows("7");
+
+	
+	//  g_edit_message_text_area.setReadOnlyFlag(true);
+
+    g_edit_message_text_area.setValue("TODO text area");
+
+    // g_edit_message_text_area.setOninputFunctionName("oninputSeasonColor");
+  
+} // createTextAreaEdit
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Controls /////////////////////////////////////////////

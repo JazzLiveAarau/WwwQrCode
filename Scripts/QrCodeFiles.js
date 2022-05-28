@@ -434,6 +434,20 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
     {
         setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number);
 
+        createTextAreaEdit();
+
+        var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
+        var download_code = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
+    
+        var download_code_two = g_qr_files_xml_object.getDownloadTwo(g_files_active_number);
+    
+        g_edit_message_text_area.setValue(QrStrings.getMsgSupporterPostWindows(supporter_name, download_code, download_code_two));	
+
+        var el_text_area = getElementTextAreaEdit();
+
+        el_text_area.style.marginTop = '0mm';
+
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
     {
