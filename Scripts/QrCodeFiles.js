@@ -502,11 +502,13 @@ function eventClickCheckBoxEditText()
     {
         hideDivTextAreaEdit();
 
-        var download_code_two = g_qr_files_xml_object.getDownloadTwo(g_files_active_number);
+        // var download_code_two = g_qr_files_xml_object.getDownloadTwo(g_files_active_number);
+
+        var person_two = g_qr_files_xml_object.getQrCodeNameTwo(g_files_active_number);
 
         var b_one_person = true;
     
-        if (download_code_two.length > 0)
+        if (person_two.length > 0)
         {
             b_one_person = false;
         }

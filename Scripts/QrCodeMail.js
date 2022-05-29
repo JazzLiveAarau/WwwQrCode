@@ -57,11 +57,13 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 // Set the edit text area for supporter
 function initEditTextAreaSupporter(i_qr_xml, i_file_number)
 {
-    var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+    // var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+
+    var person_two = g_qr_files_xml_object.getQrCodeNameTwo(g_files_active_number);
 
     var b_one_person = true;
 
-    if (download_code_two.length > 0)
+    if (person_two.length > 0)
     {
         b_one_person = false;
     }
@@ -443,6 +445,14 @@ function getElementDivAltOneShowMsgString(i_qr_xml, i_file_number, i_tab)
     var download_code = i_qr_xml.getDownloadOne(i_file_number);
 
     var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+
+    var person_two = i_qr_xml.getQrCodeNameTwo(i_file_number);
+
+    // Fix if a user first defined a second person and then took away this person
+    if (person_two.length == 0)
+    {
+        download_code_two = '';
+    }
 
     var instruction_str = QrStrings.getInstructionsWebpageQrCodeShow(download_code, download_code_two);
 
