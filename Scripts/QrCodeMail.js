@@ -30,6 +30,8 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 
     setWidthsHeightsMarginsAltOne();
 
+    setEditTextAreaSupporter(i_qr_xml, i_file_number);
+
     var el_two_from_address = getElementDivAltOneFromAddress();
 
     el_two_from_address.style.transform = 'rotate(180deg)';
@@ -47,6 +49,19 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Set the edit text area for supporter
+function setEditTextAreaSupporter(i_qr_xml, i_file_number)
+{
+    var supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number);
+
+    var download_code = i_qr_xml.getDownloadOne(i_file_number);
+
+    var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+
+    g_edit_message_text_area.setValue(QrStrings.getMsgSupporterPostWindows(supporter_name, download_code, download_code_two));	
+
+} // setEditTextAreaSupporter
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Print Page Strings ///////////////////////////////
@@ -1364,6 +1379,27 @@ function getClassAltOneShowQrImgTwo()
 
 } // getClassAltOneShowQrImgTwo
 
+// Get the element the div text area for editing a message
+function getElementDivTextAreaEdit()
+{
+    return document.getElementById(getIdDivTextAreaEdit());
+
+} // getElementDivTextAreaEdit
+
+// Returns the identity of the div text area for editing a message
+function getIdDivTextAreaEdit()
+{
+    return 'id_div_message_text_area';
+
+} // getIdDivTextAreaEdit
+
+// Returns the class for the div text area for editing a message
+function getClassDivTextAreaEdit()
+{
+    return 'cl_div_message_text_area'
+
+} // getClassDivTextAreaEdit
+
 // Get the element the text area for editing a message
 function getElementTextAreaEdit()
 {
@@ -1377,13 +1413,6 @@ function getIdTextAreaEdit()
     return 'id_message_text_area';
 
 } // getIdTextAreaEdit
-
-// Returns the class for the text area for editing a message
-function getClassTextAreaEdit()
-{
-    return 'cl_message_text_area'
-
-} // getClassTextAreaEdit
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

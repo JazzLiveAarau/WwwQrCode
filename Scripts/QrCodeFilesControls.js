@@ -71,6 +71,9 @@ var g_season_color_display_text_box = null;
 // The text area for editing a message
 var g_edit_message_text_area = null;
 
+// The edit text check box
+var g_edit_text_check_box = null;
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -120,8 +123,23 @@ function createAllControls()
 
     createTextBoxSeasonColorDisplay();
 
+    createTextAreaEdit();
+
+    initTextAreaEdit(); // TODO Remove margin-top 60px f0r <textarea>
+
+    createCheckBoxEditText();
+
 } // createAllControls
 
+// Initialize text area init
+// For some reason margin-top has a value as default ???
+function initTextAreaEdit()
+{
+    var el_text_area = getElementTextAreaEdit();
+
+    el_text_area.style.marginTop = '0mm';
+
+} // initTextAreaEdit
 
 // Creates the supporter control
 function createQrSupporterButton()
@@ -496,7 +514,7 @@ function createTextBoxSeasonColorDisplay()
 // Create the text area for editing a message
 function createTextAreaEdit()
 {
-    g_edit_message_text_area = new JazzTextArea(getIdTextAreaEdit(), getIdDivAltOneMessage());
+    g_edit_message_text_area = new JazzTextArea(getIdTextAreaEdit(), getIdDivTextAreaEdit());
 
     g_edit_message_text_area.setCols("91");
 	
@@ -510,6 +528,23 @@ function createTextAreaEdit()
     // g_edit_message_text_area.setOninputFunctionName("oninputSeasonColor");
   
 } // createTextAreaEdit
+
+// Creates the check box control edit text
+function createCheckBoxEditText()
+{
+    g_edit_text_check_box = new JazzCheckBox(getIdEditTextCheckBox(), getIdDivEditTextCheckBox());
+
+    g_edit_text_check_box.setOninputFunctionName("eventClickCheckBoxEditText");
+
+    g_edit_text_check_box.setLabelText("Text editieren");
+	
+	g_edit_text_check_box.setLabelTextPositionLeft();
+
+     g_edit_text_check_box.setTitle("Text editieren");
+
+     g_edit_text_check_box.setCheck("FALSE");
+
+} // createCheckBoxEditText
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Controls /////////////////////////////////////////////
@@ -631,6 +666,10 @@ function displayControlSupporters()
 
     displayAllExecutionButtons();
 
+    hideDivEditTextOptions();
+
+    hideDivTextAreaEdit();
+
 } // displayControlSupporters
 
 // Displays all sponsor controls
@@ -688,6 +727,10 @@ function hideDropdownTextBoxesExecutionButtons()
     hideAllTextBoxes();
 
     hideAllExecutionButtons();
+
+    hideDivEditTextOptions();
+
+    hideDivTextAreaEdit();
 
 } // hideDropdownTextBoxesExecutionButtons
 
@@ -956,15 +999,15 @@ function hideDivQrTelephone()
 } // hideDivQrTelephone
 
 // Display the div qr code code telephone number
-function displayDDivQrTelephone()
+function displayDivQrTelephone()
 {
-    console.log('displayDDivQrTelephone Enter');
+    console.log('displayDivQrTelephone Enter');
 
-    var el_telephone = getElementDDivQrTelephone();
+    var el_telephone = getElementDivQrTelephone();
 
     el_telephone.style.display = 'block';
 
-} // displayDDivQrTelephone
+} // displayDivQrTelephone
 
 // Hide the div qr code supporter button
 function hideDivQrSupporterButton()
@@ -1170,6 +1213,72 @@ function displayDivQrFileDoneButton()
 
 } // displayDivQrFileDoneButton
 
+// Hide the div text area for editing a message
+function hideDivTextAreaEdit()
+{
+    console.log('hideDivTextAreaEdit Enter');
+
+    var el_telephone = getElementDivTextAreaEdit();
+
+    el_telephone.style.display = 'none';
+
+} // hideDivTextAreaEdit
+
+// Display the div text area for editing a message
+function displayDivTextAreaEdit()
+{
+    console.log('displayDivTextAreaEdit Enter');
+
+    var el_telephone = getElementDivTextAreaEdit();
+
+    el_telephone.style.display = 'block';
+
+} // displayDivTextAreaEdit
+
+
+// Hide the div edit text options
+function hideDivEditTextOptions()
+{
+    console.log('hideDivEditTextOptions Enter');
+
+    var el_telephone = getElementDivEditTextOptions();
+
+    el_telephone.style.display = 'none';
+
+} // hideDivEditTextOptions
+
+// Display the div edit text options
+function displayDivEditTextOptions()
+{
+    console.log('displayDivEditTextOptions Enter');
+
+    var el_telephone = getElementDivEditTextOptions();
+
+    el_telephone.style.display = 'block';
+
+} // displayDivEditTextOptions
+
+// Hide the div edit text check box
+function hideDivEditTextCheckBox()
+{
+    console.log('hideDivEditTextCheckBox Enter');
+
+    var el_telephone = getElementDivEditTextCheckBox();
+
+    el_telephone.style.display = 'none';
+
+} // hideDivEditTextCheckBox
+
+// Display the div edit text check box
+function displayDivEditTextCheckBox()
+{
+    console.log('displayDivEditTextCheckBox Enter');
+
+    var el_telephone = getElementDivEditTextCheckBox();
+
+    el_telephone.style.display = 'block';
+
+} // displayDivEditTextCheckBox
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Hide And Display Functions //////////////////////////////////
@@ -1488,6 +1597,62 @@ function getIdDivSeasonDisplay()
     return 'id_div_season_color_display';
 
 } // getIdDivSeasonDisplay
+
+// Get the element the div edit text options
+function getElementDivEditTextOptions()
+{
+    return document.getElementById(getIdDivEditTextOptions());
+
+} // getElementDivEditTextOptions
+
+// Returns the identity of the div edit text options
+function getIdDivEditTextOptions()
+{
+    return 'id_div_edit_text_options';
+
+} // getIdDivEditTextOptions
+
+// Returns the class for the div edit text options
+function getClassDivEditTextOptions()
+{
+    return 'cl_div_edit_text_options'
+
+} // getClassDivEditTextOptions
+
+// Get the element the div edit text check box
+function getElementDivEditTextCheckBox()
+{
+    return document.getElementById(getIdDivEditTextCheckBox());
+
+} // getElementDivEditTextCheckBox
+
+// Returns the identity of the div edit text check box
+function getIdDivEditTextCheckBox()
+{
+    return 'id_div_edit_text_check_box';
+
+} // getIdDivEditTextCheckBox
+
+// Returns the class for the div edit text check box
+function getClassDivEditTextCheckBox()
+{
+    return 'cl_div_edit_text_check_box'
+
+} // getClassDivEditTextCheckBox
+
+// Get the element the div edit text check box
+function getElementEditTextCheckBox()
+{
+    return document.getElementById(getIdEditTextCheckBox());
+
+} // getElementEditTextCheckBox
+
+// Returns the identity of the div edit text check box
+function getIdEditTextCheckBox()
+{
+    return 'id_edit_text_check_box';
+
+} // getIdEditTextCheckBox
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

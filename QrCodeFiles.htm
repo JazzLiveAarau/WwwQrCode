@@ -77,12 +77,14 @@
     <!-- Class for a textarea control  -->
     <script type="text/javascript" src="Scripts/ControlTextArea.js"></script>
 
+    <!-- Standard control check box  -->
+    <script type="text/javascript" src="Scripts/JazzControlCheckBox.js"></script>
 
     <!-- Test functions -->
     <script type="text/javascript" src="Scripts/QrTests.js"></script>
 
-
   </head>
+
   <body onload= "onloadQrCodeFiles()" >
 
     <div class="cl_qr_code_files_container" >
@@ -150,7 +152,15 @@
 
       </div> <!-- cl_div_qr_buttons_execution -->
 
+      <div id="id_div_edit_text_options" class="cl_div_edit_text_options">
+
+        <div id="id_div_edit_text_check_box" class="cl_div_edit_text_check_box" ></div>
+
+      </div>  <!-- cl_div_edit_text_options -->
+
     </div> <!-- cl_qr_code_files_container -->
+
+    <div id="id_div_message_text_area"  class="cl_div_message_text_area" ></div>
 
     <div> <canvas id="id_canvas_qr_code"></canvas> </div>
 

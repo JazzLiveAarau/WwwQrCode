@@ -111,6 +111,7 @@ body
     margin-top: 5px;
     font-size: 10px;
     font-weight: bold;
+    overflow: hidden;
     clear: both;
 }
 
@@ -139,6 +140,19 @@ body
 }
 
 .cl_div_qr_button_file_done
+{
+    float: left;
+}
+
+.cl_div_edit_text_options
+{
+    margin-top: 10px;
+    font-size: 14px;
+    overflow: hidden;
+    clear: both;
+}
+
+.cl_div_edit_text_check_box
 {
     float: left;
 }
@@ -341,14 +355,22 @@ PagePrint
     clear: both;
 }
 
+.cl_div_message_text_area
+{
+    height: 40mm;
+    width: 190mm;
+    margin-top: 5mm;
+    /* border: 1px dotted black; */
+    text-align: left;
+    clear: both;
+}
+
 /*.cl_message_text_area*/
-.cl_div_alt_one_message textarea
+.cl_div_message_text_area textarea
 {
     height: 95%;
     width: 99%;
     font-size: 4.0mm;
-    font-weight: bold;
-    background-color: rgb(223, 224, 225);
     border: none;
     resize: none;
     /* border: 1px dotted green; */

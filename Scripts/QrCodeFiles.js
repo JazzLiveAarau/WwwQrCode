@@ -434,19 +434,16 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
     {
         setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number);
 
-        createTextAreaEdit();
+        displayDivEditTextOptions();
 
-        var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
-
-        var download_code = g_qr_files_xml_object.getDownloadOne(g_files_active_number);
-    
-        var download_code_two = g_qr_files_xml_object.getDownloadTwo(g_files_active_number);
-    
-        g_edit_message_text_area.setValue(QrStrings.getMsgSupporterPostWindows(supporter_name, download_code, download_code_two));	
-
-        var el_text_area = getElementTextAreaEdit();
-
-        el_text_area.style.marginTop = '0mm';
+        if (g_edit_text_check_box.getCheck() == "TRUE")
+        {
+            displayDivTextAreaEdit();
+        }
+        else
+        {
+            hideDivTextAreaEdit();
+        }
 
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
@@ -480,6 +477,20 @@ function oninputSeasonColor()
     setTextBoxesSeasonColor();
 
 } // oninputSeasonColor
+
+// User clicked the check box control edit text
+function eventClickCheckBoxEditText()
+{
+    if (g_edit_text_check_box.getCheck() == "TRUE")
+    {
+        displayDivTextAreaEdit();
+    }
+    else
+    {
+        hideDivTextAreaEdit();
+    }
+	
+} // eventClickCheckBoxEditText
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
