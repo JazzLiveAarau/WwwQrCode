@@ -57,10 +57,6 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 // Set the edit text area for supporter
 function initEditTextAreaSupporter(i_qr_xml, i_file_number)
 {
-    //QQQ var supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number);
-
-    //QQQ var download_code = i_qr_xml.getDownloadOne(i_file_number);
-
     var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
 
     var b_one_person = true;
@@ -82,12 +78,21 @@ function initEditTextAreaSupporter(i_qr_xml, i_file_number)
     {
         displayed_text = default_text;
 
-        // Perhaps setEditSupporterTextInLocalStorage(displayed_text);
+        setEditSupporterTextInLocalStorage(displayed_text);
     }
 
     g_edit_message_text_area.setValue(displayed_text);	
 
+    var displayed_text_html = QrStrings.convertWindowsToHtml(displayed_text); 
+
+    var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
+    edited_text_html =QrStrings.replaceSupporterNameKey(displayed_text_html, supporter_name);
+
+    setSupporterPostMessageHtml(edited_text_html)
+
 } // initEditTextAreaSupporter
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Edit Text Area //////////////////////////////////////////

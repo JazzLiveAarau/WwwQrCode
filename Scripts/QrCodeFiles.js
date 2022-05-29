@@ -484,13 +484,36 @@ function oninputSeasonColor()
 // User clicked the check box control edit text
 function eventClickCheckBoxEditText()
 {
+    var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
     if (g_edit_text_check_box.getCheck() == "TRUE")
     {
         displayDivTextAreaEdit();
+
+        var edited_text = getEditSupporterTextFromLocalStorage();
+
+        var edited_text_html = QrStrings.convertWindowsToHtml(edited_text); 
+
+        edited_text_html =QrStrings.replaceSupporterNameKey(edited_text_html, supporter_name);
+
+        setSupporterPostMessageHtml(edited_text_html);
     }
     else
     {
         hideDivTextAreaEdit();
+
+        var download_code_two = g_qr_files_xml_object.getDownloadTwo(g_files_active_number);
+
+        var b_one_person = true;
+    
+        if (download_code_two.length > 0)
+        {
+            b_one_person = false;
+        }
+    
+        var default_msg_html = QrStrings.getMsgSupporterPost(supporter_name, b_one_person);
+
+        setSupporterPostMessageHtml(default_msg_html);
     }
 	
 } // eventClickCheckBoxEditText
@@ -504,21 +527,25 @@ function onInputTextAreaEdit()
 
         setEditSupporterTextInLocalStorage(edited_text);
 
-        var edited_text_html = ''; //TODO
+        var edited_text_html = QrStrings.convertWindowsToHtml(edited_text); 
 
-        setSupporterPostMessage(edited_text)
+        var supporter_name = g_qr_files_xml_object.getQrCodeNameOne(g_files_active_number);
+
+        edited_text_html =QrStrings.replaceSupporterNameKey(edited_text_html, supporter_name);
+
+        setSupporterPostMessageHtml(edited_text_html)
     }
 
 } // onInputTextAreaEdit
 
 // Sets the supporter post (mail) message
-function setSupporterPostMessage(i_supporter_post_msg)
+function setSupporterPostMessageHtml(i_supporter_post_msg_htm)
 {
     var el_div_msg = getElementDivAltOneMessage();
 
-    el_div_msg.innerHTML = i_supporter_post_msg;
+    el_div_msg.innerHTML = i_supporter_post_msg_htm;
 
-} // setSupporterPostMessage
+} // setSupporterPostMessageHtml
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
