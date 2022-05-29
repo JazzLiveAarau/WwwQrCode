@@ -781,7 +781,7 @@ function setWidthsHeightsMarginsAltOne()
 
     var container_upper_top = 0.0;
 
-    var message_height = 40.0;
+    var message_height = 60.0;
 
     var message_width = 190.0;
 

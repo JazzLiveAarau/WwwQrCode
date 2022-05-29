@@ -102,34 +102,30 @@ class QrStrings
 
         ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU QR Code Anzeiger</h4>';
 
-        // ret_instruct = ret_instruct + '<p>';
-
         if (i_download_code_two.length == 0)
         {
-            ret_instruct = ret_instruct + 'Mit einem Mobiltelefon kann der Ausweis auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
+            ret_instruct = ret_instruct + 'Der Ausweis kann im Telefon gespeichert und gezeigt werden.' + '<br>';
 
-            ret_instruct = ret_instruct + 'Diesen Link im Telefon eingeben <br>(oder QR Code rechts scannen)' + '<br>';
+            ret_instruct = ret_instruct + 'Link unten eingeben (oder QR Code rechts scannen).' + '<br>';
 
-            ret_instruct = ret_instruct +  '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>' + '<br>';
+            ret_instruct = ret_instruct +  '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Der Code für diesen Ausweis ist <b>' + i_download_code + '</b><br>' + '<br>';
+            ret_instruct = ret_instruct + 'Der Code für diesen Ausweis ist <b>' + i_download_code + '</b>' + '<br>';
         }
         else
         {
-            ret_instruct = ret_instruct + 'Mit einem Mobiltelefon können die Ausweise auch gespeichert und gezeigt werden.' + '<br>' + '<br>';
+            ret_instruct = ret_instruct + 'Der Ausweis kann im Telefon gespeichert und gezeigt werden.' + '<br>';
 
-            ret_instruct = ret_instruct + 'Diesen Link im Telefon eingeben <br>(oder QR Codes rechts scannen)' + '<br>';
+            ret_instruct = ret_instruct + 'Link unten eingeben (oder QR Codes rechts scannen).' + '<br>';
 
-            ret_instruct = ret_instruct + '<b>' + this.urlQrCodeShowWebPage()  + '</b><br>' + '<br>';
+            ret_instruct = ret_instruct + '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>';
 
             ret_instruct = ret_instruct + 'Der Code für den ersten Ausweis ist <b>' + i_download_code + '</b><br>';
 
-            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis ist <b>' + i_download_code_two + '</b><br>';
+            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis ist <b>' + i_download_code_two + '</b>' + '<br>';
         }
 
-        ret_instruct = ret_instruct + '<br>' + 'Der Link soll als Lesezeichen (Favorite) gespeichert werden';
-
-        // ret_instruct = ret_instruct + '</p>';
+        ret_instruct = ret_instruct + 'Die Webseite (Link) danach als Lesezeichen speichern.';
 
         return ret_instruct;
 
@@ -190,7 +186,7 @@ class QrStrings
     {
         var ret_reverse_qr = '';
     
-        ret_reverse_qr = ret_reverse_qr + 'Mobiltelefon QR Code Anzeiger Link:' + '<br>';
+        ret_reverse_qr = ret_reverse_qr + 'Mobiltelefon QR Code Anzeiger:' + '<br>';
     
         ret_reverse_qr = ret_reverse_qr + this.urlQrCodeShowWebPage() + '<br><br>';
     
@@ -313,7 +309,7 @@ class QrStrings
         return ret_str;
 
     } // convertWindowsToHtml
-    
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Convert Windows To Html /////////////////////
     ///////////////////////////////////////////////////////////////////////////

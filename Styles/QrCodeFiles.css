@@ -357,7 +357,7 @@ PagePrint
 
 .cl_div_message_text_area
 {
-    height: 40mm;
+    height: 60mm;
     width: 190mm;
     margin-top: 5mm;
     /* border: 1px dotted black; */
@@ -381,7 +381,7 @@ PagePrint
     position: relative;
     top: 20mm;
     left: 10mm;
-    height: 60mm;
+    height: 40mm;
     width: 190mm;
     font-size: 3.5mm;
     border: 2px solid black;
@@ -406,9 +406,9 @@ PagePrint
 
 .cl_alt_one_show_img_one
 {
-    height: 30mm;
-    width: 30mm;
-    margin-top: 16mm;
+    height: 25mm;
+    width: 25mm;
+    margin-top: 9mm;
     margin-left: 8mm;
     /* border: 1px dotted blue; */
     float: left;
@@ -416,10 +416,10 @@ PagePrint
 
 .cl_alt_one_show_img_two
 {
-    height: 30mm;
-    width: 30mm;
-    margin-top: 16mm;
-    margin-left: 8mm;
+    height: 25mm;
+    width: 25mm;
+    margin-top: 9mm;
+    margin-left: 24mm;
     /* border: 1px dotted blue; */
     float: left;
 }
