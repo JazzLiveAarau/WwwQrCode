@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-27
+// Date: 2022-05-29
 // Author: Gunnar Lidén
 
 // File content
@@ -509,6 +509,60 @@ function getIdDivQrShowProgress()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Local Storage Edit Text ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Set the edit supporter text in local storage
+function setEditSupporterTextInLocalStorage(i_edit_supporter_text)
+{
+    localStorage.setItem(this.g_qr_local_edit_supporter_text, i_edit_supporter_text);
+
+} // setEditSupporterTextInLocalStorage
+
+// Get the edit supporter text in local storage
+function getEditSupporterTextFromLocalStorage()
+{
+    var edit_supporter_text = localStorage.getItem(this.g_qr_local_edit_supporter_text);
+
+    if (edit_supporter_text == null)
+    {
+        return "";
+    }
+    else
+    {
+        return edit_supporter_text;
+    }
+
+} // getEditSupporterTextFromLocalStorage
+
+// Deletes the edit supporter text in local storage
+function deleteEditSupporterTextInLocalStorage()
+{
+	localStorage.setItem(this.g_qr_local_edit_supporter_text, '');
+	
+} // deleteEditSupporterTextInLocalStorage
+
+// Returns true if the edit supporter text in local storage is defined
+function isDefinedEditSupporterTextInLocalStorage()
+{
+    var edit_supporter_text =  getEditSupporterTextFromLocalStorage();
+
+    if (edit_supporter_text.length > 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+} // isDefinedEditSupporterTextInLocalStorage
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Local Storage Edit Text /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Local Storage Functions ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -688,7 +742,7 @@ function getSeasonStartYearAsIntFromLocalStorage()
 
 } // getSeasonStartYearAsIntFromLocalStorage
 
-// Saves QR code data in local storage
+// Deletes QR code data in local storage
 function deleteQrCodeDataInLocalStorage()
 {
     console.log("Enter deleteQrCodeDataInLocalStorage");

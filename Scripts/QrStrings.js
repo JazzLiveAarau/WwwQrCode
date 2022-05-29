@@ -71,40 +71,15 @@ class QrStrings
     ///////////////////////// Start Supporter Mails ///////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    static getMsgSupporterPost(i_supporter_name, i_download_code, i_download_code_two)
-    {
-        var ret_htm = '';
-
-        ret_htm = ret_htm + 'Danke ' + i_supporter_name;
-
-        ret_htm = ret_htm + ', dass Sie uns als Supporter unterstützen. ' + '<br>' + '<br>';
-
-        if (i_download_code_two.length == 0)
-        {
-            ret_htm = ret_htm + 'Unten ist Ihre Supporter-Karte zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
-        }
-        else
-        {
-            ret_htm = ret_htm + 'Unten sind Ihre Supporter-Karten zum Ausschneiden und Zusammenfalten.' + '<br>' + '<br>';
-        }
-
-        ret_htm = ret_htm + 'Freundliche Grüsse ' + '<br>' + '<br>';
-
-        ret_htm = ret_htm + 'Das JAZZ <i>live</i> AARAU Team' + '<br>' + '<br>';
-
-        return ret_htm;
-
-    } // getTitleSupporterEmail
-
-    static getMsgSupporterPostWindows(i_supporter_name, i_download_code, i_download_code_two)
+    static getMsgSupporterPostWindows(i_b_one_person)
     {
         var ret_txt = '';
 
-        ret_txt = ret_txt + 'Danke ' + i_supporter_name;
+        ret_txt = ret_txt + 'Danke ' + QrStrings.getSupporterNameKey();
 
         ret_txt = ret_txt + ', dass Sie uns als Supporter unterstützen. ' + '\n' + '\n';
 
-        if (i_download_code_two.length == 0)
+        if (i_b_one_person)
         {
             ret_txt = ret_txt + 'Unten ist Ihre Supporter-Karte zum Ausschneiden und Zusammenfalten.' + '\n' + '\n';
         }
@@ -119,13 +94,7 @@ class QrStrings
 
         return ret_txt;
 
-    }
-
-    stringConvertJazzLiveAarauToHtml(i_input_str)
-    {
-        return i_input_str.replace(/JAZZ live AARAU/g, "JAZZ <i>live</i> AARAU");
-
-    } // stringConvertJazzLiveAarauToHtml
+    } // getMsgSupporterPostWindows
 
     static getInstructionsWebpageQrCodeShow(i_download_code, i_download_code_two)
     {
@@ -193,6 +162,7 @@ class QrStrings
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Supporter Mails /////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
+
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Supporter Karte ///////////////////////////
@@ -287,6 +257,65 @@ class QrStrings
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Common Strings //////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Convert Windows To Html ///////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getMsgSupporterPost(i_supporter_name, i_b_one_person)
+    {
+        var ret_htm = '';
+
+        var windows_msg = this.getMsgSupporterPostWindows(i_b_one_person);
+
+        ret_htm = this.convertWindowsToHtml(windows_msg);
+
+        ret_htm = this.replaceSupporterNameKey(ret_htm, i_supporter_name);
+
+        return ret_htm;
+
+    } // getMsgSupporterPost
+
+    static getSupporterNameKey()
+    {
+        return 'SupporterNameKey';
+
+    } // getSupporterNameKey
+
+    static replaceSupporterNameKey(i_input_str, i_supporter_name)
+    {
+        return i_input_str.replace(/SupporterNameKey/g, i_supporter_name);
+
+    } // replaceSupporterNameKey
+
+    static convertJazzLiveAarauToHtml(i_input_str)
+    {
+        return i_input_str.replace(/JAZZ live AARAU/g, "JAZZ <i>live</i> AARAU");
+
+    } // convertJazzLiveAarauToHtml
+
+    static convertEndRowToHtml(i_input_str)
+    {
+        return i_input_str.replace(/\n/g, "<br>");
+
+    } // convertEndRowToHtml
+
+    static convertWindowsToHtml(i_input_str)
+    {
+        var ret_str = i_input_str;
+
+        ret_str = this.convertEndRowToHtml(ret_str);
+
+        ret_str = this.convertJazzLiveAarauToHtml(ret_str);
+
+
+        return ret_str;
+
+    } // convertWindowsToHtml
+    
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Convert Windows To Html /////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////

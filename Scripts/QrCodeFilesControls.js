@@ -520,12 +520,9 @@ function createTextAreaEdit()
 	
 	g_edit_message_text_area.setRows("7");
 
-	
-	//  g_edit_message_text_area.setReadOnlyFlag(true);
-
     g_edit_message_text_area.setValue("TODO text area");
 
-    // g_edit_message_text_area.setOninputFunctionName("oninputSeasonColor");
+    g_edit_message_text_area.setOninputFunctionName("onInputTextAreaEdit");
   
 } // createTextAreaEdit
 

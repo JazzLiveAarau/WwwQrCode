@@ -30,7 +30,7 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 
     setWidthsHeightsMarginsAltOne();
 
-    setEditTextAreaSupporter(i_qr_xml, i_file_number);
+    initEditTextAreaSupporter(i_qr_xml, i_file_number);
 
     var el_two_from_address = getElementDivAltOneFromAddress();
 
@@ -50,18 +50,48 @@ function setPrintPageOneAlternativeOne(i_qr_xml, i_file_number)
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Set the edit text area for supporter
-function setEditTextAreaSupporter(i_qr_xml, i_file_number)
-{
-    var supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number);
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Set Edit Text Area ////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
-    var download_code = i_qr_xml.getDownloadOne(i_file_number);
+// Set the edit text area for supporter
+function initEditTextAreaSupporter(i_qr_xml, i_file_number)
+{
+    //QQQ var supporter_name = i_qr_xml.getQrCodeNameOne(i_file_number);
+
+    //QQQ var download_code = i_qr_xml.getDownloadOne(i_file_number);
 
     var download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
 
-    g_edit_message_text_area.setValue(QrStrings.getMsgSupporterPostWindows(supporter_name, download_code, download_code_two));	
+    var b_one_person = true;
 
-} // setEditTextAreaSupporter
+    if (download_code_two.length > 0)
+    {
+        b_one_person = false;
+    }
+
+    var default_text = QrStrings.getMsgSupporterPostWindows(b_one_person);
+
+    var displayed_text = '';
+
+    if (isDefinedEditSupporterTextInLocalStorage())
+    {
+        displayed_text = getEditSupporterTextFromLocalStorage();
+    }
+    else
+    {
+        displayed_text = default_text;
+
+        // Perhaps setEditSupporterTextInLocalStorage(displayed_text);
+    }
+
+    g_edit_message_text_area.setValue(displayed_text);	
+
+} // initEditTextAreaSupporter
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Set Edit Text Area //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Print Page Strings ///////////////////////////////
@@ -336,12 +366,16 @@ function getElementDivAltOneMessageString(i_qr_xml, i_file_number, i_tab)
 
     var download_code_two = '';
 
+    var b_one_person = true;
+
     if (person_two.length > 0)
     {
         download_code_two = i_qr_xml.getDownloadTwo(i_file_number);
+
+        b_one_person = false;
     }
 
-    var message_str = QrStrings.getMsgSupporterPost(supporter_name, download_code, download_code_two);
+    var message_str = QrStrings.getMsgSupporterPost(supporter_name, b_one_person);
 
     var id_div_message = getIdDivAltOneMessage();
 

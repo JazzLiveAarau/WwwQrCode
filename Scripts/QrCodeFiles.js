@@ -1,5 +1,5 @@
 // File: QrCodeFile.js
-// Date: 2022-05-23
+// Date: 2022-05-29
 // Author: Gunnar Lidén
 
 // File content
@@ -37,6 +37,9 @@ var g_qr_files_xml_object = null;
 
 // Season start year, that defines the active season directory QrFiles/Season_20NN_20MM
 var g_season_start_year = -12345;
+
+// windows.localStorage key for the edit supporter text
+var g_qr_local_edit_supporter_text = 'qr_local_edit_supporter_text';
 
 
 var g_user_member_name_address = 'Gunnar Lidén, E-Mail: gunnar.liden@jazzliveaarau.ch'; // TODO Implement!
@@ -491,6 +494,31 @@ function eventClickCheckBoxEditText()
     }
 	
 } // eventClickCheckBoxEditText
+
+// User edited text 
+function onInputTextAreaEdit()
+{
+    if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
+    {
+        var edited_text = g_edit_message_text_area.getValue();
+
+        setEditSupporterTextInLocalStorage(edited_text);
+
+        var edited_text_html = ''; //TODO
+
+        setSupporterPostMessage(edited_text)
+    }
+
+} // onInputTextAreaEdit
+
+// Sets the supporter post (mail) message
+function setSupporterPostMessage(i_supporter_post_msg)
+{
+    var el_div_msg = getElementDivAltOneMessage();
+
+    el_div_msg.innerHTML = i_supporter_post_msg;
+
+} // setSupporterPostMessage
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
