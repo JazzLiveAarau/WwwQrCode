@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-28
+// Date: 2022-05-30
 // Author: Gunnar Lidén
 
 // File content
@@ -831,15 +831,17 @@ function setWidthsHeightsMarginsAltOne()
 
     var two_qr_card_top_person_two = 8.0;
 
+    var stamp_height = 30.0;
+
     var to_address_height = 40.0;
 
     var to_address_width = 80.0;
 
     var to_address_bottom = 15.0;
 
-    var to_address_top = container_height - to_address_bottom - to_address_height;
+    var to_address_top = container_height - to_address_bottom - stamp_height - to_address_height;
 
-    var to_address_right = 15.0;
+    var to_address_right = 25.0;
 
     var to_adress_left = a4_width - to_address_right - to_address_width;
 

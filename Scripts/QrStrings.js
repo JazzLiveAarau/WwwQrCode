@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-05-26
+// Date: 2022-05-30
 // Author: Gunnar Lidén
 
 // File content
