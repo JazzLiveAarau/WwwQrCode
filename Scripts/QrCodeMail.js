@@ -657,10 +657,14 @@ function getElementDivAltOneContainerToAddressString(i_qr_xml, i_file_number, i_
     ret_container_to_address_str = ret_container_to_address_str + getDivStartString(id_div_container_to_address, cl_div_container_to_address);
 
     ret_container_to_address_str = ret_container_to_address_str + getNewLineString();
+
+    ret_container_to_address_str = ret_container_to_address_str + getElementImgAltOneStampString(i_qr_xml, i_file_number, i_tab + 1);
+
+    ret_container_to_address_str = ret_container_to_address_str + getNewLineString();
 	
 	ret_container_to_address_str = ret_container_to_address_str + getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_tab + 1);
 
-    ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab);
+    ret_container_to_address_str = ret_container_to_address_str + getTabs(i_tab + 1);
 
     ret_container_to_address_str = ret_container_to_address_str + getDivEndString(id_div_container_to_address, cl_div_container_to_address);
 
@@ -729,6 +733,26 @@ function getElementDivAltOneToAddressString(i_qr_xml, i_file_number, i_tab)
     return ret_to_address_str;
 
 } // getElementDivAltOneToAddressString
+
+
+// Get the string that defines the alternative one image stamp
+function getElementImgAltOneStampString(i_qr_xml, i_file_number, i_tab)
+{
+    var ret_image_stamp_str = '';
+
+    var id_image_stamp = getIdImgAltOneStamp();
+
+    var cl_image_stamp = getClassImgAltOneStamp();
+
+    ret_image_stamp_str = ret_image_stamp_str + getTabs(i_tab);
+
+    ret_image_stamp_str = ret_image_stamp_str + '<img id= "' + id_image_stamp + '" class= "' + cl_image_stamp + '" src= "Icons/placeholder_stamp.png" >';
+
+    ret_image_stamp_str = ret_image_stamp_str + getNewLineString() + getNewLineString();
+
+    return ret_image_stamp_str;
+
+} // getElementImgAltOneStampString
 
 // Get the string that defines the div alternative one from address
 function getElementDivAltOneFromAddressString(i_qr_xml, i_file_number, i_tab)
@@ -1462,6 +1486,27 @@ function getIdTextAreaEdit()
     return 'id_message_text_area';
 
 } // getIdTextAreaEdit
+
+// Get the element alternative one image stamp
+function getElementImgAltOneStamp()
+{
+    return document.getElementById(getIdImgAltOneStamp());
+
+} // getElementImgAltOneStamp
+
+// Returns the identity of the alternative one image stamp
+function getIdImgAltOneStamp()
+{
+    return 'id_image_alt_one_stamp';
+
+} // getIdImgAltOneStamp
+
+// Returns the class for the alternative one image stamp
+function getClassImgAltOneStamp()
+{
+    return 'cl_image_alt_one_stamp'
+
+} // getClassImgAltOneStamp
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////

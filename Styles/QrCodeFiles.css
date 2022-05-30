@@ -483,6 +483,16 @@ PagePrint
     clear: both;
 }
 
+.cl_image_alt_one_stamp
+{
+    position: relative;
+    top: 15mm;
+    left: 135mm;
+    height: 25mm;
+    /* border: 1px dotted blue; */
+    clear: both;
+}
+
 .cl_div_alt_one_to_address
 {
     position: relative;
