@@ -1,5 +1,5 @@
-// File: QrCodeFile.js
-// Date: 2022-05-30
+// File: QrCodeFiles.js
+// Date: 2022-06-01
 // Author: Gunnar Lidén
 
 // File content

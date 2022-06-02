@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-05-30
+// Date: 2022-06-01
 // Author: Gunnar Lidén
 
 // File content
@@ -895,7 +895,7 @@ function debugDisplayXmlAsText()
     
     if (!b_execute_server)
     {
-        var el_div_display_xml = getElementDivDisplayXml();
+        var el_div_display_xml = getElementDivQrDisplayXml();
 
         el_div_display_xml.style.display = 'block';
 
@@ -903,7 +903,9 @@ function debugDisplayXmlAsText()
 
         displayQrFilesXmlOnScreen(el_display_xml_text_area);
 
-        displayDivQrDisplayXml();
+        hideDivQrDisplayXml(); // Temporarely
+
+        // Temporarely displayDivQrDisplayXml();
     }
 
 } // debugDisplayXmlAsText
@@ -990,28 +992,6 @@ function getIdDisplayXmlTextArea()
     return 'id_display_xml_text_area';
 
 } // getIdDisplayXmlTextArea
-
-// Get the div for the display of the XML file
-function getElementDivDisplayXml()
-{
-    return document.getElementById(getIdDivDisplayXml());
-
-} // getElementDivDisplayXml
-
-// Returns the identity of the div for the display of the XML file
-function getIdDivDisplayXml()
-{
-    return 'id_qr_div_display_xml';
-
-} // getIdDivDisplayXml
-
-// Returns the class of the div for the display of the XML file
-function getClassDivDisplayXml()
-{
-    return 'cl_qr_div_display_xml';
-
-} // getClassDivDisplayXml
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Debug Display XML /////////////////////////////////////////

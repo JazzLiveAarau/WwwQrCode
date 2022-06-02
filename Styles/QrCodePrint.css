@@ -1,5 +1,5 @@
 /* 
-File: QrCodePrint.css Date: 2022-05-20 Author: Gunnar Lidén
+File: QrCodePrint.css Date: 2022-06-02 Author: Gunnar Lidén
 
 General information
 ===================
@@ -137,10 +137,10 @@ PagePrint
 .cl_card_box_left
 {
     width: 81mm;
-    height: 51mm;
+    height: 52mm;
     margin-left: 24mm;
     margin-right: 0mm;
-    margin-bottom: 1mm;
+    margin-bottom: 0mm;
     margin-top: 0mm;
     float: left;
     border: 1px dashed gray;    
@@ -149,10 +149,10 @@ PagePrint
 .cl_card_box_right
 {
     width: 81mm;
-    height: 51mm;
+    height: 52mm;
     margin-left: 1mm;
     margin-right: 0mm;
-    margin-bottom: 1mm;
+    margin-bottom: 0mm;
     margin-top: 0mm;
     float: left;
     border: 1px dashed gray;    
@@ -161,10 +161,10 @@ PagePrint
 .cl_card_box_reverse_left
 {
     width: 81mm;
-    height: 51mm;
+    height: 52mm;
     margin-left: 24mm;
     margin-right: 0mm;
-    margin-bottom: 1mm;
+    margin-bottom: 0mm;
     margin-top: 0mm;
     float: left;
     border: 1px dashed gray;       
@@ -174,10 +174,10 @@ PagePrint
 .cl_card_box_reverse_right
 {
     width: 81mm;
-    height: 51mm;
+    height: 52mm;
     margin-left: 1mm;
     margin-right: 0mm;
-    margin-bottom: 1mm;
+    margin-bottom: 0mm;
     margin-top: 0mm;
     float: left;
     border: 1px dashed gray;    
