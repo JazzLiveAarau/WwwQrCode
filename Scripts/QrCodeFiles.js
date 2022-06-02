@@ -437,6 +437,8 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
     {
         setPrintPageOneAlternativeOne(g_qr_files_xml_object, g_files_active_number);
 
+        displayDivQrPrintPagesIfExisting();
+
         displayDivEditTextOptions();
 
         if (g_edit_text_check_box.getCheck() == "TRUE")

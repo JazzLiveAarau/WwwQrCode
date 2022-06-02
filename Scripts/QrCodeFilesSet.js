@@ -1,5 +1,5 @@
 // File: QrCodeFilesSet.js
-// Date: 2022-05-17
+// Date: 2022-06-02
 // Author: Gunnar Lidén
 
 // File content
@@ -72,6 +72,12 @@ function setControlsSupporter()
 
     hideDisplayExecutionButtonsSupporter();
 
+    hideDivEditTextOptions();
+
+    hideDivTextAreaEdit();
+
+    hideDivQrPrintPagesIfExisting();
+
     console.log('setControlsSupporter Exit');
 
 } // setControlsSupporter
@@ -100,6 +106,8 @@ function setControlsSponsor()
 
     setControlsCategoryUndefined();
 
+    hideDivQrPrintPagesIfExisting();
+
     console.log('setControlsSponsor Exit');
 
 } // setControlsSponsor
@@ -117,6 +125,8 @@ function setControlsMusician()
 
     setTextBoxQrEmail();
 
+    hideDivQrPrintPagesIfExisting();
+
     console.log('setControlsMusician Exit');
 
 } // setControlsMusician
@@ -128,6 +138,8 @@ function setControlsMember()
 
     setControlsCategoryUndefined();
 
+    hideDivQrPrintPagesIfExisting();
+
     console.log('setControlsMember Exit');
 
 } // setControlsMember
@@ -138,6 +150,8 @@ function setControlsFree()
     console.log('setControlsFree Enter');
 
     setControlsCategoryUndefined();
+
+    hideDivQrPrintPagesIfExisting();
 
     console.log('setControlsFree Exit');
 
@@ -167,6 +181,8 @@ function setControlsCategoryUndefined()
     g_email_text_box.setValue("");
 
     g_contribution_text_box.setValue("");
+
+    hideDivQrPrintPagesIfExisting();
 
     console.log('setControlsCategoryUndefined Exit');
 

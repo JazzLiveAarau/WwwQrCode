@@ -1,5 +1,5 @@
 // File: QrCodeMail.js
-// Date: 2022-05-30
+// Date: 2022-06-02
 // Author: Gunnar Lidén
 
 // File content
@@ -1047,6 +1047,88 @@ function getLeftDistanceForCentrePosition(i_width_mm)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Set Heights Margins Functions ///////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Hide Display Function /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Hides the print pages one and two if existing
+function hideDivQrPrintPagesIfExisting()
+{
+    hideDivQrPrintPageOneIfExisting();
+
+    hideDivQrPrintPageTwoIfExisting();
+
+} // hideDivQrPrintPagesIfExisting
+
+// Displays the print pages one and two if existing
+function displayDivQrPrintPagesIfExisting()
+{
+    displayDivQrPrintPageOneIfExisting();
+
+    displayDivQrPrintPageTwoIfExisting();
+
+} // displayDivQrPrintPages
+
+// Hides the print page one if existing
+function hideDivQrPrintPageOneIfExisting()
+{
+    var el_page_one = getElementDivQrPrintPageOne();
+
+    if (null == el_page_one)
+    {
+        return;
+    }
+
+    el_page_one.style.display = 'none';
+
+} // hideDivQrPrintPageOneIfExisting
+
+// Display the print page one if existing
+function displayDivQrPrintPageOneIfExisting()
+{
+    var el_page_one = getElementDivQrPrintPageOne();
+
+    if (null == el_page_one)
+    {
+        return;
+    }
+
+    el_page_one.style.display = 'block';
+
+} // displayDivQrPrintPageOneIfExisting
+
+// Hides the print page two if existing
+function hideDivQrPrintPageTwoIfExisting()
+{
+    var el_page_two = getElementDivQrPrintPageTwo();
+
+    if (null == el_page_two)
+    {
+        return;
+    }
+
+    el_page_two.style.display = 'none';
+
+} // hideDivQrPrintPageTwoIfExisting
+
+// Hides the print page two if existing
+function displayDivQrPrintPageTwoIfExisting()
+{
+    var el_page_two = getElementDivQrPrintPageTwo();
+
+    if (null == el_page_two)
+    {
+        return;
+    }
+
+    el_page_two.style.display = 'block';
+
+} // displayDivQrPrintPageTwoIfExisting
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Hide Display Function ///////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
