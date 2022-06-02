@@ -1,5 +1,5 @@
 // File: QrCodeFiles.js
-// Date: 2022-06-01
+// Date: 2022-06-02
 // Author: Gunnar Lidén
 
 // File content
@@ -419,6 +419,8 @@ function updateControlsAfterChangeOfQrFilesXmlSupporter()
     displayControlSupporters();
 
     setCategoryButtonSupporterSelected();
+
+    hideDisplayExecutionButtonsSupporter();
 }
 
 // User clicked the send mail (post) button
