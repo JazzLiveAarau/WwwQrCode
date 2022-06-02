@@ -1,5 +1,5 @@
 // File: QrQrFilesXml.js
-// Date: 2022-05-24
+// Date: 2022-06-02
 // Author: Gunnar Lidén
 
 // File content
@@ -572,12 +572,40 @@ class QrFilesXml
          
      } // setPrintSent
 
+     // Sets the print sent flag  for a given  QR File number (true or false)
+     setPrintSentBool(i_qr_file_number, i_b_sent)
+     {
+         if (i_b_sent)
+         {
+            this.setPrintSent(i_qr_file_number, "WAHR");
+         }
+         else
+        {
+            this.setPrintSent(i_qr_file_number, "FALSCH");
+        }
+         
+     } // setPrintSentBool
+
      // Sets the print batch flag  for a given  QR File number (WAHR or FALSCH)
      setPrintBatch(i_qr_file_number, i_node_value)
      {
          this.setQrFileNodeValue(this.m_tags.getPrintBatch(), i_qr_file_number, i_node_value);
          
      } // setPrintBatch
+
+     // Sets the print batch flag for a given  QR File number (true or false)
+     setPrintBatchBool(i_qr_file_number, i_b_batch)
+     {
+         if (i_b_batch)
+         {
+            this.setPrintBatch(i_qr_file_number, "WAHR");
+         }
+         else
+        {
+            this.setPrintBatch(i_qr_file_number, "FALSCH");
+        }
+         
+     } // setPrintBatchBool
 
      // Sets the QR code name one for a given  QR File number 
      setQrCodeNameOne(i_qr_file_number, i_node_value)
@@ -760,6 +788,8 @@ class QrFilesXml
 
         var b_mail = this.getMailSentBool(i_file_number);
 
+        var b_batch = this.getPrintBatchBool(i_file_number);
+
         var b_limit = true;
 
         if (contribution < QrStrings.getSupporterContributionLimitValue())
@@ -774,7 +804,7 @@ class QrFilesXml
 
         var b_ret_sent = false;
 
-        if (b_email || b_mail)
+        if (b_email || b_mail || b_batch)
         {
             b_ret_sent = true;
         }

@@ -475,7 +475,28 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
 // User clicked the print batch button
 function eventClickPrintBatchButton()
 {
+
+    if (getActiveCategory() != QrStrings.getQrCategorySupporterString())
+    {
+        alert("eventClickPrintBatchButton Not a yet implemented active category " + getActiveExecution());
+
+        return;
+    }
+
     setActiveExecution(QrStrings. getQrExecutionPrintString());
+
+    g_qr_files_xml_object.setPrintBatchBool(g_files_active_number, true);
+
+    g_qr_files_xml_object.saveXmlFileOnServer();
+
+    if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
+    {
+        updateControlsAfterChangeOfQrFilesXmlSupporter();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
+    {
+        // setControlsMusician();
+    } 
 
 } // eventClickPrintBatchButton
 
