@@ -663,6 +663,8 @@ function displayControlSupporters()
 
     displayAllExecutionButtons();
 
+    hideDivQrFileDoneButton();
+
     hideDivEditTextOptions();
 
     hideDivTextAreaEdit();
@@ -707,6 +709,8 @@ function displayControlMusician()
 	displayDivQrEmail();
 
     displayAllExecutionButtons();
+
+    hideDivQrFileDoneButton();
 
     // Date is not displayed displayDivQrConcertDate();
 
@@ -792,7 +796,7 @@ function hideAllExecutionButtons()
 
 } // hideAllExecutionButtons
 
-// Displays all execution buttons
+// Displays all execution buttons except button
 function displayAllExecutionButtons()
 {
     console.log('displayAllExecutionButtons Enter');

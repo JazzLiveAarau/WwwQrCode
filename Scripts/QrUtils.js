@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-06-01
+// Date: 2022-06-02
 // Author: Gunnar Lidén
 
 // File content
@@ -814,6 +814,68 @@ function getSeasonColorInLocalStorage()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Active Execution //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Active execution Email, Post (Mail), Print (Batch)
+var g_active_execution = null;
+
+// Sets the active execution Email, Post (Mail), Print (Batch)
+function setActiveExecution(i_execution_str)
+{
+    if (!checkActiveExecution(i_execution_str))
+    {
+        return;
+    }
+
+    g_active_execution = i_execution_str;
+
+    console.log('setActiveExecution g_active_execution= ' + g_active_execution);
+
+} // setActiveExecution
+
+// Returns the active execution Email, Post (Mail), Print (Batch)
+function getActiveExecution()
+{
+    return g_active_execution;
+    
+} // getActiveExecution
+
+// Returns true if the active execution Email, Post (Mail), Print (Batch)
+function checkActiveExecution(i_execution_str)
+{
+    var ret_b_active = false;
+
+    if (i_execution_str == QrStrings.getQrExecutionUndefinedString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_execution_str == QrStrings.getQrExecutionEmailString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_execution_str == QrStrings.getQrExecutionPostString())
+    {
+        ret_b_active = true;
+    }
+    else if (i_execution_str == QrStrings.getQrExecutionPrintString())
+    {
+        ret_b_active = true;
+    }
+    if (!ret_b_active)
+    {
+        alert("checkActiveExecution Not an implemented execution= " + i_execution_str);
+    }
+
+    return ret_b_active;
+
+} // checkActiveExecution
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Active Execution ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Active Category ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -841,7 +903,7 @@ function getActiveCategory()
     
 } // getActiveCategory
 
-// // Returns true if the input category is Supporter, Sponsor, Musician, Free, ....
+// Returns true if the input category is Supporter, Sponsor, Musician, Free, ....
 function checkActiveCategory(i_category_str)
 {
     var ret_b_active = false;

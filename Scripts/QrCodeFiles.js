@@ -63,6 +63,8 @@ function onloadQrCodeFiles()
 
     setActiveCategory(QrStrings.getQrCategoryUndefinedString());
 
+    setActiveExecution(QrStrings. getQrExecutionUndefinedString());
+
     setAllQrFilesControls();
 
     hideQrCodeImage();
@@ -194,6 +196,8 @@ function eventSelectFileDropdown()
         setControlsFree();
     }
 
+    setActiveExecution(QrStrings. getQrExecutionUndefinedString());
+
     console.log('eventSelectFileDropdown Exit');
 
     // QrProgress.Append('g_files_active_number= ' + g_files_active_number.toString());
@@ -289,6 +293,8 @@ function eventClickQrMusicianButton()
 // User clicked the send email button
 function eventClickQrSendEmailButton()
 {
+    setActiveExecution(QrStrings. getQrExecutionEmailString());
+
     if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
     {
         return;
@@ -418,6 +424,8 @@ function updateControlsAfterChangeOfQrFilesXmlSupporter()
 // User clicked the send mail (post) button
 function eventClickQrSendPostButton()
 {
+    setActiveExecution(QrStrings. getQrExecutionPostString());
+
     getInputSetAndSaveQrCodeNames(callbackAfterGetInputSetAndSaveQrCodeNamesSendPost);
 
 } // eventClickQrSendPostButton
@@ -450,6 +458,8 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
             hideDivTextAreaEdit();
         }
 
+        displayDivQrFileDoneButton();
+
     }
     else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
     {
@@ -463,12 +473,38 @@ function callbackAfterUploadOfQrCodeFilesSendPost()
 // User clicked the print batch button
 function eventClickPrintBatchButton()
 {
+    setActiveExecution(QrStrings. getQrExecutionPrintString());
 
 } // eventClickPrintBatchButton
 
 // User clicked the file done button
 function eventClickQrFileDoneButton()
 {
+    if (getActiveExecution() == QrStrings.getQrExecutionEmailString())
+    {
+        g_qr_files_xml_object.setEmailSentBool(g_files_active_number, true);
+    }
+    else if (getActiveExecution() == QrStrings.getQrExecutionPostString())
+    {
+        g_qr_files_xml_object.setMailSentBool(g_files_active_number, true);
+    }
+    else
+    {
+        alert("eventClickQrFileDoneButton Not an implemented active execution " + getActiveExecution());
+
+        return;
+    }
+
+    g_qr_files_xml_object.saveXmlFileOnServer();
+
+    if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
+    {
+        updateControlsAfterChangeOfQrFilesXmlSupporter();
+    }
+    else if (getActiveCategory() == QrStrings.getQrCategoryMusicianString())
+    {
+        // setControlsMusician();
+    } 
 
 } // eventClickQrFileDoneButton
 
