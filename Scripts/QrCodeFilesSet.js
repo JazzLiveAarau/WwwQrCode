@@ -1,5 +1,5 @@
 // File: QrCodeFilesSet.js
-// Date: 2022-06-02
+// Date: 2022-06-06
 // Author: Gunnar Lidén
 
 // File content
@@ -94,6 +94,8 @@ function hideDisplayExecutionButtonsSupporter()
     hideOrDisplayDivQrSendEmailButton(email_address);
 
     hideOrDisplayDivQrSendPostButton(post_address);
+
+    hideDivQrFileDoneButton();
 
     console.log('hideDisplayExecutionButtonsSupporter Exit');
 

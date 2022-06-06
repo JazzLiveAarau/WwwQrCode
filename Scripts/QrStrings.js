@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-06-02
+// Date: 2022-06-06
 // Author: Gunnar Lidén
 
 // File content
@@ -15,6 +15,21 @@ class QrStrings
     {
 
     } // constructor
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Website Names /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static getQrCodeShowTitle()
+    {
+        return 'JAZZ <i>live</i> AARAU<br>Mobile Karten';
+
+    } // getQrCodeShowTitle
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Website Names /////////////((////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// Start Supporter Emails //////////////////////////
@@ -100,7 +115,7 @@ class QrStrings
     {
         var ret_instruct = '';
 
-        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU QR Code Anzeiger</h4>';
+        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU Mobile Karten</h4>';
 
         if (i_download_code_two.length == 0)
         {
@@ -186,7 +201,7 @@ class QrStrings
     {
         var ret_reverse_qr = '';
     
-        ret_reverse_qr = ret_reverse_qr + 'Mobiltelefon QR Code Anzeiger:' + '<br>';
+        ret_reverse_qr = ret_reverse_qr + 'Mobile Karten (QR Code Anzeiger):' + '<br>';
     
         ret_reverse_qr = ret_reverse_qr + this.urlQrCodeShowWebPage() + '<br><br>';
     

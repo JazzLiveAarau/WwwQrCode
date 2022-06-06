@@ -664,6 +664,36 @@ class QrFilesXml
 	///////////////////////// Start Get Filtered Arrays  //////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    // Returns an array of file numbers that shall be 'batch' printed
+    getFilteredFileNumberArrayForPrintBatch()
+    {
+        console.log('Enter QrFilesXml.getFilteredFileNumberArrayForPrintBatch');
+
+        var ret_file_numbers = [];
+
+        var n_files = this.getNumberOfQrFiles();
+
+        for (var file_number = 1; file_number <= n_files; file_number++)
+        {
+            var b_batch = this.getPrintBatchBool(file_number);
+
+            var b_print = this.getPrintSentBool(file_number);
+
+            if (b_batch && !b_print)
+            {
+                var index_add = ret_file_numbers.length;
+
+                ret_file_numbers[index_add] = file_number;                
+            }
+            
+        } // file_number
+
+        console.log('Exit QrFilesXml.getFilteredFileNumberArrayForPrintBatch Number to print is ' + ret_file_numbers.length.toString());
+
+        return ret_file_numbers;
+
+    } // getFilteredFileNumberArrayForPrintBatch
+
     // Returns an array of file numbers
     // i_b_supporters: Supporter contribution >= 
     // i_b_not_sent: Only files that were not sent

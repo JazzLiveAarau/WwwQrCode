@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-05-20
+// Date: 2022-06-02
 // Author: Gunnar Lidén
 
 // File content
@@ -10,6 +10,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+// Instance of the class QrFilesXml handling the XML file QrFiles.xml for batch print
+var g_qr_files_xml_object_batch_print  = null;
 
 // Background color for the supporter names
 var g_supporter_name_background_color = 'rgb(225, 213, 230)';
@@ -43,36 +46,36 @@ function onloadQrCodePrint()
 
     hideQrCodeImage();
 
-    getSeasonStartYear(callbackSeasonStartYearPrint);
+    //QQ getSeasonStartYear(callbackSeasonStartYearPrint);
+
+    getSeasonStartYear(callbackSeasonStartYearPrintBatch);
 
 } // onloadQrCodePrint
 
 // Callback after determining season start year with a PHP function
-function callbackSeasonStartYearPrint(i_season_start_year)
+function callbackSeasonStartYearPrintBatch(i_season_start_year)
 {
     QrProgress.Append('callbackSeasonStartYearPrint ' + i_season_start_year.toString());
 
-    g_season_start_year = i_season_start_year;
+    /// ???? g_season_start_year = i_season_start_year;
 
-    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlPrint, g_season_start_year);
+    g_qr_files_xml_object_batch_print = new QrFilesXml(afterLoadOfQrFilesXmlBatchPrint, i_season_start_year);
 
-} // callbackSeasonStartYearPrint
+} // callbackSeasonStartYearPrintBatch
 
-// Callback after loading Supporter.xml
-function afterLoadOfSupporterXmlPrint(i_supporter_xml)
+// Callback after loading QrFile.xml for batch print
+function afterLoadOfQrFilesXmlBatchPrint()
 {
-    QrProgress.Append('Enter afterLoadOfSupporterXmlPrint');
+    var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
 
-    setSupporterDataArrayFromXmlObject(i_supporter_xml);
-
-    QrProgress.Msg("");
-
-} // afterLoadOfSupporterXmlPrint
+} // afterLoadOfQrFilesXmlBatchPrint
 
 // User clicked the button generate QR codes for supporters
 function clickGenerateSupporterQrCodes()
 {
-    generateQrCodeAllSupportersCreatePrintPages();
+    //QQQQQ generateQrCodeAllSupportersCreatePrintPages();
+
+    createPrintPagesFromQrFilesXml(); 
 
     QrProgress.Msg("");
 
@@ -92,32 +95,14 @@ function clickGenerateSupporterQrReverseSide()
 ///////////////////////// Start Create Print Pages Functions //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Generate QR codes for all supporters and create print pages
-function generateQrCodeAllSupportersCreatePrintPages()
+// Create print pages from the content of QrFiles.xml (g_qr_files_xml_object_batch_print)
+function createPrintPagesFromQrFilesXml()
 {
-    var qr_case = 'ImageData'; 
+    var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
 
-    var canvas_size = 84;
+    var content_all_pages = getContentDivAllPagesString(g_qr_files_xml_object_batch_print, to_print_file_number_array);
 
-    // TODO var canvas_size = QrStrings.getCanvasSizeForImageData();
-
-    qr_code_season_str = '2021-2022';
-
-    generateQrCodeAllSupporters(qr_case, canvas_size, qr_code_season_str);
-
-    var el_all_pages = getElementDivAllPrintPages();
-
-    var season_str = getPrintQrCodeSeasonString();
-
-    var content_all_pages = getContentDivAllPagesString(season_str);
-
-    el_all_pages.innerHTML = content_all_pages;
-
-    setCanvasSupporterQrCodes();
-
-    setBackgroundColorForNames();
-
-} // generateQrCodeAllSupportersCreatePrintPages
+} // createPrintPagesFromQrFilesXml
 
 // Generate the reverse page
 function generateReversePage()
@@ -164,28 +149,106 @@ function setBackgroundColorForNames()
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Batch Print Card Array ////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+class BatchPrintCardArray
+{
+    constructor(i_qr_xml, i_print_file_numbers)
+    {
+        this.m_qr_xml = i_qr_xml;
+
+        this.m_print_file_numbers = i_print_file_numbers;
+
+        this.m_batch_print_card_array = null;
+
+        this.createArray();
+    }
+
+    createArray()
+    {
+        var season_str = this.m_qr_xml.getSeasonStartYear().toString() + '-' +
+                        (this.m_qr_xml.getSeasonStartYear() + 1).toString()
+
+        var n_files = this.m_print_file_numbers.length;
+
+        this.m_batch_print_card_array = [];
+
+        var n_names = 0;
+
+        for (var index_number=0; index_number < n_files; index_number++)
+        {
+            var file_number = this.m_print_file_numbers[index_number];
+    
+            var name_one = i_qr_xml.getQrCodeNameOne(file_number);
+    
+            var download_one = i_qr_xml.getQrDownloadOne(file_number);
+    
+            var name_two = i_qr_xml.getQrCodeNameTwo(file_number);
+    
+            var download_two = i_qr_xml.getQrDownloadTwo(file_number);
+    
+            if (name_one.length > 0 && download_one.length > 0)
+            {
+                n_names = n_names + 1;
+
+                var batch_print_card_one = new BatchPrintCard(name_one, download_one, season_str);
+
+                var index_one = this.m_batch_print_card_array.length;
+
+                this.m_batch_print_card_array[index_one] = batch_print_card_one;
+            }
+    
+            if (name_two.length > 0 && download_two.length > 0)
+            {
+                n_names = n_names + 1;
+
+                var batch_print_card_two = new BatchPrintCard(name_one, download_one, season_str);
+
+                var index_two = this.m_batch_print_card_array.length;
+
+                this.m_batch_print_card_array[index_two] = batch_print_card_two;
+            }
+    
+        } // index_number
+
+    } // createArray
+
+} // BatchPrintCardArray
+
+class BatchPrintCard
+{
+    constructor(i_name, i_download_code, i_season_str)
+    {
+        this.m_name = i_name;
+
+        this.m_download_code = i_download_code;
+
+        this.m_season_str = i_season_str;
+    }
+
+} // BatchPrintCard
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Batch Print Card Array ////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Print Page Strings ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Get the string that defines all print pages
-function getContentDivAllPagesString(i_season_str)
+function getContentDivAllPagesString(i_qr_xml, i_print_file_numbers)
 {
-    var ret_content_all_pages = '';
+    console.log("getContentDivAllPagesString Enter");
 
     var b_reverse = false;
 
-    var n_names = g_supporter_data_array.length;
-    
-    var n_pages = parseInt(n_names/10.0);
+    var ret_content_all_pages = '';
 
-    var diff_int_float = Math.abs(n_names/10.0 - n_pages);
+    var n_pages = getNumberOfPrintPages(i_qr_xml, i_print_file_numbers);
 
-    if (diff_int_float > 0.001 )
-    {
-        n_pages = n_pages + 1;
-    }
-
-    var index_supporter_start = 0;
+    var index_name_start = 0;
 
     var n_tab = 1;
 
@@ -193,19 +256,70 @@ function getContentDivAllPagesString(i_season_str)
     {
         ret_content_all_pages = ret_content_all_pages + getNewLineString();
 
-        ret_content_all_pages = ret_content_all_pages + getElementDivPrintRowContainerString(b_reverse, index_supporter_start, i_season_str, n_tab + 1);
+        //TODO ret_content_all_pages = ret_content_all_pages + getElementDivPrintRowContainerString(b_reverse, index_name_start, i_season_str, n_tab + 1);
 
         if (page_number != n_pages)
         {
             ret_content_all_pages = ret_content_all_pages + getTabs(n_tab + 1) + '<div class="page-break"></div>';
         }
 
-        index_supporter_start = index_supporter_start + 10;
+        index_name_start = index_name_start + 10;
     }
+
+    console.log("getContentDivAllPagesString Exit");
 
     return ret_content_all_pages;
 
 } // getContentDivAllPagesString
+
+function getNumberOfPrintPages(i_qr_xml, i_print_file_numbers)
+{
+    var ret_n_pages = -12345;
+
+    var n_files = i_print_file_numbers.length;
+
+    var n_names = 0;
+
+    console.log("getNumberOfPrintPages n_files= " + n_files.toString());
+
+    for (var index_number=0; index_number < n_files; index_number++)
+    {
+        var file_number = i_print_file_numbers[index_number];
+
+        var name_one = i_qr_xml.getQrCodeNameOne(file_number);
+
+        var download_one = i_qr_xml.getQrDownloadOne(file_number);
+
+        var name_two = i_qr_xml.getQrCodeNameTwo(file_number);
+
+        var download_two = i_qr_xml.getQrDownloadTwo(file_number);
+
+        if (name_one.length > 0 && download_one.length > 0)
+        {
+            n_names = n_names + 1;
+        }
+
+        if (name_two.length > 0 && download_two.length > 0)
+        {
+            n_names = n_names + 1;
+        }
+
+    } // index_number
+
+    console.log("getNumberOfPrintPages n_names= " + n_names.toString());
+
+    ret_n_pages = parseInt(n_names/10.0);
+
+    var diff_int_float = Math.abs(n_names/10.0 - ret_n_pages);
+
+    if (diff_int_float > 0.001 )
+    {
+        ret_n_pages = ret_n_pages + 1;
+    }
+
+    return ret_n_pages;
+
+} // getNumberOfPrintPages
 
 
 // Get the string that defines the reverse page
@@ -227,7 +341,7 @@ function getContentDivReversePageString()
     {
         ret_content_reverse_page = ret_content_reverse_page + getNewLineString();
 
-        ret_content_reverse_page = ret_content_reverse_page + getElementDivPrintRowContainerString(b_reverse, index_supporter_start, season_str, n_tab + 1);
+        ret_content_reverse_page = ret_content_reverse_page + getElementDivPrintRowContainerStringRemove(b_reverse, index_supporter_start, season_str, n_tab + 1);
 
         if (page_number != n_pages)
         {
@@ -242,13 +356,13 @@ function getContentDivReversePageString()
 } // getContentDivReversePageString
 
 // Get the string that defines the div for the print row container
-function getElementDivPrintRowContainerString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
+function getElementDivPrintRowContainerStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
 {
     var ret_print_row_container_str = '';
 	
     if (i_index_supporter_start >= g_supporter_data_array.length)
     {
-		alert("getElementPrintPageString i_index_supporter_start= " + i_index_supporter_start.toString());
+		alert("getElementPrintPageStringRemove i_index_supporter_start= " + i_index_supporter_start.toString());
 		
         return ret_print_row_container_str;
     }
@@ -263,7 +377,7 @@ function getElementDivPrintRowContainerString(i_b_reverse, i_index_supporter_sta
 
     ret_print_row_container_str = ret_print_row_container_str + getNewLineString();
 	
-	ret_print_row_container_str = ret_print_row_container_str + getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
+	ret_print_row_container_str = ret_print_row_container_str + getElementPrintPageStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
 	
     ret_print_row_container_str = ret_print_row_container_str + getTabs(i_tab);
 
@@ -273,16 +387,16 @@ function getElementDivPrintRowContainerString(i_b_reverse, i_index_supporter_sta
 
     return ret_print_row_container_str;
 
-} // getElementDivPrintRowContainerString
+} // getElementDivPrintRowContainerStringRemove
 
 // Get the string that defines the PrintPage element
-function getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
+function getElementPrintPageStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
 {
     var ret_print_page_str = '';
 	
     if (i_index_supporter_start >= g_supporter_data_array.length)
     {
-		alert("getElementPrintPageString i_index_supporter_start= " + i_index_supporter_start.toString());
+		alert("getElementPrintPageStringRemove i_index_supporter_start= " + i_index_supporter_start.toString());
 		
         return ret_print_page_str;
     }
@@ -293,7 +407,7 @@ function getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_seaso
 
     ret_print_page_str = ret_print_page_str + getNewLineString();
 	
-	ret_print_page_str = ret_print_page_str + getElementDivAllPrintRowsString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
+	ret_print_page_str = ret_print_page_str + getElementDivAllPrintRowsStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
 
     ret_print_page_str = ret_print_page_str + getTabs(i_tab);
 
@@ -303,10 +417,10 @@ function getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_seaso
 
     return ret_print_page_str;
 
-} // getElementPrintPageString
+} // getElementPrintPageStringRemove
 
 // Get the string that defines the div for all rows
-function getElementDivAllPrintRowsString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
+function getElementDivAllPrintRowsStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
 {
     var ret_all_print_rows_str = '';
 	
@@ -343,7 +457,7 @@ function getElementDivAllPrintRowsString(i_b_reverse, i_index_supporter_start, i
 
     return ret_all_print_rows_str;
 
-} // getElementDivAllPrintRowsString
+} // getElementDivAllPrintRowsStringRemove
 
 // Get the string that defines the div print page row
 function getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
@@ -1057,4 +1171,104 @@ function getDivEndString(i_id_element, i_cl_element)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End String Functions ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Functions To Remove ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+//QQQQQQQQQQQQQQQQQQQQ
+// Callback after determining season start year with a PHP function  QQQQQQQQQQQQQ Remove
+function callbackSeasonStartYearPrint(i_season_start_year)
+{
+    QrProgress.Append('callbackSeasonStartYearPrint ' + i_season_start_year.toString());
+
+    g_season_start_year = i_season_start_year;
+
+    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlPrint, g_season_start_year);
+
+} // callbackSeasonStartYearPrint
+
+//QQQQQQQQQQQQQQQQQQQQQQ
+// Callback after loading Supporter.xml QQQQQQQQQQQQQQQQQQQQQQQQQ Remove
+function afterLoadOfSupporterXmlPrint(i_supporter_xml)
+{
+    QrProgress.Append('Enter afterLoadOfSupporterXmlPrint');
+
+    setSupporterDataArrayFromXmlObject(i_supporter_xml);
+
+    QrProgress.Msg("");
+
+} // afterLoadOfSupporterXmlPrint
+
+//QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+// Generate QR codes for all supporters and create print pages
+function generateQrCodeAllSupportersCreatePrintPages()
+{
+    var qr_case = 'ImageData'; 
+
+    var canvas_size = 84;
+
+    // TODO var canvas_size = QrStrings.getCanvasSizeForImageData();
+
+    qr_code_season_str = '2021-2022';
+
+    generateQrCodeAllSupporters(qr_case, canvas_size, qr_code_season_str);
+
+    var el_all_pages = getElementDivAllPrintPages();
+
+    var season_str = getPrintQrCodeSeasonString();
+
+    var content_all_pages = getContentDivAllPagesStringRemove(season_str);
+
+    el_all_pages.innerHTML = content_all_pages;
+
+    setCanvasSupporterQrCodes();
+
+    setBackgroundColorForNames();
+
+} // generateQrCodeAllSupportersCreatePrintPages
+
+// Get the string that defines all print pages
+function getContentDivAllPagesStringRemove(i_season_str)
+{
+    var ret_content_all_pages = '';
+
+    var b_reverse = false;
+
+    var n_names = g_supporter_data_array.length;
+    
+    var n_pages = parseInt(n_names/10.0);
+
+    var diff_int_float = Math.abs(n_names/10.0 - n_pages);
+
+    if (diff_int_float > 0.001 )
+    {
+        n_pages = n_pages + 1;
+    }
+
+    var index_supporter_start = 0;
+
+    var n_tab = 1;
+
+    for (var page_number=1; page_number <= n_pages; page_number++)
+    {
+        ret_content_all_pages = ret_content_all_pages + getNewLineString();
+
+        ret_content_all_pages = ret_content_all_pages + getElementDivPrintRowContainerStringRemove(b_reverse, index_supporter_start, i_season_str, n_tab + 1);
+
+        if (page_number != n_pages)
+        {
+            ret_content_all_pages = ret_content_all_pages + getTabs(n_tab + 1) + '<div class="page-break"></div>';
+        }
+
+        index_supporter_start = index_supporter_start + 10;
+    }
+
+    return ret_content_all_pages;
+
+} // getContentDivAllPagesStringRemove
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Functions To Remove /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-05-27
+// Date: 2022-06-06
 // Author: Gunnar Lidén
 
 // File content
@@ -69,6 +69,10 @@ function onloadQrCodeShow()
     console.log("Enter onloadQrCodeShow");
 
     g_gr_strings = new QrStrings();
+
+    var el_logo_title = getElementDivQrCodeShowLogo();
+
+    el_logo_title.innerHTML = QrStrings.getQrCodeShowTitle();
 
     var check_interval = 10000; // milliseconds Perhaps not necessary
 
@@ -706,6 +710,21 @@ function displayDivQrShowInternetConnection()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Elements, Identities And Classes /////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Get the input element for the div qr code show logo and title
+function getElementDivQrCodeShowLogo()
+{
+    return document.getElementById(getIdDivQrCodeShowLogo());
+
+} // getElementDivQrCodeShowLogo
+
+// Returns the identity of the div qr code show logo and title
+function getIdDivQrCodeShowLogo()
+{
+    return 'id_div_qr_show_logo';
+
+} // getIdDivQrCodeShowLogo
 
 // Get the div element for the QR code image
 function getElementDivQrCodeImage()
