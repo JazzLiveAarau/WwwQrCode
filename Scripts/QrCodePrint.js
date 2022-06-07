@@ -80,9 +80,24 @@ function clickGenerateSupporterQrReverseSide()
 
 function clickCardsArePrinted()
 {
+    if (g_batch_card_array == null || g_batch_card_array.getArray() == null)
+    {
+        // alert(QrStrings.errorPrintCardsFrontFirst());
 
+        return;
+    }
+
+    g_batch_card_array.executeCardsArePrinted(callbackExecuteCardsArePrinted);
 
 } // clickCardsArePrinted
+
+function callbackExecuteCardsArePrinted()
+{
+    var el_all_pages = getElementDivAllPrintPages();
+	
+    el_all_pages.innerHTML = '';
+ 
+} // callbackExecuteCardsArePrinted
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
@@ -287,7 +302,7 @@ class BatchPrintCardArray
             {
                 n_names = n_names + 1;
 
-                var batch_print_card_one = new BatchPrintCard(name_one, download_one, season_str, this.m_category);
+                var batch_print_card_one = new BatchPrintCard(name_one, download_one, season_str, this.m_category, file_number);
 
                 var index_one = this.m_batch_print_card_array.length;
 
@@ -298,7 +313,7 @@ class BatchPrintCardArray
             {
                 n_names = n_names + 1;
 
-                var batch_print_card_two = new BatchPrintCard(name_two, download_two, season_str, this.m_category);
+                var batch_print_card_two = new BatchPrintCard(name_two, download_two, season_str, this.m_category, file_number);
 
                 var index_two = this.m_batch_print_card_array.length;
 
@@ -310,6 +325,26 @@ class BatchPrintCardArray
         this.loadAllQrCodeImages();
 
     } // createArray
+
+    executeCardsArePrinted(i_callback_function)
+    {
+        var batch_card_array = this.getArray();
+    
+        for (var index_card=0; index_card <  batch_card_array.length; index_card++)
+        {
+            var batch_card = batch_card_array[index_card];
+    
+            var file_number = batch_card.m_file_number;
+
+            var b_sent = true;
+    
+            this.m_qr_xml.setPrintSentBool(file_number, b_sent);
+        }
+
+        this.m_qr_xml.saveXmlFileOnServerCallback(i_callback_function);
+    
+    } // executeCardsArePrinted
+        
 
     getIndexForDownloadedQrCode()
     {
@@ -429,7 +464,7 @@ class BatchPrintCardArray
 // Holds all data for the (batch) card to print
 class BatchPrintCard
 {
-    constructor(i_name, i_download_code, i_season_str, i_category)
+    constructor(i_name, i_download_code, i_season_str, i_category, i_file_number)
     {
         // Name on the card
         this.m_name = i_name;
@@ -442,6 +477,9 @@ class BatchPrintCard
 
         // Card category
         this.m_category = i_category;
+
+        // File number in QrFiles.xml
+        this.m_file_number = i_file_number;
 
         // QR code image data
         this.m_qr_code_image = null;
