@@ -120,7 +120,7 @@ function generateReversePage()
 {
     var el_all_pages = getElementDivAllPrintPages();
 
-    var content_reverse_page = getContentDivReversePageString();
+    var content_reverse_page = getContentDivReversePageString(g_batch_card_array.getArray());
 
     el_all_pages.innerHTML = content_reverse_page;
 
@@ -162,18 +162,6 @@ function setBackgroundColorForNames()
     }
 
 } // setBackgroundColorForNames
-
-// Set canvas QR codes for the supporters
-function setCanvasSupporterQrCodesRemove()
-{
-    for (var index_supporter=0; index_supporter < g_supporter_image_data.length; index_supporter++)
-    {
-        var canvas_context = getCanvasContextQrCodeSupporter(index_supporter);
-
-        canvas_context.putImageData(g_supporter_image_data[index_supporter], 0, 0);
-    }
-
-} // setCanvasSupporterQrCodesRemove
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
@@ -511,7 +499,7 @@ function getNumberOfPrintPages(i_batch_card_array)
 
 
 // Get the string that defines the reverse page
-function getContentDivReversePageString()
+function getContentDivReversePageString(i_batch_card_array)
 {
     var ret_content_reverse_page = '';
 
@@ -529,7 +517,7 @@ function getContentDivReversePageString()
     {
         ret_content_reverse_page = ret_content_reverse_page + getNewLineString();
 
-        ret_content_reverse_page = ret_content_reverse_page + getElementDivPrintRowContainerStringRemove(b_reverse, index_supporter_start, season_str, n_tab + 1);
+        ret_content_reverse_page = ret_content_reverse_page + getElementDivPrintRowContainerString(b_reverse, index_supporter_start, i_batch_card_array, n_tab + 1);
 
         if (page_number != n_pages)
         {
@@ -817,241 +805,6 @@ function getElementDivSupporterNameString(i_card_name, i_tab)
 
 } // getElementDivSupporterNameString
 
-// Get the string that defines the div for the print row container
-function getElementDivPrintRowContainerStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
-{
-    var ret_print_row_container_str = '';
-	
-    if (i_index_supporter_start >= g_supporter_data_array.length)
-    {
-		alert("getElementPrintPageStringRemove i_index_supporter_start= " + i_index_supporter_start.toString());
-		
-        return ret_print_row_container_str;
-    }
-
-    var id_div_print_row_container = '';
-
-    var cl_div_print_row_container = getClassPrintPageContainer();
-
-    ret_print_row_container_str = ret_print_row_container_str + getTabs(i_tab);
-
-    ret_print_row_container_str = ret_print_row_container_str + getDivStartString(id_div_print_row_container, cl_div_print_row_container);
-
-    ret_print_row_container_str = ret_print_row_container_str + getNewLineString();
-	
-	ret_print_row_container_str = ret_print_row_container_str + getElementPrintPageStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
-	
-    ret_print_row_container_str = ret_print_row_container_str + getTabs(i_tab);
-
-    ret_print_row_container_str = ret_print_row_container_str + getDivEndString(id_div_print_row_container, cl_div_print_row_container);
-
-    ret_print_row_container_str = ret_print_row_container_str + getNewLineString() + getNewLineString();
-
-    return ret_print_row_container_str;
-
-} // getElementDivPrintRowContainerStringRemove
-
-// Get the string that defines the PrintPage element
-function getElementPrintPageStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
-{
-    var ret_print_page_str = '';
-	
-    if (i_index_supporter_start >= g_supporter_data_array.length)
-    {
-		alert("getElementPrintPageStringRemove i_index_supporter_start= " + i_index_supporter_start.toString());
-		
-        return ret_print_page_str;
-    }
-
-    ret_print_page_str = ret_print_page_str + getTabs(i_tab);
-
-    ret_print_page_str = ret_print_page_str + '<PrintPage>';
-
-    ret_print_page_str = ret_print_page_str + getNewLineString();
-	
-	ret_print_page_str = ret_print_page_str + getElementDivAllPrintRowsStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
-
-    ret_print_page_str = ret_print_page_str + getTabs(i_tab);
-
-    ret_print_page_str = ret_print_page_str + '</PrintPage>';;
-
-    ret_print_page_str = ret_print_page_str + getNewLineString() + getNewLineString();
-
-    return ret_print_page_str;
-
-} // getElementPrintPageStringRemove
-
-// Get the string that defines the div for all rows
-function getElementDivAllPrintRowsStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
-{
-    var ret_all_print_rows_str = '';
-	
-    if (i_index_supporter_start >= g_supporter_data_array.length)
-    {
-        return ret_all_print_rows_str;
-    }
-
-    var id_div_all_print_rows = '';
-
-    var cl_div_all_print_rows = getClassAllPrintRows();
-
-    ret_all_print_rows_str = ret_all_print_rows_str + getTabs(i_tab);
-
-    ret_all_print_rows_str = ret_all_print_rows_str + getDivStartString(id_div_all_print_rows, cl_div_all_print_rows);
-
-    ret_all_print_rows_str = ret_all_print_rows_str + getNewLineString();
-	
-	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab  + 1);
-	
-	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 2, i_season_str, i_tab  + 1);
-	
-	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 4, i_season_str, i_tab  + 1);
-
-	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 6, i_season_str, i_tab  + 1);
-
-	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 8, i_season_str, i_tab  + 1);
-
-    ret_all_print_rows_str = ret_all_print_rows_str + getTabs(i_tab);
-
-    ret_all_print_rows_str = ret_all_print_rows_str + getDivEndString(id_div_all_print_rows, cl_div_all_print_rows);
-
-    ret_all_print_rows_str = ret_all_print_rows_str + getNewLineString() + getNewLineString();
-
-    return ret_all_print_rows_str;
-
-} // getElementDivAllPrintRowsStringRemove
-
-// Get the string that defines the div print page row
-function getElementDivPrintPageRowStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
-{
-    var ret_print_page_row_str = '';
-
-    if (i_index_supporter_start >= g_supporter_data_array.length)
-    {
-        return ret_print_page_row_str;
-    }
-
-    var id_div_print_page_row = '';
-
-    var cl_div_print_page_row = getClassPrintPageRow();
-
-    ret_print_page_row_str = ret_print_page_row_str + getTabs(i_tab);
-
-    ret_print_page_row_str = ret_print_page_row_str + getDivStartString(id_div_print_page_row, cl_div_print_page_row);
-
-    ret_print_page_row_str = ret_print_page_row_str + getNewLineString();
-
-    if (!i_b_reverse)
-    {
-        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxLeftString(i_index_supporter_start, i_season_str, i_tab  + 1);
-	
-        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxRightString(i_index_supporter_start + 1, i_season_str, i_tab  + 1);
-    }
-    else
-    {
-        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxLeftReverseString(i_tab + 1);
-	
-        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxRightReverseString(i_tab + 1);
-    }    
-
-    ret_print_page_row_str = ret_print_page_row_str + getTabs(i_tab);
-
-    ret_print_page_row_str = ret_print_page_row_str + getDivEndString(id_div_print_page_row, cl_div_print_page_row);
-
-    ret_print_page_row_str = ret_print_page_row_str + getNewLineString() + getNewLineString();
-
-    return ret_print_page_row_str;
-
-} // getElementDivPrintPageRowStringRemove
-
-// Get the string that defines the div card box left
-function getElementDivCardBoxLeftStringRemove(i_index_supporter, i_season_str, i_tab)
-{
-    var ret_card_box_left_str = '';
-
-    if (i_index_supporter >= g_supporter_data_array.length)
-    {
-        return ret_card_box_left_str;
-    }
-
-    var id_div_card_box_left = '';
-
-    var cl_div_card_box_left = getClassCardBoxLeft();
-
-    ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab);
-
-    ret_card_box_left_str = ret_card_box_left_str + getDivStartString(id_div_card_box_left, cl_div_card_box_left);
-
-    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
-
-    ret_card_box_left_str = ret_card_box_left_str + getElementDivTextLogoString(i_tab + 1);
-
-    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
-	
-	ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab + 1) + getElementDivSupporterNameString(i_index_supporter, i_tab) + getNewLineString();
-
-    ret_card_box_left_str = ret_card_box_left_str + getElementDivSeasonTextString(i_season_str, i_tab + 1);
-
-    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
-
-    ret_card_box_left_str = ret_card_box_left_str + getElementDivQrCodeImageString(i_index_supporter, i_tab + 1);
-
-    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
-
-    ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab);
-
-    ret_card_box_left_str = ret_card_box_left_str + getDivEndString(id_div_card_box_left, cl_div_card_box_left);
-
-    ret_card_box_left_str = ret_card_box_left_str + getNewLineString() + getNewLineString();
-
-    return ret_card_box_left_str;
-
-} // getElementDivCardBoxLeftStringRemove
-
-// Get the string that defines the div card box right
-function getElementDivCardBoxRightStringRemove(i_index_supporter, i_season_str, i_tab)
-{
-    var ret_card_box_right_str = '';
-
-    if (i_index_supporter >= g_supporter_data_array.length)
-    {
-        return ret_card_box_right_str;
-    }
-
-    var id_div_card_box_right = '';
-
-    var cl_div_card_box_right = getClassCardBoxRight();
-
-    ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab);
-
-    ret_card_box_right_str = ret_card_box_right_str + getDivStartString(id_div_card_box_right, cl_div_card_box_right);
-
-    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
-
-    ret_card_box_right_str = ret_card_box_right_str + getElementDivTextLogoString(i_tab + 1);
-
-    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
-	
-	ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab + 1) + getElementDivSupporterNameString(i_index_supporter, i_tab) + getNewLineString();
-
-    ret_card_box_right_str = ret_card_box_right_str + getElementDivSeasonTextString(i_season_str, i_tab + 1);
-
-    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
-
-    ret_card_box_right_str = ret_card_box_right_str + getElementDivQrCodeImageString(i_index_supporter, i_tab + 1);
-
-    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
-
-    ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab);
-
-    ret_card_box_right_str = ret_card_box_right_str + getDivEndString(id_div_card_box_right, cl_div_card_box_right);
-
-    ret_card_box_right_str = ret_card_box_right_str + getNewLineString() + getNewLineString();
-
-    return ret_card_box_right_str;
-
-} // getElementDivCardBoxRightStringRemove
-
 // Get the string that defines the div card box left reverse side
 function getElementDivCardBoxLeftReverseString(i_tab)
 {
@@ -1156,39 +909,6 @@ function getElementDivTextLogoString(i_tab)
 
 } // getElementDivTextLogoString
 
-
-// Get the string that defines the div supporter name
-function getElementDivSupporterNameStringRemove(i_index_supporter, i_tab)
-{
-    var ret_supporter_name_str = '';
-
-    var id_div_supporter_name = '';
-
-    var cl_div_supporter_name = getClassSupporterName();
-
-    ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab);
-
-    ret_supporter_name_str = ret_supporter_name_str + getDivStartString(id_div_supporter_name, cl_div_supporter_name);
-
-    ret_supporter_name_str = ret_supporter_name_str + getNewLineString();
-
-    var supporter_data = g_supporter_data_array[i_index_supporter];
-
-    var name_str = supporter_data.getFirstAndFamilyName();
-	
-	ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab + 1) + name_str + getNewLineString();
-
-    ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab);
-
-    ret_supporter_name_str = ret_supporter_name_str + getDivEndString(id_div_supporter_name, cl_div_supporter_name);
-
-    ret_supporter_name_str = ret_supporter_name_str + getNewLineString() + getNewLineString();
-
-    return ret_supporter_name_str;
-
-} // getElementDivSupporterNameStringRemove
-
-
 // Get the string that defines the div season text
 function getElementDivSeasonTextString(i_season_str, i_tab)
 {
@@ -1248,43 +968,6 @@ function getElementDivQrCodeImageString(i_index_supporter, i_tab)
     return ret_qr_image_str;
 
 } // getElementDivQrCodeCanvasString
-
-// Get the string that defines the QR code canvas
-function getElementDivQrCodeCanvasStringRemove(i_index_supporter, i_tab)
-{
-    var ret_qr_canvas_str = '';
-
-    var id_div_qr_canvas = '';
-
-    var cl_div_qr_canvas = getClassDivCanvasQrCode();
-	
-	var id_qr_canvas = 'id_qr_canvas_' + i_index_supporter.toString();
-
-    var cl_qr_canvas = getClassQrCodeCanvas();
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getTabs(i_tab);
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getDivStartString(id_div_qr_canvas, cl_div_qr_canvas);
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getNewLineString();
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getTabs(i_tab + 1);
-
-    ret_qr_canvas_str = ret_qr_canvas_str + '<canvas ' + ' id= "' + id_qr_canvas + '" '  + ' class= "' + cl_qr_canvas + '" ' + '>';
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getNewLineString();
-	
-    ret_qr_canvas_str = ret_qr_canvas_str + getTabs(i_tab + 1);
-
-    ret_qr_canvas_str = ret_qr_canvas_str + '</canvas>';
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getDivEndString(id_div_qr_canvas, cl_div_qr_canvas);
-
-    ret_qr_canvas_str = ret_qr_canvas_str + getNewLineString() + getNewLineString();
-
-    return ret_qr_canvas_str;
-
-} // getElementDivQrCodeCanvasStringRemove
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Print Page Strings /////////////////////////////////
@@ -1681,104 +1364,4 @@ function getDivEndString(i_id_element, i_cl_element)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End String Functions ////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Start Functions To Remove ///////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
-
-//QQQQQQQQQQQQQQQQQQQQ
-// Callback after determining season start year with a PHP function  QQQQQQQQQQQQQ Remove
-function callbackSeasonStartYearPrint(i_season_start_year)
-{
-    QrProgress.Append('callbackSeasonStartYearPrint ' + i_season_start_year.toString());
-
-    g_season_start_year = i_season_start_year;
-
-    g_supporter_xml_object = new SupporterXml(afterLoadOfSupporterXmlPrint, g_season_start_year);
-
-} // callbackSeasonStartYearPrint
-
-//QQQQQQQQQQQQQQQQQQQQQQ
-// Callback after loading Supporter.xml QQQQQQQQQQQQQQQQQQQQQQQQQ Remove
-function afterLoadOfSupporterXmlPrint(i_supporter_xml)
-{
-    QrProgress.Append('Enter afterLoadOfSupporterXmlPrint');
-
-    setSupporterDataArrayFromXmlObject(i_supporter_xml);
-
-    QrProgress.Msg("");
-
-} // afterLoadOfSupporterXmlPrint
-
-//QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-// Generate QR codes for all supporters and create print pages
-function generateQrCodeAllSupportersCreatePrintPages()
-{
-    var qr_case = 'ImageData'; 
-
-    var canvas_size = 84;
-
-    // TODO var canvas_size = QrStrings.getCanvasSizeForImageData();
-
-    qr_code_season_str = '2021-2022';
-
-    generateQrCodeAllSupporters(qr_case, canvas_size, qr_code_season_str);
-
-    var el_all_pages = getElementDivAllPrintPages();
-
-    var season_str = getPrintQrCodeSeasonString();
-
-    var content_all_pages = getContentDivAllPagesStringRemove(season_str);
-
-    el_all_pages.innerHTML = content_all_pages;
-
-    setCardQrCodeImages();
-
-    setBackgroundColorForNames();
-
-} // generateQrCodeAllSupportersCreatePrintPages
-
-// Get the string that defines all print pages
-function getContentDivAllPagesStringRemove(i_season_str)
-{
-    var ret_content_all_pages = '';
-
-    var b_reverse = false;
-
-    var n_names = g_supporter_data_array.length;
-    
-    var n_pages = parseInt(n_names/10.0);
-
-    var diff_int_float = Math.abs(n_names/10.0 - n_pages);
-
-    if (diff_int_float > 0.001 )
-    {
-        n_pages = n_pages + 1;
-    }
-
-    var index_supporter_start = 0;
-
-    var n_tab = 1;
-
-    for (var page_number=1; page_number <= n_pages; page_number++)
-    {
-        ret_content_all_pages = ret_content_all_pages + getNewLineString();
-
-        ret_content_all_pages = ret_content_all_pages + getElementDivPrintRowContainerStringRemove(b_reverse, index_supporter_start, i_season_str, n_tab + 1);
-
-        if (page_number != n_pages)
-        {
-            ret_content_all_pages = ret_content_all_pages + getTabs(n_tab + 1) + '<div class="page-break"></div>';
-        }
-
-        index_supporter_start = index_supporter_start + 10;
-    }
-
-    return ret_content_all_pages;
-
-} // getContentDivAllPagesStringRemove
-
-///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// End Functions To Remove /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
