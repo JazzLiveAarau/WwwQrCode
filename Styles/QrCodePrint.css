@@ -1,5 +1,5 @@
 /* 
-File: QrCodePrint.css Date: 2022-06-02 Author: Gunnar Lidén
+File: QrCodePrint.css Date: 2022-06-07 Author: Gunnar Lidén
 
 General information
 ===================
@@ -205,7 +205,6 @@ PagePrint
     font-size: 5.6mm;
     font-weight: bold;
     padding-top: 3mm;
-    background-color: rgb(225, 213, 230);
     text-align: center;
     clear: both;
 }
@@ -237,6 +236,11 @@ PagePrint
     width: 25mm;
     float: left;
     /* border: 1px solid green; */     
+}
+
+.cl_div_qr_canvas img
+{
+    height: 23mm;
 }
 
 .cl_p_reverse_one

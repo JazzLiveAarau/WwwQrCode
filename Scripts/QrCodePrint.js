@@ -1,5 +1,5 @@
 // File: QrCodePrint.js
-// Date: 2022-06-06
+// Date: 2022-06-07
 // Author: Gunnar Lidén
 
 // File content
@@ -58,8 +58,6 @@ function callbackSeasonStartYearPrintBatch(i_season_start_year)
 {
     QrProgress.Append('callbackSeasonStartYearPrint ' + i_season_start_year.toString());
 
-    /// ???? g_season_start_year = i_season_start_year;
-
     g_qr_files_xml_object_batch_print = new QrFilesXml(afterLoadOfQrFilesXmlBatchPrint, i_season_start_year);
 
 } // callbackSeasonStartYearPrintBatch
@@ -67,7 +65,7 @@ function callbackSeasonStartYearPrintBatch(i_season_start_year)
 // Callback after loading QrFile.xml for batch print
 function afterLoadOfQrFilesXmlBatchPrint()
 {
-    // Remove from here var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
+    console.log("afterLoadOfQrFilesXmlBatchPrint QrFile.xml is loaded");
 
 } // afterLoadOfQrFilesXmlBatchPrint
 
@@ -107,9 +105,13 @@ function createPrintPagesFromQrFilesXml()
 
 function callbackAfterCreatingBatchCardArray(i_batch_card_array)
 {
-    alert("callbackAfterCreatingBatchCardArray Enter");
+    var content_all_pages = getContentDivAllPagesString(g_batch_card_array.getArray());
 
-    // var content_all_pages = getContentDivAllPagesString(g_qr_files_xml_object_batch_print, to_print_file_number_array);
+    var el_all_pages = getElementDivAllPrintPages();
+	
+    el_all_pages.innerHTML = content_all_pages;
+ 
+    setCardQrCodeImages(g_batch_card_array.getArray());
 
 } // callbackAfterCreatingBatchCardArray
 
@@ -125,13 +127,21 @@ function generateReversePage()
 } // generateReversePage
 
 // Set canvas QR codes for the supporters
-function setCanvasSupporterQrCodes()
+function setCardQrCodeImages(i_batch_card_array)
 {
-    for (var index_supporter=0; index_supporter < g_supporter_image_data.length; index_supporter++)
+    for (var index_card=0; index_card < i_batch_card_array.length; index_card++)
     {
-        var canvas_context = getCanvasContextQrCodeSupporter(index_supporter);
+        //QQQ var canvas_context = getCanvasContextQrCodeSupporter(index_card);
 
-        canvas_context.putImageData(g_supporter_image_data[index_supporter], 0, 0);
+        var batch_card = i_batch_card_array[index_card];
+
+        var image_data = batch_card.getQrCodeImage();
+
+        //QQQ canvas_context.putImageData(image_data, 0, 0);
+
+        var el_image = getElementImageQrCodeSupporter(index_card);
+
+        el_image.src = image_data;
     }
 
 } // setCanvasSupporterQrCodes
@@ -152,6 +162,18 @@ function setBackgroundColorForNames()
     }
 
 } // setBackgroundColorForNames
+
+// Set canvas QR codes for the supporters
+function setCanvasSupporterQrCodesRemove()
+{
+    for (var index_supporter=0; index_supporter < g_supporter_image_data.length; index_supporter++)
+    {
+        var canvas_context = getCanvasContextQrCodeSupporter(index_supporter);
+
+        canvas_context.putImageData(g_supporter_image_data[index_supporter], 0, 0);
+    }
+
+} // setCanvasSupporterQrCodesRemove
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
@@ -183,6 +205,12 @@ class BatchPrintCardArray
         return this.m_batch_print_card_array.length;
 
     } // getNumberOfPrintCards
+
+    getArray()
+    {
+        return this.m_batch_print_card_array;
+
+    } // getArray
 
     createArray(i_callback_array_created)
     {
@@ -378,6 +406,12 @@ class BatchPrintCard
 
     } // setQrCodeImage
 
+    getQrCodeImage()
+    {
+        return this.m_qr_code_image;
+
+    } // getQrCodeImage
+
 } // BatchPrintCard
 
 // A recursively called function cannot be a class member function
@@ -420,7 +454,7 @@ function loadQrCodeImageRecursive(i_qr_code_image_as_text)
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // Get the string that defines all print pages
-function getContentDivAllPagesString(i_qr_xml, i_print_file_numbers)
+function getContentDivAllPagesString(i_batch_card_array)
 {
     console.log("getContentDivAllPagesString Enter");
 
@@ -428,7 +462,7 @@ function getContentDivAllPagesString(i_qr_xml, i_print_file_numbers)
 
     var ret_content_all_pages = '';
 
-    var n_pages = getNumberOfPrintPages(i_qr_xml, i_print_file_numbers);
+    var n_pages = getNumberOfPrintPages(i_batch_card_array);
 
     var index_name_start = 0;
 
@@ -438,7 +472,7 @@ function getContentDivAllPagesString(i_qr_xml, i_print_file_numbers)
     {
         ret_content_all_pages = ret_content_all_pages + getNewLineString();
 
-        //TODO ret_content_all_pages = ret_content_all_pages + getElementDivPrintRowContainerString(b_reverse, index_name_start, i_season_str, n_tab + 1);
+        ret_content_all_pages = ret_content_all_pages + getElementDivPrintRowContainerString(b_reverse, index_name_start, i_batch_card_array, n_tab + 1);
 
         if (page_number != n_pages)
         {
@@ -454,39 +488,11 @@ function getContentDivAllPagesString(i_qr_xml, i_print_file_numbers)
 
 } // getContentDivAllPagesString
 
-function getNumberOfPrintPages(i_qr_xml, i_print_file_numbers)
+function getNumberOfPrintPages(i_batch_card_array)
 {
     var ret_n_pages = -12345;
 
-    var n_files = i_print_file_numbers.length;
-
-    var n_names = 0;
-
-    console.log("getNumberOfPrintPages n_files= " + n_files.toString());
-
-    for (var index_number=0; index_number < n_files; index_number++)
-    {
-        var file_number = i_print_file_numbers[index_number];
-
-        var name_one = i_qr_xml.getQrCodeNameOne(file_number);
-
-        var download_one = i_qr_xml.getQrDownloadOne(file_number);
-
-        var name_two = i_qr_xml.getQrCodeNameTwo(file_number);
-
-        var download_two = i_qr_xml.getQrDownloadTwo(file_number);
-
-        if (name_one.length > 0 && download_one.length > 0)
-        {
-            n_names = n_names + 1;
-        }
-
-        if (name_two.length > 0 && download_two.length > 0)
-        {
-            n_names = n_names + 1;
-        }
-
-    } // index_number
+    var n_names = i_batch_card_array.length;
 
     console.log("getNumberOfPrintPages n_names= " + n_names.toString());
 
@@ -536,6 +542,280 @@ function getContentDivReversePageString()
     return ret_content_reverse_page;
 
 } // getContentDivReversePageString
+
+// Get the string that defines the div for the print row container
+function getElementDivPrintRowContainerString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab)
+{
+    var ret_print_row_container_str = '';
+	
+    if (i_index_supporter_start >= i_batch_card_array.length)
+    {
+		alert("getElementPrintPageString i_index_supporter_start= " + i_index_supporter_start.toString());
+		
+        return ret_print_row_container_str;
+    }
+
+    var id_div_print_row_container = '';
+
+    var cl_div_print_row_container = getClassPrintPageContainer();
+
+    ret_print_row_container_str = ret_print_row_container_str + getTabs(i_tab);
+
+    ret_print_row_container_str = ret_print_row_container_str + getDivStartString(id_div_print_row_container, cl_div_print_row_container);
+
+    ret_print_row_container_str = ret_print_row_container_str + getNewLineString();
+	
+	ret_print_row_container_str = ret_print_row_container_str + getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab  + 1);
+	
+    ret_print_row_container_str = ret_print_row_container_str + getTabs(i_tab);
+
+    ret_print_row_container_str = ret_print_row_container_str + getDivEndString(id_div_print_row_container, cl_div_print_row_container);
+
+    ret_print_row_container_str = ret_print_row_container_str + getNewLineString() + getNewLineString();
+
+    return ret_print_row_container_str;
+
+} // getElementDivPrintRowContainerString
+
+// Get the string that defines the PrintPage element
+function getElementPrintPageString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab)
+{
+    var ret_print_page_str = '';
+	
+    if (i_index_supporter_start >= i_batch_card_array.length)
+    {
+		alert("getElementPrintPageString i_index_supporter_start= " + i_index_supporter_start.toString());
+		
+        return ret_print_page_str;
+    }
+
+    ret_print_page_str = ret_print_page_str + getTabs(i_tab);
+
+    ret_print_page_str = ret_print_page_str + '<PrintPage>';
+
+    ret_print_page_str = ret_print_page_str + getNewLineString();
+	
+	ret_print_page_str = ret_print_page_str + getElementDivAllPrintRowsString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab  + 1);
+
+    ret_print_page_str = ret_print_page_str + getTabs(i_tab);
+
+    ret_print_page_str = ret_print_page_str + '</PrintPage>';;
+
+    ret_print_page_str = ret_print_page_str + getNewLineString() + getNewLineString();
+
+    return ret_print_page_str;
+
+} // getElementPrintPageString
+
+// Get the string that defines the div for all rows
+function getElementDivAllPrintRowsString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab)
+{
+    var ret_all_print_rows_str = '';
+	
+    if (i_index_supporter_start >= i_batch_card_array.length)
+    {
+        return ret_all_print_rows_str;
+    }
+
+    var id_div_all_print_rows = '';
+
+    var cl_div_all_print_rows = getClassAllPrintRows();
+
+    ret_all_print_rows_str = ret_all_print_rows_str + getTabs(i_tab);
+
+    ret_all_print_rows_str = ret_all_print_rows_str + getDivStartString(id_div_all_print_rows, cl_div_all_print_rows);
+
+    ret_all_print_rows_str = ret_all_print_rows_str + getNewLineString();
+	
+	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab  + 1);
+	
+	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 2, i_batch_card_array, i_tab  + 1);
+	
+	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 4, i_batch_card_array, i_tab  + 1);
+
+	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 6, i_batch_card_array, i_tab  + 1);
+
+	ret_all_print_rows_str = ret_all_print_rows_str + getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start + 8, i_batch_card_array, i_tab  + 1);
+
+    ret_all_print_rows_str = ret_all_print_rows_str + getTabs(i_tab);
+
+    ret_all_print_rows_str = ret_all_print_rows_str + getDivEndString(id_div_all_print_rows, cl_div_all_print_rows);
+
+    ret_all_print_rows_str = ret_all_print_rows_str + getNewLineString() + getNewLineString();
+
+    return ret_all_print_rows_str;
+
+} // getElementDivAllPrintRowsString
+
+// Get the string that defines the div print page row
+function getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i_batch_card_array, i_tab)
+{
+    var ret_print_page_row_str = '';
+
+    if (i_index_supporter_start >= i_batch_card_array.length)
+    {
+        return ret_print_page_row_str;
+    }
+
+    var id_div_print_page_row = '';
+
+    var cl_div_print_page_row = getClassPrintPageRow();
+
+    ret_print_page_row_str = ret_print_page_row_str + getTabs(i_tab);
+
+    ret_print_page_row_str = ret_print_page_row_str + getDivStartString(id_div_print_page_row, cl_div_print_page_row);
+
+    ret_print_page_row_str = ret_print_page_row_str + getNewLineString();
+
+    if (!i_b_reverse)
+    {
+        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxLeftString(i_index_supporter_start, i_batch_card_array, i_tab  + 1);
+	
+        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxRightString(i_index_supporter_start + 1, i_batch_card_array, i_tab  + 1);
+    }
+    else
+    {
+        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxLeftReverseString(i_tab + 1);
+	
+        ret_print_page_row_str = ret_print_page_row_str + getElementDivCardBoxRightReverseString(i_tab + 1);
+    }    
+
+    ret_print_page_row_str = ret_print_page_row_str + getTabs(i_tab);
+
+    ret_print_page_row_str = ret_print_page_row_str + getDivEndString(id_div_print_page_row, cl_div_print_page_row);
+
+    ret_print_page_row_str = ret_print_page_row_str + getNewLineString() + getNewLineString();
+
+    return ret_print_page_row_str;
+
+} // getElementDivPrintPageRowString
+
+// Get the string that defines the div card box left
+function getElementDivCardBoxLeftString(i_index_supporter, i_batch_card_array, i_tab)
+{
+    var ret_card_box_left_str = '';
+
+    if (i_index_supporter >= i_batch_card_array.length)
+    {
+        return ret_card_box_left_str;
+    }
+
+    var batch_card = i_batch_card_array[i_index_supporter];
+
+    var card_name = batch_card.m_name;
+
+    var season_str = batch_card.m_season_str;
+
+    var id_div_card_box_left = '';
+
+    var cl_div_card_box_left = getClassCardBoxLeft();
+
+    ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab);
+
+    ret_card_box_left_str = ret_card_box_left_str + getDivStartString(id_div_card_box_left, cl_div_card_box_left);
+
+    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
+
+    ret_card_box_left_str = ret_card_box_left_str + getElementDivTextLogoString(i_tab + 1);
+
+    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
+	
+	ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab + 1) + getElementDivSupporterNameString(card_name, i_tab) + getNewLineString();
+
+    ret_card_box_left_str = ret_card_box_left_str + getElementDivSeasonTextString(season_str, i_tab + 1);
+
+    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
+
+    ret_card_box_left_str = ret_card_box_left_str + getElementDivQrCodeImageString(i_index_supporter, i_tab + 1);
+
+    ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
+
+    ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab);
+
+    ret_card_box_left_str = ret_card_box_left_str + getDivEndString(id_div_card_box_left, cl_div_card_box_left);
+
+    ret_card_box_left_str = ret_card_box_left_str + getNewLineString() + getNewLineString();
+
+    return ret_card_box_left_str;
+
+} // getElementDivCardBoxLeftString
+
+// Get the string that defines the div card box right
+function getElementDivCardBoxRightString(i_index_supporter, i_batch_card_array, i_tab)
+{
+    var ret_card_box_right_str = '';
+
+    if (i_index_supporter >= i_batch_card_array.length)
+    {
+        return ret_card_box_right_str;
+    }
+
+    var batch_card = i_batch_card_array[i_index_supporter];
+
+    var card_name = batch_card.m_name;
+
+    var id_div_card_box_right = '';
+
+    var season_str = batch_card.m_season_str;
+
+    var cl_div_card_box_right = getClassCardBoxRight();
+
+    ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab);
+
+    ret_card_box_right_str = ret_card_box_right_str + getDivStartString(id_div_card_box_right, cl_div_card_box_right);
+
+    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
+
+    ret_card_box_right_str = ret_card_box_right_str + getElementDivTextLogoString(i_tab + 1);
+
+    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
+	
+	ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab + 1) + getElementDivSupporterNameString(card_name, i_tab) + getNewLineString();
+
+    ret_card_box_right_str = ret_card_box_right_str + getElementDivSeasonTextString(season_str, i_tab + 1);
+
+    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
+
+    ret_card_box_right_str = ret_card_box_right_str + getElementDivQrCodeImageString(i_index_supporter, i_tab + 1);
+
+    ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
+
+    ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab);
+
+    ret_card_box_right_str = ret_card_box_right_str + getDivEndString(id_div_card_box_right, cl_div_card_box_right);
+
+    ret_card_box_right_str = ret_card_box_right_str + getNewLineString() + getNewLineString();
+
+    return ret_card_box_right_str;
+
+} // getElementDivCardBoxRightString
+
+// Get the string that defines the div supporter name
+function getElementDivSupporterNameString(i_card_name, i_tab)
+{
+    var ret_supporter_name_str = '';
+
+    var id_div_supporter_name = '';
+
+    var cl_div_supporter_name = getClassSupporterName();
+
+    ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab);
+
+    ret_supporter_name_str = ret_supporter_name_str + getDivStartString(id_div_supporter_name, cl_div_supporter_name);
+
+    ret_supporter_name_str = ret_supporter_name_str + getNewLineString();
+	
+	ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab + 1) + i_card_name + getNewLineString();
+
+    ret_supporter_name_str = ret_supporter_name_str + getTabs(i_tab);
+
+    ret_supporter_name_str = ret_supporter_name_str + getDivEndString(id_div_supporter_name, cl_div_supporter_name);
+
+    ret_supporter_name_str = ret_supporter_name_str + getNewLineString() + getNewLineString();
+
+    return ret_supporter_name_str;
+
+} // getElementDivSupporterNameString
 
 // Get the string that defines the div for the print row container
 function getElementDivPrintRowContainerStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
@@ -642,7 +922,7 @@ function getElementDivAllPrintRowsStringRemove(i_b_reverse, i_index_supporter_st
 } // getElementDivAllPrintRowsStringRemove
 
 // Get the string that defines the div print page row
-function getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
+function getElementDivPrintPageRowStringRemove(i_b_reverse, i_index_supporter_start, i_season_str, i_tab)
 {
     var ret_print_page_row_str = '';
 
@@ -682,10 +962,10 @@ function getElementDivPrintPageRowString(i_b_reverse, i_index_supporter_start, i
 
     return ret_print_page_row_str;
 
-} // getElementDivPrintPageRowString
+} // getElementDivPrintPageRowStringRemove
 
 // Get the string that defines the div card box left
-function getElementDivCardBoxLeftString(i_index_supporter, i_season_str, i_tab)
+function getElementDivCardBoxLeftStringRemove(i_index_supporter, i_season_str, i_tab)
 {
     var ret_card_box_left_str = '';
 
@@ -714,7 +994,7 @@ function getElementDivCardBoxLeftString(i_index_supporter, i_season_str, i_tab)
 
     ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
 
-    ret_card_box_left_str = ret_card_box_left_str + getElementDivQrCodeCanvasString(i_index_supporter, i_tab + 1);
+    ret_card_box_left_str = ret_card_box_left_str + getElementDivQrCodeImageString(i_index_supporter, i_tab + 1);
 
     ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
 
@@ -726,10 +1006,10 @@ function getElementDivCardBoxLeftString(i_index_supporter, i_season_str, i_tab)
 
     return ret_card_box_left_str;
 
-} // getElementDivCardBoxLeftString
+} // getElementDivCardBoxLeftStringRemove
 
 // Get the string that defines the div card box right
-function getElementDivCardBoxRightString(i_index_supporter, i_season_str, i_tab)
+function getElementDivCardBoxRightStringRemove(i_index_supporter, i_season_str, i_tab)
 {
     var ret_card_box_right_str = '';
 
@@ -758,7 +1038,7 @@ function getElementDivCardBoxRightString(i_index_supporter, i_season_str, i_tab)
 
     ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
 
-    ret_card_box_right_str = ret_card_box_right_str + getElementDivQrCodeCanvasString(i_index_supporter, i_tab + 1);
+    ret_card_box_right_str = ret_card_box_right_str + getElementDivQrCodeImageString(i_index_supporter, i_tab + 1);
 
     ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
 
@@ -770,7 +1050,7 @@ function getElementDivCardBoxRightString(i_index_supporter, i_season_str, i_tab)
 
     return ret_card_box_right_str;
 
-} // getElementDivCardBoxRightString
+} // getElementDivCardBoxRightStringRemove
 
 // Get the string that defines the div card box left reverse side
 function getElementDivCardBoxLeftReverseString(i_tab)
@@ -878,7 +1158,7 @@ function getElementDivTextLogoString(i_tab)
 
 
 // Get the string that defines the div supporter name
-function getElementDivSupporterNameString(i_index_supporter, i_tab)
+function getElementDivSupporterNameStringRemove(i_index_supporter, i_tab)
 {
     var ret_supporter_name_str = '';
 
@@ -906,7 +1186,7 @@ function getElementDivSupporterNameString(i_index_supporter, i_tab)
 
     return ret_supporter_name_str;
 
-} // getElementDivSupporterNameString
+} // getElementDivSupporterNameStringRemove
 
 
 // Get the string that defines the div season text
@@ -936,8 +1216,41 @@ function getElementDivSeasonTextString(i_season_str, i_tab)
 
 } // getElementDivSeasonTextString
 
+// Get the string that defines the QR code image
+function getElementDivQrCodeImageString(i_index_supporter, i_tab)
+{
+    var ret_qr_image_str = '';
+
+    var id_div_qr_canvas = '';
+
+    var cl_div_qr_canvas = getClassDivCanvasQrCode();
+	
+	var id_qr_canvas = 'id_qr_image_' + i_index_supporter.toString();
+
+    var cl_qr_canvas = getClassQrCodeCanvas();
+
+    ret_qr_image_str = ret_qr_image_str + getTabs(i_tab);
+
+    ret_qr_image_str = ret_qr_image_str + getDivStartString(id_div_qr_canvas, cl_div_qr_canvas);
+
+    ret_qr_image_str = ret_qr_image_str + getNewLineString();
+
+    ret_qr_image_str = ret_qr_image_str + getTabs(i_tab + 1);
+
+    ret_qr_image_str = ret_qr_image_str + '<img ' + ' id= "' + id_qr_canvas + '" '  + ' class= "' + cl_qr_canvas + '" ' + '>';
+
+    ret_qr_image_str = ret_qr_image_str + getNewLineString();
+
+    ret_qr_image_str = ret_qr_image_str + getDivEndString(id_div_qr_canvas, cl_div_qr_canvas);
+
+    ret_qr_image_str = ret_qr_image_str + getNewLineString() + getNewLineString();
+
+    return ret_qr_image_str;
+
+} // getElementDivQrCodeCanvasString
+
 // Get the string that defines the QR code canvas
-function getElementDivQrCodeCanvasString(i_index_supporter, i_tab)
+function getElementDivQrCodeCanvasStringRemove(i_index_supporter, i_tab)
 {
     var ret_qr_canvas_str = '';
 
@@ -971,7 +1284,7 @@ function getElementDivQrCodeCanvasString(i_index_supporter, i_tab)
 
     return ret_qr_canvas_str;
 
-} // getElementDivQrCodeCanvasString
+} // getElementDivQrCodeCanvasStringRemove
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Print Page Strings /////////////////////////////////
@@ -1063,6 +1376,21 @@ function getSupporterCardReverseSideFour()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Get Html Elements, Identities And Classes /////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Get the image element for the card QR code
+function getElementImageQrCodeSupporter(i_index_card)
+{
+    return document.getElementById(getIdImageQrCodeSupporter(i_index_card));
+
+} // getElementImageQrCodeSupporter
+
+// Returns the identity of the image element for the vard QR code
+function getIdImageQrCodeSupporter(i_index_card)
+{
+    return 'id_qr_image_' + i_index_card.toString();
+
+} // getIdImageQrCodeSupporter
 
 // Get the canvas context for the supporter QR code
 function getCanvasContextQrCodeSupporter(i_index_supporter)
@@ -1405,7 +1733,7 @@ function generateQrCodeAllSupportersCreatePrintPages()
 
     el_all_pages.innerHTML = content_all_pages;
 
-    setCanvasSupporterQrCodes();
+    setCardQrCodeImages();
 
     setBackgroundColorForNames();
 
