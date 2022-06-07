@@ -14,6 +14,9 @@
 // Instance of the class QrFilesXml handling the XML file QrFiles.xml for batch print
 var g_qr_files_xml_object_batch_print  = null;
 
+// Array of BatchPrintCard objects holding data for the (batch) print of cards
+var g_batch_card_array = null;
+
 // Background color for the supporter names
 var g_supporter_name_background_color = 'rgb(225, 213, 230)';
 
@@ -46,8 +49,6 @@ function onloadQrCodePrint()
 
     hideQrCodeImage();
 
-    //QQ getSeasonStartYear(callbackSeasonStartYearPrint);
-
     getSeasonStartYear(callbackSeasonStartYearPrintBatch);
 
 } // onloadQrCodePrint
@@ -73,8 +74,6 @@ function afterLoadOfQrFilesXmlBatchPrint()
 // User clicked the button generate QR codes for supporters
 function clickCreatePrintPagesFromQrFilesXml()
 {
-    //QQQQQ generateQrCodeAllSupportersCreatePrintPages();
-
     createPrintPagesFromQrFilesXml(); 
 
     QrProgress.Msg("");
@@ -100,9 +99,9 @@ function createPrintPagesFromQrFilesXml()
 {
     var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
 
-    var batch_card_array = new BatchPrintCardArray(g_qr_files_xml_object_batch_print, to_print_file_number_array);
+    g_batch_card_array = new BatchPrintCardArray(g_qr_files_xml_object_batch_print, to_print_file_number_array);
 
-    batch_card_array.createArray(callbackAfterCreatingBatchCardArray);
+    g_batch_card_array.createArray(callbackAfterCreatingBatchCardArray);
 
 } // createPrintPagesFromQrFilesXml
 
@@ -177,8 +176,6 @@ class BatchPrintCardArray
         this.m_download_codes_array = null;
 
         this.m_callback_array_created = null;
-
-        //QQQ this.createArray();
     }
 
     getNumberOfPrintCards()
@@ -254,11 +251,16 @@ class BatchPrintCardArray
 
             if (dowload_code.length > 0)
             {
-                ret_index = index_card;
+                ret_index = index_card - 1;
 
                 break;
             }
 
+        }
+
+        if (ret_index == -1)
+        {
+            ret_index = n_cards - 1;
         }
 
         return ret_index;
@@ -308,40 +310,10 @@ class BatchPrintCardArray
 
         console.log("loadAllQrCodeImages Number of downloads is " + this.m_download_codes_array.length);
 
-        this.loadQrCodeImageRecursive("");
+        loadQrCodeImageRecursive("");
 
 
     } // loadAllQrCodeImages
-
-    loadQrCodeImageRecursive(i_qr_code_image_as_text)
-    {
-        if (i_qr_code_image_as_text.length > 0)
-        {
-            var index_downloaded_code = this.getIndexForDownloadedQrCode();
-
-            var print_card =  this.m_batch_print_card_array[index_downloaded_code];
-
-            print_card.setQrCodeImage(i_qr_code_image_as_text);
-
-            console.log("loadAllQrCodeImages Image data as text set for index " + index_downloaded_code.toString());
-        }
-
-        var down_load_code = this.getIndexForNextQrCodeToDownload();
-
-        console.log("loadAllQrCodeImages down_load_code is " + down_load_code);
-
-        if (down_load_code.length == 0)
-        {
-            this.m_callback_array_created(this.m_batch_print_card_array);
-
-            return;
-        }
-
-        var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(this.m_start_year, down_load_code);
-
-        this.readImageTextFileOnServer(file_name_path_image, this.loadQrCodeImageRecursive);
-
-    } // loadQrCodeImageRecursive
 
     // Read text file on server
     // https://stackoverflow.com/questions/4533018/how-to-read-a-text-file-from-server-using-javascript
@@ -407,6 +379,37 @@ class BatchPrintCard
     } // setQrCodeImage
 
 } // BatchPrintCard
+
+// A recursively called function cannot be a class member function
+function loadQrCodeImageRecursive(i_qr_code_image_as_text)
+{
+    if (i_qr_code_image_as_text.length > 0)
+    {
+        var index_downloaded_code = g_batch_card_array.getIndexForDownloadedQrCode();
+
+        var print_card =  g_batch_card_array.m_batch_print_card_array[index_downloaded_code];
+
+        print_card.setQrCodeImage(i_qr_code_image_as_text);
+
+        console.log("loadQrCodeImageRecursive Image data as text set for index " + index_downloaded_code.toString());
+    }
+
+    var down_load_code = g_batch_card_array.getIndexForNextQrCodeToDownload();
+
+    console.log("loadQrCodeImageRecursive down_load_code is " + down_load_code);
+
+    if (down_load_code.length == 0)
+    {
+        g_batch_card_array.m_callback_array_created(g_batch_card_array.m_batch_print_card_array);
+
+        return;
+    }
+
+    var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(g_batch_card_array.m_start_year, down_load_code);
+
+    g_batch_card_array.readImageTextFileOnServer(file_name_path_image, loadQrCodeImageRecursive);
+
+} // loadQrCodeImageRecursive
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Batch Print Card Array ////////////////////////////////////
