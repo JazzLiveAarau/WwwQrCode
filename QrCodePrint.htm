@@ -32,6 +32,8 @@
     <!-- Utility functions for all QR web pages -->
     <script type="text/javascript" src="Scripts/QrUtils.js"></script>
 
+    <!-- Classes for standard controls: Text box, button and dropdown  -->
+    <script type="text/javascript" src="Scripts/JazzControls.js"></script>
 
   </head>
   <body onload= "onloadQrCodePrint()" >
@@ -41,13 +43,12 @@
       <div id="id_div_qr_print_logo" class="cl_div_qr_print_logo"></div>
 
       <div class="cl_div_qr_buttons" >
-        <div>
-          <button class="cl_button_qr_print" onclick="clickCreatePrintPagesFromQrFilesXml()">Vorderseite</button>
-        </div>
 
-        <div>
-          <button class="cl_button_qr_print" onclick="clickGenerateSupporterQrReverseSide()">Rückseite</button>
-        </div>
+        <div id="id_div_qr_button_print_front" class="cl_div_qr_button_print_front"></div>
+
+        <div id="id_div_qr_button_print_reverse" class="cl_div_qr_button_print_reverse"></div>
+
+        <div id="id_div_qr_button_print_done" class="cl_div_qr_button_print_done"></div>
 
       </div> <!--  cl_div_qr_buttons -->
 

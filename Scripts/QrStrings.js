@@ -847,6 +847,48 @@ class QrStrings
 
     } // getTitleTextboxSeasonColorDisplay 
 
+    // Caption for the button print front
+    static getCaptionButtonPrintFront()
+    {
+        return 'Vorderseite';
+
+    } // getCaptionButtonPrintFront
+
+    // Title (tooltip) for the button print front
+    static getTitleButtonPrintFront()
+    {
+        return 'Alle Vorderseiten drucken';
+
+    } // getTitleButtonPrintFront    
+
+    // Caption for the button print reverse
+    static getCaptionButtonPrintReverse()
+    {
+        return 'Rückseite';
+
+    } // getCaptionButtonPrintReverse
+
+    // Title (tooltip) for the button print reverse
+    static getTitleButtonPrintReverse()
+    {
+        return 'Eine Rückseite mit zehn Karten drucken';
+
+    } // getTitleButtonPrintReverse
+
+    // Caption for the button print done
+    static getCaptionButtonPrintDone()
+    {
+        return 'Erledigt';
+
+    } // getCaptionButtonPrintDone
+
+    // Title (tooltip) for the button print done
+    static getTitleButtonPrintDone()
+    {
+        return 'Die Karten sind gedruckt';
+
+    } // getTitleButtonPrintDone
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Strings Qr Files ////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
@@ -1002,8 +1044,27 @@ class QrStrings
 
     } // errorNoInternetConnectionQrCodeNotSaved
 
+    static errorPrintCardsFrontFirst()
+    {
+        return 'Bitte die Vorderseiten zuerst generieren';
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Error Strings ///////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// Start Message Strings ///////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    static msgNoCardsToPrint()
+    {
+        return 'Es gibt keine Karten zum Drucken';
+
+    } // msgNoCardsToPrint
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////// End Message Strings /////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////

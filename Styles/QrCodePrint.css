@@ -48,17 +48,30 @@ body
     clear: both;
 }
 
-.cl_button_qr_print 
+.cl_div_qr_button_print_front
 {
-    background-color:#323036;
-    padding:8px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 40px;
-    margin-right: 30px;
-    color:white;
     float: left;
-    cursor:pointer;
+    margin-right: 6px;
+    margin-left: 2px;
+}
+
+.cl_div_qr_button_print_reverse
+{
+    float: left;
+    margin-right: 6px;
+    margin-left: 2px;
+}
+
+.cl_div_qr_button_print_done
+{
+    float: left;
+    margin-right: 6px;
+    margin-left: 2px;
+}
+
+button
+{
+    cursor: pointer;
 }
 
 /* Size and background color (white) of the A4 pages that shall be printed.  */

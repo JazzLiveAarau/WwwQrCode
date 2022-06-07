@@ -17,6 +17,15 @@ var g_qr_files_xml_object_batch_print  = null;
 // Array of BatchPrintCard objects holding data for the (batch) print of cards
 var g_batch_card_array = null;
 
+// The button print front
+var g_print_front_button = null;
+
+// The button print reverse
+var g_print_reverse_button = null;
+
+// The button print done
+var g_print_done_button = null;
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +40,12 @@ function onloadQrCodePrint()
     var el_div_logo = getElementDivQrCodePrintLogo();
 
     el_div_logo.innerHTML = QrStrings.getQrCodePrintTitle();
+
+    createPrintFrontCardsButton();
+
+    createPrintReverseCardsButton();
+
+    createPrintDoneCardsButton();
 
     getSeasonStartYear(callbackSeasonStartYearPrintBatch);
 
@@ -63,6 +78,12 @@ function clickGenerateSupporterQrReverseSide()
 
 } // clickGenerateSupporterQrReverseSide
 
+function clickCardsArePrinted()
+{
+
+
+} // clickCardsArePrinted
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Event Functions /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -84,6 +105,13 @@ function createPrintPagesFromQrFilesXml()
 
 function callbackAfterCreatingBatchCardArray(i_batch_card_array)
 {
+    if (g_batch_card_array.getArray().length == 0)
+    {
+        alert(QrStrings.msgNoCardsToPrint());
+
+        return;
+    }
+
     var content_all_pages = getContentDivAllPagesString(g_batch_card_array.getArray());
 
     var el_all_pages = getElementDivAllPrintPages();
@@ -97,6 +125,13 @@ function callbackAfterCreatingBatchCardArray(i_batch_card_array)
 // Generate the reverse page
 function generateReversePage()
 {
+    if (g_batch_card_array == null || g_batch_card_array.getArray() == null || g_batch_card_array.getArray().length == 0)
+    {
+        alert(QrStrings.errorPrintCardsFrontFirst());
+
+        return;
+    }
+
     var el_all_pages = getElementDivAllPrintPages();
 
     var content_reverse_page = getContentDivReversePageString(g_batch_card_array.getArray());
@@ -123,6 +158,65 @@ function setCardQrCodeImages(i_batch_card_array)
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Start Create Button Controls ////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Creates the print front button control
+function createPrintFrontCardsButton()
+{
+    g_print_front_button = new JazzButton("id_qr_button_print_front", getIdDivPrintFrontCardsButton());
+
+    g_print_front_button.setOnclickFunctionName("clickCreatePrintPagesFromQrFilesXml");
+
+    g_print_front_button.setCaption(QrStrings.getCaptionButtonPrintFront());
+
+    g_print_front_button.setWidth("90px");
+
+    g_print_front_button.setLabelText("");
+
+    g_print_front_button.setTitle(QrStrings.getTitleButtonPrintFront());
+
+} // createPrintFrontCardsButton
+
+// Creates the print reverse button control
+function createPrintReverseCardsButton()
+{
+    g_print_reverse_button = new JazzButton("id_qr_button_print_reverse", getIdDivPrintReverseCardsButton());
+
+    g_print_reverse_button.setOnclickFunctionName("clickGenerateSupporterQrReverseSide");
+
+    g_print_reverse_button.setCaption(QrStrings.getCaptionButtonPrintReverse());
+
+    g_print_reverse_button.setWidth("90px");
+
+    g_print_reverse_button.setLabelText("");
+
+    g_print_reverse_button.setTitle(QrStrings.getTitleButtonPrintReverse());
+
+} // createPrintReverseCardsButton
+
+// Creates the print done button control
+function createPrintDoneCardsButton()
+{
+    g_print_done_button = new JazzButton("id_qr_button_print_done", getIdDivPrintDoneCardsButton());
+
+    g_print_done_button.setOnclickFunctionName("clickCardsArePrinted");
+
+    g_print_done_button.setCaption(QrStrings.getCaptionButtonPrintDone());
+
+    g_print_done_button.setWidth("90px");
+
+    g_print_done_button.setLabelText("");
+
+    g_print_done_button.setTitle(QrStrings.getTitleButtonPrintDone());
+
+} // createPrintDoneCardsButton
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// End Create Button Controls //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1032,6 +1126,34 @@ function getIdDivQrCodePrintLogo()
 
 } // getIdDivQrCodePrintLogo
 
+// Get the element div qr button print front
+function getElementDivPrintFrontCardsButton()
+{
+    return document.getElementById(getIdDivPrintFrontCardsButton());
+
+} // getElementDivPrintFrontCardsButton
+
+// Returns the identity of the div qr button print front
+function getIdDivPrintFrontCardsButton()
+{
+    return 'id_div_qr_button_print_front';
+
+} // getIdDivPrintFrontCardsButton
+
+// Get the element div qr button print reverse
+function getElementDivPrintReverseCardsButton()
+{
+    return document.getElementById(getIdDivPrintReverseCardsButton());
+
+} // getElementDivPrintReverseCardsButton
+
+// Returns the identity of the div qr button print reverse
+function getIdDivPrintReverseCardsButton()
+{
+    return 'id_div_qr_button_print_reverse';
+
+} // getIdDivPrintReverseCardsButton
+
 // Get the image element for the card QR code
 function getElementImageQrCodeSupporter(i_index_card)
 {
@@ -1192,6 +1314,20 @@ function getClassCardBoxRightReverse()
     return 'cl_card_box_reverse_right'
 
 } // getClassCardBoxRightReverse
+
+// Get the element div qr button print done
+function getElementDivPrintDoneCardsButton()
+{
+    return document.getElementById(getIdDivPrintDoneCardsButton());
+
+} // getElementDivPrintDoneCardsButton
+
+// Returns the identity of the div qr button print done
+function getIdDivPrintDoneCardsButton()
+{
+    return 'id_div_qr_button_print_done';
+
+} // getIdDivPrintDoneCardsButton
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Get Html Elements, Identities And Classes ///////////////////
