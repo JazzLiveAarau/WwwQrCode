@@ -1,11 +1,11 @@
 // File: QrCodePrint.js
-// Date: 2022-06-02
+// Date: 2022-06-06
 // Author: Gunnar Lidén
 
 // File content
 // =============
 //
-// QR Code printing functions
+// QR Code batch printing functions
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
@@ -66,12 +66,12 @@ function callbackSeasonStartYearPrintBatch(i_season_start_year)
 // Callback after loading QrFile.xml for batch print
 function afterLoadOfQrFilesXmlBatchPrint()
 {
-    var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
+    // Remove from here var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
 
 } // afterLoadOfQrFilesXmlBatchPrint
 
 // User clicked the button generate QR codes for supporters
-function clickGenerateSupporterQrCodes()
+function clickCreatePrintPagesFromQrFilesXml()
 {
     //QQQQQ generateQrCodeAllSupportersCreatePrintPages();
 
@@ -79,7 +79,7 @@ function clickGenerateSupporterQrCodes()
 
     QrProgress.Msg("");
 
-} // clickGenerateSupporterQrCodes
+} // clickCreatePrintPagesFromQrFilesXml
 
 function clickGenerateSupporterQrReverseSide()
 {
@@ -100,9 +100,19 @@ function createPrintPagesFromQrFilesXml()
 {
     var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
 
-    var content_all_pages = getContentDivAllPagesString(g_qr_files_xml_object_batch_print, to_print_file_number_array);
+    var batch_card_array = new BatchPrintCardArray(g_qr_files_xml_object_batch_print, to_print_file_number_array);
+
+    batch_card_array.createArray(callbackAfterCreatingBatchCardArray);
 
 } // createPrintPagesFromQrFilesXml
+
+function callbackAfterCreatingBatchCardArray(i_batch_card_array)
+{
+    alert("callbackAfterCreatingBatchCardArray Enter");
+
+    // var content_all_pages = getContentDivAllPagesString(g_qr_files_xml_object_batch_print, to_print_file_number_array);
+
+} // callbackAfterCreatingBatchCardArray
 
 // Generate the reverse page
 function generateReversePage()
@@ -162,11 +172,27 @@ class BatchPrintCardArray
 
         this.m_batch_print_card_array = null;
 
-        this.createArray();
+        this.m_start_year = null;
+
+        this.m_download_codes_array = null;
+
+        this.m_callback_array_created = null;
+
+        //QQQ this.createArray();
     }
 
-    createArray()
+    getNumberOfPrintCards()
     {
+        return this.m_batch_print_card_array.length;
+
+    } // getNumberOfPrintCards
+
+    createArray(i_callback_array_created)
+    {
+        this.m_start_year = this.m_qr_xml.getSeasonStartYear();
+
+        this.m_callback_array_created = i_callback_array_created;
+
         var season_str = this.m_qr_xml.getSeasonStartYear().toString() + '-' +
                         (this.m_qr_xml.getSeasonStartYear() + 1).toString()
 
@@ -180,13 +206,13 @@ class BatchPrintCardArray
         {
             var file_number = this.m_print_file_numbers[index_number];
     
-            var name_one = i_qr_xml.getQrCodeNameOne(file_number);
+            var name_one = this.m_qr_xml.getQrCodeNameOne(file_number);
     
-            var download_one = i_qr_xml.getQrDownloadOne(file_number);
+            var download_one = this.m_qr_xml.getDownloadOne(file_number);
     
-            var name_two = i_qr_xml.getQrCodeNameTwo(file_number);
+            var name_two = this.m_qr_xml.getQrCodeNameTwo(file_number);
     
-            var download_two = i_qr_xml.getQrDownloadTwo(file_number);
+            var download_two = this.m_qr_xml.getDownloadTwo(file_number);
     
             if (name_one.length > 0 && download_one.length > 0)
             {
@@ -212,20 +238,173 @@ class BatchPrintCardArray
     
         } // index_number
 
+        this.loadAllQrCodeImages();
+
     } // createArray
+
+    getIndexForDownloadedQrCode()
+    {
+        var ret_index = -1;
+
+        var n_cards = this.getNumberOfPrintCards();
+
+        for (var index_card=0; index_card < n_cards; index_card++)
+        {
+            var dowload_code =  this.m_download_codes_array[index_card];
+
+            if (dowload_code.length > 0)
+            {
+                ret_index = index_card;
+
+                break;
+            }
+
+        }
+
+        return ret_index;
+
+    } // getIndexForDownloadedQrCode
+
+    getIndexForNextQrCodeToDownload()
+    {
+        var ret_dowload_code = '';
+
+        var n_cards = this.getNumberOfPrintCards();
+        
+        for (var index_card=0; index_card < n_cards; index_card++)
+        {
+            var dowload_code =  this.m_download_codes_array[index_card];
+
+            if (dowload_code.length > 0)
+            {
+                ret_dowload_code = dowload_code;
+
+                this.m_download_codes_array[index_card] = '';
+
+                break;
+            }
+
+        } // index_card
+
+        return ret_dowload_code;
+
+    } // getIndexForNextQrCodeToDownload
+
+    loadAllQrCodeImages()
+    {
+        var n_cards = this.getNumberOfPrintCards();
+
+        this.m_download_codes_array = [];
+
+        for (var index_card=0; index_card < n_cards; index_card++)
+        {
+            var print_card =  this.m_batch_print_card_array[index_card];
+
+            var download_code = print_card.m_download_code;
+
+            this.m_download_codes_array[index_card] = download_code;
+
+        }
+
+        console.log("loadAllQrCodeImages Number of downloads is " + this.m_download_codes_array.length);
+
+        this.loadQrCodeImageRecursive("");
+
+
+    } // loadAllQrCodeImages
+
+    loadQrCodeImageRecursive(i_qr_code_image_as_text)
+    {
+        if (i_qr_code_image_as_text.length > 0)
+        {
+            var index_downloaded_code = this.getIndexForDownloadedQrCode();
+
+            var print_card =  this.m_batch_print_card_array[index_downloaded_code];
+
+            print_card.setQrCodeImage(i_qr_code_image_as_text);
+
+            console.log("loadAllQrCodeImages Image data as text set for index " + index_downloaded_code.toString());
+        }
+
+        var down_load_code = this.getIndexForNextQrCodeToDownload();
+
+        console.log("loadAllQrCodeImages down_load_code is " + down_load_code);
+
+        if (down_load_code.length == 0)
+        {
+            this.m_callback_array_created(this.m_batch_print_card_array);
+
+            return;
+        }
+
+        var file_name_path_image = QrStrings.getRelativeUrlQrFileImage(this.m_start_year, down_load_code);
+
+        this.readImageTextFileOnServer(file_name_path_image, this.loadQrCodeImageRecursive);
+
+    } // loadQrCodeImageRecursive
+
+    // Read text file on server
+    // https://stackoverflow.com/questions/4533018/how-to-read-a-text-file-from-server-using-javascript
+    readImageTextFileOnServer(i_file_server, i_callback_function_name) 
+    {
+        console.log("Enter readImageTextFileOnServer");
+
+        console.log("i_file_server= " + i_file_server);
+
+        var raw_file = new XMLHttpRequest();
+
+        raw_file.open("GET", i_file_server, false);
+
+        raw_file.onreadystatechange = function ()
+        {
+            if(raw_file.readyState === 4)
+            {
+                if(raw_file.status === 200 || raw_file.status == 0)
+                {
+                    console.log("File exists");
+
+                    var all_text = raw_file.responseText;
+
+                    i_callback_function_name(all_text);
+                }
+                else if (raw_file.status == 404)
+                {
+                    console.log("File is missing");
+
+                    i_callback_function_name(QrStrings.failureLoadingQrFileCode());
+                }
+            }
+        }
+
+        raw_file.send(null);
+
+    } // readImageTextFileOnServer
 
 } // BatchPrintCardArray
 
+// Holds all data for the (batch) card to print
 class BatchPrintCard
 {
     constructor(i_name, i_download_code, i_season_str)
     {
+        // Name on the card
         this.m_name = i_name;
 
+        // The download code for the QR code card
         this.m_download_code = i_download_code;
 
+        // Season string
         this.m_season_str = i_season_str;
+
+        // QR code image data
+        this.m_qr_code_image = null;
     }
+
+    setQrCodeImage(i_qr_code_image)
+    {
+        this.m_qr_code_image = i_qr_code_image;
+
+    } // setQrCodeImage
 
 } // BatchPrintCard
 

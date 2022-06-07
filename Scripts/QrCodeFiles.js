@@ -1,5 +1,5 @@
 // File: QrCodeFiles.js
-// Date: 2022-06-02
+// Date: 2022-06-07
 // Author: Gunnar Lidén
 
 // File content
@@ -488,6 +488,8 @@ function eventClickPrintBatchButton()
     g_qr_files_xml_object.setPrintBatchBool(g_files_active_number, true);
 
     g_qr_files_xml_object.saveXmlFileOnServer();
+
+    uploadQrFileImageAndTextSupporter(g_files_active_number, g_qr_files_xml_object);
 
     if (getActiveCategory() == QrStrings.getQrCategorySupporterString())
     {
