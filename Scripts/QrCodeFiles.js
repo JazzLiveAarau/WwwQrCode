@@ -485,6 +485,12 @@ function eventClickPrintBatchButton()
 
     setActiveExecution(QrStrings. getQrExecutionPrintString());
 
+    getInputSetAndSaveQrCodeNames(callbackPrintBatchAfterGetInputSetAndSaveQrCodeNames);
+
+} // eventClickPrintBatchButton
+
+function callbackPrintBatchAfterGetInputSetAndSaveQrCodeNames()
+{
     g_qr_files_xml_object.setPrintBatchBool(g_files_active_number, true);
 
     g_qr_files_xml_object.saveXmlFileOnServer();
@@ -500,7 +506,7 @@ function eventClickPrintBatchButton()
         // setControlsMusician();
     } 
 
-} // eventClickPrintBatchButton
+} // callbackPrintBatchAfterGetInputSetAndSaveQrCodeNames
 
 // User clicked the file done button
 function eventClickQrFileDoneButton()

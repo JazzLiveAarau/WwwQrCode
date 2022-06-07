@@ -200,7 +200,7 @@ class BatchPrintCardArray
             {
                 n_names = n_names + 1;
 
-                var batch_print_card_two = new BatchPrintCard(name_one, download_one, season_str);
+                var batch_print_card_two = new BatchPrintCard(name_two, download_two, season_str);
 
                 var index_two = this.m_batch_print_card_array.length;
 
