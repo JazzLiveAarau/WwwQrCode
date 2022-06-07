@@ -17,19 +17,6 @@ var g_qr_files_xml_object_batch_print  = null;
 // Array of BatchPrintCard objects holding data for the (batch) print of cards
 var g_batch_card_array = null;
 
-// Background color for the supporter names
-var g_supporter_name_background_color = 'rgb(225, 213, 230)';
-
-// The season string that will be printed on the supporter card
-var g_print_qr_code_season_str = 'Supporter<br> Saison <br>2021-2022';
-
-// Returns the season string that will be printed on the supporter card
-function getPrintQrCodeSeasonString()
-{
-    return g_print_qr_code_season_str;
-
-} // getPrintQrCodeSeasonString
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Global Parameters ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -41,13 +28,9 @@ function getPrintQrCodeSeasonString()
 // On load function for the QR code print
 function onloadQrCodePrint()
 {
-    QrProgress.Msg("Enter onloadQrCodePrint");
+    var el_div_logo = getElementDivQrCodePrintLogo();
 
-    var el_input_color = getElementInputBackgroundColor();
-
-    el_input_color.value = g_supporter_name_background_color;
-
-    hideQrCodeImage();
+    el_div_logo.innerHTML = QrStrings.getQrCodePrintTitle();
 
     getSeasonStartYear(callbackSeasonStartYearPrintBatch);
 
@@ -56,8 +39,6 @@ function onloadQrCodePrint()
 // Callback after determining season start year with a PHP function
 function callbackSeasonStartYearPrintBatch(i_season_start_year)
 {
-    QrProgress.Append('callbackSeasonStartYearPrint ' + i_season_start_year.toString());
-
     g_qr_files_xml_object_batch_print = new QrFilesXml(afterLoadOfQrFilesXmlBatchPrint, i_season_start_year);
 
 } // callbackSeasonStartYearPrintBatch
@@ -73,8 +54,6 @@ function afterLoadOfQrFilesXmlBatchPrint()
 function clickCreatePrintPagesFromQrFilesXml()
 {
     createPrintPagesFromQrFilesXml(); 
-
-    QrProgress.Msg("");
 
 } // clickCreatePrintPagesFromQrFilesXml
 
@@ -131,13 +110,9 @@ function setCardQrCodeImages(i_batch_card_array)
 {
     for (var index_card=0; index_card < i_batch_card_array.length; index_card++)
     {
-        //QQQ var canvas_context = getCanvasContextQrCodeSupporter(index_card);
-
         var batch_card = i_batch_card_array[index_card];
 
         var image_data = batch_card.getQrCodeImage();
-
-        //QQQ canvas_context.putImageData(image_data, 0, 0);
 
         var el_image = getElementImageQrCodeSupporter(index_card);
 
@@ -145,23 +120,6 @@ function setCardQrCodeImages(i_batch_card_array)
     }
 
 } // setCanvasSupporterQrCodes
-
-function setBackgroundColorForNames()
-{
-    var el_input_color = getElementInputBackgroundColor();
-
-    g_supporter_name_background_color = el_input_color.value;
-
-    var el_supporter_names = document.getElementsByClassName(getClassSupporterName());
-
-    for (var index_name=0; index_name < el_supporter_names.length; index_name++)
-    {
-        var el_supporter_name = el_supporter_names[index_name];
-
-        el_supporter_name.style.backgroundColor = g_supporter_name_background_color;
-    }
-
-} // setBackgroundColorForNames
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// End Create Print Pages Functions ////////////////////////////////
@@ -1060,6 +1018,19 @@ function getSupporterCardReverseSideFour()
 ///////////////////////// Start Get Html Elements, Identities And Classes /////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// Get the input element for the div qr code print logo and title
+function getElementDivQrCodePrintLogo()
+{
+    return document.getElementById(getIdDivQrCodePrintLogo());
+
+} // getElementDivQrCodePrintLogo
+
+// Returns the identity of the div qr code print logo and title
+function getIdDivQrCodePrintLogo()
+{
+    return 'id_div_qr_print_logo';
+
+} // getIdDivQrCodePrintLogo
 
 // Get the image element for the card QR code
 function getElementImageQrCodeSupporter(i_index_card)
@@ -1130,20 +1101,6 @@ function getClassDivCanvasQrCode()
     return 'cl_div_qr_canvas';
 
 } // getClassDivCanvasQrCode
-
-// Get the input element for the name background color
-function getElementInputBackgroundColor()
-{
-    return document.getElementById(getIdInputBackgroundColor());
-
-} // getElementInputBackgroundColor
-
-// Returns the identity of the element for the name background color
-function getIdInputBackgroundColor()
-{
-    return 'id_input_color';
-
-} // getIdInputBackgroundColor
 
 // Get the div for all print pages
 function getElementDivAllPrintPages()

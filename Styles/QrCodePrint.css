@@ -18,7 +18,7 @@ body
     background-color: rgb(223, 224, 225);
 }
 
-.cl_div_qr_generate_logo
+.cl_div_qr_print_logo
 {
     height: 22mm;
     width: 330px;
@@ -33,21 +33,9 @@ body
     clear: both;
 }
 
-input 
-{
-    padding:5px;
-    background-color:transparent;
-    border:none;
-    border-bottom:solid 4px black;
-    width:150px;
-    margin-bottom: 5mm;
-    margin-left: 50px;
-    font-size:16px;
-}
-
 .cl_qr_code_controls
 {
-    margin-left: 80mm;
+    margin-left: 5mm;
 }
 
 .cl_canvas_qr_code
@@ -71,11 +59,6 @@ input
     color:white;
     float: left;
     cursor:pointer;
-}
-
-.cl_div_qr_background_color
-{
-    clear: both;
 }
 
 /* Size and background color (white) of the A4 pages that shall be printed.  */

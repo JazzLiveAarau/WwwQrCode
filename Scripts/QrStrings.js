@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-06-06
+// Date: 2022-06-07
 // Author: Gunnar Lidén
 
 // File content
@@ -26,6 +26,11 @@ class QrStrings
 
     } // getQrCodeShowTitle
 
+    static getQrCodePrintTitle()
+    {
+        return 'JAZZ <i>live</i> AARAU<br>Print Batch';
+
+    } // getQrCodePrintTitle
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////// End Website Names /////////////((////////////////

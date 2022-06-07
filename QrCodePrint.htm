@@ -17,9 +17,6 @@
     <!-- Styles creation QR Codes  -->
     <link rel="stylesheet" href="Styles/QrCodePrint.css">
 
-    <!-- Library for the creation of QR Codes from https://cdnjs.com/libraries/qrious -->
-    <script type="text/javascript" src="QrCodeLib/qrious.js"></script>
-
     <!--  jQuery library -->
     <script src="jQuery/jquery-3.6.0.js"></script>
 
@@ -28,15 +25,6 @@
 
     <!-- Class with functions for the files XML file -->
     <script type="text/javascript" src="Scripts/QrFilesXml.js"></script>
-    
-    <!-- QR Code generation functions for supporters -->
-    <script type="text/javascript" src="Scripts/QrCodeSupporter.js"></script>
-
-    <!-- Get and set supporter data functions -->
-    <script type="text/javascript" src="Scripts/SupporterData.js"></script>
-
-    <!-- Class with functions for the supporter XML file -->
-    <script type="text/javascript" src="Scripts/SupporterXml.js"></script>
 
     <!-- Strings for all QR web pages -->
     <script type="text/javascript" src="Scripts/QrStrings.js"></script>
@@ -50,7 +38,7 @@
 
     <div class="cl_qr_code_controls" >
 
-      <div id="id_div_qr_generate_logo" class="cl_div_qr_generate_logo">JAZZ <i>live</i> AARAU<br>QR Print Batch</div>
+      <div id="id_div_qr_print_logo" class="cl_div_qr_print_logo"></div>
 
       <div class="cl_div_qr_buttons" >
         <div>
@@ -63,30 +51,13 @@
 
       </div> <!--  cl_div_qr_buttons -->
 
-      <div class= "cl_div_qr_background_color" >
-
-        <div>Hintergrundfarbe für die Supporternamen: <br><input id="id_input_color" type="text" /></div>
-
-      </div> <!-- cl_div_qr_background_color -->
-      
-
       <div> <canvas id="id_canvas_qr_code"></canvas> </div>
-
-      <div id="id_div_qr_show_progress" class="cl_div_qr_show_progress" >
-        File n created 
-      </div>
 
     </div>
 
     <div class="page-break"></div>
 
     <div id="id_all_print_pages"   class= "cl_all_print_pages" ></div>
-
-    <script type="text/javascript" >
-  
-      initQrCodeGenerator();
-  
-    </script>
 
   </body>
 </html>
