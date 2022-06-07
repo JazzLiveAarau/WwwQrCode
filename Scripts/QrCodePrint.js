@@ -97,7 +97,9 @@ function createPrintPagesFromQrFilesXml()
 {
     var to_print_file_number_array = g_qr_files_xml_object_batch_print.getFilteredFileNumberArrayForPrintBatch();
 
-    g_batch_card_array = new BatchPrintCardArray(g_qr_files_xml_object_batch_print, to_print_file_number_array);
+    var card_category = QrStrings.getQrCategorySupporterString();
+
+    g_batch_card_array = new BatchPrintCardArray(g_qr_files_xml_object_batch_print, to_print_file_number_array, card_category);
 
     g_batch_card_array.createArray(callbackAfterCreatingBatchCardArray);
 
@@ -225,11 +227,13 @@ function createPrintDoneCardsButton()
 
 class BatchPrintCardArray
 {
-    constructor(i_qr_xml, i_print_file_numbers)
+    constructor(i_qr_xml, i_print_file_numbers, i_category)
     {
         this.m_qr_xml = i_qr_xml;
 
         this.m_print_file_numbers = i_print_file_numbers;
+
+        this.m_category = i_category;
 
         this.m_batch_print_card_array = null;
 
@@ -283,7 +287,7 @@ class BatchPrintCardArray
             {
                 n_names = n_names + 1;
 
-                var batch_print_card_one = new BatchPrintCard(name_one, download_one, season_str);
+                var batch_print_card_one = new BatchPrintCard(name_one, download_one, season_str, this.m_category);
 
                 var index_one = this.m_batch_print_card_array.length;
 
@@ -294,7 +298,7 @@ class BatchPrintCardArray
             {
                 n_names = n_names + 1;
 
-                var batch_print_card_two = new BatchPrintCard(name_two, download_two, season_str);
+                var batch_print_card_two = new BatchPrintCard(name_two, download_two, season_str, this.m_category);
 
                 var index_two = this.m_batch_print_card_array.length;
 
@@ -425,7 +429,7 @@ class BatchPrintCardArray
 // Holds all data for the (batch) card to print
 class BatchPrintCard
 {
-    constructor(i_name, i_download_code, i_season_str)
+    constructor(i_name, i_download_code, i_season_str, i_category)
     {
         // Name on the card
         this.m_name = i_name;
@@ -435,6 +439,9 @@ class BatchPrintCard
 
         // Season string
         this.m_season_str = i_season_str;
+
+        // Card category
+        this.m_category = i_category;
 
         // QR code image data
         this.m_qr_code_image = null;
@@ -746,6 +753,10 @@ function getElementDivCardBoxLeftString(i_index_supporter, i_batch_card_array, i
 
     var season_str = batch_card.m_season_str;
 
+    var category_str = batch_card.m_category;
+
+    var category_season_str = category_str + '<br>' + season_str;
+
     var id_div_card_box_left = '';
 
     var cl_div_card_box_left = getClassCardBoxLeft();
@@ -762,7 +773,7 @@ function getElementDivCardBoxLeftString(i_index_supporter, i_batch_card_array, i
 	
 	ret_card_box_left_str = ret_card_box_left_str + getTabs(i_tab + 1) + getElementDivSupporterNameString(card_name, i_tab) + getNewLineString();
 
-    ret_card_box_left_str = ret_card_box_left_str + getElementDivSeasonTextString(season_str, i_tab + 1);
+    ret_card_box_left_str = ret_card_box_left_str + getElementDivSeasonTextString(category_season_str, i_tab + 1);
 
     ret_card_box_left_str = ret_card_box_left_str + getNewLineString();
 
@@ -798,6 +809,10 @@ function getElementDivCardBoxRightString(i_index_supporter, i_batch_card_array, 
 
     var season_str = batch_card.m_season_str;
 
+    var category_str = batch_card.m_category;
+
+    var category_season_str = category_str + '<br>' + season_str;
+
     var cl_div_card_box_right = getClassCardBoxRight();
 
     ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab);
@@ -812,7 +827,7 @@ function getElementDivCardBoxRightString(i_index_supporter, i_batch_card_array, 
 	
 	ret_card_box_right_str = ret_card_box_right_str + getTabs(i_tab + 1) + getElementDivSupporterNameString(card_name, i_tab) + getNewLineString();
 
-    ret_card_box_right_str = ret_card_box_right_str + getElementDivSeasonTextString(season_str, i_tab + 1);
+    ret_card_box_right_str = ret_card_box_right_str + getElementDivSeasonTextString(category_season_str, i_tab + 1);
 
     ret_card_box_right_str = ret_card_box_right_str + getNewLineString();
 
