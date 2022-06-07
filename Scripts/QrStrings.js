@@ -59,7 +59,7 @@ class QrStrings
             ret_htm = ret_htm + 'Bitte diesen Link ' + this.linkQrCodeShowWebPage(caption_str, i_download_code) + 
             ' klicken' + '<br>' + '<br>';
 
-            ret_htm = ret_htm + 'Der Code wird <b>' + i_download_code + '</b> automatisch eingegeben' + '<br>' + '<br>';
+            ret_htm = ret_htm + 'Der Code <b>' + i_download_code + '</b> wird automatisch eingegeben' + '<br>' + '<br>';
         }
         else
         {
@@ -612,7 +612,7 @@ class QrStrings
     // Caption for the button QR Files print batch
     static getCaptionButtonQrFilesPrintBatch()
     {
-        return 'Print';
+        return 'Batch';
 
     } // getCaptionButtonQrFilesPrintBatch
 
