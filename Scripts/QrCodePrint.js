@@ -278,7 +278,9 @@ class BatchPrintCardArray
         this.m_callback_array_created = i_callback_array_created;
 
         var season_str = this.m_qr_xml.getSeasonStartYear().toString() + '-' +
-                        (this.m_qr_xml.getSeasonStartYear() + 1).toString()
+                        (this.m_qr_xml.getSeasonStartYear() + 1).toString();
+
+        season_str = 'Saison' + '<br>' + season_str;
 
         var n_files = this.m_print_file_numbers.length;
 
