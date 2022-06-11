@@ -368,6 +368,3 @@ FodyWeavers.xsd
 # Season XML test data
 /XmlTestData/
 
-# FTP configuration files
-# ftp-sync.json
-*.json
