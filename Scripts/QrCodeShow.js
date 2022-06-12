@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-06-06
+// Date: 2022-06-12
 // Author: Gunnar Lidén
 
 // File content
@@ -12,6 +12,77 @@
 // https://hacks.mozilla.org/2012/02/saving-images-and-files-in-localstorage/
 
 // https://www.mediaevent.de/javascript/canvas-to-data-url.html
+
+// Learning PWA
+// ============
+//
+// Source code
+// https://github.com/iamshaunjp/pwa-tutorial/blob/master/index.html
+//
+// Lesson 1 What Are PWA's?
+// https://www.youtube.com/watch?v=4XT23X0Fjfk&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7
+// Lesson 2 Setting up a Project
+// https://www.youtube.com/watch?v=JQaL5YiSuqE&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=2
+// Lesson 3 The Web App Manifest
+//https://www.youtube.com/watch?v=AlEdGOLhuM8&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=3
+// Lesson 4 Android Emulator
+// https://www.youtube.com/watch?v=1VVKhnHNBeQ&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=4
+// Lesson 5 iOS Support
+// https://www.youtube.com/watch?v=jy6hX48pRHw&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=5
+// Lesson 6 Intro to Service Workers
+// https://www.youtube.com/watch?v=hxiggHZOGlQ&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=6
+// Lesson 7 Service Worker Life-cycle
+// https://www.youtube.com/watch?v=NhQfvZoRb2Q&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=7
+// Lesson 8 Registering a Service Worker
+// https://www.youtube.com/watch?v=6s697AJdlB8&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=8
+// Lesson 9 The Install Event
+// https://www.youtube.com/watch?v=JnCEXQo_TiI&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=9
+// Lesson 10 The 'Activate' Event
+// https://www.youtube.com/watch?v=AmWj52zw9R8&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=10
+// Lesson 11 Lighthouse Audit
+// https://www.youtube.com/watch?v=egmwY9n6qWY&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=11
+// Lesson 12 Fetch Events
+// https://www.youtube.com/watch?v=C0vh57N7vM4&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=12
+// Lesson 13 The Install Banner
+// https://www.youtube.com/watch?v=9whdWJ4q7jE&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=13
+// Lesson 14 Offline Mode Explained
+// https://www.youtube.com/watch?v=Vz1D28zshaI&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=14
+// Lesson 15 Pre-Caching Assets
+// https://www.youtube.com/watch?v=kT3qSf7jG5c&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=15
+// Lesson 16 Getting Cached Assets
+// https://www.youtube.com/watch?v=0mAw9Na6hyM&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=16
+// Lesson 17 Cache Versioning
+// https://www.youtube.com/watch?v=g9LfyCZjeKI&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=17
+// Lesson 18 Dynamic Caching
+// https://www.youtube.com/watch?v=ChXgikdQJR8&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=18
+// Lesson 19 Offline Fallback Page
+// https://www.youtube.com/watch?v=KLQELCvb-B0&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=19
+// Lesson 20 Conditional Fallbacks
+// https://www.youtube.com/watch?v=K9NXQZxKMko&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=20
+// Lesson 21 Limiting Cache Size
+// https://www.youtube.com/watch?v=CHBoXdVdPi0&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=21
+// Lesson 22 Site Audit Refresh
+// https://www.youtube.com/watch?v=1tkK-OVno84&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=22
+// Lesson 23 Firestore Database
+// https://www.youtube.com/watch?v=ZfL61cOUImw&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=23
+// Lesson 24 Realtime Data
+// https://www.youtube.com/watch?v=JP3L0jIXvrY&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=24
+// Lesson 25 Updating the UI
+// https://www.youtube.com/watch?v=ezNvFzc0f30&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=25
+// Lesson 26 Offline Data
+// https://www.youtube.com/watch?v=ciu62KLlwGQ&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=26
+// Lesson 27 Adding Recipes
+// https://www.youtube.com/watch?v=BHCk5TSNUkI&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=27
+// Lesson 28 Deleting Recipes
+// https://www.youtube.com/watch?v=zdb8_a0DXTg&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=28
+// Lesson 29 Deploying to Firebase
+// https://www.youtube.com/watch?v=e-aAAbY0miY&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=29
+// Lesson 30 Testing the App
+// https://www.youtube.com/watch?v=sI7EdkYiU20&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=30
+// Lesson 31 Next Steps
+// https://www.youtube.com/watch?v=7y7xlVo4Iio&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7&index=31
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
