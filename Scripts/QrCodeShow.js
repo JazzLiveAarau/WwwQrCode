@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-06-12
+// Date: 2022-06-13
 // Author: Gunnar Lidén
 
 // File content
@@ -88,9 +88,6 @@
 ///////////////////////// Start Global Parameters /////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// Season start year
-var g_season_start_year_show = -12345;
-
 // windows.localStorage key for the QR code season_start_year
 var g_local_storage_qr_season_start_year = 'qr_season_start_year';
 
@@ -159,9 +156,19 @@ function onloadQrCodeShow()
 
     var b_query_local = noCodeInQueryStringOrEqualToLocal();
 
-    if (b_qr_code_saved && b_query_local && g_internet_is_available) 
+    // 2022-06-12 if (b_qr_code_saved && b_query_local && g_internet_is_available) 
+    if (b_qr_code_saved && b_query_local) 
     {
+        console.log("onloadQrCodeShow  Download code is saved in local storage and there is no query string with download code");
+
         var season_start_year_int = getSeasonStartYearAsIntFromLocalStorage();
+
+        if (season_start_year_int < 2021)
+        {
+            alert("onloadQrCodeShow Error season_start_year_int= " + season_start_year_int.toString());
+
+            return;
+        }
 
         displayQrCodeWithDataFromLocalStorage(season_start_year_int);
     }
@@ -169,9 +176,13 @@ function onloadQrCodeShow()
     {
         getSeasonStartYear(callbackSeasonStartYearShow);
     }
-    else
+    else if (!g_internet_is_available)
     {
         displayDivQrShowInternetConnection();
+    }
+    else
+    {
+        alert("onloadQrCodeShow Error b_qr_code_saved= " + b_qr_code_saved.toString() + " b_query_local= " + b_query_local.toString());
     }
 
 } // onloadQrCodeShow
@@ -197,9 +208,7 @@ function eventInternetIsNotAvailableQrShow()
 // Callback function retrieving the season start year
 function callbackSeasonStartYearShow(i_season_start_year)
 {
-    g_season_start_year_show = i_season_start_year;
-
-    setSeasonStartYearInLocalStorage(g_season_start_year_show);
+    setSeasonStartYearInLocalStorage(i_season_start_year);
 
     setInputQrQodeElementWithQueryString();
 
@@ -244,17 +253,25 @@ function noCodeInQueryStringOrEqualToLocal()
 
     if (code_query.length == 0)
     {
+        console.log("noCodeInQueryStringOrEqualToLocal No code in the query string");
+
         return true;
     }
+
+    console.log("noCodeInQueryStringOrEqualToLocal Download code in the query string");
 
     var code_local_storage = getDownloadCodeFromLocalStorage();
 
     if (code_query == code_local_storage)
     {
+        console.log("noCodeInQueryStringOrEqualToLocal Download query code is equal to download code in local storage");
+
         return true;
     }
     else
     {
+        console.log("noCodeInQueryStringOrEqualToLocal Download query code is NOT equal to download code in local storage");
+
         return false;
     }
 
@@ -329,8 +346,6 @@ function displayQrCodeWithDataFromLocalStorage(i_season_start_year)
 
         return false;
     }
-
-    g_season_start_year_show = i_season_start_year;
 
     var local_download_code = getDownloadCodeFromLocalStorage();
 
@@ -454,14 +469,16 @@ function getServerFileNameImageFromInputElement()
 
     var file_name_path_image = '';
 
-    if (execApplicationOnServer())
+    var season_start_year = getSeasonStartYearAsIntFromLocalStorage();
+
+    if (season_start_year < 2021)
     {
-        file_name_path_image = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, down_load_code);
+        alert("getServerFileNameImageFromInputElement Season start year from local storage is " + season_start_year.toString());
+
+        return '';        
     }
-    else
-    {
-        file_name_path_image = QrStrings.getRelativeUrlQrFileImage(g_season_start_year_show, down_load_code);
-    }
+
+    file_name_path_image = QrStrings.getRelativeUrlQrFileImage(season_start_year, down_load_code);
 
     return file_name_path_image;
 
@@ -479,14 +496,16 @@ function getServerFileNameTextFromInputElement()
 
     var file_name_path_text = '';
 
-    if (execApplicationOnServer())
+    var season_start_year = getSeasonStartYearAsIntFromLocalStorage();
+
+    if (season_start_year < 2021)
     {
-        file_name_path_text = 'https://jazzliveaarau.ch/QrCode/' + QrStrings.getRelativeUrlQrFileText(g_season_start_year_show, down_load_code);
+        alert("getServerFileNameTextFromInputElement Season start year from local storage is " + season_start_year.toString());
+
+        return '';        
     }
-    else
-    {
-        file_name_path_text = QrStrings.getRelativeUrlQrFileText(g_season_start_year_show, down_load_code);
-    }
+
+    file_name_path_text = QrStrings.getRelativeUrlQrFileText(season_start_year, down_load_code);
 
     return file_name_path_text;
 

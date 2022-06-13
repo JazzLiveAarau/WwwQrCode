@@ -1,5 +1,5 @@
 // File: QrCodeUtils.js
-// Date: 2022-06-02
+// Date: 2022-06-13
 // Author: Gunnar Lidén
 
 // File content
@@ -195,7 +195,7 @@ class Internet
 
         this.m_interval_function = null;
 
-        this.startIntervalFunction();
+        //2022-06-12 this.startIntervalFunction();
 
     } 
 
@@ -599,7 +599,7 @@ function initQrCodeDataInLocalStorageIfDownloadCodesNotEqual(i_download_code)
 
     if (i_download_code != local_download_code)
     {
-        console.log("Download codes arenot equal");
+        console.log("Download codes are not equal");
 
         initQrCodeDataInLocalStorage(i_download_code);
     }
@@ -683,8 +683,10 @@ function getDownloadCodeFromLocalStorage()
 {
     var download_code = localStorage.getItem(this.g_local_storage_qr_image_download_code);
 
-    if (download_code == null)
+    if (download_code == null || download_code.length == 0)
     {
+        console.log("getDownloadCodeFromLocalStorage Error not in local storage. Empty string is returned");
+
         return "";
     }
     else
@@ -699,8 +701,10 @@ function getQrImageDataUrlFromLocalStorage()
 {
     var image_data_url = localStorage.getItem(this.g_local_storage_qr_image_data_url);
 
-    if (image_data_url == null)
+    if (image_data_url == null || image_data_url.length == 0)
     {
+        console.log("getQrImageDataUrlFromLocalStorage Error not in local storage. Empty string is returned");
+
         return "";
     }
     else
@@ -715,8 +719,10 @@ function getQrTextDataFromLocalStorage()
 {
     var qr_text_data = localStorage.getItem(this.g_local_storage_qr_text_data);
 
-    if (qr_text_data == null)
+    if (qr_text_data == null || qr_text_data.length == 0)
     {
+        console.log("getQrTextDataFromLocalStorage Error not in local storage. Empty string is returned");
+
         return "";
     }
     else
@@ -731,12 +737,16 @@ function getSeasonStartYearAsIntFromLocalStorage()
 {
     var season_start_year_str = localStorage.getItem(this.g_local_storage_qr_season_start_year);
 
-    if (season_start_year_str == null)
+    if (season_start_year_str == null || season_start_year_str.length == 0)
     {
+        console.log("getSeasonStartYearAsIntFromLocalStorage Error Returned start year is -12345");
+
         return -12345;
     }
     else
     {
+        console.log("getSeasonStartYearAsIntFromLocalStorage Returned start year is " + season_start_year_str);
+
         return parseInt(season_start_year_str);
     }
 
@@ -753,8 +763,6 @@ function deleteQrCodeDataInLocalStorage()
 
     localStorage.setItem(this.g_local_storage_qr_text_data, '');
 
-    localStorage.setItem(this.g_local_storage_qr_season_start_year, '');
-
 } // deleteQrCodeDataInLocalStorage
 
 // Initialize QR code data in local storage
@@ -767,8 +775,6 @@ function initQrCodeDataInLocalStorage(i_download_code)
     localStorage.setItem(this.g_local_storage_qr_image_data_url, "");
 
     localStorage.setItem(this.g_local_storage_qr_text_data, "");
-
-    localStorage.setItem(this.g_local_storage_qr_season_start_year, '');
 
 } // initQrCodeDataInLocalStorage
 
