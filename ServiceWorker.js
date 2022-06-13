@@ -34,7 +34,7 @@ const assets =
   'jQuery/jquery-3.6.0.js',
   'Styles/QrCodeShow.css',
   'manifest.json',
-  'https://jazzliveaarau.ch/favicon.ico',
+  'Icons/MaskableTextQr.png',
   'Icons/icon_cross.png',
   'Icons/icon_info_invert.png',
   'Icons/Icon-29.png',
