@@ -2,7 +2,7 @@
 {
   "name": "Jazz Mobile Karten",
   "short_name": "JAZZ QR",
-  "start_url": "/QrCodeShow.htm",
+  "start_url": "QrCodeShow.htm",
   "display": "standalone",
   "background_color": "#FFE9D2",
   "theme_color": "#FFE1C4",
