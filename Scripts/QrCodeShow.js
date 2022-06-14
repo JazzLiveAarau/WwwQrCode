@@ -1,5 +1,5 @@
 // File: QrCodeShow.js
-// Date: 2022-06-13
+// Date: 2022-06-14
 // Author: Gunnar Lidén
 
 // File content
@@ -18,6 +18,11 @@
 //
 // Source code
 // https://github.com/iamshaunjp/pwa-tutorial
+
+// Web manifest
+// https://developer.mozilla.org/de/docs/Web/Manifest
+// https://www.w3.org/TR/appmanifest/#dfn-start_url
+// https://web.dev/add-manifest/
 //
 // Lesson 1 What Are PWA's?
 // https://www.youtube.com/watch?v=4XT23X0Fjfk&list=PL4cUxeGkcC9gTxqJBcDmoi5Q2pzDusSL7
