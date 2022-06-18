@@ -303,6 +303,10 @@ function getSeasonStartYear(i_callback_season_start_year)
 
     var qr_file_xml_prev_year = QrStrings. getRelativeUrlSupporterXmlFile(current_year - 1);
 
+    console.log("getSeasonStartYear qr_file_xml_this_year= " + qr_file_xml_this_year);
+
+    console.log("getSeasonStartYear qr_file_xml_prev_year= " + qr_file_xml_prev_year);
+
     // QrProgress.Append(qr_file_xml_prev_year);
 
     seasonStartYearJQueryPost(current_year.toString(), qr_file_xml_this_year, qr_file_xml_prev_year, i_callback_season_start_year);
@@ -335,6 +339,8 @@ function seasonStartYearJQueryPost(i_current_year, i_file_name_this, i_file_name
                 //alert(data_year_str);
 
                 // QrProgress.Append('data_year_str = ' + data_year_str.trim());
+
+                console.log("seasonStartYearJQueryPost data_year_str= " + data_year_str.trim());
 				
 				var season_start_year = parseInt(data_year_str.trim());
 				

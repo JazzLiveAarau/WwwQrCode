@@ -179,6 +179,8 @@ function onloadQrCodeShow()
     }
     else if (g_internet_is_available)
     {
+        console.log("onloadQrCodeShow  Internet is available");
+
         getSeasonStartYear(callbackSeasonStartYearShow);
     }
     else if (!g_internet_is_available)
