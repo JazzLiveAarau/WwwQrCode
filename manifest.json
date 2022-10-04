@@ -1,7 +1,7 @@
 
 {
   "name": "Jazz Mobile Karten",
-  "short_name": "JAZZ QR",
+  "short_name": "E-Ticket",
   "start_url": "QrCodeShow.htm",
   "display": "standalone",
   "background_color": "#FFE9D2",

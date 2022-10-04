@@ -1,5 +1,5 @@
 // File: ServiceWorker.js
-// Date: 2022-06-13
+// Date: 2022-10-04
 // Author: Gunnar Lidén
 
 // File content
@@ -20,7 +20,7 @@
 // Cache will be updated when there is a change in this file, i.e.  
 // just change version number.
 
-const staticCacheName = 'site-static-v1';
+const staticCacheName = 'site-static-v3';
 const assets = 
 [
   '/',

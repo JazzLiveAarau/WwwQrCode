@@ -1,5 +1,5 @@
 // File: QrStrings.js
-// Date: 2022-06-07
+// Date: 2022-10-04
 // Author: Gunnar Lidén
 
 // File content
@@ -22,7 +22,7 @@ class QrStrings
 
     static getQrCodeShowTitle()
     {
-        return 'JAZZ <i>live</i> AARAU<br>Mobile Karten';
+        return 'JAZZ <i>live</i> AARAU<br>E-Ticket';
 
     } // getQrCodeShowTitle
 
@@ -42,7 +42,7 @@ class QrStrings
 
     static getTitleSupporterEmail()
     {
-        return 'JAZZ live AARAU Supporter Ausweis als QR Code';
+        return 'JAZZ live AARAU Supporter Ausweis für die App E-Ticket';
 
     } // getTitleSupporterEmail
 
@@ -52,8 +52,28 @@ class QrStrings
 
         ret_htm = ret_htm + 'Vielen Dank ' + i_supporter_name + ', dass Sie uns als Supporter unterstützen.' + '<br>' + '<br>';
 
+        ret_htm = ret_htm + 'Bitte die JAZZ <i>live</i> AARAU App E-Ticket starten und den Code <b>' + i_download_code + '</b> eingeben.' + '<br>';
+
+        if (i_download_code_two.length > 0)
+        {
+            ret_htm = ret_htm + 'Der Code für die zweite Person ist <b>' + i_download_code_two + '</b><br>' + '<br><br>';
+        }
+        else
+        {
+            ret_htm = ret_htm + '<br><br>';
+        }
+
+        ret_htm = ret_htm + '<b>Installation der App E-Ticket</b>' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'E-Ticket ist eine neue Art von App, die man PWA (Progressive Web App) nennt.'  + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'So wird die App E-Ticket installiert:'  + '<br>';
+
         var caption_str = '';
 
+        ret_htm = ret_htm + '- Dieser Link ' + this.linkQrCodeShowWebPage(caption_str, i_download_code) + ' klicken' + '<br>';
+
+        /* 2022-10-04
         if (i_download_code_two.length == 0)
         {
             ret_htm = ret_htm + 'Bitte diesen Link ' + this.linkQrCodeShowWebPage(caption_str, i_download_code) + 
@@ -71,9 +91,16 @@ class QrStrings
             ret_htm = ret_htm + '<b>' + i_download_code_two + '</b> werden automatisch eingegeben' + '<br>' + '<br>';
 
         }
+        2022-10-04 */
 
-        ret_htm = ret_htm + '<br>' + 'Die geöffnete Webseite <b>(' 
-        + this.urlFullQrCodeShowWebPage() + ')</b> bitte als Lesezeichen (Favorite) speichern.' + '<br>' + '<br>';
+        ret_htm = ret_htm + '- Die geöffnete Webseite (' 
+        + this.urlFullQrCodeShowWebPage() + ') zum Startbildschirm zufügen.' + '<br>' + '<br>';
+
+        ret_htm = ret_htm + 'Mit den meisten Android Telefonen wird man automatisch gefragt, ob man die Webseite zum Startbildschirm zufügen möchte.'  + '<br>';
+
+        ret_htm = ret_htm + 'Mit einem iPhone muss man die Webseite manuell zufügen: '  + '<br>';
+        ret_htm = ret_htm + ' - Icon Teilen klicken '  + '<br>';
+        ret_htm = ret_htm + ' - Zum Startbildschirm zufügen '  + '<br>' + '<br>' + '<br>';
         
         ret_htm = ret_htm + 'Grüsse ' + '<br>' + '<br>';
 
@@ -120,32 +147,34 @@ class QrStrings
     {
         var ret_instruct = '';
 
-        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU Mobile Karten</h4>';
+        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU App E-Ticket</h4>';
 
         if (i_download_code_two.length == 0)
         {
-            ret_instruct = ret_instruct + 'Der Ausweis kann im Telefon gespeichert und gezeigt werden.' + '<br>';
+            ret_instruct = ret_instruct + 'Der Ausweis kann mit E-Ticket gezeigt werden. Installation:' + '<br>';
 
             ret_instruct = ret_instruct + 'Link unten eingeben (oder QR Code rechts scannen).' + '<br>';
 
             ret_instruct = ret_instruct +  '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Der Code für diesen Ausweis ist <b>' + i_download_code + '</b>' + '<br>';
+            ret_instruct = ret_instruct + 'Zum Startbildschirm hinzufügen und Icon klicken' + '<br>';
+
+            ret_instruct = ret_instruct + 'Der Code für diesen Ausweis <b>' + i_download_code + '</b> eingeben' + '<br>';
         }
         else
         {
-            ret_instruct = ret_instruct + 'Der Ausweis kann im Telefon gespeichert und gezeigt werden.' + '<br>';
+            ret_instruct = ret_instruct + 'Der Ausweis kann mit E-Ticket gezeigt werden. Installation:' + '<br>';
 
             ret_instruct = ret_instruct + 'Link unten eingeben (oder QR Codes rechts scannen).' + '<br>';
 
             ret_instruct = ret_instruct + '<b>' + this.urlQrCodeShowWebPage()  + '</b>' + '<br>';
 
-            ret_instruct = ret_instruct + 'Der Code für den ersten Ausweis ist <b>' + i_download_code + '</b><br>';
+            ret_instruct = ret_instruct + 'Zum Startbildschirm hinzufügen und Icon klicken' + '<br>';
 
-            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis ist <b>' + i_download_code_two + '</b>' + '<br>';
+            ret_instruct = ret_instruct + 'Der Code für den ersten Ausweis <b>' + i_download_code + '</b> eingeben<br>';
+
+            ret_instruct = ret_instruct + 'Der Code für den zweiten Ausweis <b>' + i_download_code_two + '</b> eingeben' + '<br>';
         }
-
-        ret_instruct = ret_instruct + 'Die Webseite (Link) danach als Lesezeichen speichern.';
 
         return ret_instruct;
 
@@ -206,7 +235,7 @@ class QrStrings
     {
         var ret_reverse_qr = '';
     
-        ret_reverse_qr = ret_reverse_qr + 'Mobile Karten (QR Code Anzeiger):' + '<br>';
+        ret_reverse_qr = ret_reverse_qr + 'E-Ticket (QR Code Anzeiger):' + '<br>';
     
         ret_reverse_qr = ret_reverse_qr + this.urlQrCodeShowWebPage() + '<br><br>';
     
