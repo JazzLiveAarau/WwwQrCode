@@ -1,7 +1,7 @@
 
 {
-  "name": "Jazz Mobile Karten",
-  "short_name": "E-Ticket",
+  "name": "JAZZ live AARAU QR Ticket",
+  "short_name": "QR Ticket",
   "start_url": "QrCodeShow.htm",
   "display": "standalone",
   "background_color": "#FFE9D2",

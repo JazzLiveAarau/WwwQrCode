@@ -22,7 +22,7 @@ class QrStrings
 
     static getQrCodeShowTitle()
     {
-        return 'JAZZ <i>live</i> AARAU<br>E-Ticket';
+        return 'JAZZ <i>live</i> AARAU<br>QR Ticket';
 
     } // getQrCodeShowTitle
 
@@ -42,7 +42,7 @@ class QrStrings
 
     static getTitleSupporterEmail()
     {
-        return 'JAZZ live AARAU Supporter Ausweis für die App E-Ticket';
+        return 'JAZZ live AARAU Supporter Ausweis für die App QR Ticket';
 
     } // getTitleSupporterEmail
 
@@ -52,7 +52,7 @@ class QrStrings
 
         ret_htm = ret_htm + 'Vielen Dank ' + i_supporter_name + ', dass Sie uns als Supporter unterstützen.' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'Bitte die JAZZ <i>live</i> AARAU App E-Ticket starten und den Code <b>' + i_download_code + '</b> eingeben.' + '<br>';
+        ret_htm = ret_htm + 'Bitte die JAZZ <i>live</i> AARAU App QR Ticket starten und den Code <b>' + i_download_code + '</b> eingeben.' + '<br>';
 
         if (i_download_code_two.length > 0)
         {
@@ -63,11 +63,11 @@ class QrStrings
             ret_htm = ret_htm + '<br><br>';
         }
 
-        ret_htm = ret_htm + '<b>Installation der App E-Ticket</b>' + '<br>' + '<br>';
+        ret_htm = ret_htm + '<b>Installation der App QR Ticket</b>' + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'E-Ticket ist eine neue Art von App, die man PWA (Progressive Web App) nennt.'  + '<br>' + '<br>';
+        ret_htm = ret_htm + 'QR Ticket ist eine neue Art von App, die man PWA (Progressive Web App) nennt.'  + '<br>' + '<br>';
 
-        ret_htm = ret_htm + 'So wird die App E-Ticket installiert:'  + '<br>';
+        ret_htm = ret_htm + 'So wird die App QR Ticket installiert:'  + '<br>';
 
         var caption_str = '';
 
@@ -147,11 +147,11 @@ class QrStrings
     {
         var ret_instruct = '';
 
-        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU App E-Ticket</h4>';
+        ret_instruct = ret_instruct + '<h4>JAZZ <i>live</i> AARAU App QR Ticket</h4>';
 
         if (i_download_code_two.length == 0)
         {
-            ret_instruct = ret_instruct + 'Der Ausweis kann mit E-Ticket gezeigt werden. Installation:' + '<br>';
+            ret_instruct = ret_instruct + 'Der Ausweis kann mit QR Ticket gezeigt werden. Installation:' + '<br>';
 
             ret_instruct = ret_instruct + 'Link unten eingeben (oder QR Code rechts scannen).' + '<br>';
 
@@ -163,7 +163,7 @@ class QrStrings
         }
         else
         {
-            ret_instruct = ret_instruct + 'Der Ausweis kann mit E-Ticket gezeigt werden. Installation:' + '<br>';
+            ret_instruct = ret_instruct + 'Der Ausweis kann mit QR Ticket gezeigt werden. Installation:' + '<br>';
 
             ret_instruct = ret_instruct + 'Link unten eingeben (oder QR Codes rechts scannen).' + '<br>';
 
@@ -235,7 +235,7 @@ class QrStrings
     {
         var ret_reverse_qr = '';
     
-        ret_reverse_qr = ret_reverse_qr + 'E-Ticket (QR Code Anzeiger):' + '<br>';
+        ret_reverse_qr = ret_reverse_qr + 'QR Ticket (QR Code Anzeiger):' + '<br>';
     
         ret_reverse_qr = ret_reverse_qr + this.urlQrCodeShowWebPage() + '<br><br>';
     
